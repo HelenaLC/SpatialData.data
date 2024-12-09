@@ -29,8 +29,6 @@ Suggests:
     DT
 Remotes:
     HelenaLC/SpatialData@wo_data
-Enhances:
-    ggnewscale
 biocViews: 
     DataImport, 
     DataRepresentation, 
