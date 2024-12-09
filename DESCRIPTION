@@ -4,7 +4,8 @@ Depends: R (>= 4.4), SpatialData
 Version: 0.99.0
 Description: Makes 'scverse' data examples available through the NSF OSN, 
     and accessible from within R, using 'BiocFileCache'. Furthermore, 
-    rovides an interface to aligning data into a common (identity) space.
+    provides an interface to Python's 'spatialdata-io' for reading and
+    writing to .zarr, and to aligning data into a common (identity) space.
 Authors@R: c(
     person("Vince", "Carey",
         role=c("aut"),
