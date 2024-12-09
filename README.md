@@ -1,6 +1,6 @@
 # `SpatialData.data`
 
-> for class infrastructure, see [`SpatialData.data`](https://github.com/HelenaLC/SpatialData.data)
+> for class infrastructure, see [`SpatialData`](https://github.com/HelenaLC/SpatialData)
 
 > for visualization capabilites, see [`SpatialData.plot`](https://github.com/HelenaLC/SpatialData.plot)
 
