@@ -29,6 +29,6 @@ target <- tempfile()
 use_sdio("xenium", srcdir=td, dest=target)
 
 # read into R
-(br2fov <- readSpatialData(target))
+(br2fov <- SpatialData::readSpatialData(target))
 
 }

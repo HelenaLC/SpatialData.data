@@ -36,7 +36,7 @@ available_sdio <- function() {
 #' use_sdio("xenium", srcdir=td, dest=target)
 #' 
 #' # read into R
-#' (br2fov <- readSpatialData(target))
+#' (br2fov <- SpatialData::readSpatialData(target))
 #' 
 #' @export
 use_sdio <- function(platform="xenium", srcdir, dest) {
