@@ -29,6 +29,8 @@ Suggests:
     DT
 Remotes:
     HelenaLC/SpatialData@wo_data
+Enhances:
+    Rgraphviz
 biocViews: 
     DataImport, 
     DataRepresentation, 

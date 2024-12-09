@@ -15,6 +15,7 @@ and writing to .zarr, and to align data into a common (identity) space.
 
 ```
 BiocManager::install("HelenaLC/SpatialData")
+BiocManager::install("HelenaLC/SpatialData.data")
 ```
 
 To *interrogate* our S3 bucket you will need [paws](https://cran.r-project.org/web/packages/paws/index.html) 
