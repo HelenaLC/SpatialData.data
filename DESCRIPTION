@@ -1,6 +1,6 @@
 Package: SpatialData.data
 Title: SpatialData datasets
-Depends: R (>= 4.4)
+Depends: R (>= 4.4), SpatialData
 Version: 0.99.1
 Description: Makes 'scverse' data examples available through the NSF OSN, 
     and accessible from within R, using 'BiocFileCache'. Furthermore, 
@@ -15,8 +15,6 @@ Authors@R: c(
 	    role=c("aut", "cre"),
 	    email="helena@crowell.eu", 
 	    comment=c(ORCID="0000-0002-4801-1767")))
-Depends:
-    SpatialData
 Imports:
     basilisk,
     BiocFileCache,
