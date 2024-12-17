@@ -36,7 +36,8 @@ get_demo_SD <- function(patt,
         "mcmicro_io.zip", "merfish.zarr.zip", 
         "mibitof.zip", "steinbock_io.zip", 
         "visium_associated_xenium_io_aligned.zip", "visium_hd_3.0.0_io.zip",
-        "xenium_rep1_io_aligned.zip", "xenium_rep2_io_aligned.zip")
+        "xenium_rep1_io_aligned.zip", "xenium_rep2_io_aligned.zip",
+        "HuLungXenmulti.zip")
   
     sdurls <- paste(buckprefix, sdfold, sdzips, sep="/")
     
@@ -221,3 +222,15 @@ Breast2fov_10x <- function(target=tempfile()) {
 Lung2fov_10x <- function(target=tempfile()) {
     get_demo_SD("human_Lung_2fov", target=target)
 }
+
+#' Retrieve example dataset used in Xenium technology tutorial notebook at scverse spatialdata.
+#' @note from `https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard`.  After applying SpatialData.data::use_sdio, the resulting zip file is close to 5GB in size.
+#' @param target character(1) defaults to tempfile().  
+#'   Set to a different folder for persistent Zarr store.
+#' @examples
+#' (sd <- HumanLungMulti_10x())
+#' @export
+HumanLungMulti_10x <- function(target=tempfile()) {
+    get_demo_SD("HuLungXenmulti", target=target)
+}
+
