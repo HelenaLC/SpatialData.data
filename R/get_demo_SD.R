@@ -1,4 +1,4 @@
-#' a data.frame with information about available resources
+#' @title a data.frame with information about available resources
 #' @docType data
 #' @examples
 #' utils::data(demo_spatialdata)
@@ -11,16 +11,64 @@
 #' The individual functions in this package give similarly detailed references.
 "demo_spatialdata"
 
-#' this function consolidates the retrieval and caching and
-#' transformation of scverse-curated Zarr archives and 10x-curated
-#' Xenium archives
-#' @param patt character(1) sufficient to identify a resource in OSN
-#' @param cache like BiocFileCache
-#' @param target character(1), defaults to tempfile().  Use a
-#' different value if you wish to retain the unzipped Zarr
-#' store persistently.
+#' @title retrieve scverse-curated `SpatialData` .zarr archive
+#' @aliases MouseIntestineVisHD
+#' 
+#' @description
+#' This function consolidates the retrieval and caching and transformation 
+#' of scverse-curated Zarr archives and 10x-curated Xenium archives.
+#' 
+#' @param patt character(1) sufficient to identify an OSN resource
+#' @param cache like `BiocFileCache`
+#' @param target character(1), defaults to tempfile(); use a different 
+#'   value if you wish to retain the unzipped .zarr store persistently.
+#' 
+#' @details
+#' \describe{
+#' \item{
+#'   \code{MouseIntestineVisHD()}}{
+#'   Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine; source:
+#' \emph{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}}
+#' \item{
+#'   \code{LungAdenocarcinomaMCMICRO()}}{
+#'   MCMICRO dataset of human small cell lung adenocarcinoma}
+#' \item{
+#'   \code{MouseBrainMERFISH()}}{
+#'   MERFISH dataset of mouse brain tissue}
+#' \item{
+#'   \code{MulticancerSteinbock()}}{
+#'   imaging mass cytometry dataset of four cancers; source:
+#'   \emph{https://www.nature.com/articles/s41596-023-00881-0}}
+#' \item{
+#'   \code{ColorectalCarcinomaMIBITOF()}}{
+#'   MIBI-TOF dataset of colorectal carcinoma}
+#' \item{
+#'   \code{JanesickBreastVisiumEnh()}}{
+#'   Visium (10x Genomics) dataset of breast cancer; source: 
+#'   \emph{https://www.nature.com/articles/s41467-023-43458-x}}
+#' \item{
+#'   \code{JanesickBreastXeniumRep1/2()}}{
+#'   two Xenium (10x Genomics) sections associated with
+#'   the above Visium section from Janesick \emph{et al.}}
+#' \item{
+#'   \code{Breast2fov_10x()}}{
+#'   Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs; source: 
+#'   \emph{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}}
+#' \item{
+#'   \code{Lung2fov_10x()}}{
+#'   Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs; source: 
+#'   \emph{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}}
+#' \item{
+#'   \code{HumanLungMulti_10x()}}{
+#'   Xenium (10x Genomics) data on lung cancer;
+#'   source: \emph{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}}
+#' }
+#' 
 #' @examples
-#' (br2fov <- get_demo_SD("Breast_2fov"))
+#' # the following are equivalent:
+#' get_demo_SD("merfish")
+#' MouseBrainMERFISH()
+#' 
 #' @export
 get_demo_SD <- function(patt, 
     cache=BiocFileCache::BiocFileCache(),
@@ -28,17 +76,17 @@ get_demo_SD <- function(patt,
     
     # Bioconductor's OSN bucket
     buckprefix <- "https://mghp.osn.xsede.org/bir190004-bucket01"
-
+    
     # work on zipped Zarr archives from scverse SpatialData datasets page
     sdfold <- "BiocSpatialData"
-  
+    
     sdzips <- c(
         "mcmicro_io.zip", "merfish.zarr.zip", 
         "mibitof.zip", "steinbock_io.zip", 
         "visium_associated_xenium_io_aligned.zip", "visium_hd_3.0.0_io.zip",
         "xenium_rep1_io_aligned.zip", "xenium_rep2_io_aligned.zip",
         "HuLungXenmulti.zip")
-  
+    
     sdurls <- paste(buckprefix, sdfold, sdzips, sep="/")
     
     # work on zipped Xenium minimal outputs, retrieved and zipped in OSN
@@ -47,13 +95,13 @@ get_demo_SD <- function(patt,
     xdzips <- c(
         "Xenium_V1_human_Breast_2fov_outs.zip",
         "Xenium_V1_human_Lung_2fov_outs.zip")
-
+    
     # collect names of all zip files
     allz <- c(sdzips, xdzips)
     # build a tibble with all relevant information
     xdurls <- paste(buckprefix, xdfold, xdzips, sep="/")
     allurls <- c(sdurls, xdurls)
-  
+    
     ca <- BiocFileCache::BiocFileCache()
     chk <- lapply(allurls, \(x) BiocFileCache::bfcquery(ca, x))
     chkdf <- do.call(rbind, chk)
@@ -102,124 +150,67 @@ get_demo_SD <- function(patt,
     SpatialData::readSpatialData(dir(td, full.names=TRUE))
 }
 
-#' Retrieve 10x-published mouse intestine sample, Visium HD 3.0.0       
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From 
-#' `https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine`
-#' It takes at least a minute for this function to return, 
-#' as there is considerable decompression and reassembly 
-#' once the basic resource has been retrieved from cache.
+#' @rdname get_demo_SD
 #' @export
-MouseIntestineVisHD <- function(target=tempfile()) {
+MouseIntestineVisHD <- function(target=tempfile()) { 
     get_demo_SD("visium_hd_3.0.0", target=target)
 }
 
-#' Retrieve small cell lung adenocarcinoma sample assayed with mcmicro
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From scverse spatialdata archive citing `https://www.nature.com/articles/s41592-021-01308-y`.
-#' @examples
-#' (sd <- LungAdenocarcinomaMCMICRO())
+#' @rdname get_demo_SD
 #' @export
 LungAdenocarcinomaMCMICRO <- function(target=tempfile()) {
     get_demo_SD("mcmicro_io", target=target)
 }
 
-#' Retrieve small cell lung adenocarcinoma sample assayed with mcmicro
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From scverse spatialdata archive citing `Moffitt, J. R. et al. Molecular, spatial, and functional single-cell profiling of the hypothalamic preoptic region. Science 362, (2018).`
-#' @examples
-#' (sd <- MouseBrainMERFISH())
+#' @rdname get_demo_SD
 #' @export
 MouseBrainMERFISH = function(target=tempfile()) {
     get_demo_SD("merfish", target=target)
 }
 
-#' Retrieve spatial mass cytometry experiments for four cancers
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From spatialdata archive 
-#' citing `https://www.nature.com/articles/s41596-023-00881-0`.
-#' See also `https://bodenmillergroup.github.io/steinbock/latest/`.
-#' @examples
-#' (sd <- MulticancerSteinbock())
+#' @rdname get_demo_SD
 #' @export
 MulticancerSteinbock <- function(target=tempfile()) {
     get_demo_SD("steinbock_io", target=target)
 }
 
-#' Retrieve colorectal carcinoma MIBI-TOF experiment.
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From spatialdata archive citing `Hartmann, F. J. et al. Single-cell metabolic profiling of human cytotoxic T cells. Nat. Biotechnol. (2020) doi:10.1038/s41587-020-0651-8.`
-#' @examples
-#' (sd <- ColorectalCarcinomaMIBITOF())
+#' @rdname get_demo_SD
 #' @export
 ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
     get_demo_SD("mibitof", target=target)
 }
 
-#' Retrieve a version of Janesick FFPE breast cancer experiment, Visium platform
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
-#' This is annotated as Visium associated xenium, and has been enhanced
-#' with cell type annotation
-#' @examples
-#' (sd <- JanesickBreastVisiumEnh())
+#' @rdname get_demo_SD
 #' @export
 JanesickBreastVisiumEnh <- function(target=tempfile()) {
     get_demo_SD("visium_associated_xenium_io", target=target)
 }
 
-#' Retrieve replicate 1 of Janesick FFPE breast cancer experiment, Xenium platform
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
-#' This has been enhanced with cell type annotation.
+#' @rdname get_demo_SD
 #' @export
 JanesickBreastXeniumRep1 <- function(target=tempfile()) {
     get_demo_SD("xenium_rep1_io", target=target)
 }
 
-#' Retrieve replicate 2 of Janesick FFPE breast cancer experiment, Xenium platform
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
-#' This has been enhanced with cell type annotation.
+#' @rdname get_demo_SD
 #' @export
 JanesickBreastXeniumRep2 <- function(target=tempfile()) {
     get_demo_SD("xenium_rep2_io", target=target)
 }
 
-#' Retrieve 10x-trimmed breast cancer demonstration data, "two fields of view"
-#' @param target character(1) defaults to tempfile().
-#'   Set to a different folder for persistent Zarr store.
-#' @note From `https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data`.
-#' @examples
-#' (sd <- Breast2fov_10x())
+#' @rdname get_demo_SD
 #' @export
 Breast2fov_10x <- function(target=tempfile()) {
     get_demo_SD("human_Breast_2fov", target=target)
 }
 
-#' Retrieve 10x-trimmed lung cancer demonstration data, "two fields of view"
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
-#' @note From `https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data`.
-#' @examples
-#' (sd <- Lung2fov_10x())
+#' @rdname get_demo_SD
 #' @export
 Lung2fov_10x <- function(target=tempfile()) {
     get_demo_SD("human_Lung_2fov", target=target)
 }
 
-#' Retrieve example dataset used in Xenium technology tutorial notebook at scverse spatialdata.
-#' @note from `https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard`.  After applying SpatialData.data::use_sdio, the resulting zip file is close to 5GB in size.
-#' @param target character(1) defaults to tempfile().  
-#'   Set to a different folder for persistent Zarr store.
+#' @rdname get_demo_SD
 #' @export
 HumanLungMulti_10x <- function(target=tempfile()) {
     get_demo_SD("HuLungXenmulti", target=target)
