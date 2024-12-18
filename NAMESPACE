@@ -2,6 +2,7 @@
 
 export(Breast2fov_10x)
 export(ColorectalCarcinomaMIBITOF)
+export(HumanLungMulti_10x)
 export(JanesickBreastVisiumEnh)
 export(JanesickBreastXeniumRep1)
 export(JanesickBreastXeniumRep2)
