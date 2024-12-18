@@ -1,4 +1,12 @@
-changes in version 0.99.0
+changes in version 0.99.2
+
+- add Xenium dataset of human lung cancer to OSN and 
+  corresponding caching function 'HumanLungMulti_10x()'
+
+changes in version 0.99.1
+
+- move 'SpatialData' from 'Imports:' to 'Depends':
+  to fix issues related to order of attachment
 
 changes in version 0.99.0
 
