@@ -18,3 +18,6 @@ From spatialdata archive
 citing `https://www.nature.com/articles/s41596-023-00881-0`.
 See also `https://bodenmillergroup.github.io/steinbock/latest/`.
 }
+\examples{
+(sd <- MulticancerSteinbock())
+}

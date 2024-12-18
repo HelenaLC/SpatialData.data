@@ -16,3 +16,6 @@ Retrieve small cell lung adenocarcinoma sample assayed with mcmicro
 \note{
 From scverse spatialdata archive citing `Moffitt, J. R. et al. Molecular, spatial, and functional single-cell profiling of the hypothalamic preoptic region. Science 362, (2018).`
 }
+\examples{
+(sd <- MouseBrainMERFISH())
+}
