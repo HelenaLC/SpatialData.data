@@ -119,8 +119,6 @@ MouseIntestineVisHD <- function(target=tempfile()) {
 #' @param target character(1) defaults to tempfile().  
 #'   Set to a different folder for persistent Zarr store.
 #' @note From scverse spatialdata archive citing `https://www.nature.com/articles/s41592-021-01308-y`.
-#' @examples
-#' (sd <- LungAdenocarcinomaMCMICRO())
 #' @export
 LungAdenocarcinomaMCMICRO <- function(target=tempfile()) {
     get_demo_SD("mcmicro_io", target=target)
@@ -130,8 +128,6 @@ LungAdenocarcinomaMCMICRO <- function(target=tempfile()) {
 #' @param target character(1) defaults to tempfile().  
 #'   Set to a different folder for persistent Zarr store.
 #' @note From scverse spatialdata archive citing `Moffitt, J. R. et al. Molecular, spatial, and functional single-cell profiling of the hypothalamic preoptic region. Science 362, (2018).`
-#' @examples
-#' (sd <- MouseBrainMERFISH())
 #' @export
 MouseBrainMERFISH = function(target=tempfile()) {
     get_demo_SD("merfish", target=target)
@@ -143,8 +139,6 @@ MouseBrainMERFISH = function(target=tempfile()) {
 #' @note From spatialdata archive 
 #' citing `https://www.nature.com/articles/s41596-023-00881-0`.
 #' See also `https://bodenmillergroup.github.io/steinbock/latest/`.
-#' @examples
-#' (sd <- MulticancerSteinbock())
 #' @export
 MulticancerSteinbock <- function(target=tempfile()) {
     get_demo_SD("steinbock_io", target=target)
@@ -154,8 +148,6 @@ MulticancerSteinbock <- function(target=tempfile()) {
 #' @param target character(1) defaults to tempfile().  
 #'   Set to a different folder for persistent Zarr store.
 #' @note From spatialdata archive citing `Hartmann, F. J. et al. Single-cell metabolic profiling of human cytotoxic T cells. Nat. Biotechnol. (2020) doi:10.1038/s41587-020-0651-8.`
-#' @examples
-#' (sd <- ColorectalCarcinomaMIBITOF())
 #' @export
 ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
     get_demo_SD("mibitof", target=target)
@@ -167,8 +159,6 @@ ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
 #' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
 #' This is annotated as Visium associated xenium, and has been enhanced
 #' with cell type annotation
-#' @examples
-#' (sd <- JanesickBreastVisiumEnh())
 #' @export
 JanesickBreastVisiumEnh <- function(target=tempfile()) {
     get_demo_SD("visium_associated_xenium_io", target=target)
@@ -179,8 +169,6 @@ JanesickBreastVisiumEnh <- function(target=tempfile()) {
 #'   Set to a different folder for persistent Zarr store.
 #' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
 #' This has been enhanced with cell type annotation.
-#' @examples
-#' (sd <- JanesickBreastXeniumRep1())
 #' @export
 JanesickBreastXeniumRep1 <- function(target=tempfile()) {
     get_demo_SD("xenium_rep1_io", target=target)
@@ -191,8 +179,6 @@ JanesickBreastXeniumRep1 <- function(target=tempfile()) {
 #'   Set to a different folder for persistent Zarr store.
 #' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
 #' This has been enhanced with cell type annotation.
-#' @examples
-#' (sd <- JanesickBreastXeniumRep2())
 #' @export
 JanesickBreastXeniumRep2 <- function(target=tempfile()) {
     get_demo_SD("xenium_rep2_io", target=target)
@@ -202,8 +188,6 @@ JanesickBreastXeniumRep2 <- function(target=tempfile()) {
 #' @param target character(1) defaults to tempfile().
 #'   Set to a different folder for persistent Zarr store.
 #' @note From `https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data`.
-#' @examples
-#' (sd <- Breast2fov_10x())
 #' @export
 Breast2fov_10x <- function(target=tempfile()) {
     get_demo_SD("human_Breast_2fov", target=target)
@@ -213,8 +197,6 @@ Breast2fov_10x <- function(target=tempfile()) {
 #' @param target character(1) defaults to tempfile().  
 #'   Set to a different folder for persistent Zarr store.
 #' @note From `https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data`.
-#' @examples
-#' (sd <- Lung2fov_10x())
 #' @export
 Lung2fov_10x <- function(target=tempfile()) {
     get_demo_SD("human_Lung_2fov", target=target)
@@ -224,8 +206,6 @@ Lung2fov_10x <- function(target=tempfile()) {
 #' @note from `https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard`.  After applying SpatialData.data::use_sdio, the resulting zip file is close to 5GB in size.
 #' @param target character(1) defaults to tempfile().  
 #'   Set to a different folder for persistent Zarr store.
-#' @examples
-#' (sd <- HumanLungMulti_10x())
 #' @export
 HumanLungMulti_10x <- function(target=tempfile()) {
     get_demo_SD("HuLungXenmulti", target=target)

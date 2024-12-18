@@ -16,6 +16,3 @@ Retrieve example dataset used in Xenium technology tutorial notebook at scverse 
 \note{
 from `https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard`.  After applying SpatialData.data::use_sdio, the resulting zip file is close to 5GB in size.
 }
-\examples{
-(sd <- HumanLungMulti_10x())
-}

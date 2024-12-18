@@ -18,6 +18,3 @@ From spatialdata archive citing the biorxiv antecedent to `https://www.nature.co
 This is annotated as Visium associated xenium, and has been enhanced
 with cell type annotation
 }
-\examples{
-(sd <- JanesickBreastVisiumEnh())
-}

@@ -16,6 +16,3 @@ Retrieve 10x-trimmed lung cancer demonstration data, "two fields of view"
 \note{
 From `https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data`.
 }
-\examples{
-(sd <- Lung2fov_10x())
-}

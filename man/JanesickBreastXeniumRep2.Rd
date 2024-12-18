@@ -17,6 +17,3 @@ Retrieve replicate 2 of Janesick FFPE breast cancer experiment, Xenium platform
 From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
 This has been enhanced with cell type annotation.
 }
-\examples{
-(sd <- JanesickBreastXeniumRep2())
-}
