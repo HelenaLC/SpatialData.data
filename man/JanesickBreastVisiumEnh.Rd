@@ -19,5 +19,5 @@ This is annotated as Visium associated xenium, and has been enhanced
 with cell type annotation
 }
 \examples{
-JanesickBreastVisiumEnh()
+(sd <- JanesickBreastVisiumEnh())
 }

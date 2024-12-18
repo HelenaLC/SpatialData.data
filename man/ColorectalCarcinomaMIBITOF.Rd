@@ -17,5 +17,5 @@ Retrieve colorectal carcinoma MIBI-TOF experiment.
 From spatialdata archive citing `Hartmann, F. J. et al. Single-cell metabolic profiling of human cytotoxic T cells. Nat. Biotechnol. (2020) doi:10.1038/s41587-020-0651-8.`
 }
 \examples{
-ColorectalCarcinomaMIBITOF()
+(sd <- ColorectalCarcinomaMIBITOF())
 }

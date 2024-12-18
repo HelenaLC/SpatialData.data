@@ -18,5 +18,5 @@ From spatialdata archive citing the biorxiv antecedent to `https://www.nature.co
 This has been enhanced with cell type annotation.
 }
 \examples{
-JanesickBreastXeniumRep1()
+(sd <- JanesickBreastXeniumRep1())
 }

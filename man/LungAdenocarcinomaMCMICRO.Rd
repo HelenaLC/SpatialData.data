@@ -17,5 +17,5 @@ Retrieve small cell lung adenocarcinoma sample assayed with mcmicro
 From scverse spatialdata archive citing `https://www.nature.com/articles/s41592-021-01308-y`.
 }
 \examples{
-LungAdenocarcinomaMCMICRO()
+(sd <- LungAdenocarcinomaMCMICRO())
 }
