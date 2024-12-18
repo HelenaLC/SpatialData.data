@@ -27,7 +27,7 @@ get_demo_SD <- function(patt,
     target=tempfile()) {
     
     # Bioconductor's OSN bucket
-    buckprefix = "https://mghp.osn.xsede.org/bir190004-bucket01"
+    buckprefix <- "https://mghp.osn.xsede.org/bir190004-bucket01"
 
     # work on zipped Zarr archives from scverse SpatialData datasets page
     sdfold <- "BiocSpatialData"
@@ -120,7 +120,7 @@ MouseIntestineVisHD <- function(target=tempfile()) {
 #'   Set to a different folder for persistent Zarr store.
 #' @note From scverse spatialdata archive citing `https://www.nature.com/articles/s41592-021-01308-y`.
 #' @examples
-#' LungAdenocarcinomaMCMICRO()
+#' (sd <- LungAdenocarcinomaMCMICRO())
 #' @export
 LungAdenocarcinomaMCMICRO <- function(target=tempfile()) {
     get_demo_SD("mcmicro_io", target=target)
@@ -144,7 +144,7 @@ MouseBrainMERFISH = function(target=tempfile()) {
 #' citing `https://www.nature.com/articles/s41596-023-00881-0`.
 #' See also `https://bodenmillergroup.github.io/steinbock/latest/`.
 #' @examples
-#' MulticancerSteinbock()
+#' (sd <- MulticancerSteinbock())
 #' @export
 MulticancerSteinbock <- function(target=tempfile()) {
     get_demo_SD("steinbock_io", target=target)
@@ -155,12 +155,11 @@ MulticancerSteinbock <- function(target=tempfile()) {
 #'   Set to a different folder for persistent Zarr store.
 #' @note From spatialdata archive citing `Hartmann, F. J. et al. Single-cell metabolic profiling of human cytotoxic T cells. Nat. Biotechnol. (2020) doi:10.1038/s41587-020-0651-8.`
 #' @examples
-#' ColorectalCarcinomaMIBITOF()
+#' (sd <- ColorectalCarcinomaMIBITOF())
 #' @export
 ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
     get_demo_SD("mibitof", target=target)
 }
-
 
 #' Retrieve a version of Janesick FFPE breast cancer experiment, Visium platform
 #' @param target character(1) defaults to tempfile().  
@@ -169,10 +168,10 @@ ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
 #' This is annotated as Visium associated xenium, and has been enhanced
 #' with cell type annotation
 #' @examples
-#' JanesickBreastVisiumEnh()
+#' (sd <- JanesickBreastVisiumEnh())
 #' @export
-JanesickBreastVisiumEnh = function(target = tempfile()) {
- get_demo_SD("visium_associated_xenium_io", target=target)
+JanesickBreastVisiumEnh <- function(target=tempfile()) {
+    get_demo_SD("visium_associated_xenium_io", target=target)
 }
 
 #' Retrieve replicate 1 of Janesick FFPE breast cancer experiment, Xenium platform
@@ -181,10 +180,10 @@ JanesickBreastVisiumEnh = function(target = tempfile()) {
 #' @note From spatialdata archive citing the biorxiv antecedent to `https://www.nature.com/articles/s41467-023-43458-x`
 #' This has been enhanced with cell type annotation.
 #' @examples
-#' JanesickBreastXeniumRep1()
+#' (sd <- JanesickBreastXeniumRep1())
 #' @export
-JanesickBreastXeniumRep1 = function(target = tempfile()) {
- get_demo_SD("xenium_rep1_io", target=target)
+JanesickBreastXeniumRep1 <- function(target=tempfile()) {
+    get_demo_SD("xenium_rep1_io", target=target)
 }
 
 #' Retrieve replicate 2 of Janesick FFPE breast cancer experiment, Xenium platform
@@ -198,8 +197,6 @@ JanesickBreastXeniumRep1 = function(target = tempfile()) {
 JanesickBreastXeniumRep2 <- function(target=tempfile()) {
     get_demo_SD("xenium_rep2_io", target=target)
 }
-
-
 
 #' Retrieve 10x-trimmed breast cancer demonstration data, "two fields of view"
 #' @param target character(1) defaults to tempfile().
@@ -233,4 +230,3 @@ Lung2fov_10x <- function(target=tempfile()) {
 HumanLungMulti_10x <- function(target=tempfile()) {
     get_demo_SD("HuLungXenmulti", target=target)
 }
-
