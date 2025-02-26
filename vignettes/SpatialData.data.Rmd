@@ -32,14 +32,14 @@ and can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileC
 We can interrogate the bucket for available (zipped) .zarr archives:
 
 ```{r ons-list}
-available_spd_zarr_zips()
+SpatialData.data:::.available_spd_zarr_zips()
 ```
 
 Any of the above can be retrieved (once) into some location, and read into R; for example:
 
 ```{r ons-read}
 dir.create(td <- tempfile())
-pa <- unzip_spd_demo(
+pa <- SpatialData.data:::.unzip_spd_demo(
     zipname="merfish.zarr.zip", 
     dest=td, source="biocOSN")
 (x <- readSpatialData(pa))
