@@ -17,5 +17,5 @@
 obtain path to cached zip archive of SpatialData zarr
 }
 \examples{
-.spdzPath(zipname="merfish.zarr.zip", source="biocOSN")
+SpatialData.data:::.spdzPath(zipname="merfish.zarr.zip", source="biocOSN")
 }

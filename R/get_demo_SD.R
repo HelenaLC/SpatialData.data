@@ -11,7 +11,12 @@
 #' The individual functions in this package give similarly detailed references.
 "demo_spatialdata"
 
-#' 
+#' all logic for finding, caching, loading an OSN-based dataset, hidden
+#' @importFrom SpatialData readSpatialData
+#' @param patt character(1) sufficient to identify an OSN resource
+#' @param cache like `BiocFileCache`
+#' @param target character(1), defaults to tempfile(); use a different 
+#'   value if you wish to retain the unzipped .zarr store persistently.
 # @examples
 # # the following are equivalent:
 # get_demo_SD("merfish")
@@ -104,8 +109,6 @@
 #' This function consolidates the retrieval and caching and transformation 
 #' of scverse-curated Zarr archives and 10x-curated Xenium archives.
 #' 
-#' @param patt character(1) sufficient to identify an OSN resource
-#' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
 #' 

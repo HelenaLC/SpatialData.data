@@ -35,7 +35,7 @@ build_sandbox_path <- function(zipname) {
 #' @examples
 #' tf <- tempfile()
 #' dir.create(tf)
-#' pa <- .unzip_merfish_demo(tf)
+#' pa <- SpatialData.data:::.unzip_merfish_demo(tf)
 #' dir(pa, full.names=TRUE)
 #' 
 #' @importFrom utils unzip
@@ -49,7 +49,7 @@ build_sandbox_path <- function(zipname) {
 #' bucket for zipped zarr archives for various platforms
 #' @examples
 #' if (requireNamespace("paws")) {
-#'   .available_spd_zarr_zips()
+#'   SpatialData.data:::.available_spd_zarr_zips()
 #' }
 .available_spd_zarr_zips <- function() {
     if (!requireNamespace("paws")) 
@@ -72,7 +72,7 @@ build_sandbox_path <- function(zipname) {
 #' @param zipname character(1) name of zip archive to find
 #' @param source character(1) one of "biocOSN", "sandbox", "local"
 #' @examples
-#' .spdzPath(zipname="merfish.zarr.zip", source="biocOSN")
+#' SpatialData.data:::.spdzPath(zipname="merfish.zarr.zip", source="biocOSN")
 .spdzPath <- function(cache=BiocFileCache::BiocFileCache(), zipname, source) {
     if (missing(zipname)) stop("zipname must be supplied")
     # protect user from bad request if paws is available
@@ -124,7 +124,7 @@ build_sandbox_path <- function(zipname) {
 #' @examples
 #' tf <- tempfile()
 #' dir.create(tf)
-#' pa <- .unzip_spd_demo(zipname="mibitof.zip", destination=tf, source="biocOSN")
+#' pa <- SpatialData.data:::.unzip_spd_demo(zipname="mibitof.zip", destination=tf, source="biocOSN")
 #' dir(pa, full.names=TRUE)
 .unzip_spd_demo <- function(zipname="mibitof.zip", destination, cache=BiocFileCache::BiocFileCache(), source) {
     stopifnot(dir.exists(destination))
@@ -141,7 +141,7 @@ build_sandbox_path <- function(zipname) {
 #' bucket for zipped 10x-produced Xenium outputs
 #' @examples
 #' if (requireNamespace("paws")) {
-#'   .available_10x_xen_zips()
+#'   SpatialData.data:::.available_10x_xen_zips()
 #' }
 .available_10x_xen_zips <- function() {
     if (!requireNamespace("paws")) 
@@ -162,7 +162,7 @@ build_sandbox_path <- function(zipname) {
 #' provide path to a zip file from 10x genomics for Xenium platform
 #' @param zipname character(1) name of zip archive to find
 #' @examples
-#' .path_to_10x_xen_demo()
+#' SpatialData.data:::.path_to_10x_xen_demo()
 #' # see ?use_sdio
 .path_to_10x_xen_demo <- function(zipname="Xenium_V1_human_Breast_2fov_outs.zip") {
     .cache_add_if_needed_xendemo(

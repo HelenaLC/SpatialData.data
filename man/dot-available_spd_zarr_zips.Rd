@@ -13,6 +13,6 @@ bucket for zipped zarr archives for various platforms
 }
 \examples{
 if (requireNamespace("paws")) {
-  .available_spd_zarr_zips()
+  SpatialData.data:::.available_spd_zarr_zips()
 }
 }

@@ -29,6 +29,6 @@ unzip selected demo data to specified folder
 \examples{
 tf <- tempfile()
 dir.create(tf)
-pa <- .unzip_spd_demo(zipname="mibitof.zip", destination=tf, source="biocOSN")
+pa <- SpatialData.data:::.unzip_spd_demo(zipname="mibitof.zip", destination=tf, source="biocOSN")
 dir(pa, full.names=TRUE)
 }

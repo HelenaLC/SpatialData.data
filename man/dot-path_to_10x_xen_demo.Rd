@@ -13,6 +13,6 @@
 provide path to a zip file from 10x genomics for Xenium platform
 }
 \examples{
-.path_to_10x_xen_demo()
+SpatialData.data:::.path_to_10x_xen_demo()
 # see ?use_sdio
 }

@@ -39,10 +39,6 @@ HumanLungMulti_10x(target = tempfile())
 \arguments{
 \item{target}{character(1), defaults to tempfile(); use a different 
 value if you wish to retain the unzipped .zarr store persistently.}
-
-\item{patt}{character(1) sufficient to identify an OSN resource}
-
-\item{cache}{like `BiocFileCache`}
 }
 \description{
 This function consolidates the retrieval and caching and transformation 

@@ -13,6 +13,6 @@ bucket for zipped 10x-produced Xenium outputs
 }
 \examples{
 if (requireNamespace("paws")) {
-  .available_10x_xen_zips()
+  SpatialData.data:::.available_10x_xen_zips()
 }
 }
