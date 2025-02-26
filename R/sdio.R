@@ -1,8 +1,3 @@
-#' @importFrom basilisk BasiliskEnvironment
-.env <- BasiliskEnvironment(
-    pkgname="SpatialData", envname="anndata_env",
-    packages=c("anndata==0.9.1", "zarr==2.14.2"),
-    pip=c("spatialdata==0.2.5", "spatialdata-io==0.1.5"))
 
 #' enumerate modules
 #' @examples
@@ -10,7 +5,7 @@
 #' @export
 available_sdio <- function() {
     # avoid package-specific import
-    proc <- basilisk::basiliskStart(.env, testload="spatialdata") 
+    proc <- basilisk::basiliskStart(SpatialData:::.env, testload="spatialdata") 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")
@@ -44,7 +39,7 @@ use_sdio <- function(platform="xenium", srcdir, dest) {
         stop("Won't write to existing folder;",
             " please provide a non-existent path.")
     # avoid package-specific import
-    proc <- basilisk::basiliskStart(.env, testload="spatialdata") 
+    proc <- basilisk::basiliskStart(SpatialData:::.env, testload="spatialdata") 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function(platform, srcdir, dest) {
         sdio <- reticulate::import("spatialdata_io")

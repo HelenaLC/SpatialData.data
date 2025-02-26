@@ -11,66 +11,13 @@
 #' The individual functions in this package give similarly detailed references.
 "demo_spatialdata"
 
-#' @title retrieve scverse-curated `SpatialData` .zarr archive
-#' @aliases MouseIntestineVisHD
 #' 
-#' @description
-#' This function consolidates the retrieval and caching and transformation 
-#' of scverse-curated Zarr archives and 10x-curated Xenium archives.
-#' 
-#' @param patt character(1) sufficient to identify an OSN resource
-#' @param cache like `BiocFileCache`
-#' @param target character(1), defaults to tempfile(); use a different 
-#'   value if you wish to retain the unzipped .zarr store persistently.
-#' 
-#' @details
-#' \describe{
-#' \item{
-#'   \code{MouseIntestineVisHD()}}{
-#'   Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine; source:
-#' \emph{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}}
-#' \item{
-#'   \code{LungAdenocarcinomaMCMICRO()}}{
-#'   MCMICRO dataset of human small cell lung adenocarcinoma}
-#' \item{
-#'   \code{MouseBrainMERFISH()}}{
-#'   MERFISH dataset of mouse brain tissue}
-#' \item{
-#'   \code{MulticancerSteinbock()}}{
-#'   imaging mass cytometry dataset of four cancers; source:
-#'   \emph{https://www.nature.com/articles/s41596-023-00881-0}}
-#' \item{
-#'   \code{ColorectalCarcinomaMIBITOF()}}{
-#'   MIBI-TOF dataset of colorectal carcinoma}
-#' \item{
-#'   \code{JanesickBreastVisiumEnh()}}{
-#'   Visium (10x Genomics) dataset of breast cancer; source: 
-#'   \emph{https://www.nature.com/articles/s41467-023-43458-x}}
-#' \item{
-#'   \code{JanesickBreastXeniumRep1/2()}}{
-#'   two Xenium (10x Genomics) sections associated with
-#'   the above Visium section from Janesick \emph{et al.}}
-#' \item{
-#'   \code{Breast2fov_10x()}}{
-#'   Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs; source: 
-#'   \emph{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}}
-#' \item{
-#'   \code{Lung2fov_10x()}}{
-#'   Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs; source: 
-#'   \emph{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}}
-#' \item{
-#'   \code{HumanLungMulti_10x()}}{
-#'   Xenium (10x Genomics) data on lung cancer;
-#'   source: \emph{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}}
-#' }
-#' 
-#' @examples
-#' # the following are equivalent:
-#' get_demo_SD("merfish")
-#' MouseBrainMERFISH()
-#' 
-#' @export
-get_demo_SD <- function(patt, 
+# @examples
+# # the following are equivalent:
+# get_demo_SD("merfish")
+# MouseBrainMERFISH()
+# 
+.get_demo_SD <- function(patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile()) {
     
@@ -150,68 +97,121 @@ get_demo_SD <- function(patt,
     SpatialData::readSpatialData(dir(td, full.names=TRUE))
 }
 
-#' @rdname get_demo_SD
+#' @title retrieve scverse-curated `SpatialData` .zarr archive
+#' @aliases MouseIntestineVisHD
+#' 
+#' @description
+#' This function consolidates the retrieval and caching and transformation 
+#' of scverse-curated Zarr archives and 10x-curated Xenium archives.
+#' 
+#' @param patt character(1) sufficient to identify an OSN resource
+#' @param cache like `BiocFileCache`
+#' @param target character(1), defaults to tempfile(); use a different 
+#'   value if you wish to retain the unzipped .zarr store persistently.
+#' 
+#' @details
+#' \describe{
+#' \item{
+#'   \code{MouseIntestineVisHD()}}{
+#'   Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine; source:
+#' \emph{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}}
+#' \item{
+#'   \code{LungAdenocarcinomaMCMICRO()}}{
+#'   MCMICRO dataset of human small cell lung adenocarcinoma}
+#' \item{
+#'   \code{MouseBrainMERFISH()}}{
+#'   MERFISH dataset of mouse brain tissue}
+#' \item{
+#'   \code{MulticancerSteinbock()}}{
+#'   imaging mass cytometry dataset of four cancers; source:
+#'   \emph{https://www.nature.com/articles/s41596-023-00881-0}}
+#' \item{
+#'   \code{ColorectalCarcinomaMIBITOF()}}{
+#'   MIBI-TOF dataset of colorectal carcinoma}
+#' \item{
+#'   \code{JanesickBreastVisiumEnh()}}{
+#'   Visium (10x Genomics) dataset of breast cancer; source: 
+#'   \emph{https://www.nature.com/articles/s41467-023-43458-x}}
+#' \item{
+#'   \code{JanesickBreastXeniumRep1/2()}}{
+#'   two Xenium (10x Genomics) sections associated with
+#'   the above Visium section from Janesick \emph{et al.}}
+#' \item{
+#'   \code{Breast2fov_10x()}}{
+#'   Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs; source: 
+#'   \emph{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}}
+#' \item{
+#'   \code{Lung2fov_10x()}}{
+#'   Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs; source: 
+#'   \emph{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}}
+#' \item{
+#'   \code{HumanLungMulti_10x()}}{
+#'   Xenium (10x Genomics) data on lung cancer;
+#'   source: \emph{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}}
+#' }
+
+#' @rdname MouseIntestineVisHD
 #' @export
 MouseIntestineVisHD <- function(target=tempfile()) { 
-    get_demo_SD("visium_hd_3.0.0", target=target)
+    .get_demo_SD("visium_hd_3.0.0", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 LungAdenocarcinomaMCMICRO <- function(target=tempfile()) {
-    get_demo_SD("mcmicro_io", target=target)
+    .get_demo_SD("mcmicro_io", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 MouseBrainMERFISH = function(target=tempfile()) {
-    get_demo_SD("merfish", target=target)
+    .get_demo_SD("merfish", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 MulticancerSteinbock <- function(target=tempfile()) {
-    get_demo_SD("steinbock_io", target=target)
+    .get_demo_SD("steinbock_io", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
-    get_demo_SD("mibitof", target=target)
+    .get_demo_SD("mibitof", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 JanesickBreastVisiumEnh <- function(target=tempfile()) {
-    get_demo_SD("visium_associated_xenium_io", target=target)
+    .get_demo_SD("visium_associated_xenium_io", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 JanesickBreastXeniumRep1 <- function(target=tempfile()) {
-    get_demo_SD("xenium_rep1_io", target=target)
+    .get_demo_SD("xenium_rep1_io", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 JanesickBreastXeniumRep2 <- function(target=tempfile()) {
-    get_demo_SD("xenium_rep2_io", target=target)
+    .get_demo_SD("xenium_rep2_io", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 Breast2fov_10x <- function(target=tempfile()) {
-    get_demo_SD("human_Breast_2fov", target=target)
+    .get_demo_SD("human_Breast_2fov", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 Lung2fov_10x <- function(target=tempfile()) {
-    get_demo_SD("human_Lung_2fov", target=target)
+    .get_demo_SD("human_Lung_2fov", target=target)
 }
 
-#' @rdname get_demo_SD
+#' @rdname MouseIntestineVisHD
 #' @export
 HumanLungMulti_10x <- function(target=tempfile()) {
-    get_demo_SD("HuLungXenmulti", target=target)
+    .get_demo_SD("HuLungXenmulti", target=target)
 }
