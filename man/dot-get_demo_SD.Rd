@@ -17,3 +17,7 @@ value if you wish to retain the unzipped .zarr store persistently.}
 \description{
 all logic for finding, caching, loading an OSN-based dataset, hidden
 }
+\note{
+This function checks for stale element in cache and uses bfcupdate to rectify
+before retrieving from cache.
+}

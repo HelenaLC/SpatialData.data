@@ -18,6 +18,8 @@
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
+#' @note This function checks for stale element in cache and uses bfcupdate to rectify
+#' before retrieving from cache.
 # @examples
 # # the following are equivalent:
 # get_demo_SD("merfish")
@@ -89,6 +91,9 @@
     }
     # so a single pattern has hit, and it is in cache
     if (chkdf[ind,]$rname %in% xdzips) { # it is a Xenium 10x output resource
+        # check if update needed
+        stale = BiocFileCache::bfcneedsupdate(cache, chkdf[ind,]$rid)
+        if (stale) BiocFileCache::bfcupdate(cache, chkdf[ind,]$rid, fpath=chkdf[ind,]$fpath, rtype="web")
         preloc <- chkdf[ind,]$rpath
         td <- tempfile() # can't use target
         dir.create(td)
@@ -96,6 +101,9 @@
         use_sdio("xenium", srcdir=td, dest=target) # zarr in target
         return(SpatialData::readSpatialData(target))
     }
+# check again, this one is not in xdzips
+    stale = BiocFileCache::bfcneedsupdate(cache, chkdf[ind,]$rid)
+    if (stale) BiocFileCache::bfcupdate(cache, chkdf[ind,]$rid, fpath=chkdf[ind,]$fpath, rtype="web")
     loc <- chkdf[ind,]$rpath
     td <- target
     dir.create(td)
