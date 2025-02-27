@@ -13,6 +13,7 @@
 
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' @importFrom SpatialData readSpatialData
+#' @importClassesFrom SpatialData SpatialData
 #' @param patt character(1) sufficient to identify an OSN resource
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 

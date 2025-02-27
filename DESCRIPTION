@@ -24,10 +24,10 @@ Suggests:
     BiocStyle,
     knitr,
     magick,
-    paws,
     Rgraphviz,
     testthat,
-    DT
+    DT,
+    paws
 Remotes:
     HelenaLC/SpatialData
 biocViews: 
