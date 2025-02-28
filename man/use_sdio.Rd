@@ -20,7 +20,7 @@ output to .zarr with specific folder structure.
 }
 \examples{
 # unzip flat files
-pa <- path_to_10x_xen_demo()
+pa <- SpatialData.data:::.path_to_10x_xen_demo()
 dir.create(td <- tempfile())
 unzip(pa, exdir=td)
 

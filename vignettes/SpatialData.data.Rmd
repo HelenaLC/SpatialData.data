@@ -32,17 +32,15 @@ and can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileC
 We can interrogate the bucket for available (zipped) .zarr archives:
 
 ```{r ons-list}
-available_spd_zarr_zips()
+if (requireNamespace("paws")) availableOSN()
 ```
 
-Any of the above can be retrieved (once) into some location, and read into R; for example:
+Any of the above can be retrieved (once) into some location, and read into R.  We
+use dataset-specific functions, or `loadFromOSN`:
 
 ```{r ons-read}
-dir.create(td <- tempfile())
-pa <- unzip_spd_demo(
-    zipname="merfish.zarr.zip", 
-    dest=td, source="biocOSN")
-(x <- readSpatialData(pa))
+ls("package:SpatialData.data")  # run a dataset-specific function, or
+(x <- loadFromOSN("Lung2fov")) # stub can be used
 ```
 
 # Session info
