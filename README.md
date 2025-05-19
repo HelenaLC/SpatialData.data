@@ -26,21 +26,24 @@ installed; it is not necessary for retrievals.
 **Query Bioconductor's OSN bucket:**
 
 ```
-> available_spd_zarr_zips()  # as of Nov 10 2024
+> availableOSN()  # as of May 19 2025
 checking Bioconductor OSN bucket...
-[1] "mcmicro_io.zip"                         
-[2] "merfish.zarr.zip"                       
-[3] "mibitof.zip"                            
-[4] "steinbock_io.zip"                       
-[5] "visium_associated_xenium_io_aligned.zip"
-[6] "visium_hd_3.0.0_io.zip"                 
+[1] "HuLungXenmulti.zip"                     
+[2] "mcmicro_io.zip"                         
+[3] "merfish.zarr.zip"                       
+[4] "mibitof.zip"                            
+[5] "steinbock_io.zip"                       
+[6] "visium_associated_xenium_io_aligned.zip"
+[7] "visium_hd_3.0.0_io.zip"                 
+[8] "xenium_rep1_io_aligned.zip"             
+[9] "xenium_rep2_io_aligned.zip"               
 ```
 
 **Bring a *.zip* archive into your local cache:**
 
 ```
 dir.create(tf <- tempfile())
-pa = unzip_spd_demo(
+pa = SpatialData.data:::.unzip_spd_demo(
   zipname="mibitof.zip", 
   destination=tf, 
   source="biocOSN")
