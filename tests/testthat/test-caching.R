@@ -1,4 +1,5 @@
 library(SpatialData)
+Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("available_sdio()", {
     expect_error(available_sdio(1))

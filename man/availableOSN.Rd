@@ -12,6 +12,7 @@ use 'paws::s3' to interrogate an NSF Open Storage Network
 bucket for zipped zarr archives for various platforms
 }
 \examples{
+Sys.setenv(AWS_REGION = "us-east-1")
 if (requireNamespace("paws")) {
   availableOSN()
 }

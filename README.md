@@ -26,21 +26,25 @@ installed; it is not necessary for retrievals.
 **Query Bioconductor's OSN bucket:**
 
 ```
-> available_spd_zarr_zips()  # as of Nov 10 2024
+> Sys.setenv(AWS_REGION = "us-east-1")
+> availableOSN()  # as of May 19 2025
 checking Bioconductor OSN bucket...
-[1] "mcmicro_io.zip"                         
-[2] "merfish.zarr.zip"                       
-[3] "mibitof.zip"                            
-[4] "steinbock_io.zip"                       
-[5] "visium_associated_xenium_io_aligned.zip"
-[6] "visium_hd_3.0.0_io.zip"                 
+[1] "HuLungXenmulti.zip"                     
+[2] "mcmicro_io.zip"                         
+[3] "merfish.zarr.zip"                       
+[4] "mibitof.zip"                            
+[5] "steinbock_io.zip"                       
+[6] "visium_associated_xenium_io_aligned.zip"
+[7] "visium_hd_3.0.0_io.zip"                 
+[8] "xenium_rep1_io_aligned.zip"             
+[9] "xenium_rep2_io_aligned.zip"               
 ```
 
 **Bring a *.zip* archive into your local cache:**
 
 ```
 dir.create(tf <- tempfile())
-pa = unzip_spd_demo(
+pa = SpatialData.data:::.unzip_spd_demo(
   zipname="mibitof.zip", 
   destination=tf, 
   source="biocOSN")
@@ -51,16 +55,29 @@ dir(pa, full.names=TRUE) # see the files
 
 ```
 (mibi <- readSpatialData(pa))
+# or simply
+# (mibi <- ColorectalCarcinomaMIBITOF())
 ```
 
 ```
 > mibi
 class: SpatialData
-images(3): point16_image point23_image point8_image
-labels(3): point16_labels point23_labels point8_labels
-shapes(0):
-points(0):
-tables(1): table
+- images(3):
+  - point16_image (3,1024,1024)
+  - point23_image (3,1024,1024)
+  - point8_image (3,1024,1024)
+- labels(3):
+  - point16_labels (1024,1024)
+  - point23_labels (1024,1024)
+  - point8_labels (1024,1024)
+- points(0):
+- shapes(0):
+- tables(1):
+  - table (36,3309)
+coordinate systems:
+- point16(2): point16_image point16_labels
+- point23(2): point23_image point23_labels
+- point8(2): point8_image point8_labels
 ```
 
 ```

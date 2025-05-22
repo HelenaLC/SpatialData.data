@@ -32,6 +32,7 @@ and can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileC
 We can interrogate the bucket for available (zipped) .zarr archives:
 
 ```{r ons-list}
+Sys.setenv(AWS_REGION = "us-east-1")
 if (requireNamespace("paws")) availableOSN()
 ```
 

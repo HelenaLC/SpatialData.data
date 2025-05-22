@@ -24,7 +24,6 @@
 # # the following are equivalent:
 # get_demo_SD("merfish")
 # MouseBrainMERFISH()
-# 
 .get_demo_SD <- function(patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile()) {
