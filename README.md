@@ -26,6 +26,7 @@ installed; it is not necessary for retrievals.
 **Query Bioconductor's OSN bucket:**
 
 ```
+> Sys.setenv(AWS_REGION = "us-east-1")
 > availableOSN()  # as of May 19 2025
 checking Bioconductor OSN bucket...
 [1] "HuLungXenmulti.zip"                     
@@ -54,16 +55,29 @@ dir(pa, full.names=TRUE) # see the files
 
 ```
 (mibi <- readSpatialData(pa))
+# or simply
+# (mibi <- ColorectalCarcinomaMIBITOF())
 ```
 
 ```
 > mibi
 class: SpatialData
-images(3): point16_image point23_image point8_image
-labels(3): point16_labels point23_labels point8_labels
-shapes(0):
-points(0):
-tables(1): table
+- images(3):
+  - point16_image (3,1024,1024)
+  - point23_image (3,1024,1024)
+  - point8_image (3,1024,1024)
+- labels(3):
+  - point16_labels (1024,1024)
+  - point23_labels (1024,1024)
+  - point8_labels (1024,1024)
+- points(0):
+- shapes(0):
+- tables(1):
+  - table (36,3309)
+coordinate systems:
+- point16(2): point16_image point16_labels
+- point23(2): point23_image point23_labels
+- point8(2): point8_image point8_labels
 ```
 
 ```
