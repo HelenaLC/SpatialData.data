@@ -17,8 +17,10 @@ availableOSN <- function() {
     s3 <- paws::s3(
         credentials=list(anonymous=TRUE),
         endpoint="https://mghp.osn.xsede.org")
-    zz <- s3$list_objects("bir190004-bucket01") 
-    allk <- lapply(zz$Contents, "[[", "Key")
-    basename(grep("BiocSpatialData\\/", allk, value=TRUE))
+    zz <- s3$list_objects(
+        Bucket="bir190004-bucket01", 
+        Prefix="BiocSpatialData") 
+    keys <- lapply(zz$Contents, "[[", "Key")
+    basename(grepv("/", keys))
 }
 
