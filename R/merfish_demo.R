@@ -62,9 +62,14 @@ build_sandbox_path <- function(zipname) {
     s3 <- paws::s3(
         credentials=list(anonymous=TRUE),
         endpoint="https://mghp.osn.xsede.org")
-    zz <- s3$list_objects("bir190004-bucket01") 
-    allk <- lapply(zz$Contents, "[[", "Key")
-    basename(grep("BiocSpatialData\\/", allk, value=TRUE))
+    # zz <- s3$list_objects("bir190004-bucket01") 
+    # allk <- lapply(zz$Contents, "[[", "Key")
+    # basename(grep("BiocSpatialData\\/", allk, value=TRUE))
+    zz <- s3$list_objects(
+      Bucket="bir190004-bucket01", 
+      Prefix="BiocSpatialData") 
+    keys <- lapply(zz$Contents, "[[", "Key")
+    basename(grepv("/", keys))
 }
 
 #' obtain path to cached zip archive of SpatialData zarr
@@ -154,9 +159,14 @@ build_sandbox_path <- function(zipname) {
     s3 <- paws::s3(
         credentials=list(anonymous=TRUE),
         endpoint="https://mghp.osn.xsede.org")
-    zz <- s3$list_objects("bir190004-bucket01") 
-    allk <- lapply(zz$Contents, "[[", "Key")
-    basename(grep("BiocXenDemo\\/", allk, value=TRUE))
+    # zz <- s3$list_objects("bir190004-bucket01") 
+    # allk <- lapply(zz$Contents, "[[", "Key")
+    # basename(grep("BiocXenDemo\\/", allk, value=TRUE))
+    zz <- s3$list_objects(
+      Bucket="bir190004-bucket01", 
+      Prefix="BiocXenDemo") 
+    keys <- lapply(zz$Contents, "[[", "Key")
+    basename(grepv("/", keys))
 }
 
 #' provide path to a zip file from 10x genomics for Xenium platform
