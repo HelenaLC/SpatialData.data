@@ -41,7 +41,7 @@ use dataset-specific functions, or `loadFromOSN`:
 
 ```{r ons-read}
 ls("package:SpatialData.data")  # run a dataset-specific function, or
-(x <- loadFromOSN("Lung2fov")) # stub can be used
+(x <- loadFromOSN("LungAdenocarcinomaMCMICRO")) # stub can be used
 ```
 
 # Session info
