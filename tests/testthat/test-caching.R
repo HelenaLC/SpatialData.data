@@ -52,7 +52,10 @@ test_that("merfish demo zip has expected content", {
     if (nrow(qu) > 0) BiocFileCache::bfcremove(ca, qu$rid)
 }
  
+# TODO: update or remove this test since mibitof.zip in zarr v2 format 
+# is no longer available in the sandbox
 test_that("sandbox data can be acquired and used", {
+    skip("sandbox data is no longer available in the expected format (zarr v2)")
     .clean_cache("mibitof.zip")
     tf <- tempfile()
     dir.create(tf)
