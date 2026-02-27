@@ -4,7 +4,7 @@
 #' @return an instance of SpatialData, or NULL if the stub does not
 #' uniquely match (using grep()) the name of any resource
 #' @examples
-#' lu = loadFromOSN("Lung2")
+#' lu = loadFromOSN("MCMICRO")
 #' lu
 #' @export
 loadFromOSN = function(stub) { 

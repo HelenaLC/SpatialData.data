@@ -19,6 +19,6 @@ use a string to identify a resource in SpatialData format and
 ingest via SpatialData::readSpatialData
 }
 \examples{
-lu = loadFromOSN("Lung2")
+lu = loadFromOSN("MCMICRO")
 lu
 }

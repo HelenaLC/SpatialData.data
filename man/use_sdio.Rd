@@ -24,11 +24,12 @@ pa <- SpatialData.data:::.path_to_10x_xen_demo()
 dir.create(td <- tempfile())
 unzip(pa, exdir=td)
 
+# TODO: for now spatialdata_io generates zarr v3, not v2, so skipping
 # read & write to .zarr w/ 'spatialdata-io'
-target <- tempfile()
-use_sdio("xenium", srcdir=td, dest=target)
+# target <- tempfile()
+# use_sdio("xenium", srcdir=td, dest=target)
 
 # read into R
-(br2fov <- SpatialData::readSpatialData(target))
+# (br2fov <- SpatialData::readSpatialData(target))
 
 }
