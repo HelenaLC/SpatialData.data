@@ -9,7 +9,10 @@ test_that("available_sdio()", {
     expect_true(any(grepl("^(vis|xen)", x)))
 })
 
+# TODO: update or remove this test since sd of xenium readout zarr v2 format 
+# is no longer available via spatialdata_io
 test_that("use_sdio()", {
+    skip("data is no longer available in the expected format (zarr v2)")
     # get dataset
     zip <- SpatialData.data:::.path_to_10x_xen_demo()
     dir.create(src <- tempfile())
@@ -52,7 +55,10 @@ test_that("merfish demo zip has expected content", {
     if (nrow(qu) > 0) BiocFileCache::bfcremove(ca, qu$rid)
 }
  
+# TODO: update or remove this test since mibitof.zip in zarr v2 format 
+# is no longer available in the sandbox
 test_that("sandbox data can be acquired and used", {
+    skip("sandbox data is no longer available in the expected format (zarr v2)")
     .clean_cache("mibitof.zip")
     tf <- tempfile()
     dir.create(tf)
