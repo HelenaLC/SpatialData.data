@@ -5,7 +5,15 @@
 #' @export
 available_sdio <- function() {
     # avoid package-specific import
-    proc <- basilisk::basiliskStart(SpatialData:::.env, testload="spatialdata") 
+    version <- getOption("sd_version")
+    if(is.null(version))  version <- "0.7.2"
+    env <- switch (version,
+      `"0.3.0"` = .env_03,
+      `"0.5.0"` = .env_03,
+      `"0.7.2"` = .env,
+    )
+    message("Using spatialdata version ", version)
+    proc <- basilisk::basiliskStart(env, testload="spatialdata") 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")
@@ -49,4 +57,3 @@ use_sdio <- function(platform="xenium", srcdir, dest) {
         sdio[[platform]](srcdir)$write(dest)
     }, platform=platform, srcdir=srcdir, dest=dest)
 }
-
