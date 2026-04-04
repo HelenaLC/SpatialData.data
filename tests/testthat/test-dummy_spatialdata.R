@@ -3,19 +3,29 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("generate_dataset()", {
   
-  # points work
-  generate_dataset(points = list(list(n_points=12L)))
-  
-  # points and shapes
-  metadata <- list(
+  # versions
+  versions <- list(
     "0.7.2" = "zarr.json",
     "0.5.0" = ".zattrs"
   )
-  lapply(names(metadata), function(x){
+  
+  # points work
+  generate_dataset(points = list(list(n_points=12L)))
+  
+  # points and shapes work
+  lapply(names(versions), function(x){
     zarrfile <- tempfile(fileext = ".zarr")
     generate_dataset(
       file = zarrfile, 
       sd_version = x,
+      images = list(
+        list(type = "rgb", n_layers = 4L, coordinate_system="global"),
+        list(type = "grayscale", n_layers = 1L, coordinate_system="global")
+      ),
+      labels = list(
+        list(n_labels = 12L, n_layers = 4L, coordinate_system="global2"),
+        list(n_labels = 12L, n_layers = 0L, coordinate_system="global2")
+      ),
       shapes = list(
         list(n_shapes=12L, coordinate_system="global"),
         list(n_shapes=20L)
@@ -34,9 +44,11 @@ test_that("generate_dataset()", {
         )
       )
     )
+    
+    # check zarr version
     expect_true(
       file.exists(
-        file.path(zarrfile, metadata[[x]])
+        file.path(zarrfile, versions[[x]])
       )
     )
     

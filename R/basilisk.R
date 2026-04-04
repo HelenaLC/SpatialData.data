@@ -57,6 +57,7 @@
   envname="sd_env",
   packages=c("python==3.12.0"),
   pip=c("zarr==3.1.5", 
+        "ome_zarr==0.13.0", # 0.14.0 fails to due a bug, check scverse/spatialdata #1092
         "spatialdata==0.7.2", 
         "spatialdata_io==0.6.0",
         "dummy-spatialdata==0.1.4",

@@ -56,7 +56,6 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
     unlink(file, recursive = TRUE)
     dummy_sd <- reticulate::import("dummy_spatialdata")
     sd <- reticulate::import("spatialdata")
-    reticulate::import("numpy")
     temp <- dummy_sd$generate_dataset(
       images = images,
       labels = labels,
