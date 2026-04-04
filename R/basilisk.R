@@ -62,3 +62,22 @@
         "spatialdata_io==0.6.0",
         "dummy-spatialdata==0.1.4",
         "setuptools==75.8.0"))
+
+#' @noRd
+.get_basilisk_env <- function(
+    sd_version = getOption("sd_version")
+){
+  if(is.null(sd_version)) {
+    warning('getOption("sd_version") is NULL, using 0.7.2. ',
+            'Set sd_version to 0.3.0, 0.5.0 or 0.7.2 for Spatialdata versions.')
+    sd_version <- "0.7.2"
+  }
+  message("Using spatialdata version ", sd_version)
+  switch (sd_version,
+          "0.3.0" = .env_03,
+          "0.5.0" = .env_05,
+          "0.7.2" = .env,
+          {
+            stop('sd_version should be set to 0.3.0, 0.5.0 or 0.7.2.') 
+          })
+}

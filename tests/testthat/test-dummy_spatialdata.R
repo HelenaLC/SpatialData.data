@@ -12,7 +12,7 @@ test_that("generate_dataset()", {
   # points work
   generate_dataset(points = list(list(n_points=12L)))
   
-  # points and shapes work
+  # full spatialdata object works with 0.5.0 and 0.7.2
   lapply(names(versions), function(x){
     zarrfile <- tempfile(fileext = ".zarr")
     generate_dataset(
@@ -53,6 +53,7 @@ test_that("generate_dataset()", {
     )
     
     # check read for only 0.5.0
+    # TODO: read spatial data for v0.7.2
     if(x == "0.5.0"){
       expect_s4_class(readSpatialData(zarrfile), "SpatialData")      
     }

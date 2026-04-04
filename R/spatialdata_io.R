@@ -1,19 +1,9 @@
-
 #' enumerate modules
 #' @examples
 #' available_sdio()
 #' @export
-available_sdio <- function() {
-    # avoid package-specific import
-    version <- getOption("sd_version")
-    if(is.null(version))  version <- "0.7.2"
-    env <- switch (version,
-      `"0.3.0"` = .env_03,
-      `"0.5.0"` = .env_03,
-      `"0.7.2"` = .env,
-    )
-    message("Using spatialdata version ", version)
-    proc <- basilisk::basiliskStart(env, testload="spatialdata") 
+available_sdio <- function(sd_version = NULL) {
+    proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version)) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")
@@ -47,8 +37,7 @@ use_sdio <- function(platform="xenium", srcdir, dest) {
     if (dir.exists(dest)) 
         stop("Won't write to existing folder;",
             " please provide a non-existent path.")
-    # avoid package-specific import
-    proc <- basilisk::basiliskStart(SpatialData:::.env, testload="spatialdata") 
+    proc <- basilisk::basiliskStart(.get_basilisk_env()) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function(platform, srcdir, dest) {
         sdio <- reticulate::import("spatialdata_io")

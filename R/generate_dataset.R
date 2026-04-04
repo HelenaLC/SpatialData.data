@@ -50,15 +50,9 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
                              tables = NULL,
                              coordinate_systems = NULL,
                              seed = 42L) {
-  # avoid package-specific import
-  if(is.null(sd_version)) sd_version <- "0.7.2"
-  env <- switch (sd_version,
-                 "0.3.0" = .env_03,
-                 "0.5.0" = .env_05,
-                 "0.7.2" = .env
-  )
-  message("Using spatialdata version ", sd_version)
-  proc <- basilisk::basiliskStart(env) 
+  proc <- basilisk::basiliskStart(
+    .get_basilisk_env(sd_version)
+  ) 
   on.exit(basilisk::basiliskStop(proc))
   basilisk::basiliskRun(proc, function() {
     unlink(file, recursive = TRUE)

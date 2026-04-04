@@ -11,6 +11,18 @@
 #' The individual functions in this package give similarly detailed references.
 "demo_spatialdata"
 
+#' @noRd
+.SD_ZIPS <- c(
+  "mcmicro_io.zip", 
+  "merfish.zarr.zip", 
+  "mibitof.zip", 
+  "steinbock_io.zip", 
+  "visium_associated_xenium_io_aligned.zip", 
+  "visium_hd_3.0.0_io.zip",
+  "xenium_rep1_io_aligned.zip", 
+  "xenium_rep2_io_aligned.zip",
+  "HuLungXenmulti.zip")
+
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' @importFrom SpatialData readSpatialData
 #' @importClassesFrom SpatialData SpatialData
@@ -33,15 +45,7 @@
     
     # work on zipped Zarr archives from scverse SpatialData datasets page
     sdfold <- "BiocSpatialData"
-    
-    sdzips <- c(
-        "mcmicro_io.zip", "merfish.zarr.zip", 
-        "mibitof.zip", "steinbock_io.zip", 
-        "visium_associated_xenium_io_aligned.zip", "visium_hd_3.0.0_io.zip",
-        "xenium_rep1_io_aligned.zip", "xenium_rep2_io_aligned.zip",
-        "HuLungXenmulti.zip")
-    
-    sdurls <- paste(buckprefix, sdfold, sdzips, sep="/")
+    sdurls <- paste(buckprefix, sdfold, .SD_ZIPS, sep="/")
     
     # work on zipped Xenium minimal outputs, retrieved and zipped in OSN
     # these must be expanded and processed with use_sdio
@@ -51,7 +55,7 @@
         "Xenium_V1_human_Lung_2fov_outs.zip")
     
     # collect names of all zip files
-    allz <- c(sdzips, xdzips)
+    allz <- c(.SD_ZIPS, xdzips)
     # build a tibble with all relevant information
     xdurls <- paste(buckprefix, xdfold, xdzips, sep="/")
     allurls <- c(sdurls, xdurls)
@@ -66,9 +70,9 @@
         chkxen <- grep(patt, xdzips)
         if (length(chkxen) > 1) stop(nupatt)
         if (length(chkxen) == 0) {   # add a zipped zarr
-            zipind = grep(patt, sdzips)  # already ruled out xenium group, must be from spatialdata archive
+            zipind = grep(patt, .SD_ZIPS)  # already ruled out xenium group, must be from spatialdata archive
             if (length(zipind) == 0) stop("patt not matched in available resources")
-            zipname <- sdzips[zipind]
+            zipname <- .SD_ZIPS[zipind]
             message(sprintf("caching %s", zipname))
             fpath <- sdurls[zipind]
             loc <- BiocFileCache::bfcadd(cache, rname=zipname, fpath=fpath, rtype="web")
