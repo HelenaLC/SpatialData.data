@@ -1,3 +1,7 @@
+.OSN_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData/"
+.OSN_PATH_XENIUM <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo/"
+.SCVERSE_PATH <- "https://s3.embl.de/spatialdata/spatialdata-sandbox"
+
 #' use 'paws::s3' to interrogate an NSF Open Storage Network 
 #' bucket for zipped zarr archives for various platforms
 #' @examples
@@ -44,10 +48,10 @@ availableOSN_BiocXen <- function() {
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
 #' if (requireNamespace("paws")) {
-#'   available_scverse_sandbox()
+#'   available_sandbox()
 #' }
 #' @export
-available_scverse_sandbox <- function() {
+available_sandbox <- function() {
   .check_paws()
   message("checking scverse spatialdata-sandbox bucket...")
   s3 <- paws::s3(

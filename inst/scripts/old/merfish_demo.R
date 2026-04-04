@@ -142,38 +142,6 @@ build_sandbox_path <- function(zipname) {
     dir(destination, full.names=TRUE)
 }
 
-#' use 'paws::s3' to interrogate an NSF Open Storage Network 
-#' bucket for zipped 10x-produced Xenium outputs
-#' @examples
-#' if (requireNamespace("paws")) {
-#'   SpatialData.data:::.available_10x_xen_zips()
-#' }
-.available_10x_xen_zips <- function() {
-    if (!requireNamespace("paws")) 
-        stop("install 'paws' to use this function; without it",
-            " we can't check existence of data in OSN bucket")
-    message("checking Bioconductor OSN bucket...")
-    s3 <- paws::s3(
-        credentials=list(anonymous=TRUE),
-        endpoint="https://mghp.osn.xsede.org")
-    zz <- s3$list_objects(
-      Bucket="bir190004-bucket01", 
-      Prefix="BiocXenDemo") 
-    keys <- lapply(zz$Contents, "[[", "Key")
-    basename(grepv("/", keys))
-}
-
-#' provide path to a zip file from 10x genomics for Xenium platform
-#' @param zipname character(1) name of zip archive to find
-#' @examples
-#' SpatialData.data:::.path_to_10x_xen_demo()
-#' # see ?use_sdio
-.path_to_10x_xen_demo <- function(zipname="Xenium_V1_human_Breast_2fov_outs.zip") {
-    .cache_add_if_needed_xendemo(
-        cache=BiocFileCache::BiocFileCache(),
-        zipname=zipname, source="biocOSN")
-}
-
 .cache_add_if_needed_xendemo <- function(cache=BiocFileCache::BiocFileCache(), 
        zipname="Xenium_V1_human_Breast_2fov_outs.zip", source="biocOSN") {
     info <- BiocFileCache::bfcquery(cache, zipname)
