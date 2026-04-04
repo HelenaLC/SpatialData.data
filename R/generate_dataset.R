@@ -1,0 +1,73 @@
+#' generate spatialdata datasets using dummy-spatialdata
+#' 
+#' @examples
+#' generate_dataset()
+#' 
+#' # write spatialdata in 0.5.0 version
+#' zarrfile <- tempfile(fileext = ".zarr")
+#' generate_dataset(
+#'   file = zarrfile, 
+#'   sd_version = "0.5.0",
+#'   points = list(
+#'     list(n_points=12L)
+#'   )
+#' )
+#' 
+#' # write spatialdata in 0.7.2 version
+#' zarrfile <- tempfile(fileext = ".zarr")
+#' generate_dataset(
+#'   file = zarrfile, 
+#'   sd_version = "0.7.2",
+#'   shapes = list(
+#'     list(n_shapes=12L, coordinate_system="global"),
+#'   ),
+#'   points = list(
+#'     list(n_points=12L)
+#'   ),
+#'   coordinate_systems = list(
+#'     global = list(
+#'       transformations = list("affine"), 
+#'       shape = list(x=2000L, y=2000L)
+#'     )
+#'   )
+#' )
+#' 
+#' @export
+generate_dataset <- function(file = tempfile(fileext = ".zarr"),
+                             sd_version = getOption("sd_version"),
+                             images = NULL, 
+                             labels = NULL, 
+                             shapes = NULL, 
+                             points = NULL, 
+                             tables = NULL,
+                             coordinate_systems = NULL,
+                             seed = 42L) {
+  # avoid package-specific import
+  if(is.null(sd_version)) sd_version <- "0.7.2"
+  env <- switch (sd_version,
+                 "0.3.0" = .env_03,
+                 "0.5.0" = .env_05,
+                 "0.7.2" = .env
+  )
+  message("Using spatialdata version ", sd_version)
+  proc <- basilisk::basiliskStart(env) 
+  on.exit(basilisk::basiliskStop(proc))
+  basilisk::basiliskRun(proc, function() {
+    unlink(file, recursive = TRUE)
+    dummy_sd <- reticulate::import("dummy_spatialdata")
+    sd <- reticulate::import("spatialdata")
+    reticulate::import("numpy")
+    temp <- dummy_sd$generate_dataset(
+      images = images,
+      labels = labels,
+      shapes = shapes,
+      points = points,
+      tables = tables,
+      coordinate_systems = coordinate_systems,
+      SEED = seed
+    )
+    temp$write(file)
+    message("SpatialData object written to '", file, "'")
+    return(TRUE)
+  })
+}
