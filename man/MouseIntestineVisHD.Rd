@@ -18,7 +18,7 @@ MouseIntestineVisHD(target = tempfile())
 
 LungAdenocarcinomaMCMICRO(target = tempfile())
 
-MouseBrainMERFISH(target = tempfile())
+MouseBrainMERFISH(target = tempfile(), source = bucket_path("biocOSN"))
 
 MulticancerSteinbock(target = tempfile())
 
@@ -68,7 +68,11 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.
   Visium (10x Genomics) dataset of breast cancer; source: 
   \emph{https://www.nature.com/articles/s41467-023-43458-x}}
 \item{
-  \code{JanesickBreastXeniumRep1/2()}}{
+  \code{JanesickBreastXeniumRep1()}}{
+  two Xenium (10x Genomics) sections associated with
+  the above Visium section from Janesick \emph{et al.}}
+\item{
+  \code{JanesickBreastXeniumRep2()}}{
   two Xenium (10x Genomics) sections associated with
   the above Visium section from Janesick \emph{et al.}}
 \item{

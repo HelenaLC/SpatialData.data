@@ -1,16 +1,41 @@
-.OSN_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData/"
-.OSN_PATH_XENIUM <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo/"
-.SCVERSE_PATH <- "https://s3.embl.de/spatialdata/spatialdata-sandbox"
-
-#' use 'paws::s3' to interrogate an NSF Open Storage Network 
-#' bucket for zipped zarr archives for various platforms
+#' available
+#' 
+#' Function for interrogating files across buckets. Please use 'paws::s3' to 
+#' interrogate buckets for zipped zarr archives or raw readouts for various 
+#' platforms.
+#' 
+#' @param source The name of the query bucket.
+#' \describe{
+#'  \item{biocOSN}{
+#'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
+#'  }
+#'  \item{biocOSN_Xenium}{
+#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
+#'  }
+#'  \item{sandbox}{
+#'    scverse's spatialdata-sandbox bucket at EMBL.
+#'  }
+#' }
+#' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
 #' if (requireNamespace("paws")) {
-#'   availableOSN()
+#'   available("biocOSN")
 #' }
 #' @export
-availableOSN <- function() {
+available <- function(source = "biocOSN"){
+  switch(source, 
+         biocOSN = .available_biocOSN(),
+         biocOSN_Xenium = .available_biocOSN_Xenium(),
+         sandbox = .available_sandbox(), 
+         {
+           stop("Unknown bucket! Available values are ", 
+                "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
+         })
+}
+
+#' @noRd
+.available_biocOSN <- function() {
     .check_paws()
     message("checking Bioconductor OSN bucket...")
     s3 <- paws::s3(
@@ -23,17 +48,10 @@ availableOSN <- function() {
     basename(grepv("/", keys))
 }
 
-#' use 'paws::s3' to interrogate an NSF Open Storage Network 
-#' bucket for zipped zarr archives for various platforms
-#' @examples
-#' Sys.setenv(AWS_REGION = "us-east-1")
-#' if (requireNamespace("paws")) {
-#'   availableOSN_BiocXen()
-#' }
-#' @export
-availableOSN_BiocXen <- function() {
+#' @noRd
+.available_biocOSN_Xenium <- function() {
   .check_paws()
-  message("checking Bioconductor OSN bucket...")
+  message("checking Bioconductor OSN bucket (Xenium readouts) ...")
   s3 <- paws::s3(
     credentials=list(anonymous=TRUE),
     endpoint="https://mghp.osn.xsede.org")
@@ -44,14 +62,8 @@ availableOSN_BiocXen <- function() {
   basename(grepv("/", keys))
 }
 
-#' use 'paws::s3' to interrogate the scverse sandbox bucket in EMBL
-#' @examples
-#' Sys.setenv(AWS_REGION = "us-east-1")
-#' if (requireNamespace("paws")) {
-#'   available_sandbox()
-#' }
-#' @export
-available_sandbox <- function() {
+#' @noRd
+.available_sandbox <- function() {
   .check_paws()
   message("checking scverse spatialdata-sandbox bucket...")
   s3 <- paws::s3(

@@ -2,23 +2,41 @@
 # Bucket paths #### 
 ####
 
-#' @export
-osn_path <- function() {
-  "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData"
-}
+.OSN_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData"
+.OSN_Xenium_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo"
+.SANDBOX_PATH <- "https://s3.embl.de/spatialdata/spatialdata-sandbox"
 
+#' bucket_path
+#' 
+#' Function for interrogating path to buckets.
+#' 
+#' @param source The name of the query bucket.
+#' \describe{
+#'  \item{biocOSN}{
+#'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
+#'  }
+#'  \item{biocOSN_Xenium}{
+#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
+#'  }
+#'  \item{sandbox}{
+#'    scverse's spatialdata-sandbox bucket at EMBL.
+#'  }
+#' }
+#' 
 #' @export
-osn_xenium_path <- function() {
-  "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo"
-}
-
-#' @export
-sandbox_path <- function() {
-  "https://s3.embl.de/spatialdata/spatialdata-sandbox"
+bucket_path <- function(source = "biocOSN"){
+  switch(source, 
+         biocOSN = .OSN_PATH,
+         biocOSN_Xenium = .OSN_Xenium_PATH,
+         sandbox = .SANDBOX_PATH, 
+         {
+           stop("Unknown bucket! Available values are ", 
+                "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
+         })
 }
 
 ####
-# Main readers and auxiliary #### 
+# Bucket data #### 
 ####
 
 #' @title a data.frame with information about available resources
@@ -65,6 +83,10 @@ sandbox_path <- function() {
   "xenium_rep1_io_spatialdata_0.7.1.zip" 
 )
 
+####
+# Main readers and auxiliary #### 
+####
+
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' 
 #' @importFrom SpatialData readSpatialData
@@ -73,26 +95,27 @@ sandbox_path <- function() {
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
+#' @param source the name of the source bucket.
 #' @note This function checks for stale element in cache and uses bfcupdate to rectify
 #' before retrieving from cache.
 #' 
 # @examples
 # # the following are equivalent:
-# .get_demo_SDdata("merfish")
+# get_demo_SDdata("merfish")
 # MouseBrainMERFISH()
-.get_demo_SDdata <- function(
+get_demo_SDdata <- function(
     patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile(),
-    source = osn_path()
+    source = bucket_path("biocOSN")
 ) {
   
   # get file and urls
-  allz <- if (source == osn_path()) {
+  allz <- if (source == bucket_path("biocOSN")) {
     .OSN_DATA
-  } else if (source == osn_xenium_path()) {
+  } else if (source == bucket_path("biocOSN_Xenium")) {
     .OSN_Xenium_DATA
-  } else if (source == sandbox_path()) {
+  } else if (source == bucket_path("sandbox")) {
     .SANDBOX_DATA
   } else {
     stop("Unknown source")
@@ -138,7 +161,7 @@ sandbox_path <- function() {
 
   # unzip (convert to zarr if needed using spatialdata-io)
   # and return to target
-  if(source == osn_xenium_path()){
+  if(source == bucket_path("biocOSN_Xenium")){
     dir.create(td <- tempfile()) # can't use target'
     unzip(loc, exdir=td)  # manufacturer output
     if (dir.exists(target)) 
@@ -152,17 +175,17 @@ sandbox_path <- function() {
   }
 }
 
-#' read the data with S
+#' read the data with SpatialData::readSpatialData
 #' @noRd
 #' @importFrom SpatialData readSpatialData
 .read_demo_SDdata <- function(
   patt, 
   cache=BiocFileCache::BiocFileCache(),
   target=tempfile(), 
-  source=osn_path()
+  source=bucket_path("biocOSN")
 ) {
   SpatialData::readSpatialData(
-    .get_demo_SDdata(
+    get_demo_SDdata(
       patt = patt,
       cache = cache,
       target = target,
@@ -180,7 +203,18 @@ sandbox_path <- function() {
 }
 
 #' @title retrieve scverse-curated `SpatialData` .zarr archive
-#' @aliases MouseIntestineVisHD
+#' @aliases 
+#' MouseIntestineVisHD
+#' LungAdenocarcinomaMCMICRO
+#' MouseBrainMERFISH
+#' MulticancerSteinbock
+#' ColorectalCarcinomaMIBITOF
+#' JanesickBreastVisiumEnh
+#' JanesickBreastXeniumRep1
+#' JanesickBreastXeniumRep2
+#' Breast2fov_10x
+#' Lung2fov_10x
+#' HumanLungMulti_10x
 #' 
 #' @description
 #' This function consolidates the retrieval and caching and transformation 
@@ -213,7 +247,11 @@ sandbox_path <- function() {
 #'   Visium (10x Genomics) dataset of breast cancer; source: 
 #'   \emph{https://www.nature.com/articles/s41467-023-43458-x}}
 #' \item{
-#'   \code{JanesickBreastXeniumRep1/2()}}{
+#'   \code{JanesickBreastXeniumRep1()}}{
+#'   two Xenium (10x Genomics) sections associated with
+#'   the above Visium section from Janesick \emph{et al.}}
+#' \item{
+#'   \code{JanesickBreastXeniumRep2()}}{
 #'   two Xenium (10x Genomics) sections associated with
 #'   the above Visium section from Janesick \emph{et al.}}
 #' \item{
@@ -239,7 +277,7 @@ sandbox_path <- function() {
 MouseIntestineVisHD <- function(target=tempfile()) { 
     .read_demo_SDdata("visium_hd_3.0.0", 
                       target=target,
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -247,15 +285,16 @@ MouseIntestineVisHD <- function(target=tempfile()) {
 LungAdenocarcinomaMCMICRO <- function(target=tempfile()) {
     .read_demo_SDdata("mcmicro_io", 
                       target=target, 
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
 #' @export
-MouseBrainMERFISH = function(target=tempfile()) {
+MouseBrainMERFISH = function(target=tempfile(), 
+                             source = bucket_path("biocOSN")) {
     .read_demo_SDdata("merfish", 
                       target=target, 
-                      source = osn_path())
+                      source = source)
 }
 
 #' @rdname MouseIntestineVisHD
@@ -263,7 +302,7 @@ MouseBrainMERFISH = function(target=tempfile()) {
 MulticancerSteinbock <- function(target=tempfile()) {
     .read_demo_SDdata("steinbock_io", 
                       target=target,
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -271,7 +310,7 @@ MulticancerSteinbock <- function(target=tempfile()) {
 ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
     .read_demo_SDdata("mibitof", 
                       target=target, 
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -279,7 +318,7 @@ ColorectalCarcinomaMIBITOF <- function(target=tempfile()) {
 JanesickBreastVisiumEnh <- function(target=tempfile()) {
     .read_demo_SDdata("visium_associated_xenium_io", 
                       target=target, 
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -287,7 +326,7 @@ JanesickBreastVisiumEnh <- function(target=tempfile()) {
 JanesickBreastXeniumRep1 <- function(target=tempfile()) {
     .read_demo_SDdata("xenium_rep1_io", 
                       target=target, 
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -295,7 +334,7 @@ JanesickBreastXeniumRep1 <- function(target=tempfile()) {
 JanesickBreastXeniumRep2 <- function(target=tempfile()) {
     .read_demo_SDdata("xenium_rep2_io", 
                       target=target, 
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -303,7 +342,7 @@ JanesickBreastXeniumRep2 <- function(target=tempfile()) {
 Breast2fov_10x <- function(target=tempfile()) {
     .read_demo_SDdata("human_Breast_2fov", 
                       target=target, 
-                      source = osn_xenium_path())
+                      source = bucket_path("biocOSN_Xenium"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -311,7 +350,7 @@ Breast2fov_10x <- function(target=tempfile()) {
 Lung2fov_10x <- function(target=tempfile()) {
     .read_demo_SDdata("human_Lung_2fov", 
                       target=target, 
-                      source = osn_xenium_path())
+                      source = bucket_path("biocOSN_Xenium"))
 }
 
 #' @rdname MouseIntestineVisHD
@@ -319,5 +358,5 @@ Lung2fov_10x <- function(target=tempfile()) {
 HumanLungMulti_10x <- function(target=tempfile()) {
     .read_demo_SDdata("HuLungXenmulti", 
                       target=target, 
-                      source = osn_path())
+                      source = bucket_path("biocOSN"))
 }
