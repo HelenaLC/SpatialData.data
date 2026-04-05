@@ -11,7 +11,11 @@
 )
 }
 \arguments{
+\item{cache}{cache location BiocFileCache::BiocFileCache()}
+
 \item{zipname}{character(1) name of zip archive to find}
+
+\item{source}{source, see \link{bucket_path}}
 }
 \description{
 provide path to a zip file from 10x genomics for Xenium platform

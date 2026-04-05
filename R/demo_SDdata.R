@@ -83,6 +83,9 @@ bucket_path <- function(source = "biocOSN"){
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
 #' @param source the name of the source bucket.
+#' 
+#' @importFrom utils unzip
+#' 
 #' @note This function checks for stale element in cache and uses bfcupdate to rectify
 #' before retrieving from cache.
 #' 
@@ -150,14 +153,14 @@ get_demo_SDdata <- function(
   # and return to target
   if(source == bucket_path("biocOSN_Xenium")){
     dir.create(td <- tempfile()) # can't use target'
-    unzip(loc, exdir=td)  # manufacturer output
+    utils::unzip(loc, exdir=td)  # manufacturer output
     if (dir.exists(target)) 
       warning("target exists")
     use_sdio("xenium", srcdir=td, dest=target) # zarr in target
     return(target)
   } else {
     dir.create(td <- target)
-    unzip(loc, exdir=td)
+    utils::unzip(loc, exdir=td)
     return(dir(td, full.names=TRUE)) 
   }
 }
@@ -192,7 +195,11 @@ get_demo_SDdata <- function(
 # TODO: get rid of this later
 
 #' provide path to a zip file from 10x genomics for Xenium platform
+#' 
+#' @param cache cache location BiocFileCache::BiocFileCache()
 #' @param zipname character(1) name of zip archive to find
+#' @param source source, see \link{bucket_path}
+#' 
 #' @examples
 #' SpatialData.data:::.path_to_10x_xen_demo()
 #' # see ?use_sdio
@@ -227,6 +234,8 @@ get_demo_SDdata <- function(
 #' @param extended if TRUE, all columns will be returned, e.g. File size, 
 #' License etc.
 #'
+#' @importFrom utils read.csv
+#' 
 #' @returns data.frame
 #' 
 #' @export
@@ -236,7 +245,7 @@ get_demo_SDdata <- function(
 #' SpatialData.data_list(extended = TRUE)
 SpatialData.data_list <- function(extended = FALSE) {
   data_file <- system.file("data", "demo_spatialdata.csv", package = "SpatialData.data")
-  x <- read.csv(data_file, sep = ";")
+  x <- utils::read.csv(data_file, sep = ";")
   if(extended) x else x[,c("Function", "Technology", "S3_buckets", "Format")]
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate_dataset.R
 \name{generate_dataset}
 \alias{generate_dataset}
-\title{generate spatialdata datasets using dummy-spatialdata}
+\title{generate_dataset}
 \usage{
 generate_dataset(
   file = tempfile(fileext = ".zarr"),
@@ -16,6 +16,25 @@ generate_dataset(
   seed = 42L
 )
 }
+\arguments{
+\item{file}{location that zarr file will be written}
+
+\item{sd_version}{spatialdata version, see \link{available_sdio}}
+
+\item{images}{image element}
+
+\item{labels}{labels element}
+
+\item{shapes}{shapes element}
+
+\item{points}{points element}
+
+\item{tables}{tables element (anndata)}
+
+\item{coordinate_systems}{list of coordinate systems}
+
+\item{seed}{seed}
+}
 \description{
-generate spatialdata datasets using dummy-spatialdata
+Generate spatialdata datasets using dummy-spatialdata
 }

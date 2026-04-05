@@ -1,6 +1,19 @@
-#' generate spatialdata datasets using dummy-spatialdata
+#' generate_dataset
 #' 
+#' Generate spatialdata datasets using dummy-spatialdata
+#' 
+#' @param file location that zarr file will be written
+#' @param sd_version spatialdata version, see \link{available_sdio}
+#' @param images image element
+#' @param labels labels element
+#' @param shapes shapes element
+#' @param points points element
+#' @param tables tables element (anndata)
+#' @param coordinate_systems list of coordinate systems
+#' @param seed seed
+#'
 #' @examples
+#' 
 #' generate_dataset()
 #' 
 #' # write spatialdata in 0.5.0 version
@@ -38,6 +51,7 @@
 #' )
 #' 
 #' @export
+#' 
 generate_dataset <- function(file = tempfile(fileext = ".zarr"),
                              sd_version = getOption("sd_version"),
                              images = NULL, 

@@ -1,6 +1,14 @@
+#' available_sdio
+#' 
 #' enumerate modules
+#' 
+#' @param sd_version spatialdata version, should be set to 0.3.0, 0.5.0 or 0.7.2. Default: 0.7.
+#' 
+#' @import basilisk
+#' 
 #' @examples
 #' available_sdio()
+#' 
 #' @export
 available_sdio <- function(sd_version = NULL) {
     proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version)) 

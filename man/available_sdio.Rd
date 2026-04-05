@@ -2,13 +2,17 @@
 % Please edit documentation in R/spatialdata_io.R
 \name{available_sdio}
 \alias{available_sdio}
-\title{enumerate modules}
+\title{available_sdio}
 \usage{
 available_sdio(sd_version = NULL)
+}
+\arguments{
+\item{sd_version}{spatialdata version, should be set to 0.3.0, 0.5.0 or 0.7.2. Default: 0.7.}
 }
 \description{
 enumerate modules
 }
 \examples{
 available_sdio()
+
 }

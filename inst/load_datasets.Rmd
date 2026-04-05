@@ -1,0 +1,79 @@
+---
+title: "`SpatialData.data`"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+package: "`r BiocStyle::pkg_ver('SpatialData.data')`"
+author: 
+  - name: Vince Carey
+  - name: Helena Lucia Crowell
+output:
+  BiocStyle::html_document
+vignette: |
+  %\VignetteIndexEntry{SpatialData.data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=FALSE, message=FALSE, warning=FALSE)
+```
+
+```{r load-libs}
+library(SpatialData)
+# library(SpatialData.data)
+```
+
+# Download datasets
+
+```{r ons-list}
+Sys.setenv(AWS_REGION = "us-east-1")
+if (requireNamespace("paws")) availableOSN()
+```
+
+Any of the above can be retrieved (once) into some location, and read into R.  We
+use dataset-specific functions, or `loadFromOSN`:
+
+```{r MouseIntestineVisHD}
+(x <- MouseIntestineVisHD()) # stub can be used
+```
+
+```{r LungAdenocarcinomaMCMICRO}
+(x <- LungAdenocarcinomaMCMICRO()) # stub can be used
+```
+
+```{r MouseBrainMERFISH}
+(x <- MouseBrainMERFISH()) # stub can be used
+```
+
+```{r MulticancerSteinbock}
+(x <- MulticancerSteinbock()) # stub can be used
+```
+
+```{r ColorectalCarcinomaMIBITOF}
+(x <- ColorectalCarcinomaMIBITOF()) # stub can be used
+```
+
+```{r JanesickBreastVisiumEnh}
+(x <- JanesickBreastVisiumEnh()) # stub can be used
+```
+
+```{r JanesickBreastXeniumRep2}
+(x <- JanesickBreastXeniumRep2()) # stub can be used
+```
+
+```{r Breast2fov_10x}
+(x <- Breast2fov_10x()) # stub can be used
+```
+
+```{r Lung2fov_10x}
+(x <- Lung2fov_10x()) # stub can be used
+```
+
+```{r HumanLungMulti_10x}
+(x <- HumanLungMulti_10x()) # stub can be used
+```
+
+# Session info
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
