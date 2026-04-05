@@ -6,7 +6,7 @@ LungAdenocarcinomaMCMICRO();CyCIF (MCMICRO output);Small lung adenocarcinoma;bio
 MouseBrainMERFISH();MERFISH;Mouse brain;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);50 MB;merfish;CC0 1.0 DEED
 MouseLiverMERFISH();MERFISH;Mouse liver ;sandbox;0.7.2 (Zarr v3);66 MB;mouse_liver ;CC BY 4.0 DEED
 ColorectalCarcinomaMIBITOF();MIBI-TOF;Colorectal carcinoma;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);25 MB;mibitof;CC BY 4.0 DEED
-MulticancerSteinbock();Imaging Mass Cytometry (Steinbock output);4 different cancers (SCCHN, BCC, NSCLC, CRC);biocOSN;0.3.0 (Zarr v2);820 MB;steinbock_io;CC BY 4.0 DEED
+MulticancerSteinbock();IMC (Steinbock output);4 different cancers (SCCHN, BCC, NSCLC, CRC);biocOSN;0.3.0 (Zarr v2);820 MB;steinbock_io;CC BY 4.0 DEED
 JanesickBreastVisiumEnh();Visium;Breast Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);1.5 GB;visium_associated_xenium_io;CCA
 JanesickBreastXeniumRep1();Xenium;Breast Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);2.8 GB;xenium_rep1_io;CCA
 JanesickBreastXeniumRep2();Xenium;Breast Cancer;biocOSN;0.3.0 (Zarr v2);3.7 GB;xenium_rep2_io;CCA

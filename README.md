@@ -65,6 +65,24 @@ We can check all available datasets below:
 SpatialData.data_list()
 ```
 
+<div><pre><code style="font-size: 13px;">                       Function             Technology       S3_buckets                           Format
+1         MouseIntestineVisHD()              Visium HD biocOSN, sandbox 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+2             MouseBrainVisHD()              Visium HD          sandbox                  0.3.0 (Zarr v2)
+3               MouseBrainVis()                 Visium          sandbox                  0.7.2 (Zarr v3)
+4   LungAdenocarcinomaMCMICRO() CyCIF (MCMICRO output)          biocOSN                  0.3.0 (Zarr v2)
+5           MouseBrainMERFISH()                MERFISH biocOSN, sandbox 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+6           MouseLiverMERFISH()                MERFISH          sandbox                  0.7.2 (Zarr v3)
+7  ColorectalCarcinomaMIBITOF()               MIBI-TOF biocOSN, sandbox 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+8        MulticancerSteinbock() IMC (Steinbock output)          biocOSN                  0.3.0 (Zarr v2)
+9     JanesickBreastVisiumEnh()                 Visium biocOSN, sandbox 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+10   JanesickBreastXeniumRep1()                 Xenium biocOSN, sandbox 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+11   JanesickBreastXeniumRep2()                 Xenium          biocOSN                  0.3.0 (Zarr v2)
+12         HumanLungMulti_10x()                 Xenium biocOSN, sandbox 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+13             Breast2fov_10x()       Xenium (trimmed)   biocOSN_Xenium 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+14               Lung2fov_10x()       Xenium (trimmed)   biocOSN_Xenium 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
+15           SpaceMHelaniH3T3()                 SpaceM          sandbox                  0.7.2 (Zarr v3)</code></pre></div>
+```
+
 To interrogate the bucket for available (zipped) .zarr archives:
 
 ``` r
