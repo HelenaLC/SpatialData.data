@@ -43,7 +43,7 @@ whose elements are customized by the user.
 
 # Introduction
 
-```{r load-data}
+```{r aws}
 Sys.setenv(AWS_REGION = "us-east-1")
 ```
 
