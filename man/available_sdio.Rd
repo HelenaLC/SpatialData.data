@@ -4,10 +4,13 @@
 \alias{available_sdio}
 \title{available_sdio}
 \usage{
-available_sdio(sd_version = NULL)
+available_sdio(sd_version = getOption("sd_version"), verbose = TRUE)
 }
 \arguments{
-\item{sd_version}{spatialdata version, should be set to 0.3.0, 0.5.0 or 0.7.2. Default: 0.7.}
+\item{sd_version}{spatialdata version, should be set to 0.3.0, 0.5.0 or 
+0.7.2. Default: 0.7.}
+
+\item{verbose}{verbose}
 }
 \description{
 enumerate modules

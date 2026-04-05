@@ -2,16 +2,19 @@
 #' 
 #' enumerate modules
 #' 
-#' @param sd_version spatialdata version, should be set to 0.3.0, 0.5.0 or 0.7.2. Default: 0.7.
-#' 
+#' @param sd_version spatialdata version, should be set to 0.3.0, 0.5.0 or 
+#' 0.7.2. Default: 0.7.
+#' @param verbose verbose
 #' @import basilisk
 #' 
 #' @examples
 #' available_sdio()
 #' 
 #' @export
-available_sdio <- function(sd_version = NULL) {
-    proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version)) 
+available_sdio <- function(sd_version = getOption("sd_version"), 
+                           verbose = TRUE) {
+    proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version, 
+                                                      verbose = TRUE)) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")
@@ -50,10 +53,11 @@ use_sdio <- function(platform="xenium", srcdir, dest) {
             " please provide a non-existent path.")
     proc <- basilisk::basiliskStart(.get_basilisk_env()) 
     on.exit(basilisk::basiliskStop(proc))
-    basilisk::basiliskRun(proc, function(platform, srcdir, dest) {
+    basilisk::basiliskRun(proc, function(platform, srcdir, dest, avail) {
         sdio <- reticulate::import("spatialdata_io")
         avail <- names(sdio)
-        stopifnot(platform %in% available_sdio())
+        stopifnot(platform %in% avail)
         sdio[[platform]](srcdir)$write(dest)
-    }, platform=platform, srcdir=srcdir, dest=dest)
+    }, platform=platform, srcdir=srcdir, dest=dest, 
+    avail = available_sdio(verbose = FALSE))
 }
