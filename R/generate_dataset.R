@@ -14,20 +14,17 @@
 #' )
 #' 
 #' # write spatialdata in 0.7.2 version
-#' zarrfile <- tempfile(fileext = ".zarr")
 #' generate_dataset(
-#'   file = zarrfile, 
 #'   sd_version = "0.7.2",
 #'   images = list(
 #'     list(type = "rgb", n_layers = 4L, coordinate_system="global"),
 #'     list(type = "grayscale", n_layers = 1L, coordinate_system="global")
 #'   ),
 #'   labels = list(
-#'     list(n_labels = 12L, n_layers = 4L, coordinate_system="global2"),
-#'     list(n_labels = 12L, n_layers = 0L, coordinate_system="global2")
+#'     list(n_labels = 12L, n_layers = 4L")
 #'   ),
 #'   shapes = list(
-#'     list(n_shapes=12L, coordinate_system="global"),
+#'     list(n_shapes=12L, coordinate_system="global")
 #'   ),
 #'   points = list(
 #'     list(n_points=12L)
@@ -69,6 +66,6 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
     )
     temp$write(file)
     message("SpatialData object written to '", file, "'")
-    return(TRUE)
+    return(file)
   })
 }

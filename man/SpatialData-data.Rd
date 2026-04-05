@@ -157,7 +157,6 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.
 
 }}
 \examples{
-
 # load using `load_data`
 ld <- load_data("ColorectalCarcinomaMIBITOF")
 ld

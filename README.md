@@ -127,12 +127,14 @@ checking Bioconductor OSN bucket (Xenium readouts) ...
 [3] "Xenium_V1_human_Breast_2fov_outs.zip"                "Xenium_V1_human_Lung_2fov_outs.zip" 
 ```
 
-You can use `basilisk` to convert these readouts into various SpatialData 
+We use `basilisk` to convert these readouts into various SpatialData 
 formats: 
 
 * **0.3.0** (Zarr v2), 
 * **0.5.0** (Zarr v2) and 
 * **0.7.2** (Zarr v3)
+
+We use `options(sd_version)` to set the SpatialData version.
 
 ```
 options(sd_version = "0.3.0")

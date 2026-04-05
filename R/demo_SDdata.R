@@ -39,19 +39,6 @@ bucket_path <- function(source = "biocOSN"){
 # Bucket data #### 
 ####
 
-#' @title a data.frame with information about available resources
-#' @docType data
-#' @examples
-#' utils::data(demo_spatialdata)
-#' if (requireNamespace("DT")) {
-#'   DT::datatable(demo_spatialdata)
-#' }
-#' @note This information was scraped from 
-#' [scverse spatialdata](https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html) download site on 5 Dec 2024.
-#' The bracketed numbers under "Sample" refer to footnotes provided at that site.
-#' The individual functions in this package give similarly detailed references.
-"demo_spatialdata"
-
 #' @noRd
 .OSN_DATA <- c(
   "mcmicro_io.zip", 
@@ -202,6 +189,31 @@ get_demo_SDdata <- function(
   stop("pattern '", patt ,"' not matched in available resources")
 }
 
+# TODO: get rid of this later
+
+#' provide path to a zip file from 10x genomics for Xenium platform
+#' @param zipname character(1) name of zip archive to find
+#' @examples
+#' SpatialData.data:::.path_to_10x_xen_demo()
+#' # see ?use_sdio
+.path_to_10x_xen_demo <- function(
+    cache=BiocFileCache::BiocFileCache(),
+    zipname="Xenium_V1_human_Breast_2fov_outs.zip", 
+    source = bucket_path("biocOSN_Xenium")) {
+  info <- BiocFileCache::bfcquery(cache, zipname)
+  nrec <- nrow(info)
+  if (nrec > 1) {
+    message(sprintf("multiple %s found in cache, using last recorded", zipname))
+  }
+  if (nrec == 1) {
+    message("returning path to cached zip")
+    return(info$rpath[nrec])
+  }
+  fp <- file.path(source, zipname)
+  message(sprintf("retrieving from %s, caching, and returning path", source))
+  BiocFileCache::bfcadd(cache, rname=zipname, fpath=fp, rtype="web")
+}
+
 ####
 # Tech specific readers #### 
 ####
@@ -271,7 +283,6 @@ SpatialData.data_list <- function(extended = FALSE) {
 #' }
 #' 
 #' @examples
-#'
 #' # load using `load_data`
 #' ld <- load_data("ColorectalCarcinomaMIBITOF")
 #' ld
@@ -286,6 +297,8 @@ SpatialData.data_list <- function(extended = FALSE) {
 #' 
 #' @return an instance of SpatialData, or NULL if the stub does not
 #' uniquely match (using grep()) the name of any resource
+#' 
+#' @export
 load_data = function(stub, 
                      target = tempfile(), 
                      source = bucket_path("biocOSN")) { 

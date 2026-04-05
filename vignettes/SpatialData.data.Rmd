@@ -22,26 +22,120 @@ library(SpatialData)
 library(SpatialData.data)
 ```
 
+`Spatialdata.data` package provides utilities for accessing, reading and 
+generating SpatialData datasets. 
+
+*scverse* SpatialData examples are available through
+
+1. Bioc's NSF OSN bucket and 
+2. scverse's spatialdata-sandbox ([https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html](https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html))
+
+which are accessible from within R, using `BiocFileCache`.
+
+`SpatialData.data` uses `basilisk` to interface and maintain multiple 
+versions of python's spatialdata package (0.3.0, 0.5.0 and 0.7.2) for reading
+and writing to .zarr packages. 
+
+`basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by the
+`dummy-spatialdata` package that generates toy spatialdata examples 
+whose elements are customized by the user.
+
 # Introduction
+
+## Zipped .zarr archives
 
 Data from a variety of technologies has been made available as `SpatialData` .zarr stores 
 [here](https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html).
-These, in turn, have been deposited in Bioconductor's NSF Open Storage Network bucket,
-and can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
+These, in turn, have been deposited in Bioconductor's NSF Open Storage Network also and 
+can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
-We can interrogate the bucket for available (zipped) .zarr archives:
+Any spatialdata dataset can be retrieved (once) into some location, and 
+read into R.  We use dataset-specific functions, or `load_data`:
 
-```{r ons-list}
-Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws")) availableOSN()
+```{r load-data}
+(x <- load_data("ColorectalCarcinomaMIBITOF")) # stub can be used
 ```
 
-Any of the above can be retrieved (once) into some location, and read into R.  We
-use dataset-specific functions, or `loadFromOSN`:
+or 
 
-```{r ons-read}
-ls("package:SpatialData.data")  # run a dataset-specific function, or
-(x <- loadFromOSN("LungAdenocarcinomaMCMICRO")) # stub can be used
+```{r load-data-biocOSN}
+# from biocOSN
+x <- ColorectalCarcinomaMIBITOF()
+```
+
+```{r load-data-sandbox}
+# TODO: zarr v3 is not complete yet
+# from sandbox (Zarr v3)
+# x <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
+```
+
+We can check all available datasets below:
+
+```{r load-data-list}
+SpatialData.data_list()
+```
+
+To interrogate the bucket for available (zipped) .zarr archives:
+
+```{r avail}
+Sys.setenv(AWS_REGION = "us-east-1")
+if (requireNamespace("paws")) available("biocOSN")
+```
+
+## SpatialData-io
+
+`SpatialData.data` also provides access to some raw spatial omic readouts. These
+data bundle can then be converted into SpatialData objects using `spatialdata-io`
+pyton package via `basilisk`.
+
+```{r avail2}
+available("biocOSN_Xenium")
+```
+
+You can use `basilisk` to convert these readouts into various SpatialData 
+formats: 
+
+* **0.3.0** (Zarr v2), 
+* **0.5.0** (Zarr v2) and 
+* **0.7.2** (Zarr v3)
+
+We use `options(sd_version)` to set the SpatialData version.
+
+```{r sd-io}
+options(sd_version = "0.3.0")
+(x <- Breast2fov_10x(source = bucket_path("biocOSN_Xenium")))
+```
+
+## Dummy SpatialData objects
+
+`SpatialData.data` package incorporates the `dummy-spatialdata` python package
+from PyPI ([https://pypi.org/project/dummy-spatialdata/](https://pypi.org/project/dummy-spatialdata/))
+via `basilisk` to generate toy spatialdata objects in multiple spatialdata 
+versions. 
+
+```{r dummy}
+# zarrfile <- tempfile(fileext = ".zarr")
+sd <- generate_dataset(
+  # file = zarrfile, 
+  sd_version = "0.5.0",
+  images = list(
+    list(type = "rgb", n_layers = 4L, coordinate_system="global"),
+    list(type = "grayscale", n_layers = 1L, coordinate_system="global")
+  ),
+  shapes = list(
+    list(n_shapes=12L, coordinate_system="global")
+  ),
+  points = list(
+    list(n_points=12L)
+  ),
+  coordinate_systems = list(
+    global = list(
+      transformations = list("affine"), 
+      shape = list(x=2000L, y=2000L)
+    )
+  )
+)
+readSpatialData(sd)
 ```
 
 # Session info
