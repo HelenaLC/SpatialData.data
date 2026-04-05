@@ -1,16 +1,16 @@
 Function;Technology;Sample;S3_buckets;Format;FileSize;Pattern;License
-MouseIntestineVisHD();Visium HD;Mouse intestin;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);1 GB;visium_hd_3.0.0;CCA
-MouseBrainVisHD();Visium HD;Mouse brain;sandbox;0.3.0 (Zarr v2);174 MB;visium_hd_4.0.1;CC BY 4.0 DEED
-MouseBrainVis();Visium;Mouse brain;sandbox;0.7.2 (Zarr v3);65 MB;visium_spatialdata;CC BY 4.0 DEED
-LungAdenocarcinomaMCMICRO();CyCIF (MCMICRO output);Small lung adenocarcinoma;biocOSN;0.3.0 (Zarr v2);250 MB;mcmicro_io;CC BY-NC 4.0 DEED
-MouseBrainMERFISH();MERFISH;Mouse brain;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);50 MB;merfish;CC0 1.0 DEED
-MouseLiverMERFISH();MERFISH;Mouse liver ;sandbox;0.7.2 (Zarr v3);66 MB;mouse_liver ;CC BY 4.0 DEED
-ColorectalCarcinomaMIBITOF();MIBI-TOF;Colorectal carcinoma;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);25 MB;mibitof;CC BY 4.0 DEED
-MulticancerSteinbock();IMC (Steinbock output);4 different cancers (SCCHN, BCC, NSCLC, CRC);biocOSN;0.3.0 (Zarr v2);820 MB;steinbock_io;CC BY 4.0 DEED
-JanesickBreastVisiumEnh();Visium;Breast Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);1.5 GB;visium_associated_xenium_io;CCA
-JanesickBreastXeniumRep1();Xenium;Breast Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);2.8 GB;xenium_rep1_io;CCA
-JanesickBreastXeniumRep2();Xenium;Breast Cancer;biocOSN;0.3.0 (Zarr v2);3.7 GB;xenium_rep2_io;CCA
-HumanLungMulti_10x();Xenium;Lung Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);5.4 GB;HuLungXenmulti, xenium_2.0.0;CC BY 4.0 DEED
-Breast2fov_10x();Xenium (trimmed);Breast (2 FOV);biocOSN_Xenium;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);380 MB;Xenium_V1_human_Breast_2fov;CCA
-Lung2fov_10x();Xenium (trimmed);Lung (2 FOV);biocOSN_Xenium;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);280 MB;Xenium_V1_human_Lung_2fov;CCA
-SpaceMHelaniH3T3();SpaceM;Hepa and NIH3T3 cells?;sandbox;0.7.2 (Zarr v3);49 MB;spacem_helanih3t3;CC BY 4.0 DEED
+MouseIntestineVisHD;Visium HD;Mouse intestin;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);1 GB;visium_hd_3.0.0;CCA
+MouseBrainVisHD;Visium HD;Mouse brain;sandbox;0.3.0 (Zarr v2);174 MB;visium_hd_4.0.1;CC BY 4.0 DEED
+MouseBrainVis;Visium;Mouse brain;sandbox;0.7.2 (Zarr v3);65 MB;visium_spatialdata;CC BY 4.0 DEED
+LungAdenocarcinomaMCMICRO;CyCIF (MCMICRO output);Small lung adenocarcinoma;biocOSN;0.3.0 (Zarr v2);250 MB;mcmicro_io;CC BY-NC 4.0 DEED
+MouseBrainMERFISH;MERFISH;Mouse brain;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);50 MB;merfish;CC0 1.0 DEED
+MouseLiverMERFISH;MERFISH;Mouse liver ;sandbox;0.7.2 (Zarr v3);66 MB;mouse_liver ;CC BY 4.0 DEED
+ColorectalCarcinomaMIBITOF;MIBI-TOF;Colorectal carcinoma;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);25 MB;mibitof;CC BY 4.0 DEED
+MulticancerSteinbock;IMC (Steinbock output);4 different cancers (SCCHN, BCC, NSCLC, CRC);biocOSN;0.3.0 (Zarr v2);820 MB;steinbock_io;CC BY 4.0 DEED
+JanesickBreastVisiumEnh;Visium;Breast Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);1.5 GB;visium_associated_xenium_io;CCA
+JanesickBreastXeniumRep1;Xenium;Breast Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);2.8 GB;xenium_rep1_io;CCA
+JanesickBreastXeniumRep2;Xenium;Breast Cancer;biocOSN;0.3.0 (Zarr v2);3.7 GB;xenium_rep2_io;CCA
+HumanLungMulti_10x;Xenium;Lung Cancer;biocOSN, sandbox;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);5.4 GB;HuLungXenmulti, xenium_2.0.0;CC BY 4.0 DEED
+Breast2fov_10x;Xenium (trimmed);Breast (2 FOV);biocOSN_Xenium;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);380 MB;Xenium_V1_human_Breast_2fov;CCA
+Lung2fov_10x;Xenium (trimmed);Lung (2 FOV);biocOSN_Xenium;0.3.0 (Zarr v2), 0.7.2 (Zarr v3);280 MB;Xenium_V1_human_Lung_2fov;CCA
+SpaceMHelaniH3T3;SpaceM;Hepa and NIH3T3 cells?;sandbox;0.7.2 (Zarr v3);49 MB;spacem_helanih3t3;CC BY 4.0 DEED

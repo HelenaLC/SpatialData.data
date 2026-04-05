@@ -290,7 +290,7 @@ load_data = function(stub,
                      target = tempfile(), 
                      source = bucket_path("biocOSN")) { 
   opts = SpatialData.data_list()
-  hit = grep(stub, opts, value=TRUE)
+  hit = grep(stub, opts$Function, value=TRUE)
   if (!is.na(hit[1]) && length(hit)==1L) 
     return(get(hit)(target = target,
                     source = source))
