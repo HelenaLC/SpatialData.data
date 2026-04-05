@@ -27,6 +27,8 @@ available_sdio <- function(sd_version = NULL) {
 #' @param dest character(1) a path to a desired destination for zarr representation
 #' 
 #' @examples
+#' Sys.setenv(AWS_REGION = "us-east-1")
+#' 
 #' # unzip flat files
 #' pa <- SpatialData.data:::.path_to_10x_xen_demo()
 #' dir.create(td <- tempfile())

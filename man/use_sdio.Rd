@@ -19,6 +19,8 @@ Use Python's 'spatialdata-io' to transform manufacturer
 output to .zarr with specific folder structure.
 }
 \examples{
+Sys.setenv(AWS_REGION = "us-east-1")
+
 # unzip flat files
 pa <- SpatialData.data:::.path_to_10x_xen_demo()
 dir.create(td <- tempfile())

@@ -157,6 +157,8 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.
 
 }}
 \examples{
+Sys.setenv(AWS_REGION = "us-east-1")
+
 # load using `load_data`
 ld <- load_data("ColorectalCarcinomaMIBITOF")
 ld

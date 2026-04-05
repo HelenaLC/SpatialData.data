@@ -89,10 +89,7 @@ bucket_path <- function(source = "biocOSN"){
 #' @note This function checks for stale element in cache and uses bfcupdate to rectify
 #' before retrieving from cache.
 #' 
-# @examples
-# # the following are equivalent:
-# get_demo_SDdata("merfish")
-# MouseBrainMERFISH()
+#' @export
 get_demo_SDdata <- function(
     patt, 
     cache=BiocFileCache::BiocFileCache(),
@@ -201,6 +198,7 @@ get_demo_SDdata <- function(
 #' @param source source, see \link{bucket_path}
 #' 
 #' @examples
+#' Sys.setenv(AWS_REGION = "us-east-1")
 #' SpatialData.data:::.path_to_10x_xen_demo()
 #' # see ?use_sdio
 .path_to_10x_xen_demo <- function(
@@ -292,6 +290,8 @@ SpatialData.data_list <- function(extended = FALSE) {
 #' }
 #' 
 #' @examples
+#' Sys.setenv(AWS_REGION = "us-east-1")
+#' 
 #' # load using `load_data`
 #' ld <- load_data("ColorectalCarcinomaMIBITOF")
 #' ld

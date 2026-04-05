@@ -20,6 +20,7 @@ knitr::opts_chunk$set(cache=FALSE, message=FALSE, warning=FALSE)
 ```{r load-libs}
 library(SpatialData)
 library(SpatialData.data)
+library(paws)
 ```
 
 `Spatialdata.data` package provides utilities for accessing, reading and 
@@ -41,6 +42,10 @@ and writing to .zarr packages.
 whose elements are customized by the user.
 
 # Introduction
+
+```{r load-data}
+Sys.setenv(AWS_REGION = "us-east-1")
+```
 
 ## Zipped .zarr archives
 
@@ -78,8 +83,7 @@ SpatialData.data_list()
 To interrogate the bucket for available (zipped) .zarr archives:
 
 ```{r avail}
-Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws")) available("biocOSN")
+available("biocOSN")
 ```
 
 ## SpatialData-io

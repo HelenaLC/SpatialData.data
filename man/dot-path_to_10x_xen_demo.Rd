@@ -21,6 +21,7 @@
 provide path to a zip file from 10x genomics for Xenium platform
 }
 \examples{
+Sys.setenv(AWS_REGION = "us-east-1")
 SpatialData.data:::.path_to_10x_xen_demo()
 # see ?use_sdio
 }
