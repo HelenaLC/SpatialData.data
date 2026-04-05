@@ -10,7 +10,8 @@ test_that("generate_dataset()", {
   )
   
   # points work
-  generate_dataset(points = list(list(n_points=12L)))
+  generate_dataset(sd_version = "0.7.2", 
+                   points = list(list(n_points=12L)))
   
   # full spatialdata object works with 0.5.0 and 0.7.2
   lapply(names(versions), function(x){
