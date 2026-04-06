@@ -16,6 +16,7 @@ Authors@R: c(
 	    email="helena@crowell.eu", 
 	    comment=c(ORCID="0000-0002-4801-1767")))
 Imports:
+    utils,
     basilisk,
     BiocFileCache,
     reticulate,
@@ -23,10 +24,7 @@ Imports:
 Suggests:
     BiocStyle,
     knitr,
-    magick,
-    Rgraphviz,
     testthat,
-    DT,
     paws
 Remotes:
     HelenaLC/SpatialData
