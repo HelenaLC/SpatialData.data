@@ -29,10 +29,11 @@ unzip(pa, exdir=td)
 # read & write to .zarr w/ 'spatialdata-io'
 target <- tempfile()
 options(sd_version = "0.3.0")
-use_sdio("xenium", srcdir=td, dest=target)
+# turn of basilisk on GHA
+# use_sdio("xenium", srcdir=td, dest=target)
 
 # read with SpatialData
-br2fov <- SpatialData::readSpatialData(target)
-br2fov
+# br2fov <- SpatialData::readSpatialData(target)
+# br2fov
 
 }

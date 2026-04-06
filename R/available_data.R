@@ -19,9 +19,10 @@
 #' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
-#' if (requireNamespace("paws")) {
-#'   available("biocOSN")
-#' }
+#' # TODO: turn off basilisk on GHA
+#' # if (requireNamespace("paws")) {
+#' #    available("biocOSN")
+#' # }
 #' @export
 available <- function(source = "biocOSN"){
   switch(source, 

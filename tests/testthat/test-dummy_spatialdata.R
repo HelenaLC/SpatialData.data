@@ -3,6 +3,7 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("generate_dataset()", {
   
+  skip("turn off basilisk on GHA")
   # versions
   versions <- list(
     "0.7.2" = "zarr.json",

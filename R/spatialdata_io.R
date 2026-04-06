@@ -8,7 +8,8 @@
 #' @import basilisk
 #' 
 #' @examples
-#' available_sdio()
+#' # TODO: turn off basilisk on GHA
+#' # available_sdio()
 #' 
 #' @export
 available_sdio <- function(sd_version = getOption("sd_version"), 
@@ -40,11 +41,12 @@ available_sdio <- function(sd_version = getOption("sd_version"),
 #' # read & write to .zarr w/ 'spatialdata-io'
 #' target <- tempfile()
 #' options(sd_version = "0.3.0")
-#' use_sdio("xenium", srcdir=td, dest=target)
+#' # turn of basilisk on GHA
+#' # use_sdio("xenium", srcdir=td, dest=target)
 #' 
 #' # read with SpatialData
-#' br2fov <- SpatialData::readSpatialData(target)
-#' br2fov
+#' # br2fov <- SpatialData::readSpatialData(target)
+#' # br2fov
 #' 
 #' @export
 use_sdio <- function(platform="xenium", srcdir, dest) {

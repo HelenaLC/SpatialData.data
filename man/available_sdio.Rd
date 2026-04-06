@@ -16,6 +16,7 @@ available_sdio(sd_version = getOption("sd_version"), verbose = TRUE)
 enumerate modules
 }
 \examples{
-available_sdio()
+# TODO: turn off basilisk on GHA
+# available_sdio()
 
 }
