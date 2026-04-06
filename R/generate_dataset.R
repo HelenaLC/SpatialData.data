@@ -66,7 +66,6 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
   ) 
   on.exit(basilisk::basiliskStop(proc))
   basilisk::basiliskRun(proc, function() {
-    unlink(file, recursive = TRUE)
     dummy_sd <- reticulate::import("dummy_spatialdata")
     sd <- reticulate::import("spatialdata")
     temp <- dummy_sd$generate_dataset(
@@ -78,6 +77,8 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
       coordinate_systems = coordinate_systems,
       SEED = seed
     )
+    if(dir.exists(file))
+      unlink(file, recursive = TRUE)
     temp$write(file)
     message("SpatialData object written to '", file, "'")
     return(file)
