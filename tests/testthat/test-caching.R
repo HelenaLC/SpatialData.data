@@ -2,7 +2,7 @@ library(SpatialData)
 Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("available_sdio()", {
-    skip("TODO: turn off basilisk in GHA for now")
+    # skip("TODO: turn off basilisk in GHA for now")
     x <- available_sdio()   # lists methods known to spatialdata-io python module
     expect_is(x, "character")
     expect_true(length(x) > 0)
