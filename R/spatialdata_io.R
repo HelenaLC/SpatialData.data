@@ -14,8 +14,7 @@
 #' @export
 available_sdio <- function(sd_version = getOption("sd_version"), 
                            verbose = TRUE) {
-    proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version, 
-                                                      verbose = TRUE)) 
+    proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version)) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")
@@ -53,14 +52,12 @@ use_sdio <- function(platform="xenium", srcdir, dest) {
     if (dir.exists(dest)) 
         stop("Won't write to existing folder;",
             " please provide a non-existent path.")
-    avail <- available_sdio(verbose = FALSE) # run before basilisk
     proc <- basilisk::basiliskStart(.get_basilisk_env()) 
     on.exit(basilisk::basiliskStop(proc))
-    basilisk::basiliskRun(proc, function(platform, srcdir, dest, avail) {
+    basilisk::basiliskRun(proc, function(platform, srcdir, dest) {
         sdio <- reticulate::import("spatialdata_io")
         avail <- names(sdio)
         stopifnot(platform %in% avail)
         sdio[[platform]](srcdir)$write(dest)
-    }, platform=platform, srcdir=srcdir, dest=dest, 
-    avail = avail)
+    }, platform=platform, srcdir=srcdir, dest=dest)
 }
