@@ -134,7 +134,17 @@ jobs:
           
           ## Required for reticulate/basilisk/arrow
           brew install llvm
+          echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> /Users/runner/.bash_profile
+          export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+          export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
+      - name: temp job
+        if: matrix.config.os == 'macOS-latest'
+        run: |
+          echo $PATH
+          echo $LDFLAGS
+          echo $CPPFLAGS
+          
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
         run: |
