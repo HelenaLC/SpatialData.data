@@ -56,7 +56,7 @@ use_sdio <- function(platform="xenium", srcdir, dest) {
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function(platform, srcdir, dest) {
         sdio <- reticulate::import("spatialdata_io")
-        # avail <- names(sdio)
+        avail <- names(sdio)
         # stopifnot(platform %in% avail)
         # sdio[[platform]](srcdir)$write(dest)
     }, platform=platform, srcdir=srcdir, dest=dest)
