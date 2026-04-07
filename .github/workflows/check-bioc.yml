@@ -133,7 +133,7 @@ jobs:
           brew install xquartz --cask
           
           ## Required for reticulate/basilisk/arrow
-          brew install lvm --cask
+          brew install llvm
 
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
