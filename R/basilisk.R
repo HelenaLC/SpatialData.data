@@ -54,7 +54,7 @@
   pkgname="SpatialData.data", 
   envname="sd_env_03",
   packages=c("python==3.12.0"),
-  pip= c("spatialdata==0.5.0", 
+  pip= c("spatialdata==0.3.0", 
          "spatialdata_io==0.1.7",
          "setuptools==75.8.0"))
 
