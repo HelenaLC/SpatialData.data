@@ -26,7 +26,7 @@
         "multiscale_spatial_image==2.0.2", "natsort==8.4.0", "networkx==3.4.2",
         "numba==0.61.0", "numcodecs==0.15.1", "numpy==2.1.3", "ome_types==0.5.3",
         "ome_zarr==0.10.3", "packaging==24.2", "pandas==2.2.3", "param==2.2.0",
-        "pims==0.7", "platformdirs==4.3.6", "psutil==7.0.0", "pyarrow==16.0.0",
+        "pims==0.7", "platformdirs==4.3.6", "psutil==7.0.0", "pyarrow==23.0.1",
         "pyct==0.5.0", "pydantic==2.10.6", "pydantic_compat==0.1.2",
         "pydantic_core==2.27.2", "pygments==2.19.1", "pyparsing==3.2.1",
         "pyproj==3.7.0", "pytz==2025.1", "readfcs==2.0.1", "requests==2.32.3",
