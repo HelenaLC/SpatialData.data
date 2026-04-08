@@ -8,8 +8,6 @@ test_that("available_sdio()", {
     expect_true(any(grepl("^(vis|xen)", x)))
 })
 
-# TODO: turn off basilisk on GHA
-# is no longer available via spatialdata_io
 test_that("use_sdio()", {
   
     # get dataset
@@ -31,9 +29,3 @@ test_that("use_sdio()", {
     x <- readSpatialData(out)
     expect_s4_class(x, "SpatialData")
 }) 
-
-.clean_cache <- \(zip) {
-    ca <- BiocFileCache::BiocFileCache()
-    qu <- BiocFileCache::bfcquery(ca, zip)
-    if (nrow(qu) > 0) BiocFileCache::bfcremove(ca, qu$rid)
-}

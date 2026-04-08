@@ -3,7 +3,7 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("generate_dataset()", {
   
-  skip("turn off basilisk on GHA")
+  # skip("turn off basilisk on GHA")
   # versions
   versions <- list(
     "0.7.2" = "zarr.json",
@@ -55,7 +55,6 @@ test_that("generate_dataset()", {
     )
     
     # check read for only 0.5.0
-    # TODO: read spatial data for v0.7.2
     if(x == "0.5.0"){
       expect_s4_class(readSpatialData(zarrfile), "SpatialData")      
     }

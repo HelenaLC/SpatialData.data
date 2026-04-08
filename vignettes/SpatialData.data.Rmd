@@ -118,9 +118,7 @@ via `basilisk` to generate toy spatialdata objects in multiple spatialdata
 versions. 
 
 ```{r dummy, eval=FALSE}
-# zarrfile <- tempfile(fileext = ".zarr")
 sd <- generate_dataset(
-  # file = zarrfile, 
   sd_version = "0.5.0",
   images = list(
     list(type = "rgb", n_layers = 4L, coordinate_system="global"),
