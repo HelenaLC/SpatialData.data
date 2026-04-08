@@ -92,7 +92,7 @@ available("biocOSN")
 data bundle can then be converted into SpatialData objects using `spatialdata-io`
 pyton package via `basilisk`.
 
-```{r avail2, eval=FALSE}
+```{r avail2}
 available("biocOSN_Xenium")
 ```
 
@@ -105,7 +105,7 @@ formats:
 
 We use `options(sd_version)` to set the SpatialData version.
 
-```{r sd-io, eval=FALSE}
+```{r sd-io}
 options(sd_version = "0.3.0")
 (x <- Breast2fov_10x(source = bucket_path("biocOSN_Xenium")))
 ```
@@ -117,7 +117,7 @@ from PyPI ([https://pypi.org/project/dummy-spatialdata/](https://pypi.org/projec
 via `basilisk` to generate toy spatialdata objects in multiple spatialdata 
 versions. 
 
-```{r dummy, eval=FALSE}
+```{r dummy}
 sd <- generate_dataset(
   sd_version = "0.5.0",
   images = list(
