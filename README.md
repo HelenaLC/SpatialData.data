@@ -194,11 +194,12 @@ generate_dataset(
 
 ```
 Using spatialdata version 0.5.0
-[1] TRUE
+[1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpXl8ziv/file11cae4154ccb2.zarr"
 ```
 
 ``` r
-SpatialData::readSpatialData(zarrfile)
+sd <- SpatialData::readSpatialData(zarrfile)
+sd
 ```
 
 ```
@@ -214,6 +215,15 @@ class: SpatialData
 - tables(0):
 coordinate systems:
 - global(3): image_0 image_1 shape_0
+```
+
+``` r
+image(sd, 1)
+```
+
+```
+class:  ImageArray (MultiScale) 
+Scales (4): (3,2000,2000) (3,1000,1000) (3,500,500) (3,250,250)
 ```
 
 
