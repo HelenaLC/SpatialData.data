@@ -118,7 +118,7 @@ via `basilisk` to generate toy spatialdata objects in multiple spatialdata
 versions. 
 
 ```{r dummy}
-sd <- generate_dataset(
+sd_zarr <- generate_dataset(
   sd_version = "0.5.0",
   images = list(
     list(type = "rgb", n_layers = 4L, coordinate_system="global"),
@@ -137,7 +137,20 @@ sd <- generate_dataset(
     )
   )
 )
-readSpatialData(sd)
+sd_zarr
+```
+
+Now we can read the SpatialData object with SpatialData.
+
+```{r read}
+sd <- readSpatialData(sd_zarr)
+sd
+```
+
+We can also get individual elements
+
+```{r image}
+image(sd, 1)
 ```
 
 # Session info

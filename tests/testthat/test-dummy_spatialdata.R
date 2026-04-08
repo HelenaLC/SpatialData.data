@@ -16,6 +16,8 @@ test_that("generate_dataset()", {
   
   # full spatialdata object works with 0.5.0 and 0.7.2
   lapply(names(versions), function(x){
+    
+    # generate sd zarr object
     zarrfile <- tempfile(fileext = ".zarr")
     generate_dataset(
       file = zarrfile, 
@@ -56,7 +58,9 @@ test_that("generate_dataset()", {
     
     # check read for only 0.5.0
     if(x == "0.5.0"){
+      sd <- readSpatialData(zarrfile)
       expect_s4_class(readSpatialData(zarrfile), "SpatialData")      
+      expect_true(length(images(x)) > 0)
     }
   })
 })
