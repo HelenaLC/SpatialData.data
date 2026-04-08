@@ -23,3 +23,7 @@ bucket_path(source = "biocOSN")
 \description{
 Function for interrogating path to buckets.
 }
+\examples{
+bucket_path()
+
+}

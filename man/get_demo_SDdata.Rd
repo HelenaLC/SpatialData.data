@@ -28,3 +28,8 @@ all logic for finding, caching, loading an OSN-based dataset, hidden
 This function checks for stale element in cache and uses bfcupdate to rectify
 before retrieving from cache.
 }
+\examples{
+get_demo_SDdata("mibitof", 
+                source = bucket_path())
+
+}

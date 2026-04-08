@@ -13,7 +13,7 @@
 #' @param seed seed
 #'
 #' @examples
-#' 
+#' options(sd_version = "0.5.0")
 #' generate_dataset()
 #' 
 #' # write spatialdata in 0.5.0 version
@@ -33,9 +33,6 @@
 #'     list(type = "rgb", n_layers = 4L, coordinate_system="global"),
 #'     list(type = "grayscale", n_layers = 1L, coordinate_system="global")
 #'   ),
-#'   labels = list(
-#'     list(n_labels = 12L, n_layers = 4L")
-#'   ),
 #'   shapes = list(
 #'     list(n_shapes=12L, coordinate_system="global")
 #'   ),
@@ -49,9 +46,7 @@
 #'     )
 #'   )
 #' )
-#' 
 #' @export
-#' 
 generate_dataset <- function(file = tempfile(fileext = ".zarr"),
                              sd_version = getOption("sd_version"),
                              images = NULL, 

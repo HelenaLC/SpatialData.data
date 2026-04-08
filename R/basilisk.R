@@ -6,9 +6,9 @@
 # the blobs dataset in example("table-utils") because
 # of matters related to metadata/hasTable behavior
 
-# sd version 0.3.0 environment
+# sd version 0.3.0 environment (old version from Basel Hackathon)
 #' @importFrom basilisk BasiliskEnvironment
-.env_03 <- BasiliskEnvironment(
+.env_03_old <- BasiliskEnvironment(
   pkgname="SpatialData.data", 
   envname="sd_env_03",
   packages=c( "python==3.12.0"),
@@ -38,6 +38,11 @@
         "typing_extensions==4.12.2", "urllib3==2.3.0", "wrapt==1.17.2",
         "xarray==2024.11.0", "xarray_dataclasses==1.9.1", "xarray_schema==0.0.3",
         "zarr==2.18.4", "zict==3.0.0"))
+
+# notes from AM -- The environments below use a fixed variation of the 
+# spatialdata-io==0.3.0 environment from Basel Hackathon 2024. 
+# The old environment (see above) throws an OSerror on MacOS, thus we use
+# fixed ones below.
 
 # sd version 0.3.0 environment
 #' @importFrom basilisk BasiliskEnvironment

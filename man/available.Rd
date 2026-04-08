@@ -27,8 +27,7 @@ platforms.
 }
 \examples{
 Sys.setenv(AWS_REGION = "us-east-1")
-# TODO: turn off basilisk on GHA
-# if (requireNamespace("paws")) {
-#    available("biocOSN")
-# }
+if (requireNamespace("paws")) {
+  available("biocOSN")
+}
 }

@@ -38,3 +38,38 @@ generate_dataset(
 \description{
 Generate spatialdata datasets using dummy-spatialdata
 }
+\examples{
+options(sd_version = "0.5.0")
+generate_dataset()
+
+# write spatialdata in 0.5.0 version
+zarrfile <- tempfile(fileext = ".zarr")
+generate_dataset(
+  file = zarrfile, 
+  sd_version = "0.5.0",
+  points = list(
+    list(n_points=12L)
+  )
+)
+
+# write spatialdata in 0.7.2 version
+generate_dataset(
+  sd_version = "0.7.2",
+  images = list(
+    list(type = "rgb", n_layers = 4L, coordinate_system="global"),
+    list(type = "grayscale", n_layers = 1L, coordinate_system="global")
+  ),
+  shapes = list(
+    list(n_shapes=12L, coordinate_system="global")
+  ),
+  points = list(
+    list(n_points=12L)
+  ),
+  coordinate_systems = list(
+    global = list(
+      transformations = list("affine"), 
+      shape = list(x=2000L, y=2000L)
+    )
+  )
+)
+}

@@ -8,8 +8,7 @@
 #' @import basilisk
 #' 
 #' @examples
-#' # TODO: turn off basilisk on GHA
-#' # available_sdio()
+#' available_sdio()
 #' 
 #' @export
 available_sdio <- function(sd_version = getOption("sd_version"), 

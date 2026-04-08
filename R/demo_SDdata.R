@@ -23,6 +23,9 @@
 #'  }
 #' }
 #' 
+#' @examples
+#' bucket_path()
+#' 
 #' @export
 bucket_path <- function(source = "biocOSN"){
   switch(source, 
@@ -88,6 +91,10 @@ bucket_path <- function(source = "biocOSN"){
 #' 
 #' @note This function checks for stale element in cache and uses bfcupdate to rectify
 #' before retrieving from cache.
+#' 
+#' @examples
+#' get_demo_SDdata("mibitof", 
+#'                 source = bucket_path())
 #' 
 #' @export
 get_demo_SDdata <- function(
