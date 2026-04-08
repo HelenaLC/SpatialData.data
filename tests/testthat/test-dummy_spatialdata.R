@@ -59,8 +59,8 @@ test_that("generate_dataset()", {
     # check read for only 0.5.0
     if(x == "0.5.0"){
       sd <- readSpatialData(zarrfile)
-      expect_s4_class(readSpatialData(zarrfile), "SpatialData")      
-      expect_true(length(images(x)) > 0)
+      expect_s4_class(sd <- readSpatialData(zarrfile), "SpatialData")      
+      expect_true(length(images(sd)) > 0)
     }
   })
 })
