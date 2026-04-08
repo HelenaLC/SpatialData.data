@@ -242,7 +242,7 @@ get_demo_SDdata <- function(
 #' SpatialData.data_list()
 #' SpatialData.data_list(extended = TRUE)
 SpatialData.data_list <- function(extended = FALSE) {
-  data_file <- system.file("data", "demo_spatialdata.csv", package = "SpatialData.data")
+  data_file <- system.file("extdata", "demo_spatialdata.csv", package = "SpatialData.data")
   x <- utils::read.csv(data_file, sep = ";")
   if(extended) x else x[,c("Function", "Technology", "S3_buckets", "Format")]
 }
