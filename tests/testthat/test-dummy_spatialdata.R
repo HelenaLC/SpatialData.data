@@ -10,9 +10,8 @@ test_that("generate_dataset()", {
     "0.5.0" = ".zattrs"
   )
   
-  # points work
-  generate_dataset(sd_version = "0.7.2", 
-                   points = list(list(n_points=12L)))
+  # points work with no coordinate systems
+  generate_dataset(sd_version = "0.7.2", points = list(list(n=12L)))
   
   # full spatialdata object works with 0.5.0 and 0.7.2
   lapply(names(versions), function(x){
@@ -23,19 +22,19 @@ test_that("generate_dataset()", {
       file = zarrfile, 
       sd_version = x,
       images = list(
-        list(type = "rgb", n_layers = 4L, coordinate_system="global"),
-        list(type = "grayscale", n_layers = 1L, coordinate_system="global")
+        list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
+        list(type = "grayscale", coordinate_system="global")
       ),
       labels = list(
-        list(n_labels = 12L, n_layers = 4L, coordinate_system="global2"),
-        list(n_labels = 12L, n_layers = 0L, coordinate_system="global2")
+        list(n = 12L, scale_factors = c(2L,2L,2L), coordinate_system="global2"),
+        list(n = 12L, coordinate_system="global2")
       ),
       shapes = list(
-        list(n_shapes=12L, coordinate_system="global"),
-        list(n_shapes=20L)
+        list(n=12L, type = "polygon", coordinate_system="global"),
+        list(n=20L, type = "polygon")
       ),
       points = list(
-        list(n_points=12L)
+        list(n=12L)
       ),
       coordinate_systems = list(
         global = list(
