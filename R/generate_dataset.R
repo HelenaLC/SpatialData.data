@@ -22,7 +22,7 @@
 #'   file = zarrfile, 
 #'   sd_version = "0.5.0",
 #'   points = list(
-#'     list(n_points=12L)
+#'     list(n=12L)
 #'   )
 #' )
 #' 
@@ -30,14 +30,14 @@
 #' generate_dataset(
 #'   sd_version = "0.7.2",
 #'   images = list(
-#'     list(type = "rgb", n_layers = 4L, coordinate_system="global"),
-#'     list(type = "grayscale", n_layers = 1L, coordinate_system="global")
+#'     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
+#'     list(type = "grayscale", coordinate_system="global")
 #'   ),
 #'   shapes = list(
-#'     list(n_shapes=12L, coordinate_system="global")
+#'     list(n=12L, type ="polygon", coordinate_system="global")
 #'   ),
 #'   points = list(
-#'     list(n_points=12L)
+#'     list(n=12L)
 #'   ),
 #'   coordinate_systems = list(
 #'     global = list(
@@ -65,15 +65,26 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
       unlink(file, recursive = TRUE)
     dummy_sd <- reticulate::import("dummy_spatialdata")
     sd <- reticulate::import("spatialdata")
-    temp <- dummy_sd$generate_dataset(
-      images = images,
-      labels = labels,
-      shapes = shapes,
-      points = points,
-      tables = tables,
-      coordinate_systems = coordinate_systems,
-      SEED = seed
-    )
+    if(is.null(coordinate_systems)){
+      temp <- dummy_sd$generate_dataset(
+        images = images,
+        labels = labels,
+        shapes = shapes,
+        points = points,
+        tables = tables,
+        SEED = seed
+      ) 
+    } else {
+      temp <- dummy_sd$generate_dataset(
+        images = images,
+        labels = labels,
+        shapes = shapes,
+        points = points,
+        tables = tables,
+        coordinate_systems = coordinate_systems,
+        SEED = seed
+      )
+    }
     temp$write(file)
     message("SpatialData object written to '", file, "'")
     return(file)

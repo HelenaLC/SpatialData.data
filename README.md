@@ -174,14 +174,14 @@ generate_dataset(
   file = zarrfile, 
   sd_version = "0.5.0",
   images = list(
-    list(type = "rgb", n_layers = 4L, coordinate_system="global"),
-    list(type = "grayscale", n_layers = 1L, coordinate_system="global")
+    list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
+    list(type = "grayscale", n_layers = c(), coordinate_system="global")
   ),
   shapes = list(
-    list(n_shapes=12L, coordinate_system="global")
+    list(n=12L, type="polygon", coordinate_system="global")
   ),
   points = list(
-    list(n_points=12L)
+    list(n=12L)
   ),
   coordinate_systems = list(
     global = list(
@@ -190,6 +190,7 @@ generate_dataset(
     )
   )
 )
+sd_zarr
 ```
 
 ```
