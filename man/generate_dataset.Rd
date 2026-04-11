@@ -60,7 +60,7 @@ generate_dataset(
     list(type = "grayscale", coordinate_system="global")
   ),
   shapes = list(
-    list(n=12L, coordinate_system="global")
+    list(n=12L, type ="polygon", coordinate_system="global")
   ),
   points = list(
     list(n=12L)
