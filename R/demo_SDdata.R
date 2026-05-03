@@ -142,7 +142,13 @@ get_demo_SDdata <- function(
     zipname <- allz[zipind]
     message(sprintf("caching %s", zipname))
     fpath <- allurls[zipind]
-    loc <- BiocFileCache::bfcadd(cache, rname=zipname, fpath=fpath, rtype="web")
+    # loc <- BiocFileCache::bfcadd(cache, rname=zipname, fpath=fpath, rtype="web")
+    # loc <- bfcadd_folder(cache, rname=zipname, fpath=fpath, rtype="web")
+    loc <- .bfc_cached_unzip_dir(
+      cache = cache,
+      rname = paste0("SpatialData.data:unzipped:", zipname),
+      fpath = fpath
+    )
   }
   
   # single pattern, length(ind) == 1
@@ -156,16 +162,16 @@ get_demo_SDdata <- function(
   # unzip (convert to zarr if needed using spatialdata-io)
   # and return to target
   if(source == bucket_path("biocOSN_Xenium")){
-    dir.create(td <- tempfile()) # can't use target'
-    utils::unzip(loc, exdir=td)  # manufacturer output
+    # dir.create(td <- tempfile()) # can't use target'
+    # utils::unzip(loc, exdir=td)  # manufacturer output
     if (dir.exists(target)) 
       warning("target exists")
-    use_sdio("xenium", srcdir=td, dest=target) # zarr in target
+    use_sdio("xenium", srcdir=loc, dest=target) # zarr in target
     return(target)
   } else {
-    dir.create(td <- target)
-    utils::unzip(loc, exdir=td)
-    return(dir(td, full.names=TRUE)) 
+    # dir.create(td <- target)
+    # utils::unzip(loc, exdir=td)
+    return(dir(loc, full.names=TRUE)) 
   }
 }
 
@@ -178,7 +184,8 @@ get_demo_SDdata <- function(
   target=tempfile(), 
   source=bucket_path("biocOSN")
 ) {
-  SpatialData::readSpatialData(
+  start <- proc.time()
+  sd <- SpatialData::readSpatialData(
     get_demo_SDdata(
       patt = patt,
       cache = cache,
@@ -186,6 +193,8 @@ get_demo_SDdata <- function(
       source = source
     )
   )
+  print(proc.time() - start)
+  sd
 }
 
 .pattern_not_unique <- function(patt) {
@@ -224,6 +233,80 @@ get_demo_SDdata <- function(
   fp <- file.path(source, zipname)
   message(sprintf("retrieving from %s, caching, and returning path", source))
   BiocFileCache::bfcadd(cache, rname=zipname, fpath=fp, rtype="web")
+}
+
+.bfc_cached_unzip_dir <- function(
+    cache,
+    rname,
+    fpath,
+    ext = "_unzipped",
+    fname = "unique"
+) {
+  q <- BiocFileCache::bfcquery(
+    cache,
+    rname,
+    field = "rname",
+    exact = TRUE
+  )
+  
+  if (nrow(q) > 1L) {
+    stop("Multiple BiocFileCache records found for: ", rname)
+  }
+  
+  if (nrow(q) == 0L) {
+    rid <- names(BiocFileCache::bfcadd(
+      cache,
+      rname = rname,
+      fpath = fpath,
+      rtype = "web",
+      download = FALSE,
+      ext = ext,
+      fname = fname
+    ))
+  } else {
+    rid <- q$rid[[1]]
+  }
+  
+  out <- unname(BiocFileCache::bfcrpath(cache, rids = rid))
+  stale <- BiocFileCache::bfcneedsupdate(cache, rid)
+  
+  if (!dir.exists(out) || isTRUE(stale)) {
+    BiocFileCache::bfcdownload(
+      cache,
+      rid,
+      ask = FALSE,
+      FUN = .unzip_to_dir
+    )
+    out <- unname(BiocFileCache::bfcrpath(cache, rids = rid))
+  }
+  
+  out
+}
+
+.unzip_to_dir <- function(from, to) {
+  if (dir.exists(to)) {
+    unlink(to, recursive = TRUE, force = TRUE)
+  } else if (file.exists(to)) {
+    unlink(to, force = TRUE)
+  }
+  
+  ok <- dir.create(to, recursive = TRUE, showWarnings = FALSE)
+  if (!ok && !dir.exists(to)) {
+    return("could not create extraction directory")
+  }
+  
+  start <- proc.time()
+  ans <- tryCatch(
+    utils::unzip(from, exdir = to),
+    error = function(e) e
+  )
+  print(proc.time() - start)
+  
+  if (inherits(ans, "error")) {
+    return(conditionMessage(ans))
+  }
+  
+  TRUE
 }
 
 ####
