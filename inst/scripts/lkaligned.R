@@ -1,5 +1,5 @@
 # explore images()
-library(SpatialData)
+library(spatialdataR)
 library(EBImage)
 available_spd_zarr_zips()
 td = tempfile()

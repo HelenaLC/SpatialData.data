@@ -1,4 +1,4 @@
-library(SpatialData)
+library(spatialdataR)
 Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("available_sdio()", {

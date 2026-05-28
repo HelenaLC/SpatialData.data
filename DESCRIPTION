@@ -20,14 +20,14 @@ Imports:
     basilisk,
     BiocFileCache,
     reticulate,
-    SpatialData
+    spatialdataR
 Suggests:
     BiocStyle,
     knitr,
     testthat,
     paws
 Remotes:
-    HelenaLC/SpatialData
+    HelenaLC/spatialdataR
 biocViews: 
     DataImport, 
     DataRepresentation, 
@@ -38,8 +38,8 @@ biocViews:
     SingleCell,
     Spatial
 License: Artistic-2.0
-RoxygenNote: 7.3.3
 Encoding: UTF-8
 VignetteBuilder: knitr
 URL: https://github.com/HelenaLC/SpatialData.data
 BugReports: https://github.com/HelenaLC/SpatialData.data/issues
+Config/roxygen2/version: 8.0.0
