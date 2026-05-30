@@ -199,7 +199,7 @@ Using spatialdata version 0.5.0
 ```
 
 ``` r
-sd <- SpatialData::readSpatialData(zarrfile)
+sd <- spatialdataR::readSpatialData(zarrfile)
 sd
 ```
 

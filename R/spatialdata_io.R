@@ -44,7 +44,7 @@ available_sdio <- function(sd_version = getOption("sd_version"),
 #' # use_sdio("xenium", srcdir=td, dest=target)
 #' 
 #' # read with SpatialData
-#' # br2fov <- SpatialData::readSpatialData(target)
+#' # br2fov <- spatialdataR::readSpatialData(target)
 #' # br2fov
 #' 
 #' @export
