@@ -79,8 +79,8 @@ bucket_path <- function(source = "biocOSN"){
 
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' 
-#' @importFrom SpatialData readSpatialData
-#' @importClassesFrom SpatialData SpatialData
+#' @importFrom spatialdataR readSpatialData
+#' @importClassesFrom spatialdataR SpatialData
 #' @param patt character(1) sufficient to identify an OSN resource
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
@@ -169,16 +169,16 @@ get_demo_SDdata <- function(
   }
 }
 
-#' read the data with SpatialData::readSpatialData
+#' read the data with spatialdataR::readSpatialData
 #' @noRd
-#' @importFrom SpatialData readSpatialData
+#' @importFrom spatialdataR readSpatialData
 .read_demo_SDdata <- function(
   patt, 
   cache=BiocFileCache::BiocFileCache(),
   target=tempfile(), 
   source=bucket_path("biocOSN")
 ) {
-  SpatialData::readSpatialData(
+  spatialdataR::readSpatialData(
     get_demo_SDdata(
       patt = patt,
       cache = cache,

@@ -32,8 +32,8 @@ options(sd_version = "0.3.0")
 # turn of basilisk on GHA
 # use_sdio("xenium", srcdir=td, dest=target)
 
-# read with SpatialData
-# br2fov <- SpatialData::readSpatialData(target)
+# read with spatialdataR
+# br2fov <- spatialdataR::readSpatialData(target)
 # br2fov
 
 }
