@@ -1,6 +1,6 @@
 # `SpatialData.data`
 
-> for class infrastructure, see [`SpatialData`](https://github.com/HelenaLC/SpatialData)
+> for class infrastructure, see [`spatialdataR`](https://github.com/HelenaLC/spatialdataR)
 
 > for visualization capabilites, see [`SpatialData.plot`](https://github.com/HelenaLC/SpatialData.plot)
 
@@ -27,7 +27,7 @@ whose elements are customized by the user.
 # Installation
 
 ```
-BiocManager::install("HelenaLC/SpatialData")
+BiocManager::install("HelenaLC/spatialdataR")
 BiocManager::install("HelenaLC/SpatialData.data")
 ```
 
