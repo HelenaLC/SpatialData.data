@@ -36,46 +36,61 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.
 \details{
 \itemize{
   \item MouseIntestineVisHD:
-    Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine; source:
+    Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine;
+    source (biocOSN):
     \url{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}
   \item MouseBrainVisHD:
-    Visium HD 4.0.1 (10x Genomics) dataset of mouse brain; source:
+    Visium HD 4.0.1 (10x Genomics) dataset of mouse brain;
+    source (sandbox):
     \url{https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen}
   \item MouseBrainVis:
-    Visium (10x Genomics) dataset of mouse brain; source:
+    Visium (10x Genomics) dataset of mouse brain;
+    source (sandbox):
     \url{https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114}
   \item LungAdenocarcinomaMCMICRO:
-    MCMICRO dataset of human small cell lung adenocarcinoma
+    MCMICRO dataset of human small cell lung adenocarcinoma;
+    source (biocOSN)
   \item MouseBrainMERFISH:
-    MERFISH dataset of mouse brain tissue
+    MERFISH dataset of mouse brain tissue;
+    source (biocOSN)
   \item MouseLiverMERFISH:
-    MERFISH dataset of mouse liver tissue (SPArrOW output); source:
+    MERFISH dataset of mouse liver tissue (SPArrOW output);
+    source (sandbox):
     \url{https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1}
   \item MulticancerSteinbock:
-    imaging mass cytometry dataset of four cancers; source:
+    imaging mass cytometry dataset of four cancers;
+    source (biocOSN):
     \url{https://www.nature.com/articles/s41596-023-00881-0}
   \item ColorectalCarcinomaMIBITOF:
-    MIBI-TOF dataset of colorectal carcinoma
+    MIBI-TOF dataset of colorectal carcinoma;
+    source (biocOSN)
   \item JanesickBreastVisiumEnh:
-    Visium (10x Genomics) dataset of breast cancer; source:
+    Visium (10x Genomics) dataset of breast cancer;
+    source (biocOSN):
     \url{https://www.nature.com/articles/s41467-023-43458-x}
   \item JanesickBreastXeniumRep1:
     first of two Xenium (10x Genomics) sections associated with
-    the Visium section from Janesick \emph{et al.}
+    the Visium section from Janesick \emph{et al.};
+    source (biocOSN)
   \item JanesickBreastXeniumRep2:
     second of two Xenium (10x Genomics) sections associated with
-    the Visium section from Janesick \emph{et al.}
+    the Visium section from Janesick \emph{et al.};
+    source (biocOSN)
   \item Breast2fov_10x:
-    Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs; source:
+    Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs;
+    source (biocOSN_Xenium):
     \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
   \item Lung2fov_10x:
-    Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs; source:
+    Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs;
+    source (biocOSN_Xenium):
     \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
   \item HumanLungMulti_10x:
-    Xenium (10x Genomics) data on lung cancer; source:
+    Xenium (10x Genomics) data on lung cancer;
+    source (biocOSN):
     \url{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}
   \item SpaceMHelaniH3T3:
-    SpaceM on Hepa and NIH3T3 cells; more info:
+    SpaceM on Hepa and NIH3T3 cells; source (sandbox);
+    more info:
     \url{https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md}
 }
 }

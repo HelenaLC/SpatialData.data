@@ -55,16 +55,16 @@ These, in turn, have been deposited in Bioconductor's NSF Open Storage Network a
 can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
 Any spatialdata dataset can be retrieved (once) into some location, and 
-read into R.  We use dataset-specific functions, or `SpatialData.data_load`:
+read into R.  We use dataset-specific functions, or `SD.data_load`:
 
 ```{r load-data}
-(x <- SpatialData.data_load("ColorectalCarcinomaMIBITOF"))
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
 ```{r load-data-sandbox}
 # TODO: zarr v3 is not complete yet
 # from sandbox (Zarr v3)
-# (x <- SpatialData.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
+# (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
 We can check all available datasets below:
@@ -100,8 +100,7 @@ We use `options(sd_version)` to set the SpatialData version.
 
 ```{r sd-io}
 options(sd_version = "0.3.0")
-(x <- SpatialData.data_load("Breast2fov_10x", 
-                            source = "biocOSN_Xenium"))
+(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
 ## Dummy SpatialData objects
