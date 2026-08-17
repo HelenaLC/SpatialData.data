@@ -1,5 +1,5 @@
 #' #' use a string to identify a resource in SpatialData format and
-#' #' ingest via SpatialData::readSpatialData
+#' #' ingest via spatialdataR::readSpatialData
 #' #' @param stub character(1) a string that identifies a resource
 #' #' @return an instance of SpatialData, or NULL if the stub does not
 #' #' uniquely match (using grep()) the name of any resource

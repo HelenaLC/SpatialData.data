@@ -26,8 +26,6 @@ Suggests:
     knitr,
     testthat,
     paws
-Remotes:
-    HelenaLC/spatialdataR
 biocViews: 
     DataImport, 
     DataRepresentation, 

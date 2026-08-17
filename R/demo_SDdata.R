@@ -80,7 +80,6 @@ bucket_path <- function(source = "biocOSN"){
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' 
 #' @importFrom spatialdataR readSpatialData
-#' @importClassesFrom spatialdataR SpatialData
 #' @param patt character(1) sufficient to identify an OSN resource
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
