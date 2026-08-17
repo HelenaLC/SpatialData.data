@@ -11,7 +11,7 @@ test_that("SD.io_available()", {
 path_to_10x_xen_demo <- function(
     cache=BiocFileCache::BiocFileCache(),
     zipname="Xenium_V1_human_Breast_2fov_outs.zip", 
-    source = biocOSN_Xenium) {
+    source = "biocOSN_Xenium") {
   info <- BiocFileCache::bfcquery(cache, zipname)
   nrec <- nrow(info)
   if (nrec > 1) {
