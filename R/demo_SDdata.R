@@ -80,7 +80,6 @@ bucket_path <- function(source = "biocOSN"){
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' 
 #' @importFrom spatialdataR readSpatialData
-#' @importClassesFrom spatialdataR SpatialData
 #' @param patt character(1) sufficient to identify an OSN resource
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
@@ -101,20 +100,20 @@ get_demo_SDdata <- function(
     patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile(),
-    source = bucket_path("biocOSN")
+    source = "biocOSN"
 ) {
   
   # get file and urls
-  allz <- if (source == bucket_path("biocOSN")) {
+  allz <- if (source == "biocOSN") {
     .OSN_DATA
-  } else if (source == bucket_path("biocOSN_Xenium")) {
+  } else if (source == "biocOSN_Xenium") {
     .OSN_Xenium_DATA
-  } else if (source == bucket_path("sandbox")) {
+  } else if (source == "sandbox") {
     .SANDBOX_DATA
   } else {
     stop("Unknown source")
   }
-  allurls <- file.path(source, allz)
+  allurls <- file.path(bucket_path[[source]], allz)
   
   # get availables in cache
   ca <- BiocFileCache::BiocFileCache()
@@ -155,7 +154,7 @@ get_demo_SDdata <- function(
 
   # unzip (convert to zarr if needed using spatialdata-io)
   # and return to target
-  if(source == bucket_path("biocOSN_Xenium")){
+  if(source == "biocOSN_Xenium"){
     dir.create(td <- tempfile()) # can't use target'
     utils::unzip(loc, exdir=td)  # manufacturer output
     if (dir.exists(target)) 
@@ -176,7 +175,7 @@ get_demo_SDdata <- function(
   patt, 
   cache=BiocFileCache::BiocFileCache(),
   target=tempfile(), 
-  source=bucket_path("biocOSN")
+  source="biocOSN"
 ) {
   spatialdataR::readSpatialData(
     get_demo_SDdata(
@@ -202,7 +201,7 @@ get_demo_SDdata <- function(
 #' 
 #' @param cache cache location BiocFileCache::BiocFileCache()
 #' @param zipname character(1) name of zip archive to find
-#' @param source source, see \link{bucket_path}
+#' @param source source name
 #' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
@@ -211,7 +210,7 @@ get_demo_SDdata <- function(
 .path_to_10x_xen_demo <- function(
     cache=BiocFileCache::BiocFileCache(),
     zipname="Xenium_V1_human_Breast_2fov_outs.zip", 
-    source = bucket_path("biocOSN_Xenium")) {
+    source = biocOSN_Xenium) {
   info <- BiocFileCache::bfcquery(cache, zipname)
   nrec <- nrow(info)
   if (nrec > 1) {
@@ -221,8 +220,9 @@ get_demo_SDdata <- function(
     message("returning path to cached zip")
     return(info$rpath[nrec])
   }
-  fp <- file.path(source, zipname)
-  message(sprintf("retrieving from %s, caching, and returning path", source))
+  fp <- file.path(bucket_path(source), zipname)
+  message(sprintf("retrieving from %s, caching, and returning path", 
+                  bucket_path(source)))
   BiocFileCache::bfcadd(cache, rname=zipname, fpath=fp, rtype="web")
 }
 
@@ -230,6 +230,23 @@ get_demo_SDdata <- function(
 # Tech specific readers #### 
 ####
 
+.DATASETS <- list(
+  MouseIntestineVisHD        = "visium_hd_3.0.0",
+  MouseBrainVisHD            = "visium_hd_4.0.1",
+  MouseBrainVis              = "visium_spatialdata",
+  LungAdenocarcinomaMCMICRO  = "mcmicro_io",
+  MouseBrainMERFISH          = "merfish",
+  MouseLiverMERFISH          = "mouse_liver",
+  MulticancerSteinbock       = "steinbock_io",
+  ColorectalCarcinomaMIBITOF = "mibitof",
+  JanesickBreastVisiumEnh    = "visium_associated_xenium_io",
+  JanesickBreastXeniumRep1   = "xenium_rep1_io",
+  JanesickBreastXeniumRep2   = "xenium_rep2_io",
+  Breast2fov_10x             = "human_Breast_2fov",
+  Lung2fov_10x               = "human_Lung_2fov",
+  HumanLungMulti_10x         = "HuLungXenmulti",
+  SpaceMHelaniH3T3           = "spacem_helanih3t3"
+)
 
 #' SpatialData.data_list
 #'
@@ -303,10 +320,6 @@ SpatialData.data_list <- function(extended = FALSE) {
 #' ld <- load_data("ColorectalCarcinomaMIBITOF")
 #' ld
 #' 
-#' # uses biocOSN as source
-#' ld <- ColorectalCarcinomaMIBITOF()
-#' ld 
-#' 
 #' # TODO: zarr v3 read is not complete
 #' # # use sandbox as source
 #' # ld <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
@@ -334,6 +347,18 @@ load_data = function(stub,
     message("returning NULL")
   }
   NULL
+}
+
+#' @export
+data_load = function(stub, 
+                     target = tempfile(), 
+                     source = "biocOSN") { 
+  opts = SpatialData.data_list()
+  if(stub %in% opts$Function) {
+    .read_demo_SDdata(.DATASETS[[stub]], target=target, source = source)
+  } else {
+    stop("Dataset no found!")
+  }
 }
 
 #' @describeIn SpatialData-data
