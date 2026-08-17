@@ -8,7 +8,7 @@ get_demo_SDdata(
   patt,
   cache = BiocFileCache::BiocFileCache(),
   target = tempfile(),
-  source = bucket_path("biocOSN")
+  source = "biocOSN"
 )
 }
 \arguments{

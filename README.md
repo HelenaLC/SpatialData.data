@@ -44,10 +44,10 @@ These, in turn, have been deposited in Bioconductor's NSF Open Storage Network a
 can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
 Any spatialdata dataset can be retrieved (once) into some location, and 
-read into R.  We use dataset-specific functions, or `load_data`:
+read into R.  We use dataset-specific functions, or `SpatialData.data_load`:
 
 ``` r
-(x <- load_data("ColorectalCarcinomaMIBITOF")) # stub can be used
+(x <- SpatialData.data_load("ColorectalCarcinomaMIBITOF")) # stub can be used
 ```
 
 ```
