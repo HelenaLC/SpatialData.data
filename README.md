@@ -47,7 +47,7 @@ Any spatialdata dataset can be retrieved (once) into some location, and
 read into R.  We use dataset-specific functions, or `SpatialData.data_load`:
 
 ``` r
-(x <- SpatialData.data_load("ColorectalCarcinomaMIBITOF")) # stub can be used
+(x <- SpatialData.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
 ```
@@ -83,7 +83,7 @@ x <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
 We can check all available datasets below:
 
 ``` r
-SpatialData.data_list()
+SD.data_list()
 ```
 
 <div><pre><code style="font-size: 12px;">                       Function             Technology       S3_buckets                           Format

@@ -92,8 +92,7 @@ bucket_path <- function(source = "biocOSN"){
 #' before retrieving from cache.
 #' 
 #' @examples
-#' get_demo_SDdata("mibitof", 
-#'                 source = bucket_path())
+#' get_demo_SDdata("mibitof", source = "biocOSN")
 #' 
 #' @export
 get_demo_SDdata <- function(
@@ -113,7 +112,7 @@ get_demo_SDdata <- function(
   } else {
     stop("Unknown source")
   }
-  allurls <- file.path(bucket_path[[source]], allz)
+  allurls <- file.path(bucket_path(source), allz)
   
   # get availables in cache
   ca <- BiocFileCache::BiocFileCache()
@@ -159,7 +158,7 @@ get_demo_SDdata <- function(
     utils::unzip(loc, exdir=td)  # manufacturer output
     if (dir.exists(target)) 
       warning("target exists")
-    use_sdio("xenium", srcdir=td, dest=target) # zarr in target
+    SD.io("xenium", srcdir=td, dest=target) # zarr in target
     return(target)
   } else {
     dir.create(td <- target)
@@ -217,7 +216,7 @@ get_demo_SDdata <- function(
   SpaceMHelaniH3T3           = "spacem_helanih3t3"
 )
 
-#' SpatialData.data_list
+#' SD.data_list
 #'
 #' Returns metadata of available data from Bioc OSN and scverse spatialdata-
 #' sandbox S3 buckets
@@ -232,22 +231,22 @@ get_demo_SDdata <- function(
 #' @export
 #' 
 #' @examples
-#' SpatialData.data_list()
-#' SpatialData.data_list(extended = TRUE)
-SpatialData.data_list <- function(extended = FALSE) {
+#' SD.data_list()
+#' SD.data_list(extended = TRUE)
+SD.data_list <- function(extended = FALSE) {
   data_file <- system.file("extdata", "demo_spatialdata.csv", package = "SpatialData.data")
   x <- utils::read.csv(data_file, sep = ";")
   if(extended) x else x[,c("Function", "Technology", "S3_buckets", "Format")]
 }
 
 #' @title retrieve scverse-curated `SpatialData` .zarr archive
-#' @rdname SpatialData-data
+#' @rdname SD.data_load
 #' 
 #' @description
 #' This function consolidates the retrieval and caching and transformation 
 #' of scverse-curated Zarr archives and 10x-curated Xenium archives.
 #' 
-#' @param stub character(1) a string that identifies a resource
+#' @param id character string; dataset identifier
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
 #' @param target character(1), defaults to tempfile(); use a different 
@@ -265,73 +264,88 @@ SpatialData.data_list <- function(extended = FALSE) {
 #'  }
 #' }
 #' 
-#' @return an instance of SpatialData, or NULL if the stub does not
-#' uniquely match (using grep()) the name of any resource
-
+#' @return an instance of SpatialData, or NULL if the dataset identifier (id) 
+#' does not uniquely match (using grep()) the name of any resource
+#' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
 #' 
-#' # load using `SpatialData.data_load`
-#' ld <- SpatialData.data_load("ColorectalCarcinomaMIBITOF")
+#' # load using `SD.data_load`
+#' ld <- SD.data_load("ColorectalCarcinomaMIBITOF")
 #' ld
 #' 
 #' # TODO: zarr v3 read is not complete
 #' # # use sandbox as source
-#' # ld <- SpatialData.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox")
+#' # ld <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox")
 #' 
 #' @export
 #' 
 #' @details
 #' \itemize{
 #'   \item MouseIntestineVisHD:
-#'     Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine; source:
+#'     Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine;
+#'     source (biocOSN):
 #'     \url{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}
 #'   \item MouseBrainVisHD:
-#'     Visium HD 4.0.1 (10x Genomics) dataset of mouse brain; source:
+#'     Visium HD 4.0.1 (10x Genomics) dataset of mouse brain;
+#'     source (sandbox):
 #'     \url{https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen}
 #'   \item MouseBrainVis:
-#'     Visium (10x Genomics) dataset of mouse brain; source:
+#'     Visium (10x Genomics) dataset of mouse brain;
+#'     source (sandbox):
 #'     \url{https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114}
 #'   \item LungAdenocarcinomaMCMICRO:
-#'     MCMICRO dataset of human small cell lung adenocarcinoma
+#'     MCMICRO dataset of human small cell lung adenocarcinoma;
+#'     source (biocOSN)
 #'   \item MouseBrainMERFISH:
-#'     MERFISH dataset of mouse brain tissue
+#'     MERFISH dataset of mouse brain tissue;
+#'     source (biocOSN)
 #'   \item MouseLiverMERFISH:
-#'     MERFISH dataset of mouse liver tissue (SPArrOW output); source:
+#'     MERFISH dataset of mouse liver tissue (SPArrOW output);
+#'     source (sandbox):
 #'     \url{https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1}
 #'   \item MulticancerSteinbock:
-#'     imaging mass cytometry dataset of four cancers; source:
+#'     imaging mass cytometry dataset of four cancers;
+#'     source (biocOSN):
 #'     \url{https://www.nature.com/articles/s41596-023-00881-0}
 #'   \item ColorectalCarcinomaMIBITOF:
-#'     MIBI-TOF dataset of colorectal carcinoma
+#'     MIBI-TOF dataset of colorectal carcinoma;
+#'     source (biocOSN)
 #'   \item JanesickBreastVisiumEnh:
-#'     Visium (10x Genomics) dataset of breast cancer; source:
+#'     Visium (10x Genomics) dataset of breast cancer;
+#'     source (biocOSN):
 #'     \url{https://www.nature.com/articles/s41467-023-43458-x}
 #'   \item JanesickBreastXeniumRep1:
 #'     first of two Xenium (10x Genomics) sections associated with
-#'     the Visium section from Janesick \emph{et al.}
+#'     the Visium section from Janesick \emph{et al.};
+#'     source (biocOSN)
 #'   \item JanesickBreastXeniumRep2:
 #'     second of two Xenium (10x Genomics) sections associated with
-#'     the Visium section from Janesick \emph{et al.}
+#'     the Visium section from Janesick \emph{et al.};
+#'     source (biocOSN)
 #'   \item Breast2fov_10x:
-#'     Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs; source:
+#'     Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs;
+#'     source (biocOSN_Xenium):
 #'     \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
 #'   \item Lung2fov_10x:
-#'     Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs; source:
+#'     Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs;
+#'     source (biocOSN_Xenium):
 #'     \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
 #'   \item HumanLungMulti_10x:
-#'     Xenium (10x Genomics) data on lung cancer; source:
+#'     Xenium (10x Genomics) data on lung cancer;
+#'     source (biocOSN):
 #'     \url{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}
 #'   \item SpaceMHelaniH3T3:
-#'     SpaceM on Hepa and NIH3T3 cells; more info:
+#'     SpaceM on Hepa and NIH3T3 cells; source (sandbox);
+#'     more info:
 #'     \url{https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md}
 #' }
-SpatialData.data_load = function(stub, 
-                                 target = tempfile(), 
-                                 source = "biocOSN") { 
-  opts = SpatialData.data_list()
-  if(stub %in% opts$Function) {
-    .read_demo_SDdata(.DATASETS[[stub]], target=target, source = source)
+SD.data_load = function(id, 
+                        target = tempfile(), 
+                        source = "biocOSN") { 
+  opts = SD.data_list()
+  if(id %in% opts$Function) {
+    .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
   } else {
     stop("Dataset no found!")
   }

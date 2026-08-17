@@ -1,31 +1,26 @@
 library(spatialdataR)
 Sys.setenv(AWS_REGION = "us-east-1")
 
-test_that("available_sdio()", {
-    x <- available_sdio()   # lists methods known to spatialdata-io python module
+test_that("SD.io_available()", {
+    x <- SD.io_available()   # lists methods known to spatialdata-io python module
     expect_is(x, "character")
     expect_true(length(x) > 0)
     expect_true(any(grepl("^(vis|xen)", x)))
 })
 
-test_that("use_sdio()", {
-  
-    # get dataset
-    zip <- SpatialData.data:::.path_to_10x_xen_demo()
-    dir.create(src <- tempfile())
-    unzip(zip, exdir=src)
+test_that("SD.io()", {
     
     # directory already exists
     dir.create(out <- tempfile())
     options(sd_version = "0.3.0")
-    expect_error(use_sdio("xenium", src, out))
+    expect_error(SD.io("xenium", src, out))
     
     # invalid platform specification
     out <- tempfile()
-    expect_error(use_sdio(".", src, out))
+    expect_error(SD.io(".", src, out))
     
     # read'n'write using 'spatialdata-io'
-    use_sdio("xenium", src, out)
+    SD.io("xenium", src, out)
     x <- readSpatialData(out)
     expect_s4_class(x, "SpatialData")
 }) 

@@ -3,7 +3,7 @@
 #' Generate spatialdata datasets using dummy-spatialdata
 #' 
 #' @param file location that zarr file will be written
-#' @param sd_version spatialdata version, see \link{available_sdio}
+#' @param sd_version spatialdata version, see \link{SD.io_available}
 #' @param images image element
 #' @param labels labels element
 #' @param shapes shapes element
