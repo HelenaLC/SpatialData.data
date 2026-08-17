@@ -4,7 +4,7 @@
 \alias{SD.data_load}
 \title{retrieve scverse-curated `SpatialData` .zarr archive}
 \usage{
-SD.data_load(id, target = tempfile(), source = "biocOSN")
+SD.data_load(id, target = tempfile(), source)
 }
 \arguments{
 \item{id}{character string; dataset identifier}
@@ -12,7 +12,7 @@ SD.data_load(id, target = tempfile(), source = "biocOSN")
 \item{target}{character(1), defaults to tempfile(); use a different 
 value if you wish to retain the unzipped .zarr store persistently.}
 
-\item{source}{The name of the query bucket.
+\item{source}{The name of the source, i.e. query bucket.
 \describe{
  \item{biocOSN}{
    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
@@ -26,8 +26,9 @@ value if you wish to retain the unzipped .zarr store persistently.}
 }}
 }
 \value{
-an instance of SpatialData, or NULL if the dataset identifier (id) 
-does not uniquely match (using grep()) the name of any resource
+an instance of SpatialData, or throws an error if the dataset 
+identifier (id)does not uniquely match the name of any resource, see 
+\link{SD.data_list} for the list of datasets.
 }
 \description{
 This function consolidates the retrieval and caching and transformation 

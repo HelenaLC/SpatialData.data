@@ -14,7 +14,7 @@
 SD.io_available <- function(sd_version = getOption("sd_version"), 
                            verbose = TRUE) {
     proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version, 
-                                                      verbose = TRUE)) 
+                                                      verbose = verbose)) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")

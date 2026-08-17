@@ -44,10 +44,10 @@ These, in turn, have been deposited in Bioconductor's NSF Open Storage Network a
 can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
 Any spatialdata dataset can be retrieved (once) into some location, and 
-read into R.  We use dataset-specific functions, or `SpatialData.data_load`:
+read into R.  We use dataset-specific functions, or `SD.data_load`:
 
 ``` r
-(x <- SpatialData.data_load("ColorectalCarcinomaMIBITOF"))
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
 ```
@@ -73,11 +73,8 @@ coordinate systems:
 or 
 
 ``` r
-# from biocOSN
-x <- ColorectalCarcinomaMIBITOF()
-
 # from sandbox (Zarr v3)
-x <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
 We can check all available datasets below:
