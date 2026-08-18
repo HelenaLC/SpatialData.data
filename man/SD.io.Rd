@@ -8,7 +8,7 @@ output to .zarr with specific folder structure.}
 SD.io(platform = "xenium", srcdir, dest)
 }
 \arguments{
-\item{platform}{character(1) must be an element of `SD.io_available()` output}
+\item{platform}{character(1) must be an element of `SD.io_readers()` output}
 
 \item{srcdir}{character(1) path to folder holding manufacturer output files}
 

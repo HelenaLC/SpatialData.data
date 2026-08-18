@@ -1,6 +1,6 @@
-#' SD.io_available
+#' SD.io_readers
 #' 
-#' enumerate modules
+#' Method to call technology-specific readers by spatialdata-io.
 #' 
 #' @param sd_version spatialdata version, should be set to 0.3.0, 0.5.0 or 
 #' 0.7.2. Default: 0.7.
@@ -8,10 +8,10 @@
 #' @import basilisk
 #' 
 #' @examples
-#' SD.io_available()
+#' SD.io_readers()
 #' 
 #' @export
-SD.io_available <- function(sd_version = getOption("sd_version"), 
+SD.io_readers <- function(sd_version = getOption("sd_version"), 
                            verbose = TRUE) {
     proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version, 
                                                       verbose = verbose)) 
@@ -25,7 +25,7 @@ SD.io_available <- function(sd_version = getOption("sd_version"),
 #' Use Python's 'spatialdata-io' to transform manufacturer 
 #' output to .zarr with specific folder structure.
 #' 
-#' @param platform character(1) must be an element of `SD.io_available()` output
+#' @param platform character(1) must be an element of `SD.io_readers()` output
 #' @param srcdir character(1) path to folder holding manufacturer output files
 #' @param dest character(1) a path to a desired destination for zarr representation
 #' 

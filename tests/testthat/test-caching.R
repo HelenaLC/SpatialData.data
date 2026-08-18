@@ -1,8 +1,8 @@
 library(spatialdataR)
 Sys.setenv(AWS_REGION = "us-east-1")
 
-test_that("SD.io_available()", {
-    x <- SD.io_available()   # lists methods known to spatialdata-io python module
+test_that("SD.io_readers()", {
+    x <- SD.io_readers()   # lists methods known to spatialdata-io python module
     expect_is(x, "character")
     expect_true(length(x) > 0)
     expect_true(any(grepl("^(vis|xen)", x)))

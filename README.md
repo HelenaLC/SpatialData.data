@@ -78,7 +78,7 @@ or you can also explicitly download datasets from difference source, e.g.
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
-We can check all available datasets below and their source using:
+We can check all available datasets below and their sources:
 
 ``` r
 SD.data_list()

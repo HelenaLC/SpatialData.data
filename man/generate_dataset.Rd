@@ -19,7 +19,7 @@ generate_dataset(
 \arguments{
 \item{file}{location that zarr file will be written}
 
-\item{sd_version}{spatialdata version, see \link{SD.io_available}}
+\item{sd_version}{spatialdata version, see \link{SD.io_readers}}
 
 \item{images}{image element}
 
