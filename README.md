@@ -5,19 +5,18 @@
 # Introduction
 
 `Spatialdata.data` package provides utilities for accessing, reading and
-generating SpatialData datasets.
+generating SpatialData datasets. Data from a variety of spatial omics
+technologies has been made available as `SpatialData` .zarr stores
 
-*scverse* SpatialData examples are available through
+These *scverse* SpatialData examples are available through
 
 1.  Bioc’s NSF OSN bucket and
 2.  scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
-which are accessible from within R, using `BiocFileCache`.
-
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
 versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for
-reading and writing to .zarr packages.
+reading and writing to .zarr stores.
 
 `basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by
 the `dummy-spatialdata` package that generates toy spatialdata examples
@@ -56,13 +55,6 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 ## Load SpatialData (.zarr) from Archives
 
-Data from a variety of technologies has been made available as
-`SpatialData` .zarr stores
-[here](https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html).
-These, in turn, have been deposited in Bioconductor’s NSF Open Storage
-Network also and can be retrieved with caching support using
-*[BiocFileCache](https://bioconductor.org/packages/3.24/BiocFileCache)*.
-
 Any spatialdata dataset can be retrieved (once) into some location, and
 read into R.
 
@@ -87,7 +79,7 @@ read into R.
 #> - point8(2): point8_image point8_labels
 ```
 
-## SpatialData-io
+## Using spatialdata-io
 
 `SpatialData.data` also provides access to some raw spatial omic
 readouts. These data bundle can then be converted into SpatialData
@@ -108,18 +100,18 @@ We use `options(sd_version)` to set the SpatialData version.
 options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 #> Using spatialdata version 0.3.0
-#> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpOOhAWi/file288a155[0m
-#>          [35mbdb41/[0m[95mcell_feature_matrix.h5[0m                                           
-#> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
+#> [34mINFO    [0m reading                                                                
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmp3DoiIf/file32c36d5[0m
+#>          [35me5184/[0m[95mcell_feature_matrix.h5[0m                                           
+#> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
 #>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpOOhAWi/[0m[95mfile288a419[0m
-#>          [95m7935b[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmp3DoiIf/[0m[95mfile32c34b3[0m
+#>          [95m9e934[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
 #>          understand the implications of working with SpatialData objects that   
 #>          are not self-contained.                                                
-#> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpOOhAWi/[0m[95mfile288a419[0m
-#>          [95m7935b[0m
+#> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmp3DoiIf/[0m[95mfile32c34b3[0m
+#>          [95m9e934[0m
 #> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
 #> ℹ /Users/amanuky/.duckdb
 #> This persists across sessions and is shared with the DuckDB CLI and other clients.
@@ -144,11 +136,11 @@ options(sd_version = "0.3.0")
 #>   transcripts
 ```
 
-## Dummy SpatialData objects
+## Generating dummy SpatialData objects
 
 `SpatialData.data` package incorporates the `dummy-spatialdata` python
-package from PyPI (<https://pypi.org/project/dummy-spatialdata/>) to generate 
-toy spatialdata objects in multiple spatialdata versions.
+package (<https://pypi.org/project/dummy-spatialdata/>) via `basilisk`
+to generate toy spatialdata objects in multiple spatialdata versions.
 
 ``` r
 zarrfile <- tempfile(fileext = ".zarr")
@@ -173,6 +165,6 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpOOhAWi/file288a1819d9ef.zarr"
+#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//Rtmp3DoiIf/file32c319c8fe5c.zarr"
 sd <- spatialdataR::readSpatialData(zarrfile)
 ```
