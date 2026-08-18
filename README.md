@@ -105,7 +105,7 @@ To interrogate the bucket for available (zipped) .zarr archives:
 
 ``` r
 Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws")) available("biocOSN")
+if (requireNamespace("paws")) data_available("biocOSN")
 ```
 
 ## SpatialData-io
@@ -115,7 +115,7 @@ data bundle can then be converted into SpatialData objects using `spatialdata-io
 pyton package via `basilisk`.
 
 ``` r
-available("biocOSN_Xenium")
+SD.data_available("biocOSN_Xenium")
 ```
 
 ```
