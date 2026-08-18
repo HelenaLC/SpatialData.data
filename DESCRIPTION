@@ -38,6 +38,6 @@ biocViews:
 License: Artistic-2.0
 Encoding: UTF-8
 VignetteBuilder: knitr
-URL: https://github.com/HelenaLC/SpatialData.data
+URL: https://github.com/HelenaLC/SpatialData.data, https://helenalc.github.io/SpatialData.data/
 BugReports: https://github.com/HelenaLC/SpatialData.data/issues
 Config/roxygen2/version: 8.0.0
