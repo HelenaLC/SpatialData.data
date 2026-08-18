@@ -44,7 +44,7 @@ These, in turn, have been deposited in Bioconductor's NSF Open Storage Network a
 can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
 Any spatialdata dataset can be retrieved (once) into some location, and 
-read into R.  We use dataset-specific functions, or `SD.data_load`:
+read into R.
 
 ``` r
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
@@ -70,14 +70,15 @@ coordinate systems:
 - point8(2): point8_image point8_labels
 ```
 
-or 
+or you can also explicitly download datasets from difference source, e.g. 
+`sandbox` which will import a Zarr v3 version of the same SpatialData store.
 
 ``` r
 # from sandbox (Zarr v3)
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
-We can check all available datasets below:
+We can check all available datasets below and their source using:
 
 ``` r
 SD.data_list()
@@ -105,7 +106,7 @@ To interrogate the bucket for available (zipped) .zarr archives:
 
 ``` r
 Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws")) data_available("biocOSN")
+if (requireNamespace("paws")) SD.data_available("biocOSN")
 ```
 
 ## SpatialData-io

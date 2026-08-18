@@ -79,14 +79,14 @@
 #' @examples
 #' bucket_path()
 #' 
-#' @export
+#' @noRd
 bucket_path <- function(source = "biocOSN"){
   switch(source, 
          biocOSN = .OSN_PATH,
          biocOSN_Xenium = .OSN_Xenium_PATH,
          sandbox = .SANDBOX_PATH, 
          {
-           stop("Unknown bucket! Available values are ", 
+           stop("Unknown source/bucket! Available values are ", 
                 "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
          })
 }
@@ -222,11 +222,11 @@ SD.data_load = function(id,
                         target = tempfile(), 
                         source) { 
   opts <- SD.data_list()
-  if(missing(source)){
-    source <- opts[opts$Function == id, "S3_buckets"]
-    source <- strsplit(source, split = ", ")[[1]][1]
-  }
   if(id %in% opts$Function) {
+    if(missing(source)){
+      source <- opts[opts$Function == id, "S3_buckets"]
+      source <- strsplit(source, split = ", ")[[1]][1]
+    }
     .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
   } else {
     stop("Dataset not found!")
@@ -267,9 +267,7 @@ SD.data_load = function(id,
     .OSN_Xenium_DATA
   } else if (source == "sandbox") {
     .SANDBOX_DATA
-  } else {
-    stop("Unknown source")
-  }
+  } 
   allurls <- file.path(bucket_path(source), allz)
   
   # get availables in cache
