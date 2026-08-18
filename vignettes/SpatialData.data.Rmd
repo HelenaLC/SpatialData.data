@@ -48,7 +48,7 @@ if(!requireNamespace("SpatialData.data"))
 
 You can also install the development version like so:
 
-```{r install-pak}
+```{r install-pak, eval=FALSE}
 if(!requireNamespace("pak"))
   install.packages("pak")
 pak::pak("HelenaLC/SpatialData.data")
