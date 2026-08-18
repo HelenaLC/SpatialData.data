@@ -42,8 +42,8 @@ whose elements are customized by the user.
 #| label: install
 if(!requireNamespace("BiocManager"))
   install.packages("BiocManager")
-BiocManager::install("HelenaLC/spatialdataR")
-BiocManager::install("HelenaLC/SpatialData.data")
+BiocManager::install("spatialdataR")
+BiocManager::install("SpatialData.data")
 ```
 
 ```{r library}

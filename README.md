@@ -27,8 +27,8 @@ whose elements are customized by the user.
 ``` r
 if(!requireNamespace("BiocManager"))
   install.packages("BiocManager")
-BiocManager::install("HelenaLC/spatialdataR")
-BiocManager::install("HelenaLC/SpatialData.data")
+BiocManager::install("spatialdataR")
+BiocManager::install("SpatialData.data")
 ```
 
 ``` r
@@ -101,17 +101,17 @@ options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 #> Using spatialdata version 0.3.0
 #> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpKTaKOe/file3381498[0m
-#>          [35m6fd5a/[0m[95mcell_feature_matrix.h5[0m                                           
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/file3de54f0[0m
+#>          [35m39621/[0m[95mcell_feature_matrix.h5[0m                                           
 #> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
 #>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpKTaKOe/[0m[95mfile33813d6[0m
-#>          [95m3456c[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/[0m[95mfile3de5747[0m
+#>          [95m5790d[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
 #>          understand the implications of working with SpatialData objects that   
 #>          are not self-contained.                                                
 #> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpKTaKOe/[0m[95mfile33813d6[0m
-#>          [95m3456c[0m
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/[0m[95mfile3de5747[0m
+#>          [95m5790d[0m
 #> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
 #> ℹ /Users/amanuky/.duckdb
 #> This persists across sessions and is shared with the DuckDB CLI and other clients.
@@ -165,6 +165,6 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpKTaKOe/file3381a60f370.zarr"
+#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpoVFq2y/file3de565329005.zarr"
 sd <- spatialdataR::readSpatialData(zarrfile)
 ```

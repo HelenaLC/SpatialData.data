@@ -17,14 +17,6 @@ vignette: |
 knitr::opts_chunk$set(cache=FALSE, message=FALSE, warning=FALSE)
 ```
 
-```{r load-libs}
-library(spatialdataR)
-library(SpatialData.data)
-library(paws)
-Sys.setenv(AWS_REGION = "us-east-1") 
-```
-```
-
 `Spatialdata.data` package provides utilities for accessing, reading and
 generating SpatialData datasets. Data from a variety of spatial omics 
 technologies has been made available as `SpatialData` .zarr stores
@@ -42,6 +34,32 @@ reading and writing to .zarr stores.
 `basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by
 the `dummy-spatialdata` package that generates toy spatialdata examples
 whose elements are customized by the user.
+
+## Installation
+
+You can install `r BiocStyle::Biocpkg("SpatialData.data")` using: 
+
+```{r eval=FALSE}
+if(!requireNamespace("spatialdataR"))
+  BiocManager::install("spatialdataR")
+if(!requireNamespace("SpatialData.data"))
+  BiocManager::install("SpatialData.data")
+```
+
+You can also install the development version like so:
+
+```{r install-pak}
+if(!requireNamespace("pak"))
+  install.packages("pak")
+pak::pak("HelenaLC/SpatialData.data")
+```
+
+```{r load-libs}
+library(spatialdataR)
+library(SpatialData.data)
+library(paws)
+Sys.setenv(AWS_REGION = "us-east-1") 
+```
 
 ## Load SpatialData (.zarr) from Archives
 
