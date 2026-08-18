@@ -44,10 +44,10 @@ These, in turn, have been deposited in Bioconductor's NSF Open Storage Network a
 can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
 Any spatialdata dataset can be retrieved (once) into some location, and 
-read into R.  We use dataset-specific functions, or `load_data`:
+read into R.
 
 ``` r
-(x <- load_data("ColorectalCarcinomaMIBITOF")) # stub can be used
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
 ```
@@ -70,20 +70,18 @@ coordinate systems:
 - point8(2): point8_image point8_labels
 ```
 
-or 
+or you can also explicitly download datasets from difference source, e.g. 
+`sandbox` which will import a Zarr v3 version of the same SpatialData store.
 
 ``` r
-# from biocOSN
-x <- ColorectalCarcinomaMIBITOF()
-
 # from sandbox (Zarr v3)
-x <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
-We can check all available datasets below:
+We can check all available datasets below and their sources:
 
 ``` r
-SpatialData.data_list()
+SD.data_list()
 ```
 
 <div><pre><code style="font-size: 12px;">                       Function             Technology       S3_buckets                           Format
@@ -108,7 +106,7 @@ To interrogate the bucket for available (zipped) .zarr archives:
 
 ``` r
 Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws")) available("biocOSN")
+if (requireNamespace("paws")) SD.data_available("biocOSN")
 ```
 
 ## SpatialData-io
@@ -118,7 +116,7 @@ data bundle can then be converted into SpatialData objects using `spatialdata-io
 pyton package via `basilisk`.
 
 ``` r
-available("biocOSN_Xenium")
+SD.data_available("biocOSN_Xenium")
 ```
 
 ```

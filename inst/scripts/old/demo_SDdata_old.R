@@ -120,3 +120,110 @@
   unzip(loc, exdir=td)
   dir(td, full.names=TRUE)
 }
+
+#' provide path to a zip file from 10x genomics for Xenium platform
+#' 
+#' @param cache cache location BiocFileCache::BiocFileCache()
+#' @param zipname character(1) name of zip archive to find
+#' @param source source name
+#' 
+#' @examples
+#' Sys.setenv(AWS_REGION = "us-east-1")
+#' SpatialData.data:::.path_to_10x_xen_demo()
+#' # see ?use_sdio
+.path_to_10x_xen_demo <- function(
+    cache=BiocFileCache::BiocFileCache(),
+    zipname="Xenium_V1_human_Breast_2fov_outs.zip", 
+    source = biocOSN_Xenium) {
+  info <- BiocFileCache::bfcquery(cache, zipname)
+  nrec <- nrow(info)
+  if (nrec > 1) {
+    message(sprintf("multiple %s found in cache, using last recorded", zipname))
+  }
+  if (nrec == 1) {
+    message("returning path to cached zip")
+    return(info$rpath[nrec])
+  }
+  fp <- file.path(bucket_path(source), zipname)
+  message(sprintf("retrieving from %s, caching, and returning path", 
+                  bucket_path(source)))
+  BiocFileCache::bfcadd(cache, rname=zipname, fpath=fp, rtype="web")
+}
+
+#' @title retrieve scverse-curated `SpatialData` .zarr archive
+#' @rdname SpatialData-data2
+#' 
+#' @aliases 
+#' MouseIntestineVisHD
+#' MouseBrainVisHD
+#' MouseBrainVis
+#' LungAdenocarcinomaMCMICRO
+#' MouseBrainMERFISH
+#' MouseLiverMERFISH
+#' MulticancerSteinbock
+#' ColorectalCarcinomaMIBITOF
+#' JanesickBreastVisiumEnh
+#' JanesickBreastXeniumRep1
+#' JanesickBreastXeniumRep2
+#' Breast2fov_10x
+#' Lung2fov_10x
+#' HumanLungMulti_10x
+#' SpaceMHelaniH3T3
+#' 
+#' @description
+#' This function consolidates the retrieval and caching and transformation 
+#' of scverse-curated Zarr archives and 10x-curated Xenium archives.
+#' 
+#' @param stub character(1) a string that identifies a resource
+#' @param target character(1), defaults to tempfile(); use a different 
+#'   value if you wish to retain the unzipped .zarr store persistently.
+#' @param target character(1), defaults to tempfile(); use a different 
+#'   value if you wish to retain the unzipped .zarr store persistently.
+#' @param source The name of the query bucket.
+#' \describe{
+#'  \item{biocOSN}{
+#'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
+#'  }
+#'  \item{biocOSN_Xenium}{
+#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
+#'  }
+#'  \item{sandbox}{
+#'    scverse's spatialdata-sandbox bucket at EMBL.
+#'  }
+#' }
+#' 
+#' @examples
+#' Sys.setenv(AWS_REGION = "us-east-1")
+#' 
+#' # load using `load_data`
+#' ld <- load_data("ColorectalCarcinomaMIBITOF")
+#' ld
+#' 
+#' # TODO: zarr v3 read is not complete
+#' # # use sandbox as source
+#' # ld <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
+#' 
+#' @return an instance of SpatialData, or NULL if the stub does not
+#' uniquely match (using grep()) the name of any resource
+#' 
+#' @export
+load_data = function(stub, 
+                     target = tempfile(), 
+                     source = bucket_path("biocOSN")) { 
+  opts = SpatialData.data_list()
+  hit = grep(stub, opts$Function, value=TRUE)
+  if (!is.na(hit[1]) && length(hit)==1L) 
+    return(get(hit)(target = target,
+                    source = source))
+  else if (is.na(hit[1])) {
+    message("stub provided has no match in OSN resources")
+    message("returning NULL")
+  }
+  else {
+    message("stub does not uniquely match an OSN resource")
+    message("matched: ")
+    print(hit)
+    message("returning NULL")
+  }
+  NULL
+}

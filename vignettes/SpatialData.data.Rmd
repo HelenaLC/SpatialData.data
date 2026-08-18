@@ -55,45 +55,38 @@ These, in turn, have been deposited in Bioconductor's NSF Open Storage Network a
 can be retrieved with caching support using `r BiocStyle::Biocpkg("BiocFileCache")`.
 
 Any spatialdata dataset can be retrieved (once) into some location, and 
-read into R.  We use dataset-specific functions, or `load_data`:
+read into R.  We use dataset-specific functions, or `SD.data_load`:
 
 ```{r load-data}
-(x <- load_data("ColorectalCarcinomaMIBITOF")) # stub can be used
-```
-
-or 
-
-```{r load-data-biocOSN}
-# from biocOSN
-x <- ColorectalCarcinomaMIBITOF()
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
 ```{r load-data-sandbox}
 # TODO: zarr v3 is not complete yet
 # from sandbox (Zarr v3)
-# x <- ColorectalCarcinomaMIBITOF(source = bucket_path("sandbox"))
+# (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
 We can check all available datasets below:
 
 ```{r load-data-list}
-SpatialData.data_list()
+SD.data_list()
 ```
 
 To interrogate the bucket for available (zipped) .zarr archives:
 
 ```{r avail}
-available("biocOSN")
+SD.data_available("biocOSN")
 ```
 
-## SpatialData-io
+## SpatialData I/O
 
 `SpatialData.data` also provides access to some raw spatial omic readouts. These
 data bundle can then be converted into SpatialData objects using `spatialdata-io`
 pyton package via `basilisk`.
 
 ```{r avail2}
-available("biocOSN_Xenium")
+SD.data_available("biocOSN_Xenium")
 ```
 
 You can use `basilisk` to convert these readouts into various SpatialData 
@@ -107,7 +100,7 @@ We use `options(sd_version)` to set the SpatialData version.
 
 ```{r sd-io}
 options(sd_version = "0.3.0")
-(x <- Breast2fov_10x(source = bucket_path("biocOSN_Xenium")))
+(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
 ## Dummy SpatialData objects

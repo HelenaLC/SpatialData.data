@@ -1,4 +1,4 @@
-#' available
+#' SD.data_available
 #' 
 #' Function for interrogating files across buckets. Please use 'paws::s3' to 
 #' interrogate buckets for zipped zarr archives or raw readouts for various 
@@ -20,10 +20,10 @@
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
 #' if (requireNamespace("paws")) {
-#'   available("biocOSN")
+#'   SD.data_available("biocOSN")
 #' }
 #' @export
-available <- function(source = "biocOSN"){
+SD.data_available <- function(source = "biocOSN"){
   switch(source, 
          biocOSN = .available_biocOSN(),
          biocOSN_Xenium = .available_biocOSN_Xenium(),
