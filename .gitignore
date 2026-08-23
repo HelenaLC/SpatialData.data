@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 vignettes/load_datasets.Rmd
+docs

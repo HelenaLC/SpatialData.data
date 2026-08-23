@@ -1,21 +1,22 @@
 ---
-title: "`SpatialData.data`"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-package: "`r BiocStyle::pkg_ver('SpatialData.data')`"
-author: 
-  - name: Vince Carey
-  - name: Helena Lucia Crowell
-output:
-  BiocStyle::html_document
-vignette: |
-  %\VignetteIndexEntry{SpatialData.data}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+format:
+  gfm:
+    default-image-extension: ""
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache=FALSE, message=FALSE, warning=FALSE)
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
 ```
+
+# Introduction
 
 `Spatialdata.data` package provides utilities for accessing, reading and
 generating SpatialData datasets. Data from a variety of spatial omics 
@@ -35,28 +36,27 @@ reading and writing to .zarr stores.
 the `dummy-spatialdata` package that generates toy spatialdata examples
 whose elements are customized by the user.
 
-## Installation
+# Installation
 
-You can install `r BiocStyle::Biocpkg("SpatialData.data")` using: 
-
-```{r eval=FALSE}
-if(!requireNamespace("spatialdataR"))
-  BiocManager::install("spatialdataR")
-if(!requireNamespace("SpatialData.data"))
-  BiocManager::install("SpatialData.data")
+```{r install, eval=FALSE}
+#| label: install
+if(!requireNamespace("BiocManager"))
+  install.packages("BiocManager")
+BiocManager::install("spatialdataR")
+BiocManager::install("SpatialData.data")
 ```
 
-You can also install the development version like so:
-
-```{r install-pak, eval=FALSE}
-if(!requireNamespace("pak"))
-  install.packages("pak")
-pak::pak("HelenaLC/SpatialData.data")
-```
-
-```{r load-libs}
+```{r library}
 library(spatialdataR)
 library(SpatialData.data)
+```
+
+To *interrogate* our S3 bucket you will need [paws](https://cran.r-project.org/web/packages/paws/index.html) 
+installed; it is not necessary for retrievals.
+
+```{r aws}
+if(!requireNamespace("paws"))
+  install.packages("paws")
 library(paws)
 Sys.setenv(AWS_REGION = "us-east-1") 
 ```
@@ -66,26 +66,9 @@ Sys.setenv(AWS_REGION = "us-east-1")
 Any spatialdata dataset can be retrieved (once) into some location, and
 read into R.
 
-```{r load-data}
+```{r load}
+#| label: load
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
-```
-
-```{r load-data-sandbox}
-# TODO: zarr v3 is not complete yet
-# from sandbox (Zarr v3)
-# (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
-```
-
-We can check all available datasets below:
-
-```{r load-data-list}
-SD.data_list()
-```
-
-To interrogate the bucket for available (zipped) .zarr archives:
-
-```{r avail}
-SD.data_available("biocOSN")
 ```
 
 ## Using spatialdata-io
@@ -94,20 +77,15 @@ SD.data_available("biocOSN")
 readouts. These data bundle can then be converted into SpatialData
 objects using `spatialdata-io` python package.
 
-```{r avail2}
+```{r avail}
+#| label: avail
 SD.data_available("biocOSN_Xenium")
 ```
 
-You can use `basilisk` to convert these readouts into various SpatialData 
-formats: 
-
-* **0.3.0** (Zarr v2), 
-* **0.5.0** (Zarr v2) and 
-* **0.7.2** (Zarr v3)
-
 We use `options(sd_version)` to set the SpatialData version.
 
-```{r sd-io}
+```{r load_basilisk}
+#| label: load_basilisk
 options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
@@ -118,8 +96,11 @@ options(sd_version = "0.3.0")
 via `basilisk` to generate toy spatialdata objects in multiple spatialdata 
 versions. 
 
-```{r dummy}
-sd_zarr <- generate_dataset(
+```{r generate_dataset}
+#| label: generate_dataset
+zarrfile <- tempfile(fileext = ".zarr")
+generate_dataset(
+  file = zarrfile, 
   sd_version = "0.5.0",
   images = list(
     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
@@ -138,24 +119,5 @@ sd_zarr <- generate_dataset(
     )
   )
 )
-sd_zarr
-```
-
-Now we can read the SpatialData object with SpatialData.
-
-```{r read}
-sd <- readSpatialData(sd_zarr)
-sd
-```
-
-We can also get individual elements
-
-```{r image}
-image(sd, 1)
-```
-
-# Session info
-
-```{r sessionInfo, echo=FALSE}
-sessionInfo()
+sd <- spatialdataR::readSpatialData(zarrfile)
 ```
