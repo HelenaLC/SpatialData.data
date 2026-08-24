@@ -23,8 +23,9 @@ technologies has been made available as `SpatialData` .zarr stores
 
 These *scverse* SpatialData examples are available through
 
-1.  Bioc’s NSF OSN bucket and
-2.  scverse’s spatialdata-sandbox
+1.  **biocOSN:** Bioc’s NSF OSN bucket,
+2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from some Xenium datasets and
+3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
@@ -84,6 +85,12 @@ We can check all available datasets and their sources with:
 
 ```{r load-data-list}
 SD.data_list()
+```
+
+or as below for a detailed overview and metadata on all datasets: 
+
+```{r view-data-list, eval=FALSE}
+View(SD.data_list(extended = TRUE))
 ```
 
 To interrogate the bucket for available (zipped) .zarr archives:

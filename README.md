@@ -10,8 +10,10 @@ technologies has been made available as `SpatialData` .zarr stores
 
 These *scverse* SpatialData examples are available through
 
-1.  Bioc’s NSF OSN bucket and
-2.  scverse’s spatialdata-sandbox
+1.  **biocOSN:** Bioc’s NSF OSN bucket,
+2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
+    some Xenium datasets and
+3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
@@ -100,28 +102,18 @@ options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 #> checking Bioconductor OSN bucket (Xenium readouts) ...
 #> Using spatialdata version 0.3.0
-#> Warning: Error updating pyenv [exit code 1]
-#> Using Python: /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12
-#> Creating virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03' ...
-#> + /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12 -m venv /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03
-#> Done!
-#> Installing packages: pip, wheel, setuptools
-#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03/bin/python -m pip install --upgrade pip wheel setuptools
-#> Installing packages: 'spatialdata==0.3.0', 'datashader==0.19.0', 'spatialdata_io==0.1.7', 'setuptools==75.8.0'
-#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03/bin/python -m pip install --upgrade --no-user 'spatialdata==0.3.0' 'datashader==0.19.0' 'spatialdata_io==0.1.7' 'setuptools==75.8.0'
-#> Virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03' successfully created.
 #> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpmDUbtF/file67c23bf[0m
-#>          [35mbfb3c/[0m[95mcell_feature_matrix.h5[0m                                           
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/file7f98173[0m
+#>          [35m02669/[0m[95mcell_feature_matrix.h5[0m                                           
 #> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
 #>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpmDUbtF/[0m[95mfile67c21c2[0m
-#>          [95mb3ee8[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/[0m[95mfile7f985a2[0m
+#>          [95m9c363[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
 #>          understand the implications of working with SpatialData objects that   
 #>          are not self-contained.                                                
 #> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpmDUbtF/[0m[95mfile67c21c2[0m
-#>          [95mb3ee8[0m
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/[0m[95mfile7f985a2[0m
+#>          [95m9c363[0m
 #> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
 #> ℹ /Users/amanuky/.duckdb
 #> This persists across sessions and is shared with the DuckDB CLI and other clients.
@@ -175,16 +167,6 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> Warning: Error updating pyenv [exit code 1]
-#> Using Python: /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12
-#> Creating virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05' ...
-#> + /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12 -m venv /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05
-#> Done!
-#> Installing packages: pip, wheel, setuptools
-#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05/bin/python -m pip install --upgrade pip wheel setuptools
-#> Installing packages: 'spatialdata==0.5.0', 'spatialdata_io==0.6.0', 'dummy-spatialdata==0.1.7', 'setuptools==75.8.0'
-#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05/bin/python -m pip install --upgrade --no-user 'spatialdata==0.5.0' 'spatialdata_io==0.6.0' 'dummy-spatialdata==0.1.7' 'setuptools==75.8.0'
-#> Virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05' successfully created.
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpmDUbtF/file67c23cfea265.zarr"
+#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//Rtmpc4KT2x/file7f98c92d6ec.zarr"
 sd <- spatialdataR::readSpatialData(zarrfile)
 ```
