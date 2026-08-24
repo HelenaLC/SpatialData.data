@@ -1,8 +1,8 @@
 # SD.data_available
 
-Function for interrogating files across buckets. Please use 'paws::s3'
-to interrogate buckets for zipped zarr archives or raw readouts for
-various platforms.
+Function for interrogating files across buckets. Please use
+paws.storage::s3' to interrogate buckets for zipped zarr archives or raw
+readouts for various platforms.
 
 ## Usage
 
@@ -34,7 +34,7 @@ SD.data_available(source = "biocOSN")
 
 ``` r
 Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws")) {
+if (requireNamespace("paws.storage")) {
   SD.data_available("biocOSN")
 }
 #> checking Bioconductor OSN bucket...

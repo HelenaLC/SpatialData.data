@@ -27,14 +27,14 @@ SD.io_readers()
 #> Installing pyenv ...
 #> Done! pyenv has been installed to '/home/runner/.local/share/r-reticulate/pyenv/bin/pyenv'.
 #> Using Python: /home/runner/.pyenv/versions/3.12.0/bin/python3.12
-#> Creating virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.7/sd_env_03' ... 
-#> + /home/runner/.pyenv/versions/3.12.0/bin/python3.12 -m venv /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.7/sd_env_03
+#> Creating virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03' ... 
+#> + /home/runner/.pyenv/versions/3.12.0/bin/python3.12 -m venv /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03
 #> Done!
 #> Installing packages: pip, wheel, setuptools
-#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.7/sd_env_03/bin/python -m pip install --upgrade pip wheel setuptools
+#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03/bin/python -m pip install --upgrade pip wheel setuptools
 #> Installing packages: 'spatialdata==0.3.0', 'datashader==0.19.0', 'spatialdata_io==0.1.7', 'setuptools==75.8.0'
-#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.7/sd_env_03/bin/python -m pip install --upgrade --no-user 'spatialdata==0.3.0' 'datashader==0.19.0' 'spatialdata_io==0.1.7' 'setuptools==75.8.0'
-#> Virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.7/sd_env_03' successfully created.
+#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03/bin/python -m pip install --upgrade --no-user 'spatialdata==0.3.0' 'datashader==0.19.0' 'spatialdata_io==0.1.7' 'setuptools==75.8.0'
+#> Virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03' successfully created.
 #>  [1] "codex"                     "converters"               
 #>  [3] "cosmx"                     "curio"                    
 #>  [5] "dbit"                      "generic"                  

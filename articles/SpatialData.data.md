@@ -6,8 +6,10 @@ technologies has been made available as `SpatialData` .zarr stores
 
 These *scverse* SpatialData examples are available through
 
-1.  Bioc’s NSF OSN bucket and
-2.  scverse’s spatialdata-sandbox
+1.  **biocOSN:** Bioc’s NSF OSN bucket,
+2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
+    some Xenium datasets and
+3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
@@ -41,11 +43,15 @@ if(!requireNamespace("pak"))
 pak::pak("HelenaLC/SpatialData.data")
 ```
 
+To *interrogate* our S3 bucket you will need
+[paws.storage](https://cran.r-project.org/web/packages/paws.storage/index.html)
+installed.
+
 ``` r
 
 library(spatialdataR)
 library(SpatialData.data)
-library(paws)
+library(paws.storage)
 Sys.setenv(AWS_REGION = "us-east-1") 
 ```
 
@@ -77,52 +83,54 @@ read into R.
     ## - point23(2): point23_image point23_labels
     ## - point8(2): point8_image point8_labels
 
+You can also the same data from different sources, including the
+spatialdata’s sandbox that are SpatialData stores saved as Zarr v3.
+
 ``` r
 
-# TODO: zarr v3 is not complete yet
-# from sandbox (Zarr v3)
-# (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
 ```
 
-We can check all available datasets below:
+    ## class: SpatialData
+    ## - images(3):
+    ##   - point16_image (3,1024,1024)
+    ##   - point23_image (3,1024,1024)
+    ##   - point8_image (3,1024,1024)
+    ## - labels(3):
+    ##   - point16_labels (1024,1024)
+    ##   - point23_labels (1024,1024)
+    ##   - point8_labels (1024,1024)
+    ## - points(0):
+    ## - shapes(0):
+    ## - tables(1):
+    ##   - table (36,3309) [point8_labels,point16_labels,point23_labels]
+    ## coordinate systems(3):
+    ## - point16(2): point16_image point16_labels
+    ## - point23(2): point23_image point23_labels
+    ## - point8(2): point8_image point8_labels
+
+We can check all available datasets and their sources with:
 
 ``` r
 
 SD.data_list()
 ```
 
-    ##                      Function             Technology       S3_buckets
-    ## 1         MouseIntestineVisHD              Visium HD biocOSN, sandbox
-    ## 2             MouseBrainVisHD              Visium HD          sandbox
-    ## 3               MouseBrainVis                 Visium          sandbox
-    ## 4   LungAdenocarcinomaMCMICRO CyCIF (MCMICRO output)          biocOSN
-    ## 5           MouseBrainMERFISH                MERFISH biocOSN, sandbox
-    ## 6           MouseLiverMERFISH                MERFISH          sandbox
-    ## 7  ColorectalCarcinomaMIBITOF               MIBI-TOF biocOSN, sandbox
-    ## 8        MulticancerSteinbock IMC (Steinbock output)          biocOSN
-    ## 9     JanesickBreastVisiumEnh                 Visium biocOSN, sandbox
-    ## 10   JanesickBreastXeniumRep1                 Xenium biocOSN, sandbox
-    ## 11   JanesickBreastXeniumRep2                 Xenium          biocOSN
-    ## 12         HumanLungMulti_10x                 Xenium biocOSN, sandbox
-    ## 13             Breast2fov_10x       Xenium (trimmed)   biocOSN_Xenium
-    ## 14               Lung2fov_10x       Xenium (trimmed)   biocOSN_Xenium
-    ## 15           SpaceMHelaniH3T3                 SpaceM          sandbox
-    ##                              Format
-    ## 1  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 2                   0.3.0 (Zarr v2)
-    ## 3                   0.7.2 (Zarr v3)
-    ## 4                   0.3.0 (Zarr v2)
-    ## 5  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 6                   0.7.2 (Zarr v3)
-    ## 7  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 8                   0.3.0 (Zarr v2)
-    ## 9  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 10 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 11                  0.3.0 (Zarr v2)
-    ## 12 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 13 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 14 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-    ## 15                  0.7.2 (Zarr v3)
+    ##  [1] "MouseIntestineVisHD"        "MouseBrainVisHD"           
+    ##  [3] "MouseBrainVis"              "LungAdenocarcinomaMCMICRO" 
+    ##  [5] "MouseBrainMERFISH"          "MouseLiverMERFISH"         
+    ##  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      
+    ##  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  
+    ## [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        
+    ## [13] "Breast2fov_10x"             "Lung2fov_10x"              
+    ## [15] "SpaceMHelaniH3T3"
+
+or as below for a detailed overview and metadata on all datasets:
+
+``` r
+
+View(SD.data_list(extended = TRUE))
+```
 
 To interrogate the bucket for available (zipped) .zarr archives:
 
@@ -152,10 +160,9 @@ objects using `spatialdata-io` python package.
 SD.data_available("biocOSN_Xenium")
 ```
 
-    ## [1] "README.html"                                        
-    ## [2] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
-    ## [3] "Xenium_V1_human_Breast_2fov_outs.zip"               
-    ## [4] "Xenium_V1_human_Lung_2fov_outs.zip"
+    ## [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
+    ## [2] "Xenium_V1_human_Breast_2fov_outs.zip"               
+    ## [3] "Xenium_V1_human_Lung_2fov_outs.zip"
 
 You can use `basilisk` to convert these readouts into various
 SpatialData formats:
@@ -172,14 +179,14 @@ options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
-    ## INFO     reading /tmp/RtmpBTvSFn/file9c7a75c51c15/cell_feature_matrix.h5        
+    ## INFO     reading /tmp/Rtmprjf2Z0/file60f73d659e8a/cell_feature_matrix.h5        
     ## INFO     The SpatialData object is not self-contained (i.e. it contains some    
     ##          elements that are Dask-backed from locations outside                   
-    ##          /tmp/RtmpBTvSFn/file9c7a2d1ac24). Please see the documentation of      
+    ##          /tmp/Rtmprjf2Z0/file60f756e344bf). Please see the documentation of     
     ##          `is_self_contained()` to understand the implications of working with   
     ##          SpatialData objects that are not self-contained.                       
     ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/RtmpBTvSFn/file9c7a2d1ac24
+    ##          /tmp/Rtmprjf2Z0/file60f756e344bf
 
     ## class: SpatialData
     ## - images(1):
@@ -229,7 +236,7 @@ sd_zarr <- generate_dataset(
 sd_zarr
 ```
 
-    ## [1] "/tmp/RtmpBTvSFn/file9c7a7bda4d82.zarr"
+    ## [1] "/tmp/Rtmprjf2Z0/file60f7103ec7db.zarr"
 
 Now we can read the SpatialData object with SpatialData.
 
@@ -286,7 +293,7 @@ image(sd, 1)
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] paws_0.10.0             SpatialData.data_0.99.7 spatialdataR_0.99.44   
+    ## [1] paws.storage_0.10.0     SpatialData.data_0.99.8 spatialdataR_0.99.44   
     ## [4] BiocStyle_2.41.0       
     ## 
     ## loaded via a namespace (and not attached):
@@ -296,47 +303,46 @@ image(sd, 1)
     ##  [7] SingleCellExperiment_1.35.2 BiocFileCache_3.3.0        
     ##  [9] duckdb_1.5.5                digest_0.6.39              
     ## [11] lifecycle_1.0.5             sf_1.1-2                   
-    ## [13] RSQLite_3.53.3              paws.storage_0.10.0        
-    ## [15] magrittr_2.0.5              compiler_4.6.1             
-    ## [17] rlang_1.3.0                 sass_0.4.10                
-    ## [19] tools_4.6.1                 yaml_2.3.12                
-    ## [21] knitr_1.51                  S4Arrays_1.13.0            
-    ## [23] htmlwidgets_1.6.4           bit_4.6.0                  
-    ## [25] classInt_0.4-11             curl_7.1.0                 
-    ## [27] reticulate_1.46.0           DelayedArray_0.39.6        
-    ## [29] xml2_1.6.0                  abind_1.4-8                
-    ## [31] KernSmooth_2.23-26          withr_3.0.3                
-    ## [33] purrr_1.2.2                 BiocGenerics_0.59.12       
-    ## [35] desc_1.4.3                  R.oo_1.27.1                
-    ## [37] grid_4.6.1                  stats4_4.6.1               
-    ## [39] e1071_1.7-17                SummarizedExperiment_1.43.0
-    ## [41] cli_3.6.6                   rmarkdown_2.31             
-    ## [43] crayon_1.5.3                ragg_1.5.2                 
-    ## [45] generics_0.1.4              otel_0.2.0                 
-    ## [47] DBI_1.3.0                   cachem_1.1.0               
-    ## [49] proxy_0.4-29                parallel_4.6.1             
-    ## [51] BiocManager_1.30.27         XVector_0.53.0             
-    ## [53] matrixStats_1.5.0           basilisk_1.25.0            
-    ## [55] vctrs_0.7.3                 Matrix_1.7-5               
-    ## [57] jsonlite_2.0.0              dir.expiry_1.21.0          
-    ## [59] bookdown_0.47               IRanges_2.47.2             
-    ## [61] S4Vectors_0.51.7            bit64_4.8.4                
-    ## [63] RBGL_1.89.0                 systemfonts_1.3.2          
-    ## [65] jquerylib_0.1.4             units_1.0-1                
-    ## [67] glue_1.8.1                  pkgdown_2.2.1              
-    ## [69] ZarrArray_1.0.1             Rarr_2.0.1                 
-    ## [71] GenomicRanges_1.64.0        tibble_3.3.1               
-    ## [73] pillar_1.11.1               htmltools_0.5.9            
-    ## [75] Seqinfo_1.3.0               graph_1.91.0               
-    ## [77] dbplyr_2.6.0                R6_2.6.1                   
-    ## [79] httr2_1.3.0                 wk_0.9.5                   
-    ## [81] textshaping_1.0.5           evaluate_1.0.5             
-    ## [83] lattice_0.22-9              Biobase_2.73.2             
-    ## [85] R.methodsS3_1.8.2           png_0.1-9                  
-    ## [87] duckspatial_1.2.1           memoise_2.0.1              
-    ## [89] paws.common_0.8.10          bslib_0.12.0               
-    ## [91] class_7.3-23                uuid_1.2-2                 
-    ## [93] Rcpp_1.1.2                  SparseArray_1.13.2         
-    ## [95] anndataR_1.3.1              xfun_0.60                  
-    ## [97] fs_2.1.0                    MatrixGenerics_1.25.0      
-    ## [99] pkgconfig_2.0.3
+    ## [13] RSQLite_3.53.3              magrittr_2.0.5             
+    ## [15] compiler_4.6.1              rlang_1.3.0                
+    ## [17] sass_0.4.10                 tools_4.6.1                
+    ## [19] yaml_2.3.12                 knitr_1.51                 
+    ## [21] S4Arrays_1.13.0             htmlwidgets_1.6.4          
+    ## [23] bit_4.6.0                   classInt_0.4-11            
+    ## [25] curl_7.1.0                  reticulate_1.46.0          
+    ## [27] DelayedArray_0.39.6         xml2_1.6.0                 
+    ## [29] abind_1.4-8                 KernSmooth_2.23-26         
+    ## [31] withr_3.0.3                 purrr_1.2.2                
+    ## [33] BiocGenerics_0.59.12        desc_1.4.3                 
+    ## [35] R.oo_1.27.1                 grid_4.6.1                 
+    ## [37] stats4_4.6.1                e1071_1.7-17               
+    ## [39] SummarizedExperiment_1.43.0 cli_3.6.6                  
+    ## [41] rmarkdown_2.31              crayon_1.5.3               
+    ## [43] ragg_1.5.2                  generics_0.1.4             
+    ## [45] otel_0.2.0                  DBI_1.3.0                  
+    ## [47] cachem_1.1.0                proxy_0.4-29               
+    ## [49] parallel_4.6.1              BiocManager_1.30.27        
+    ## [51] XVector_0.53.0              matrixStats_1.5.0          
+    ## [53] basilisk_1.25.0             vctrs_0.7.3                
+    ## [55] Matrix_1.7-5                jsonlite_2.0.0             
+    ## [57] dir.expiry_1.21.0           bookdown_0.47              
+    ## [59] IRanges_2.47.2              S4Vectors_0.51.7           
+    ## [61] bit64_4.8.4                 RBGL_1.89.0                
+    ## [63] systemfonts_1.3.2           jquerylib_0.1.4            
+    ## [65] units_1.0-1                 glue_1.8.1                 
+    ## [67] pkgdown_2.2.1               ZarrArray_1.0.1            
+    ## [69] Rarr_2.0.1                  GenomicRanges_1.64.0       
+    ## [71] tibble_3.3.1                pillar_1.11.1              
+    ## [73] htmltools_0.5.9             Seqinfo_1.3.0              
+    ## [75] graph_1.91.0                dbplyr_2.6.0               
+    ## [77] R6_2.6.1                    httr2_1.3.0                
+    ## [79] wk_0.9.5                    textshaping_1.0.5          
+    ## [81] evaluate_1.0.5              lattice_0.22-9             
+    ## [83] Biobase_2.73.2              R.methodsS3_1.8.2          
+    ## [85] png_0.1-9                   duckspatial_1.2.1          
+    ## [87] memoise_2.0.1               paws.common_0.8.10         
+    ## [89] bslib_0.12.0                class_7.3-23               
+    ## [91] uuid_1.2-2                  Rcpp_1.1.2                 
+    ## [93] SparseArray_1.13.2          anndataR_1.3.1             
+    ## [95] xfun_0.60                   fs_2.1.0                   
+    ## [97] MatrixGenerics_1.25.0       pkgconfig_2.0.3

@@ -17,107 +17,91 @@ SD.data_list(extended = FALSE)
 
 ## Value
 
-data.frame
+a vector of dataset names or a data.frame
 
 ## Examples
 
 ``` r
 SD.data_list()
-#>                      Function             Technology       S3_buckets
-#> 1         MouseIntestineVisHD              Visium HD biocOSN, sandbox
-#> 2             MouseBrainVisHD              Visium HD          sandbox
-#> 3               MouseBrainVis                 Visium          sandbox
-#> 4   LungAdenocarcinomaMCMICRO CyCIF (MCMICRO output)          biocOSN
-#> 5           MouseBrainMERFISH                MERFISH biocOSN, sandbox
-#> 6           MouseLiverMERFISH                MERFISH          sandbox
-#> 7  ColorectalCarcinomaMIBITOF               MIBI-TOF biocOSN, sandbox
-#> 8        MulticancerSteinbock IMC (Steinbock output)          biocOSN
-#> 9     JanesickBreastVisiumEnh                 Visium biocOSN, sandbox
-#> 10   JanesickBreastXeniumRep1                 Xenium biocOSN, sandbox
-#> 11   JanesickBreastXeniumRep2                 Xenium          biocOSN
-#> 12         HumanLungMulti_10x                 Xenium biocOSN, sandbox
-#> 13             Breast2fov_10x       Xenium (trimmed)   biocOSN_Xenium
-#> 14               Lung2fov_10x       Xenium (trimmed)   biocOSN_Xenium
-#> 15           SpaceMHelaniH3T3                 SpaceM          sandbox
-#>                              Format
-#> 1  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 2                   0.3.0 (Zarr v2)
-#> 3                   0.7.2 (Zarr v3)
-#> 4                   0.3.0 (Zarr v2)
-#> 5  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 6                   0.7.2 (Zarr v3)
-#> 7  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 8                   0.3.0 (Zarr v2)
-#> 9  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 10 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 11                  0.3.0 (Zarr v2)
-#> 12 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 13 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 14 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)
-#> 15                  0.7.2 (Zarr v3)
+#>  [1] "MouseIntestineVisHD"        "MouseBrainVisHD"           
+#>  [3] "MouseBrainVis"              "LungAdenocarcinomaMCMICRO" 
+#>  [5] "MouseBrainMERFISH"          "MouseLiverMERFISH"         
+#>  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      
+#>  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  
+#> [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        
+#> [13] "Breast2fov_10x"             "Lung2fov_10x"              
+#> [15] "SpaceMHelaniH3T3"          
 SD.data_list(extended = TRUE)
-#>                      Function             Technology
+#>                          Name             Technology
 #> 1         MouseIntestineVisHD              Visium HD
-#> 2             MouseBrainVisHD              Visium HD
-#> 3               MouseBrainVis                 Visium
-#> 4   LungAdenocarcinomaMCMICRO CyCIF (MCMICRO output)
-#> 5           MouseBrainMERFISH                MERFISH
-#> 6           MouseLiverMERFISH                MERFISH
-#> 7  ColorectalCarcinomaMIBITOF               MIBI-TOF
-#> 8        MulticancerSteinbock IMC (Steinbock output)
-#> 9     JanesickBreastVisiumEnh                 Visium
-#> 10   JanesickBreastXeniumRep1                 Xenium
-#> 11   JanesickBreastXeniumRep2                 Xenium
-#> 12         HumanLungMulti_10x                 Xenium
-#> 13             Breast2fov_10x       Xenium (trimmed)
-#> 14               Lung2fov_10x       Xenium (trimmed)
-#> 15           SpaceMHelaniH3T3                 SpaceM
-#>                                          Sample       S3_buckets
-#> 1                                Mouse intestin biocOSN, sandbox
-#> 2                                   Mouse brain          sandbox
-#> 3                                   Mouse brain          sandbox
-#> 4                     Small lung adenocarcinoma          biocOSN
-#> 5                                   Mouse brain biocOSN, sandbox
-#> 6                                  Mouse liver           sandbox
-#> 7                          Colorectal carcinoma biocOSN, sandbox
-#> 8  4 different cancers (SCCHN, BCC, NSCLC, CRC)          biocOSN
-#> 9                                 Breast Cancer biocOSN, sandbox
-#> 10                                Breast Cancer biocOSN, sandbox
-#> 11                                Breast Cancer          biocOSN
-#> 12                                  Lung Cancer biocOSN, sandbox
-#> 13                               Breast (2 FOV)   biocOSN_Xenium
-#> 14                                 Lung (2 FOV)   biocOSN_Xenium
-#> 15                       Hepa and NIH3T3 cells?          sandbox
-#>                              Format FileSize                      Pattern
-#> 1  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)     1 GB              visium_hd_3.0.0
-#> 2                   0.3.0 (Zarr v2)   174 MB              visium_hd_4.0.1
-#> 3                   0.7.2 (Zarr v3)    65 MB           visium_spatialdata
-#> 4                   0.3.0 (Zarr v2)   250 MB                   mcmicro_io
-#> 5  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)    50 MB                      merfish
-#> 6                   0.7.2 (Zarr v3)    66 MB                 mouse_liver 
-#> 7  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)    25 MB                      mibitof
-#> 8                   0.3.0 (Zarr v2)   820 MB                 steinbock_io
-#> 9  0.3.0 (Zarr v2), 0.7.2 (Zarr v3)   1.5 GB  visium_associated_xenium_io
-#> 10 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)   2.8 GB               xenium_rep1_io
-#> 11                  0.3.0 (Zarr v2)   3.7 GB               xenium_rep2_io
-#> 12 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)   5.4 GB HuLungXenmulti, xenium_2.0.0
-#> 13 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)   380 MB  Xenium_V1_human_Breast_2fov
-#> 14 0.3.0 (Zarr v2), 0.7.2 (Zarr v3)   280 MB    Xenium_V1_human_Lung_2fov
-#> 15                  0.7.2 (Zarr v3)    49 MB            spacem_helanih3t3
-#>              License
-#> 1                CCA
-#> 2     CC BY 4.0 DEED
-#> 3     CC BY 4.0 DEED
-#> 4  CC BY-NC 4.0 DEED
-#> 5       CC0 1.0 DEED
-#> 6     CC BY 4.0 DEED
-#> 7     CC BY 4.0 DEED
-#> 8     CC BY 4.0 DEED
-#> 9                CCA
-#> 10               CCA
-#> 11               CCA
-#> 12    CC BY 4.0 DEED
-#> 13               CCA
-#> 14               CCA
-#> 15    CC BY 4.0 DEED
+#> 2         MouseIntestineVisHD              Visium HD
+#> 3             MouseBrainVisHD              Visium HD
+#> 4               MouseBrainVis                 Visium
+#> 5   LungAdenocarcinomaMCMICRO CyCIF (MCMICRO output)
+#> 6           MouseBrainMERFISH                MERFISH
+#> 7           MouseBrainMERFISH                MERFISH
+#> 8           MouseLiverMERFISH                MERFISH
+#> 9  ColorectalCarcinomaMIBITOF               MIBI-TOF
+#> 10 ColorectalCarcinomaMIBITOF               MIBI-TOF
+#> 11       MulticancerSteinbock IMC (Steinbock output)
+#> 12    JanesickBreastVisiumEnh                 Visium
+#> 13    JanesickBreastVisiumEnh                 Visium
+#> 14   JanesickBreastXeniumRep1                 Xenium
+#> 15   JanesickBreastXeniumRep1                 Xenium
+#> 16   JanesickBreastXeniumRep2                 Xenium
+#> 17         HumanLungMulti_10x                 Xenium
+#> 18         HumanLungMulti_10x                 Xenium
+#> 19             Breast2fov_10x       Xenium (trimmed)
+#> 20             Breast2fov_10x       Xenium (trimmed)
+#> 21               Lung2fov_10x       Xenium (trimmed)
+#> 22               Lung2fov_10x       Xenium (trimmed)
+#> 23           SpaceMHelaniH3T3                 SpaceM
+#>                                          Sample     S3_buckets Zarr_Format
+#> 1                               Mouse intestine        biocOSN          v2
+#> 2                               Mouse intestine        sandbox          v3
+#> 3                                   Mouse brain        sandbox          v3
+#> 4                                   Mouse brain        sandbox          v3
+#> 5               Human small lung adenocarcinoma        biocOSN          v2
+#> 6                                   Mouse brain        biocOSN          v2
+#> 7                                   Mouse brain        sandbox          v3
+#> 8                                  Mouse liver         sandbox          v3
+#> 9                    Human colorectal carcinoma        biocOSN          v2
+#> 10                   Human colorectal carcinoma        sandbox          v3
+#> 11 4 different cancers (SCCHN, BCC, NSCLC, CRC)        biocOSN          v2
+#> 12                          Human breast cancer        biocOSN          v2
+#> 13                          Human breast cancer        sandbox          v3
+#> 14                          Human breast cancer        biocOSN          v2
+#> 15                          Human breast cancer        sandbox          v3
+#> 16                          Human breast cancer        biocOSN          v2
+#> 17                            Human lung Cancer        biocOSN          v2
+#> 18                            Human lung Cancer        sandbox          v3
+#> 19                              Breast (2 FOVs) biocOSN_Xenium          v2
+#> 20                              Breast (2 FOVs) biocOSN_Xenium          v3
+#> 21                                Lung (2 FOVs) biocOSN_Xenium          v2
+#> 22                                Lung (2 FOVs) biocOSN_Xenium          v3
+#> 23                        Hepa and NIH3T3 cells        sandbox          v3
+#>    FileSize           License                     Pattern
+#> 1      1 GB               CCA             visium_hd_3.0.0
+#> 2      1 GB               CCA             visium_hd_3.0.0
+#> 3    174 MB    CC BY 4.0 DEED             visium_hd_4.0.1
+#> 4     65 MB    CC BY 4.0 DEED          visium_spatialdata
+#> 5    250 MB CC BY-NC 4.0 DEED                  mcmicro_io
+#> 6     50 MB      CC0 1.0 DEED                     merfish
+#> 7     50 MB      CC0 1.0 DEED                     merfish
+#> 8     66 MB    CC BY 4.0 DEED                 mouse_liver
+#> 9     25 MB    CC BY 4.0 DEED                     mibitof
+#> 10    25 MB    CC BY 4.0 DEED                     mibitof
+#> 11   820 MB    CC BY 4.0 DEED                steinbock_io
+#> 12   1.5 GB               CCA visium_associated_xenium_io
+#> 13   1.5 GB               CCA visium_associated_xenium_io
+#> 14   2.8 GB               CCA              xenium_rep1_io
+#> 15   2.8 GB               CCA              xenium_rep1_io
+#> 16   3.7 GB               CCA              xenium_rep2_io
+#> 17   5.4 GB    CC BY 4.0 DEED              HuLungXenmulti
+#> 18   5.4 GB    CC BY 4.0 DEED                xenium_2.0.0
+#> 19   380 MB               CCA Xenium_V1_human_Breast_2fov
+#> 20   380 MB               CCA Xenium_V1_human_Breast_2fov
+#> 21   280 MB               CCA   Xenium_V1_human_Lung_2fov
+#> 22   280 MB               CCA   Xenium_V1_human_Lung_2fov
+#> 23    49 MB    CC BY 4.0 DEED           spacem_helanih3t3
 ```

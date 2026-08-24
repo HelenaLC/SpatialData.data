@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">SpatialData.data</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,8 +57,12 @@
 <p><code>Spatialdata.data</code> package provides utilities for accessing, reading and generating SpatialData datasets. Data from a variety of spatial omics technologies has been made available as <code>SpatialData</code> .zarr stores</p>
 <p>These <em>scverse</em> SpatialData examples are available through</p>
 <ol style="list-style-type: decimal">
-<li>Bioc’s NSF OSN bucket and</li>
-<li>scverse’s spatialdata-sandbox (<a href="https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html" class="external-link uri">https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html</a>)</li>
+<li>
+<strong>biocOSN:</strong> Bioc’s NSF OSN bucket,</li>
+<li>
+<strong>biocOSN_Xenium:</strong> Bioc’s NSF OSN bucket for raw data outputs from some Xenium datasets and</li>
+<li>
+<strong>sandbox:</strong> scverse’s spatialdata-sandbox (<a href="https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html" class="external-link uri">https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html</a>)</li>
 </ol>
 <p><code>SpatialData.data</code> uses <code>basilisk</code> to interface and maintain multiple versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for reading and writing to .zarr stores.</p>
 <p><code>basilisk</code> environments (only 0.5.0 and 0.7.2) are also accompanied by the <code>dummy-spatialdata</code> package that generates toy spatialdata examples whose elements are customized by the user.</p>
@@ -79,12 +83,11 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     filter</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HelenaLC/SpatialData.data" class="external-link">SpatialData.data</a></span><span class="op">)</span></span></code></pre></div>
-<p>To <em>interrogate</em> our S3 bucket you will need <a href="https://cran.r-project.org/web/packages/paws/index.html" class="external-link">paws</a> installed; it is not necessary for retrievals.</p>
+<p>To <em>interrogate</em> our S3 bucket you will need <a href="https://cran.r-project.org/web/packages/paws.storage/index.html" class="external-link">paws.storage</a> installed.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"paws"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"paws"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required namespace: paws</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paws-r/paws" class="external-link">paws</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"paws.storage"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"paws.storage"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paws-r/paws" class="external-link">paws.storage</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>AWS_REGION <span class="op">=</span> <span class="st">"us-east-1"</span><span class="op">)</span> </span></code></pre></div>
 <div class="section level2">
 <h2 id="load-spatialdata-zarr-from-archives">Load SpatialData (.zarr) from Archives<a class="anchor" aria-label="anchor" href="#load-spatialdata-zarr-from-archives"></a>
@@ -92,6 +95,7 @@
 <p>Any spatialdata dataset can be retrieved (once) into some location, and read into R.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; checking Bioconductor OSN bucket...</span></span>
 <span><span class="co">#&gt; class: SpatialData</span></span>
 <span><span class="co">#&gt; - images(3):</span></span>
 <span><span class="co">#&gt;   - point16_image (3,1024,1024)</span></span>
@@ -117,27 +121,27 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/SD.data_available.html">SD.data_available</a></span><span class="op">(</span><span class="st">"biocOSN_Xenium"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; checking Bioconductor OSN bucket (Xenium readouts) ...</span></span>
-<span><span class="co">#&gt; [1] "README.html"                                        </span></span>
-<span><span class="co">#&gt; [2] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"</span></span>
-<span><span class="co">#&gt; [3] "Xenium_V1_human_Breast_2fov_outs.zip"               </span></span>
-<span><span class="co">#&gt; [4] "Xenium_V1_human_Lung_2fov_outs.zip"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"</span></span>
+<span><span class="co">#&gt; [2] "Xenium_V1_human_Breast_2fov_outs.zip"               </span></span>
+<span><span class="co">#&gt; [3] "Xenium_V1_human_Lung_2fov_outs.zip"</span></span></code></pre></div>
 <p>We use <code>options(sd_version)</code> to set the SpatialData version.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>sd_version <span class="op">=</span> <span class="st">"0.3.0"</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"Breast2fov_10x"</span>, source <span class="op">=</span> <span class="st">"biocOSN_Xenium"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; checking Bioconductor OSN bucket (Xenium readouts) ...</span></span>
 <span><span class="co">#&gt; Using spatialdata version 0.3.0</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">INFO    </span> reading                                                                </span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/file3de54f0</span></span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">39621/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>                                           </span></span>
+<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/file7f98173</span></span></span>
+<span><span class="co">#&gt;          <span style="color: #BB00BB;">02669/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>                                           </span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">INFO    </span> The SpatialData object is not self-contained <span style="font-weight: bold;">(</span>i.e. it contains some    </span></span>
 <span><span class="co">#&gt;          elements that are Dask-backed from locations outside                   </span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/</span><span style="color: #FF55FF;">file3de5747</span></span></span>
-<span><span class="co">#&gt;          <span style="color: #FF55FF;">5790d</span><span style="font-weight: bold;">)</span>. Please see the documentation of `<span style="color: #BB00BB; font-weight: bold;">is_self_contained</span><span style="font-weight: bold;">()</span>` to       </span></span>
+<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/</span><span style="color: #FF55FF;">file7f985a2</span></span></span>
+<span><span class="co">#&gt;          <span style="color: #FF55FF;">9c363</span><span style="font-weight: bold;">)</span>. Please see the documentation of `<span style="color: #BB00BB; font-weight: bold;">is_self_contained</span><span style="font-weight: bold;">()</span>` to       </span></span>
 <span><span class="co">#&gt;          understand the implications of working with SpatialData objects that   </span></span>
 <span><span class="co">#&gt;          are not self-contained.                                                </span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/</span><span style="color: #FF55FF;">file3de5747</span></span></span>
-<span><span class="co">#&gt;          <span style="color: #FF55FF;">5790d</span></span></span>
+<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/</span><span style="color: #FF55FF;">file7f985a2</span></span></span>
+<span><span class="co">#&gt;          <span style="color: #FF55FF;">9c363</span></span></span>
 <span><span class="co">#&gt; duckdb is storing downloaded extensions and secrets under ~/.duckdb:</span></span>
 <span><span class="co">#&gt; ℹ /Users/amanuky/.duckdb</span></span>
 <span><span class="co">#&gt; This persists across sessions and is shared with the DuckDB CLI and other clients.</span></span>
@@ -188,7 +192,7 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using spatialdata version 0.5.0</span></span>
-<span><span class="co">#&gt; [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpoVFq2y/file3de565329005.zarr"</span></span>
+<span><span class="co">#&gt; [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//Rtmpc4KT2x/file7f98c92d6ec.zarr"</span></span>
 <span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu">spatialdataR</span><span class="fu">::</span><span class="fu"><a href="https://helenalc.github.io/spatialdataR/reference/readSpatialData.html" class="external-link">readSpatialData</a></span><span class="op">(</span><span class="va">zarrfile</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

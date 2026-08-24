@@ -110,6 +110,7 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 # load using `SD.data_load`
 ld <- SD.data_load("ColorectalCarcinomaMIBITOF")
+#> checking Bioconductor OSN bucket...
 #> caching mibitof.zip
 #> 
 ld
