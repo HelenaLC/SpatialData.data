@@ -7,8 +7,8 @@
 SD.io_readers(sd_version = getOption("sd_version"), verbose = TRUE)
 }
 \arguments{
-\item{sd_version}{spatialdata version, should be set to 0.3.0, 0.5.0 or 
-0.7.2. Default: 0.7.}
+\item{sd_version}{spatialdata version, should be set to 0.5.0 or 0.8.0. 
+Default: 0.8.0.}
 
 \item{verbose}{verbose}
 }

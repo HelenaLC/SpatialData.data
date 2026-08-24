@@ -17,24 +17,20 @@ vignette: |
 knitr::opts_chunk$set(cache=FALSE, message=FALSE, warning=FALSE)
 ```
 
-`Spatialdata.data` package provides utilities for accessing, reading and
-generating SpatialData datasets. Data from a variety of spatial omics 
-technologies has been made available as `SpatialData` .zarr stores
+`r BiocStyle::Biocpkg("SpatialData.data")` package provides utilities for accessing, reading and generating SpatialData datasets. Data from a variety 
+of spatial omics technologies has been made available as `SpatialData` (zipped) .zarr stores.
 
-These *scverse* SpatialData examples are available through
+These *scverse* SpatialData examples are available through sources 
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
 2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from some Xenium datasets and
 3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
-`SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for
+`r BiocStyle::Biocpkg("SpatialData.data")` uses `basilisk` to interface and maintain multiple versions of scverse’s `spatialdata` module (0.5 and 0.8) for
 reading and writing to .zarr stores.
 
-`basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by
-the `dummy-spatialdata` package that generates toy spatialdata examples
-whose elements are customized by the user.
+The package also incorporates `dummy-spatialdata` python module that generates toy SpatialData examples whose elements are customized by the user. These examples can be generated again using `spatialdata` module versions 0.5 and 0.8
 
 ## Installation
 
@@ -67,15 +63,14 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 ## Load SpatialData (.zarr) from Archives
 
-Any spatialdata dataset can be retrieved (once) into some location, and
+Any SpatialData dataset can be retrieved (once) into some location, and
 read into R.
 
 ```{r load-data}
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
-You can also the same data from different sources, including the spatialdata's
-sandbox that are SpatialData stores saved as Zarr v3.
+You can also install the same data from different sources, including the scverse's `spatialdata` sandbox where SpatialData stores are saved as Zarr v3.
 
 ```{r load-data-sandbox}
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
@@ -93,7 +88,7 @@ or as below for a detailed overview and metadata on all datasets:
 View(SD.data_list(extended = TRUE))
 ```
 
-To interrogate the bucket for available (zipped) .zarr archives:
+You can also interrogate the sources (S3 buckets) for available (zipped) .zarr archives:
 
 ```{r avail}
 SD.data_available("biocOSN")
@@ -102,24 +97,25 @@ SD.data_available("biocOSN")
 ## Using spatialdata-io
 
 `SpatialData.data` also provides access to some raw spatial omic
-readouts. These data bundle can then be converted into SpatialData
+readouts. After installation from the source (i.e. `biocOSN_Xenium`), 
+these data bundles can then be converted into SpatialData
 objects using `spatialdata-io` python package.
 
-```{r avail2}
-SD.data_available("biocOSN_Xenium")
+```{r sd-io}
+(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
-You can use `basilisk` to convert these readouts into various SpatialData 
-formats: 
+You can use `basilisk` to convert these readouts into SpatialData zarr stores 
+using multiple `spatialdata` module versions, each associated with a different 
+Zarr format:
 
-* **0.3.0** (Zarr v2), 
 * **0.5.0** (Zarr v2) and 
-* **0.7.2** (Zarr v3)
+* **0.8.0** (Zarr v3)
 
-We use `options(sd_version)` to set the SpatialData version.
+We use `options(sd_version)` to set the `spatialdata` module version.
 
 ```{r sd-io}
-options(sd_version = "0.3.0")
+options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
