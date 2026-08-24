@@ -101,10 +101,6 @@ readouts. After installation from the source (i.e. `biocOSN_Xenium`),
 these data bundles can then be converted into SpatialData
 objects using `spatialdata-io` python package.
 
-```{r sd-io}
-(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
-```
-
 You can use `basilisk` to convert these readouts into SpatialData zarr stores 
 using multiple `spatialdata` module versions, each associated with a different 
 Zarr format:
