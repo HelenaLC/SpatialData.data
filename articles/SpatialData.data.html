@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SpatialData.data</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,11 +69,13 @@ Lucia Crowell</h4>
 
     
     
-<p><code>Spatialdata.data</code> package provides utilities for
-accessing, reading and generating SpatialData datasets. Data from a
-variety of spatial omics technologies has been made available as
-<code>SpatialData</code> .zarr stores</p>
-<p>These <em>scverse</em> SpatialData examples are available through</p>
+<p><em><a href="https://bioconductor.org/packages/3.23/SpatialData.data" class="external-link">SpatialData.data</a></em>
+package provides utilities for accessing, reading and generating
+SpatialData datasets. Data from a variety of spatial omics technologies
+has been made available as <code>SpatialData</code> (zipped) .zarr
+stores.</p>
+<p>These <em>scverse</em> SpatialData examples are available through
+sources</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>biocOSN:</strong> Bioc’s NSF OSN bucket,</li>
@@ -83,12 +85,14 @@ outputs from some Xenium datasets and</li>
 <li>
 <strong>sandbox:</strong> scverse’s spatialdata-sandbox (<a href="https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html" class="external-link uri">https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html</a>)</li>
 </ol>
-<p><code>SpatialData.data</code> uses <code>basilisk</code> to interface
-and maintain multiple versions of python’s spatialdata package (0.3.0,
-0.5.0 and 0.7.2) for reading and writing to .zarr stores.</p>
-<p><code>basilisk</code> environments (only 0.5.0 and 0.7.2) are also
-accompanied by the <code>dummy-spatialdata</code> package that generates
-toy spatialdata examples whose elements are customized by the user.</p>
+<p><em><a href="https://bioconductor.org/packages/3.23/SpatialData.data" class="external-link">SpatialData.data</a></em>
+uses <code>basilisk</code> to interface and maintain multiple versions
+of scverse’s <code>spatialdata</code> module (0.5 and 0.8) for reading
+and writing to .zarr stores.</p>
+<p>The package also incorporates <code>dummy-spatialdata</code> python
+module that generates toy SpatialData examples whose elements are
+customized by the user. These examples can be generated again using
+<code>spatialdata</code> module versions 0.5 and 0.8</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
@@ -115,7 +119,7 @@ installed.</p>
 <div class="section level3">
 <h3 id="load-spatialdata--zarr-from-archives">Load SpatialData (.zarr) from Archives<a class="anchor" aria-label="anchor" href="#load-spatialdata--zarr-from-archives"></a>
 </h3>
-<p>Any spatialdata dataset can be retrieved (once) into some location,
+<p>Any SpatialData dataset can be retrieved (once) into some location,
 and read into R.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -136,8 +140,9 @@ and read into R.</p>
 <span><span class="co">## - point16(2): point16_image point16_labels</span></span>
 <span><span class="co">## - point23(2): point23_image point23_labels</span></span>
 <span><span class="co">## - point8(2): point8_image point8_labels</span></span></code></pre>
-<p>You can also the same data from different sources, including the
-spatialdata’s sandbox that are SpatialData stores saved as Zarr v3.</p>
+<p>You can also install the same data from different sources, including
+the scverse’s <code>spatialdata</code> sandbox where SpatialData stores
+are saved as Zarr v3.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span>, source <span class="op">=</span> <span class="st">"sandbox"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: SpatialData</span></span>
@@ -171,7 +176,8 @@ spatialdata’s sandbox that are SpatialData stores saved as Zarr v3.</p>
 <p>or as below for a detailed overview and metadata on all datasets:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="../reference/SD.data_list.html">SD.data_list</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>To interrogate the bucket for available (zipped) .zarr archives:</p>
+<p>You can also interrogate the sources (S3 buckets) for available
+(zipped) .zarr archives:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/SD.data_available.html">SD.data_available</a></span><span class="op">(</span><span class="st">"biocOSN"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "HuLungXenmulti.zip"                     </span></span>
@@ -188,40 +194,35 @@ spatialdata’s sandbox that are SpatialData stores saved as Zarr v3.</p>
 <h3 id="using-spatialdata-io">Using spatialdata-io<a class="anchor" aria-label="anchor" href="#using-spatialdata-io"></a>
 </h3>
 <p><code>SpatialData.data</code> also provides access to some raw
-spatial omic readouts. These data bundle can then be converted into
-SpatialData objects using <code>spatialdata-io</code> python
-package.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/SD.data_available.html">SD.data_available</a></span><span class="op">(</span><span class="st">"biocOSN_Xenium"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"</span></span>
-<span><span class="co">## [2] "Xenium_V1_human_Breast_2fov_outs.zip"               </span></span>
-<span><span class="co">## [3] "Xenium_V1_human_Lung_2fov_outs.zip"</span></span></code></pre>
+spatial omic readouts. After installation from the source
+(i.e. <code>biocOSN_Xenium</code>), these data bundles can then be
+converted into SpatialData objects using <code>spatialdata-io</code>
+python package.</p>
 <p>You can use <code>basilisk</code> to convert these readouts into
-various SpatialData formats:</p>
+SpatialData zarr stores using multiple <code>spatialdata</code> module
+versions, each associated with a different Zarr format:</p>
 <ul>
-<li>
-<strong>0.3.0</strong> (Zarr v2),</li>
 <li>
 <strong>0.5.0</strong> (Zarr v2) and</li>
 <li>
-<strong>0.7.2</strong> (Zarr v3)</li>
+<strong>0.8.0</strong> (Zarr v3)</li>
 </ul>
-<p>We use <code>options(sd_version)</code> to set the SpatialData
-version.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>sd_version <span class="op">=</span> <span class="st">"0.3.0"</span><span class="op">)</span></span>
+<p>We use <code>options(sd_version)</code> to set the
+<code>spatialdata</code> module version.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>sd_version <span class="op">=</span> <span class="st">"0.5.0"</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"Breast2fov_10x"</span>, source <span class="op">=</span> <span class="st">"biocOSN_Xenium"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> reading <span style="color: #BB00BB;">/tmp/Rtmprjf2Z0/file60f73d659e8a/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>        </span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> reading <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/file601f27e34dbc/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>        </span></span>
 <span><span class="co">## <span style="color: #0000BB;">INFO    </span> The SpatialData object is not self-contained <span style="font-weight: bold;">(</span>i.e. it contains some    </span></span>
 <span><span class="co">##          elements that are Dask-backed from locations outside                   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/Rtmprjf2Z0/</span><span style="color: #FF55FF;">file60f756e344bf</span><span style="font-weight: bold;">)</span>. Please see the documentation of     </span></span>
+<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/</span><span style="color: #FF55FF;">file601f318456fd</span><span style="font-weight: bold;">)</span>. Please see the documentation of     </span></span>
 <span><span class="co">##          `<span style="color: #BB00BB; font-weight: bold;">is_self_contained</span><span style="font-weight: bold;">()</span>` to understand the implications of working with   </span></span>
 <span><span class="co">##          SpatialData objects that are not self-contained.                       </span></span>
 <span><span class="co">## <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/Rtmprjf2Z0/</span><span style="color: #FF55FF;">file60f756e344bf</span></span></span></code></pre>
+<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/</span><span style="color: #FF55FF;">file601f318456fd</span></span></span></code></pre>
 <pre><code><span><span class="co">## class: SpatialData</span></span>
 <span><span class="co">## - images(1):</span></span>
-<span><span class="co">##   - morphology_focus (5,3529,5792)</span></span>
+<span><span class="co">##   - morphology_focus (4,3529,5792)</span></span>
 <span><span class="co">## - labels(2):</span></span>
 <span><span class="co">##   - cell_labels (3529,5792)</span></span>
 <span><span class="co">##   - nucleus_labels (3529,5792)</span></span>
@@ -244,7 +245,7 @@ version.</p>
 <code>dummy-spatialdata</code> python package (<a href="https://pypi.org/project/dummy-spatialdata/" class="external-link">https://pypi.org/project/dummy-spatialdata/</a>)
 via <code>basilisk</code> to generate toy spatialdata objects in
 multiple spatialdata versions.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sd_zarr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate_dataset.html">generate_dataset</a></span><span class="op">(</span></span>
 <span>  sd_version <span class="op">=</span> <span class="st">"0.5.0"</span>,</span>
 <span>  images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -263,9 +264,16 @@ multiple spatialdata versions.</p>
 <span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2000L</span>, y<span class="op">=</span><span class="fl">2000L</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">sd_zarr</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/Rtmprjf2Z0/file60f7103ec7db.zarr"</span></span></code></pre>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> no axes information specified in the object, setting `dims` to: <span style="font-weight: bold;">(</span><span style="color: #00BB00;">'c'</span>,  </span></span>
+<span><span class="co">##          <span style="color: #00BB00;">'y'</span>, <span style="color: #00BB00;">'x'</span><span style="font-weight: bold;">)</span>                                                              </span></span>
+<span><span class="co">## <span style="color: #0000BB;">INFO    </span> no axes information specified in the object, setting `dims` to: <span style="font-weight: bold;">(</span><span style="color: #00BB00;">'c'</span>,  </span></span>
+<span><span class="co">##          <span style="color: #00BB00;">'y'</span>, <span style="color: #00BB00;">'x'</span><span style="font-weight: bold;">)</span>                                                              </span></span>
+<span><span class="co">## <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
+<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/</span><span style="color: #FF55FF;">file601f1afe3f11.zarr</span></span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sd_zarr</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "/tmp/RtmpLwVhkA/file601f1afe3f11.zarr"</span></span></code></pre>
 <p>Now we can read the SpatialData object with SpatialData.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://helenalc.github.io/spatialdataR/reference/readSpatialData.html" class="external-link">readSpatialData</a></span><span class="op">(</span><span class="va">sd_zarr</span><span class="op">)</span></span>
@@ -313,7 +321,7 @@ multiple spatialdata versions.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] paws.storage_0.10.0     SpatialData.data_0.99.8 spatialdataR_0.99.44   </span></span>
+<span><span class="co">## [1] paws.storage_0.10.0     SpatialData.data_0.99.9 spatialdataR_0.99.44   </span></span>
 <span><span class="co">## [4] BiocStyle_2.41.0       </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>

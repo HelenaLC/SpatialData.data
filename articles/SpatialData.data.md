@@ -1,10 +1,11 @@
 # \`SpatialData.data\`
 
-`Spatialdata.data` package provides utilities for accessing, reading and
-generating SpatialData datasets. Data from a variety of spatial omics
-technologies has been made available as `SpatialData` .zarr stores
+*[SpatialData.data](https://bioconductor.org/packages/3.23/SpatialData.data)*
+package provides utilities for accessing, reading and generating
+SpatialData datasets. Data from a variety of spatial omics technologies
+has been made available as `SpatialData` (zipped) .zarr stores.
 
-These *scverse* SpatialData examples are available through
+These *scverse* SpatialData examples are available through sources
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
 2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
@@ -12,13 +13,15 @@ These *scverse* SpatialData examples are available through
 3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
-`SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for
-reading and writing to .zarr stores.
+*[SpatialData.data](https://bioconductor.org/packages/3.23/SpatialData.data)*
+uses `basilisk` to interface and maintain multiple versions of scverse’s
+`spatialdata` module (0.5 and 0.8) for reading and writing to .zarr
+stores.
 
-`basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by
-the `dummy-spatialdata` package that generates toy spatialdata examples
-whose elements are customized by the user.
+The package also incorporates `dummy-spatialdata` python module that
+generates toy SpatialData examples whose elements are customized by the
+user. These examples can be generated again using `spatialdata` module
+versions 0.5 and 0.8
 
 ### Installation
 
@@ -57,7 +60,7 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 ### Load SpatialData (.zarr) from Archives
 
-Any spatialdata dataset can be retrieved (once) into some location, and
+Any SpatialData dataset can be retrieved (once) into some location, and
 read into R.
 
 ``` r
@@ -83,8 +86,9 @@ read into R.
     ## - point23(2): point23_image point23_labels
     ## - point8(2): point8_image point8_labels
 
-You can also the same data from different sources, including the
-spatialdata’s sandbox that are SpatialData stores saved as Zarr v3.
+You can also install the same data from different sources, including the
+scverse’s `spatialdata` sandbox where SpatialData stores are saved as
+Zarr v3.
 
 ``` r
 
@@ -132,7 +136,8 @@ or as below for a detailed overview and metadata on all datasets:
 View(SD.data_list(extended = TRUE))
 ```
 
-To interrogate the bucket for available (zipped) .zarr archives:
+You can also interrogate the sources (S3 buckets) for available (zipped)
+.zarr archives:
 
 ``` r
 
@@ -152,45 +157,37 @@ SD.data_available("biocOSN")
 ### Using spatialdata-io
 
 `SpatialData.data` also provides access to some raw spatial omic
-readouts. These data bundle can then be converted into SpatialData
-objects using `spatialdata-io` python package.
+readouts. After installation from the source (i.e. `biocOSN_Xenium`),
+these data bundles can then be converted into SpatialData objects using
+`spatialdata-io` python package.
 
-``` r
+You can use `basilisk` to convert these readouts into SpatialData zarr
+stores using multiple `spatialdata` module versions, each associated
+with a different Zarr format:
 
-SD.data_available("biocOSN_Xenium")
-```
-
-    ## [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
-    ## [2] "Xenium_V1_human_Breast_2fov_outs.zip"               
-    ## [3] "Xenium_V1_human_Lung_2fov_outs.zip"
-
-You can use `basilisk` to convert these readouts into various
-SpatialData formats:
-
-- **0.3.0** (Zarr v2),
 - **0.5.0** (Zarr v2) and
-- **0.7.2** (Zarr v3)
+- **0.8.0** (Zarr v3)
 
-We use `options(sd_version)` to set the SpatialData version.
+We use `options(sd_version)` to set the `spatialdata` module version.
 
 ``` r
 
-options(sd_version = "0.3.0")
+options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
-    ## INFO     reading /tmp/Rtmprjf2Z0/file60f73d659e8a/cell_feature_matrix.h5        
+    ## INFO     reading /tmp/RtmpLwVhkA/file601f27e34dbc/cell_feature_matrix.h5        
     ## INFO     The SpatialData object is not self-contained (i.e. it contains some    
     ##          elements that are Dask-backed from locations outside                   
-    ##          /tmp/Rtmprjf2Z0/file60f756e344bf). Please see the documentation of     
+    ##          /tmp/RtmpLwVhkA/file601f318456fd). Please see the documentation of     
     ##          `is_self_contained()` to understand the implications of working with   
     ##          SpatialData objects that are not self-contained.                       
     ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/Rtmprjf2Z0/file60f756e344bf
+    ##          /tmp/RtmpLwVhkA/file601f318456fd
 
     ## class: SpatialData
     ## - images(1):
-    ##   - morphology_focus (5,3529,5792)
+    ##   - morphology_focus (4,3529,5792)
     ## - labels(2):
     ##   - cell_labels (3529,5792)
     ##   - nucleus_labels (3529,5792)
@@ -233,10 +230,21 @@ sd_zarr <- generate_dataset(
     )
   )
 )
+```
+
+    ## INFO     no axes information specified in the object, setting `dims` to: ('c',  
+    ##          'y', 'x')                                                              
+    ## INFO     no axes information specified in the object, setting `dims` to: ('c',  
+    ##          'y', 'x')                                                              
+    ## INFO     The Zarr backing store has been changed from None the new file path:   
+    ##          /tmp/RtmpLwVhkA/file601f1afe3f11.zarr
+
+``` r
+
 sd_zarr
 ```
 
-    ## [1] "/tmp/Rtmprjf2Z0/file60f7103ec7db.zarr"
+    ## [1] "/tmp/RtmpLwVhkA/file601f1afe3f11.zarr"
 
 Now we can read the SpatialData object with SpatialData.
 
@@ -293,7 +301,7 @@ image(sd, 1)
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] paws.storage_0.10.0     SpatialData.data_0.99.8 spatialdataR_0.99.44   
+    ## [1] paws.storage_0.10.0     SpatialData.data_0.99.9 spatialdataR_0.99.44   
     ## [4] BiocStyle_2.41.0       
     ## 
     ## loaded via a namespace (and not attached):

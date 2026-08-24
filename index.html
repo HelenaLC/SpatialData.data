@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">SpatialData.data</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +54,8 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h1></div>
-<p><code>Spatialdata.data</code> package provides utilities for accessing, reading and generating SpatialData datasets. Data from a variety of spatial omics technologies has been made available as <code>SpatialData</code> .zarr stores</p>
-<p>These <em>scverse</em> SpatialData examples are available through</p>
+<p><code>SpatialData.data</code> package provides utilities for accessing, reading and generating SpatialData datasets. Data from a variety of spatial omics technologies has been made available as <code>SpatialData</code> (zipped) .zarr stores.</p>
+<p>These <em>scverse</em> SpatialData examples are available through sources</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>biocOSN:</strong> Bioc’s NSF OSN bucket,</li>
@@ -64,8 +64,9 @@
 <li>
 <strong>sandbox:</strong> scverse’s spatialdata-sandbox (<a href="https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html" class="external-link uri">https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html</a>)</li>
 </ol>
-<p><code>SpatialData.data</code> uses <code>basilisk</code> to interface and maintain multiple versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for reading and writing to .zarr stores.</p>
-<p><code>basilisk</code> environments (only 0.5.0 and 0.7.2) are also accompanied by the <code>dummy-spatialdata</code> package that generates toy spatialdata examples whose elements are customized by the user.</p>
+<p><code>SpatialData.data</code> uses <code>basilisk</code> to interface and maintain multiple versions of scverse’s <code>spatialdata</code> module (0.5 and 0.8) for reading and writing to .zarr stores.</p>
+<p>The package also incorporates <code>dummy-spatialdata</code> python module that generates toy SpatialData examples whose elements are customized by the user. These examples can be generated again using <code>spatialdata</code> module versions 0.5 and 0.8.</p>
+<p>Please visit the <strong>vignette</strong> for more information.</p>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -113,87 +114,17 @@
 <span><span class="co">#&gt; - point16(2): point16_image point16_labels</span></span>
 <span><span class="co">#&gt; - point23(2): point23_image point23_labels</span></span>
 <span><span class="co">#&gt; - point8(2): point8_image point8_labels</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="using-spatialdata-io">Using spatialdata-io<a class="anchor" aria-label="anchor" href="#using-spatialdata-io"></a>
-</h2>
-<p><code>SpatialData.data</code> also provides access to some raw spatial omic readouts. These data bundle can then be converted into SpatialData objects using <code>spatialdata-io</code> python package.</p>
+<p>You can view a list of available datasets using:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/SD.data_available.html">SD.data_available</a></span><span class="op">(</span><span class="st">"biocOSN_Xenium"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; checking Bioconductor OSN bucket (Xenium readouts) ...</span></span>
-<span><span class="co">#&gt; [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"</span></span>
-<span><span class="co">#&gt; [2] "Xenium_V1_human_Breast_2fov_outs.zip"               </span></span>
-<span><span class="co">#&gt; [3] "Xenium_V1_human_Lung_2fov_outs.zip"</span></span></code></pre></div>
-<p>We use <code>options(sd_version)</code> to set the SpatialData version.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>sd_version <span class="op">=</span> <span class="st">"0.3.0"</span><span class="op">)</span></span>
-<span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"Breast2fov_10x"</span>, source <span class="op">=</span> <span class="st">"biocOSN_Xenium"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; checking Bioconductor OSN bucket (Xenium readouts) ...</span></span>
-<span><span class="co">#&gt; Using spatialdata version 0.3.0</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">INFO    </span> reading                                                                </span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/file7f98173</span></span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">02669/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>                                           </span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">INFO    </span> The SpatialData object is not self-contained <span style="font-weight: bold;">(</span>i.e. it contains some    </span></span>
-<span><span class="co">#&gt;          elements that are Dask-backed from locations outside                   </span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/</span><span style="color: #FF55FF;">file7f985a2</span></span></span>
-<span><span class="co">#&gt;          <span style="color: #FF55FF;">9c363</span><span style="font-weight: bold;">)</span>. Please see the documentation of `<span style="color: #BB00BB; font-weight: bold;">is_self_contained</span><span style="font-weight: bold;">()</span>` to       </span></span>
-<span><span class="co">#&gt;          understand the implications of working with SpatialData objects that   </span></span>
-<span><span class="co">#&gt;          are not self-contained.                                                </span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">#&gt;          <span style="color: #BB00BB;">/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/</span><span style="color: #FF55FF;">file7f985a2</span></span></span>
-<span><span class="co">#&gt;          <span style="color: #FF55FF;">9c363</span></span></span>
-<span><span class="co">#&gt; duckdb is storing downloaded extensions and secrets under ~/.duckdb:</span></span>
-<span><span class="co">#&gt; ℹ /Users/amanuky/.duckdb</span></span>
-<span><span class="co">#&gt; This persists across sessions and is shared with the DuckDB CLI and other clients.</span></span>
-<span><span class="co">#&gt; ℹ Run duckdb(shared_home = FALSE) to use a temporary directory instead.</span></span>
-<span><span class="co">#&gt; ℹ See ?duckdb_storage for details and alternatives.</span></span>
-<span><span class="co">#&gt; class: SpatialData</span></span>
-<span><span class="co">#&gt; - images(1):</span></span>
-<span><span class="co">#&gt;   - morphology_focus (5,3529,5792)</span></span>
-<span><span class="co">#&gt; - labels(2):</span></span>
-<span><span class="co">#&gt;   - cell_labels (3529,5792)</span></span>
-<span><span class="co">#&gt;   - nucleus_labels (3529,5792)</span></span>
-<span><span class="co">#&gt; - points(1):</span></span>
-<span><span class="co">#&gt;   - transcripts (1113950)</span></span>
-<span><span class="co">#&gt; - shapes(3):</span></span>
-<span><span class="co">#&gt;   - cell_boundaries (7275,circle)</span></span>
-<span><span class="co">#&gt;   - cell_circles (0,circle)</span></span>
-<span><span class="co">#&gt;   - nucleus_boundaries (7020,circle)</span></span>
-<span><span class="co">#&gt; - tables(1):</span></span>
-<span><span class="co">#&gt;   - table (280,7275) [cell_circles]</span></span>
-<span><span class="co">#&gt; coordinate systems(1):</span></span>
-<span><span class="co">#&gt; - global(7): morphology_focus cell_labels ... nucleus_boundaries</span></span>
-<span><span class="co">#&gt;   transcripts</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="generating-dummy-spatialdata-objects">Generating dummy SpatialData objects<a class="anchor" aria-label="anchor" href="#generating-dummy-spatialdata-objects"></a>
-</h2>
-<p><code>SpatialData.data</code> package incorporates the <code>dummy-spatialdata</code> python package (<a href="https://pypi.org/project/dummy-spatialdata/" class="external-link uri">https://pypi.org/project/dummy-spatialdata/</a>) via <code>basilisk</code> to generate toy spatialdata objects in multiple spatialdata versions.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">zarrfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".zarr"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/generate_dataset.html">generate_dataset</a></span><span class="op">(</span></span>
-<span>  file <span class="op">=</span> <span class="va">zarrfile</span>, </span>
-<span>  sd_version <span class="op">=</span> <span class="st">"0.5.0"</span>,</span>
-<span>  images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"rgb"</span>, scale_factors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2L</span>,<span class="fl">2L</span>,<span class="fl">2L</span><span class="op">)</span>, coordinate_system<span class="op">=</span><span class="st">"global"</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"grayscale"</span>, n_layers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, coordinate_system<span class="op">=</span><span class="st">"global"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  shapes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">12L</span>, type<span class="op">=</span><span class="st">"polygon"</span>, coordinate_system<span class="op">=</span><span class="st">"global"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">12L</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  coordinate_systems <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    global <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>      transformations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"affine"</span><span class="op">)</span>, </span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2000L</span>, y<span class="op">=</span><span class="fl">2000L</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using spatialdata version 0.5.0</span></span>
-<span><span class="co">#&gt; [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//Rtmpc4KT2x/file7f98c92d6ec.zarr"</span></span>
-<span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu">spatialdataR</span><span class="fu">::</span><span class="fu"><a href="https://helenalc.github.io/spatialdataR/reference/readSpatialData.html" class="external-link">readSpatialData</a></span><span class="op">(</span><span class="va">zarrfile</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/SD.data_list.html">SD.data_list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "MouseIntestineVisHD"        "MouseBrainVisHD"           </span></span>
+<span><span class="co">#&gt;  [3] "MouseBrainVis"              "LungAdenocarcinomaMCMICRO" </span></span>
+<span><span class="co">#&gt;  [5] "MouseBrainMERFISH"          "MouseLiverMERFISH"         </span></span>
+<span><span class="co">#&gt;  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      </span></span>
+<span><span class="co">#&gt;  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  </span></span>
+<span><span class="co">#&gt; [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        </span></span>
+<span><span class="co">#&gt; [13] "Breast2fov_10x"             "Lung2fov_10x"              </span></span>
+<span><span class="co">#&gt; [15] "SpaceMHelaniH3T3"</span></span></code></pre></div>
 </div>
 </div>
 

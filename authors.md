@@ -13,12 +13,12 @@ Source:
 [`DESCRIPTION`](https://github.com/HelenaLC/SpatialData.data/blob/main/DESCRIPTION)
 
 Carey V, Crowell H (2026). *SpatialData.data: SpatialData datasets*. R
-package version 0.99.8, <https://github.com/HelenaLC/SpatialData.data>.
+package version 0.99.9, <https://github.com/HelenaLC/SpatialData.data>.
 
     @Manual{,
       title = {SpatialData.data: SpatialData datasets},
       author = {Vince Carey and Helena L. Crowell},
       year = {2026},
-      note = {R package version 0.99.8},
+      note = {R package version 0.99.9},
       url = {https://github.com/HelenaLC/SpatialData.data},
     }

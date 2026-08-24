@@ -63,16 +63,8 @@ generate_dataset(
 options(sd_version = "0.5.0")
 generate_dataset()
 #> Using spatialdata version 0.5.0
-#> Using Python: /home/runner/.pyenv/versions/3.12.0/bin/python3.12
-#> Creating virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05' ... 
-#> + /home/runner/.pyenv/versions/3.12.0/bin/python3.12 -m venv /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05
-#> Done!
-#> Installing packages: pip, wheel, setuptools
-#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05/bin/python -m pip install --upgrade pip wheel setuptools
-#> Installing packages: 'spatialdata==0.5.0', 'spatialdata_io==0.6.0', 'dummy-spatialdata==0.1.7', 'setuptools==75.8.0'
-#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05/bin/python -m pip install --upgrade --no-user 'spatialdata==0.5.0' 'spatialdata_io==0.6.0' 'dummy-spatialdata==0.1.7' 'setuptools==75.8.0'
-#> Virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05' successfully created.
-#> [1] "/tmp/RtmpROhD7D/file1de4798d9ddd.zarr"
+#> SpatialData object written to '/tmp/RtmpZKIm20/file1e3b197a2171.zarr'
+#> [1] "/tmp/RtmpZKIm20/file1e3b197a2171.zarr"
 
 # write spatialdata in 0.5.0 version
 zarrfile <- tempfile(fileext = ".zarr")
@@ -84,11 +76,12 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> [1] "/tmp/RtmpROhD7D/file1de4670c4999.zarr"
+#> SpatialData object written to '/tmp/RtmpZKIm20/file1e3b4c79de5b.zarr'
+#> [1] "/tmp/RtmpZKIm20/file1e3b4c79de5b.zarr"
 
-# write spatialdata in 0.7.2 version
+# write spatialdata in 0.8.0 version
 generate_dataset(
-  sd_version = "0.7.2",
+  sd_version = "0.8.0",
   images = list(
     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
     list(type = "grayscale", coordinate_system="global")
@@ -106,15 +99,15 @@ generate_dataset(
     )
   )
 )
-#> Using spatialdata version 0.7.2
+#> Using spatialdata version 0.8.0
 #> Using Python: /home/runner/.pyenv/versions/3.12.0/bin/python3.12
-#> Creating virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env' ... 
-#> + /home/runner/.pyenv/versions/3.12.0/bin/python3.12 -m venv /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env
+#> Creating virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.9/sd_env' ... 
+#> + /home/runner/.pyenv/versions/3.12.0/bin/python3.12 -m venv /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.9/sd_env
 #> Done!
 #> Installing packages: pip, wheel, setuptools
-#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env/bin/python -m pip install --upgrade pip wheel setuptools
-#> Installing packages: 'zarr==3.1.5', 'ome_zarr==0.13.0', 'spatialdata==0.7.2', 'spatialdata_io==0.6.0', 'dummy-spatialdata==0.1.7', 'setuptools==75.8.0'
-#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env/bin/python -m pip install --upgrade --no-user 'zarr==3.1.5' 'ome_zarr==0.13.0' 'spatialdata==0.7.2' 'spatialdata_io==0.6.0' 'dummy-spatialdata==0.1.7' 'setuptools==75.8.0'
-#> Virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env' successfully created.
-#> [1] "/tmp/RtmpROhD7D/file1de450a7e43c.zarr"
+#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.9/sd_env/bin/python -m pip install --upgrade pip wheel setuptools
+#> Installing packages: 'zarr==3.1.5', 'spatialdata==0.8.0', 'spatialdata_io==0.7.1', 'dummy-spatialdata==0.1.10', 'setuptools==75.8.0'
+#> + /home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.9/sd_env/bin/python -m pip install --upgrade --no-user 'zarr==3.1.5' 'spatialdata==0.8.0' 'spatialdata_io==0.7.1' 'dummy-spatialdata==0.1.10' 'setuptools==75.8.0'
+#> Virtual environment '/home/runner/.cache/R/basilisk/1.25.0/SpatialData.data/0.99.9/sd_env' successfully created.
+#> [1] "/tmp/RtmpZKIm20/file1e3bb11c4d4.zarr"
 ```

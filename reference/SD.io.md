@@ -30,7 +30,7 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 # read & write to .zarr w/ 'spatialdata-io'
 target <- tempfile()
-options(sd_version = "0.3.0")
+options(sd_version = "0.5.0")
 # turn of basilisk on GHA
 # SD.io("xenium", srcdir=td, dest=target)
 
