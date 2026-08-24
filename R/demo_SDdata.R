@@ -1,97 +1,4 @@
 ####
-# Bucket data #### 
-####
-
-#' @noRd
-.OSN_DATA <- c(
-  "mcmicro_io.zip", 
-  "merfish.zarr.zip", 
-  "mibitof.zip", 
-  "steinbock_io.zip", 
-  "visium_associated_xenium_io_aligned.zip", 
-  "visium_hd_3.0.0_io.zip",
-  "xenium_rep1_io_aligned.zip", 
-  "xenium_rep2_io_aligned.zip",
-  "HuLungXenmulti.zip")
-
-#' @noRd
-.OSN_Xenium_DATA <- c(
-  "Xenium_V1_human_Breast_2fov_outs.zip",
-  "Xenium_V1_human_Lung_2fov_outs.zip")
-
-#' @noRd
-.SANDBOX_DATA <- c(
-  "merfish_spatialdata_0.7.1.zip",          
-  "mibitof_spatialdata_0.7.1.zip",                   
-  "mouse_liver_spatialdata_0.7.1.zip",        
-  "spacem_helanih3t3_spatialdata_0.7.1.zip",
-  "visium_associated_xenium_io_spatialdata_0.7.1.zip",
-  "visium_hd_3.0.0_io_spatialdata_0.7.1.zip",
-  "visium_hd_4.0.1_io_spatialdata_0.7.1.zip",         
-  "visium_spatialdata_0.7.1.zip",        
-  "xenium_2.0.0_io_spatialdata_0.7.1.zip",            
-  "xenium_rep1_io_spatialdata_0.7.1.zip" 
-)
-
-.DATASETS <- list(
-  MouseIntestineVisHD        = "visium_hd_3.0.0",
-  MouseBrainVisHD            = "visium_hd_4.0.1",
-  MouseBrainVis              = "visium_spatialdata",
-  LungAdenocarcinomaMCMICRO  = "mcmicro_io",
-  MouseBrainMERFISH          = "merfish",
-  MouseLiverMERFISH          = "mouse_liver",
-  MulticancerSteinbock       = "steinbock_io",
-  ColorectalCarcinomaMIBITOF = "mibitof",
-  JanesickBreastVisiumEnh    = "visium_associated_xenium_io",
-  JanesickBreastXeniumRep1   = "xenium_rep1_io",
-  JanesickBreastXeniumRep2   = "xenium_rep2_io",
-  Breast2fov_10x             = "human_Breast_2fov",
-  Lung2fov_10x               = "human_Lung_2fov",
-  HumanLungMulti_10x         = "HuLungXenmulti",
-  SpaceMHelaniH3T3           = "spacem_helanih3t3"
-)
-
-####
-# Bucket path #### 
-####
-
-.OSN_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData"
-.OSN_Xenium_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo"
-.SANDBOX_PATH <- "https://s3.embl.de/spatialdata/spatialdata-sandbox"
-
-#' bucket_path
-#' 
-#' Function for interrogating path to buckets.
-#' 
-#' @param source The name of the query bucket.
-#' \describe{
-#'  \item{biocOSN}{
-#'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
-#'  }
-#'  \item{biocOSN_Xenium}{
-#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
-#'  }
-#'  \item{sandbox}{
-#'    scverse's spatialdata-sandbox bucket at EMBL.
-#'  }
-#' }
-#' 
-#' @examples
-#' bucket_path()
-#' 
-#' @noRd
-bucket_path <- function(source = "biocOSN"){
-  switch(source, 
-         biocOSN = .OSN_PATH,
-         biocOSN_Xenium = .OSN_Xenium_PATH,
-         sandbox = .SANDBOX_PATH, 
-         {
-           stop("Unknown source/bucket! Available values are ", 
-                "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
-         })
-}
-
-####
 # Main readers #### 
 ####
 
@@ -105,7 +12,7 @@ bucket_path <- function(source = "biocOSN"){
 #'
 #' @importFrom utils read.csv
 #' 
-#' @returns data.frame
+#' @returns a vector of dataset names or a data.frame
 #' 
 #' @export
 #' 
@@ -113,9 +20,9 @@ bucket_path <- function(source = "biocOSN"){
 #' SD.data_list()
 #' SD.data_list(extended = TRUE)
 SD.data_list <- function(extended = FALSE) {
-  data_file <- system.file("extdata", "demo_spatialdata.csv", package = "SpatialData.data")
+  data_file <- system.file("extdata", "datasets.csv", package = "SpatialData.data")
   x <- utils::read.csv(data_file, sep = ";")
-  if(extended) x else x[,c("Function", "Technology", "S3_buckets", "Format")]
+  if(extended) x else unique(x$Name)
 }
 
 #' @title retrieve scverse-curated `SpatialData` .zarr archive
@@ -124,6 +31,8 @@ SD.data_list <- function(extended = FALSE) {
 #' @description
 #' This function consolidates the retrieval and caching and transformation 
 #' of scverse-curated Zarr archives and 10x-curated Xenium archives.
+#' 
+#' @importFrom stats setNames
 #' 
 #' @param id character string; dataset identifier
 #' @param target character(1), defaults to tempfile(); use a different 
@@ -221,22 +130,21 @@ SD.data_list <- function(extended = FALSE) {
 SD.data_load = function(id, 
                         target = tempfile(), 
                         source) { 
-  opts <- SD.data_list()
-  if(id %in% opts$Function) {
-    if(missing(source)){
-      source <- opts[opts$Function == id, "S3_buckets"]
-      source <- strsplit(source, split = ", ")[[1]][1]
-    }
-    .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
-  } else {
-    stop("Dataset not found!")
+  msg <- c("Please run SD.data_list(extended = TRUE) to see available ", 
+           "datasets and their S3 buckets.")
+  opts <- SD.data_list(extended = TRUE)
+  if(!id %in% opts$Name)
+    stop("Dataset '", id, "' not found! ", msg)
+  if(missing(source)){
+    source <- opts$S3_buckets[opts$Name == id][1] 
+  } else if(!source %in% opts$S3_buckets[opts$Name == id]){
+    stop("Mismatching source/bucket '", source, "' with dataset '", 
+         id, "'! ", msg)
   }
+  opts <- opts[opts$S3_buckets == source,]
+  .DATASETS <- setNames(opts$Pattern, opts$Name)
+  .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
 }
-
-####
-# Auxiliary #### 
-####
-
 
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
 #' 
@@ -261,13 +169,7 @@ SD.data_load = function(id,
 ) {
   
   # get file and urls
-  allz <- if (source == "biocOSN") {
-    .OSN_DATA
-  } else if (source == "biocOSN_Xenium") {
-    .OSN_Xenium_DATA
-  } else if (source == "sandbox") {
-    .SANDBOX_DATA
-  } 
+  allz <- SD.data_available(source = source)
   allurls <- file.path(bucket_path(source), allz)
   
   # get availables in cache
@@ -306,7 +208,7 @@ SD.data_load = function(id,
       BiocFileCache::bfcupdate(cache, chkdf[ind,]$rid, fpath=chkdf[ind,]$fpath, rtype="web")
     loc <- chkdf[ind,]$rpath
   }
-
+  
   # unzip (convert to zarr if needed using spatialdata-io)
   # and return to target
   if(source == "biocOSN_Xenium"){
@@ -327,10 +229,10 @@ SD.data_load = function(id,
 #' @noRd
 #' @importFrom spatialdataR readSpatialData
 .read_demo_SDdata <- function(
-  patt, 
-  cache=BiocFileCache::BiocFileCache(),
-  target=tempfile(), 
-  source="biocOSN"
+    patt, 
+    cache=BiocFileCache::BiocFileCache(),
+    target=tempfile(), 
+    source="biocOSN"
 ) {
   spatialdataR::readSpatialData(
     .get_demo_SDdata(
@@ -341,6 +243,50 @@ SD.data_load = function(id,
     )
   )
 }
+
+####
+# Buckets #### 
+####
+
+.OSN_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData"
+.OSN_Xenium_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo"
+.SANDBOX_PATH <- "https://s3.embl.de/spatialdata/spatialdata-sandbox"
+
+#' bucket_path
+#' 
+#' Function for interrogating path to buckets.
+#' 
+#' @param source The name of the query bucket.
+#' \describe{
+#'  \item{biocOSN}{
+#'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
+#'  }
+#'  \item{biocOSN_Xenium}{
+#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
+#'  }
+#'  \item{sandbox}{
+#'    scverse's spatialdata-sandbox bucket at EMBL.
+#'  }
+#' }
+#' 
+#' @examples
+#' bucket_path()
+#' 
+#' @noRd
+bucket_path <- function(source = "biocOSN"){
+  switch(source, 
+         biocOSN = .OSN_PATH,
+         biocOSN_Xenium = .OSN_Xenium_PATH,
+         sandbox = .SANDBOX_PATH, 
+         {
+           stop("Unknown source/bucket! Available values are ", 
+                "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
+         })
+}
+
+####
+# Auxiliary #### 
+####
 
 .pattern_not_unique <- function(patt) {
   stop("pattern '", patt ,"' does not uniquely identify a resource, please be more specific")

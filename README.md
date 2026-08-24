@@ -10,8 +10,10 @@ technologies has been made available as `SpatialData` .zarr stores
 
 These *scverse* SpatialData examples are available through
 
-1.  Bioc’s NSF OSN bucket and
-2.  scverse’s spatialdata-sandbox
+1.  **biocOSN:** Bioc’s NSF OSN bucket,
+2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
+    some Xenium datasets and
+3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
@@ -42,14 +44,13 @@ library(SpatialData.data)
 ```
 
 To *interrogate* our S3 bucket you will need
-[paws](https://cran.r-project.org/web/packages/paws/index.html)
-installed; it is not necessary for retrievals.
+[paws.storage](https://cran.r-project.org/web/packages/paws.storage/index.html)
+installed.
 
 ``` r
-if(!requireNamespace("paws"))
-  install.packages("paws")
-#> Loading required namespace: paws
-library(paws)
+if(!requireNamespace("paws.storage"))
+  install.packages("paws.storage")
+library(paws.storage)
 Sys.setenv(AWS_REGION = "us-east-1") 
 ```
 
@@ -60,6 +61,7 @@ read into R.
 
 ``` r
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
+#> checking Bioconductor OSN bucket...
 #> class: SpatialData
 #> - images(3):
 #>   - point16_image (3,1024,1024)
@@ -88,10 +90,9 @@ objects using `spatialdata-io` python package.
 ``` r
 SD.data_available("biocOSN_Xenium")
 #> checking Bioconductor OSN bucket (Xenium readouts) ...
-#> [1] "README.html"                                        
-#> [2] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
-#> [3] "Xenium_V1_human_Breast_2fov_outs.zip"               
-#> [4] "Xenium_V1_human_Lung_2fov_outs.zip"
+#> [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
+#> [2] "Xenium_V1_human_Breast_2fov_outs.zip"               
+#> [3] "Xenium_V1_human_Lung_2fov_outs.zip"
 ```
 
 We use `options(sd_version)` to set the SpatialData version.
@@ -99,19 +100,20 @@ We use `options(sd_version)` to set the SpatialData version.
 ``` r
 options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
+#> checking Bioconductor OSN bucket (Xenium readouts) ...
 #> Using spatialdata version 0.3.0
 #> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/file3de54f0[0m
-#>          [35m39621/[0m[95mcell_feature_matrix.h5[0m                                           
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/file7f98173[0m
+#>          [35m02669/[0m[95mcell_feature_matrix.h5[0m                                           
 #> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
 #>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/[0m[95mfile3de5747[0m
-#>          [95m5790d[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/[0m[95mfile7f985a2[0m
+#>          [95m9c363[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
 #>          understand the implications of working with SpatialData objects that   
 #>          are not self-contained.                                                
 #> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/[0m[95mfile3de5747[0m
-#>          [95m5790d[0m
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/[0m[95mfile7f985a2[0m
+#>          [95m9c363[0m
 #> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
 #> ℹ /Users/amanuky/.duckdb
 #> This persists across sessions and is shared with the DuckDB CLI and other clients.
@@ -165,6 +167,6 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpoVFq2y/file3de565329005.zarr"
+#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//Rtmpc4KT2x/file7f98c92d6ec.zarr"
 sd <- spatialdataR::readSpatialData(zarrfile)
 ```

@@ -11,7 +11,7 @@ SD.data_list(extended = FALSE)
 License etc.}
 }
 \value{
-data.frame
+a vector of dataset names or a data.frame
 }
 \description{
 Returns metadata of available data from Bioc OSN and scverse spatialdata-
