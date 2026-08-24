@@ -33,24 +33,6 @@
   "xenium_rep1_io_spatialdata_0.7.1.zip" 
 )
 
-.DATASETS <- list(
-  MouseIntestineVisHD        = "visium_hd_3.0.0",
-  MouseBrainVisHD            = "visium_hd_4.0.1",
-  MouseBrainVis              = "visium_spatialdata",
-  LungAdenocarcinomaMCMICRO  = "mcmicro_io",
-  MouseBrainMERFISH          = "merfish",
-  MouseLiverMERFISH          = "mouse_liver",
-  MulticancerSteinbock       = "steinbock_io",
-  ColorectalCarcinomaMIBITOF = "mibitof",
-  JanesickBreastVisiumEnh    = "visium_associated_xenium_io",
-  JanesickBreastXeniumRep1   = "xenium_rep1_io",
-  JanesickBreastXeniumRep2   = "xenium_rep2_io",
-  Breast2fov_10x             = "human_Breast_2fov",
-  Lung2fov_10x               = "human_Lung_2fov",
-  HumanLungMulti_10x         = "HuLungXenmulti",
-  SpaceMHelaniH3T3           = "spacem_helanih3t3"
-)
-
 ####
 # Bucket path #### 
 ####
@@ -113,9 +95,9 @@ bucket_path <- function(source = "biocOSN"){
 #' SD.data_list()
 #' SD.data_list(extended = TRUE)
 SD.data_list <- function(extended = FALSE) {
-  data_file <- system.file("extdata", "demo_spatialdata.csv", package = "SpatialData.data")
+  data_file <- system.file("extdata", "datasets.csv", package = "SpatialData.data")
   x <- utils::read.csv(data_file, sep = ";")
-  if(extended) x else x[,c("Function", "Technology", "S3_buckets", "Format")]
+  if(extended) x else x$Name
 }
 
 #' @title retrieve scverse-curated `SpatialData` .zarr archive
@@ -221,10 +203,11 @@ SD.data_list <- function(extended = FALSE) {
 SD.data_load = function(id, 
                         target = tempfile(), 
                         source) { 
-  opts <- SD.data_list()
-  if(id %in% opts$Function) {
+  opts <- SD.data_list(extended = TRUE)
+  .DATASETS <- setNames(opts$Pattern, opts$Name)
+  if(id %in% opts$Name) {
     if(missing(source)){
-      source <- opts[opts$Function == id, "S3_buckets"]
+      source <- opts[opts$Name == id, "S3_buckets"]
       source <- strsplit(source, split = ", ")[[1]][1]
     }
     .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
@@ -262,11 +245,14 @@ SD.data_load = function(id,
   
   # get file and urls
   allz <- if (source == "biocOSN") {
-    .OSN_DATA
+    # .OSN_DATA
+    .available_biocOSN()
   } else if (source == "biocOSN_Xenium") {
-    .OSN_Xenium_DATA
+    # .OSN_Xenium_DATA
+    .available_biocOSN_Xenium()
   } else if (source == "sandbox") {
-    .SANDBOX_DATA
+    # .SANDBOX_DATA
+    .available_sandbox()
   } 
   allurls <- file.path(bucket_path(source), allz)
   

@@ -62,8 +62,9 @@ SD.data_available <- function(source = "biocOSN"){
   basename(grepv("/", keys))
 }
 
+# TODO: for now we fix the version to 0.7.1
 #' @noRd
-.available_sandbox <- function() {
+.available_sandbox <- function(version = "0.7.1") {
   .check_paws()
   message("checking scverse spatialdata-sandbox bucket...")
   s3 <- paws::s3(
@@ -73,7 +74,8 @@ SD.data_available <- function(source = "biocOSN"){
     Bucket="spatialdata",
     Prefix="spatialdata-sandbox") 
   keys <- lapply(zz$Contents, "[[", "Key")
-  basename(grepv("/", keys))
+  keys <- basename(grepv("/", keys))
+  keys[grepl(paste0(version, ".zip$"), keys)]
 }
 
 .check_paws <- function() {
