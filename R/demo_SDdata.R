@@ -12,7 +12,7 @@
 #'
 #' @importFrom utils read.csv
 #' 
-#' @returns a list or a data.frame
+#' @returns a vector of dataset names or a data.frame
 #' 
 #' @export
 #' 
@@ -130,8 +130,8 @@ SD.data_list <- function(extended = FALSE) {
 SD.data_load = function(id, 
                         target = tempfile(), 
                         source) { 
-  msg <- c("Please run SD.data_list() to see available datasets and ", 
-           "their S3 buckets.")
+  msg <- c("Please run SD.data_list(extended = TRUE) to see available ", 
+           "datasets and their S3 buckets.")
   opts <- SD.data_list(extended = TRUE)
   if(!id %in% opts$Name)
     stop("Dataset '", id, "' not found! ", msg)

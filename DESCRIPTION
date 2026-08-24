@@ -21,7 +21,7 @@ Imports:
     BiocFileCache,
     reticulate,
     spatialdataR,
-    paws
+    paws.storage
 Suggests:
     BiocStyle,
     knitr,

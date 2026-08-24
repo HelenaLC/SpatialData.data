@@ -42,14 +42,13 @@ library(SpatialData.data)
 ```
 
 To *interrogate* our S3 bucket you will need
-[paws](https://cran.r-project.org/web/packages/paws/index.html)
-installed; it is not necessary for retrievals.
+[paws.storage](https://cran.r-project.org/web/packages/paws.storage/index.html)
+installed.
 
 ``` r
-if(!requireNamespace("paws"))
-  install.packages("paws")
-#> Loading required namespace: paws
-library(paws)
+if(!requireNamespace("paws.storage"))
+  install.packages("paws.storage")
+library(paws.storage)
 Sys.setenv(AWS_REGION = "us-east-1") 
 ```
 
@@ -60,6 +59,7 @@ read into R.
 
 ``` r
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
+#> checking Bioconductor OSN bucket...
 #> class: SpatialData
 #> - images(3):
 #>   - point16_image (3,1024,1024)
@@ -88,10 +88,9 @@ objects using `spatialdata-io` python package.
 ``` r
 SD.data_available("biocOSN_Xenium")
 #> checking Bioconductor OSN bucket (Xenium readouts) ...
-#> [1] "README.html"                                        
-#> [2] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
-#> [3] "Xenium_V1_human_Breast_2fov_outs.zip"               
-#> [4] "Xenium_V1_human_Lung_2fov_outs.zip"
+#> [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
+#> [2] "Xenium_V1_human_Breast_2fov_outs.zip"               
+#> [3] "Xenium_V1_human_Lung_2fov_outs.zip"
 ```
 
 We use `options(sd_version)` to set the SpatialData version.
@@ -99,19 +98,30 @@ We use `options(sd_version)` to set the SpatialData version.
 ``` r
 options(sd_version = "0.3.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
+#> checking Bioconductor OSN bucket (Xenium readouts) ...
 #> Using spatialdata version 0.3.0
+#> Warning: Error updating pyenv [exit code 1]
+#> Using Python: /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12
+#> Creating virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03' ...
+#> + /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12 -m venv /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03
+#> Done!
+#> Installing packages: pip, wheel, setuptools
+#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03/bin/python -m pip install --upgrade pip wheel setuptools
+#> Installing packages: 'spatialdata==0.3.0', 'datashader==0.19.0', 'spatialdata_io==0.1.7', 'setuptools==75.8.0'
+#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03/bin/python -m pip install --upgrade --no-user 'spatialdata==0.3.0' 'datashader==0.19.0' 'spatialdata_io==0.1.7' 'setuptools==75.8.0'
+#> Virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_03' successfully created.
 #> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/file3de54f0[0m
-#>          [35m39621/[0m[95mcell_feature_matrix.h5[0m                                           
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpmDUbtF/file67c23bf[0m
+#>          [35mbfb3c/[0m[95mcell_feature_matrix.h5[0m                                           
 #> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
 #>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/[0m[95mfile3de5747[0m
-#>          [95m5790d[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpmDUbtF/[0m[95mfile67c21c2[0m
+#>          [95mb3ee8[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
 #>          understand the implications of working with SpatialData objects that   
 #>          are not self-contained.                                                
 #> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpoVFq2y/[0m[95mfile3de5747[0m
-#>          [95m5790d[0m
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpmDUbtF/[0m[95mfile67c21c2[0m
+#>          [95mb3ee8[0m
 #> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
 #> ℹ /Users/amanuky/.duckdb
 #> This persists across sessions and is shared with the DuckDB CLI and other clients.
@@ -165,6 +175,16 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpoVFq2y/file3de565329005.zarr"
+#> Warning: Error updating pyenv [exit code 1]
+#> Using Python: /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12
+#> Creating virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05' ...
+#> + /Users/amanuky/.pyenv/versions/3.12.0/bin/python3.12 -m venv /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05
+#> Done!
+#> Installing packages: pip, wheel, setuptools
+#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05/bin/python -m pip install --upgrade pip wheel setuptools
+#> Installing packages: 'spatialdata==0.5.0', 'spatialdata_io==0.6.0', 'dummy-spatialdata==0.1.7', 'setuptools==75.8.0'
+#> + /Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05/bin/python -m pip install --upgrade --no-user 'spatialdata==0.5.0' 'spatialdata_io==0.6.0' 'dummy-spatialdata==0.1.7' 'setuptools==75.8.0'
+#> Virtual environment '/Users/amanuky/Library/Caches/org.R-project.R/R/basilisk/1.25.0/SpatialData.data/0.99.8/sd_env_05' successfully created.
+#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpmDUbtF/file67c23cfea265.zarr"
 sd <- spatialdataR::readSpatialData(zarrfile)
 ```

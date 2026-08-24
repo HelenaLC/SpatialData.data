@@ -51,13 +51,13 @@ library(spatialdataR)
 library(SpatialData.data)
 ```
 
-To *interrogate* our S3 bucket you will need [paws](https://cran.r-project.org/web/packages/paws/index.html) 
-installed; it is not necessary for retrievals.
+To *interrogate* our S3 bucket you will need [paws.storage](https://cran.r-project.org/web/packages/paws.storage/index.html) 
+installed. 
 
 ```{r aws}
-if(!requireNamespace("paws"))
-  install.packages("paws")
-library(paws)
+if(!requireNamespace("paws.storage"))
+  install.packages("paws.storage")
+library(paws.storage)
 Sys.setenv(AWS_REGION = "us-east-1") 
 ```
 
