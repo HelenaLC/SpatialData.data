@@ -17,10 +17,10 @@ These *scverse* SpatialData examples are available through
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for
-reading and writing to .zarr stores.
+versions of python’s spatialdata package (0.5 and 0.8) for reading and
+writing to .zarr stores.
 
-`basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by
+`basilisk` environments for versions 0.5 and 0.8 are also accompanied by
 the `dummy-spatialdata` package that generates toy spatialdata examples
 whose elements are customized by the user.
 
@@ -98,22 +98,22 @@ SD.data_available("biocOSN_Xenium")
 We use `options(sd_version)` to set the SpatialData version.
 
 ``` r
-options(sd_version = "0.3.0")
+options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 #> checking Bioconductor OSN bucket (Xenium readouts) ...
-#> Using spatialdata version 0.3.0
+#> Using spatialdata version 0.5.0
 #> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/file7f98173[0m
-#>          [35m02669/[0m[95mcell_feature_matrix.h5[0m                                           
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/file913f4c9[0m
+#>          [35mcf4c7/[0m[95mcell_feature_matrix.h5[0m                                           
 #> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
 #>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/[0m[95mfile7f985a2[0m
-#>          [95m9c363[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/[0m[95mfile913f548[0m
+#>          [95ma5c1c[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
 #>          understand the implications of working with SpatialData objects that   
 #>          are not self-contained.                                                
 #> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/Rtmpc4KT2x/[0m[95mfile7f985a2[0m
-#>          [95m9c363[0m
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/[0m[95mfile913f548[0m
+#>          [95ma5c1c[0m
 #> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
 #> ℹ /Users/amanuky/.duckdb
 #> This persists across sessions and is shared with the DuckDB CLI and other clients.
@@ -121,7 +121,7 @@ options(sd_version = "0.3.0")
 #> ℹ See ?duckdb_storage for details and alternatives.
 #> class: SpatialData
 #> - images(1):
-#>   - morphology_focus (5,3529,5792)
+#>   - morphology_focus (4,3529,5792)
 #> - labels(2):
 #>   - cell_labels (3529,5792)
 #>   - nucleus_labels (3529,5792)
@@ -167,6 +167,14 @@ generate_dataset(
   )
 )
 #> Using spatialdata version 0.5.0
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//Rtmpc4KT2x/file7f98c92d6ec.zarr"
+#> [34mINFO    [0m no axes information specified in the object, setting `dims` to: [1m([0m[32m'c'[0m,  
+#>          [32m'y'[0m, [32m'x'[0m[1m)[0m                                                              
+#> [34mINFO    [0m no axes information specified in the object, setting `dims` to: [1m([0m[32m'c'[0m,  
+#>          [32m'y'[0m, [32m'x'[0m[1m)[0m                                                              
+#> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
+#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/[0m[95mfile913f370[0m
+#>          [95mff8ca.zarr[0m
+#> SpatialData object written to '/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpTsMMJS/file913f370ff8ca.zarr'
+#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpTsMMJS/file913f370ff8ca.zarr"
 sd <- spatialdataR::readSpatialData(zarrfile)
 ```

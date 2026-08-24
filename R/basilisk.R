@@ -5,18 +5,17 @@
   envname="sd_env_05",
   packages=c("python==3.12.0"),
   pip= c("spatialdata==0.5.0", 
-         "spatialdata_io==0.6.0",
+         "spatialdata_io==0.3.0",
          "dummy-spatialdata==0.1.7",
          "setuptools==75.8.0"))
 
 # sd version 0.8.0 environment
 #' @importFrom basilisk BasiliskEnvironment
-.env_080 <- BasiliskEnvironment(
+.env_08 <- BasiliskEnvironment(
   pkgname="SpatialData.data", 
   envname="sd_env",
   packages=c("python==3.12.0"),
   pip=c("zarr==3.1.5", 
-        "ome_zarr==0.13.0", # 0.14.0 fails to due a bug, check scverse/spatialdata #1092
         "spatialdata==0.8.0", 
         "spatialdata_io==0.7.1",
         "dummy-spatialdata==0.1.10",
@@ -36,7 +35,7 @@
     message("Using spatialdata version ", sd_version)
   switch (sd_version,
           "0.5.0" = .env_05,
-          "0.8.0" = .env_080,
+          "0.8.0" = .env_08,
           {
             stop('sd_version should be set to 0.5.0 or 0.8.0.') 
           })
