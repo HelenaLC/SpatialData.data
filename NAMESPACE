@@ -9,5 +9,8 @@ export(generate_dataset)
 import(basilisk)
 importFrom(basilisk,BasiliskEnvironment)
 importFrom(spatialdataR,readSpatialData)
-importFrom(utils,read.csv)
-importFrom(utils,unzip)
+importFrom(stats,setNames)
+importFrom(utils,
+  read.csv,
+  unzip
+)

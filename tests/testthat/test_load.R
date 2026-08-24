@@ -10,5 +10,10 @@ test_that("source list", {
 
 test_that("invalid source", {
   expect_error(SD.data_load("ColorectalCarcinomaMIBITOF", source = "source"), 
-               "Unknown source/bucket")
+               "Mismatching source/bucket")
+})
+
+test_that("source and dataset mismatch", {
+  expect_error(SD.data_load("MouseBrainVisHD", source = "biocOSN"), 
+               "Mismatching source/bucket")
 })

@@ -75,11 +75,11 @@ SD.data_available <- function(source = "biocOSN"){
     Prefix="spatialdata-sandbox") 
   keys <- lapply(zz$Contents, "[[", "Key")
   keys <- basename(grepv("/", keys))
-  keys[grepl(paste0(version, ".zip$"), keys)]
+  keys[grepl(paste0(version, "\\.zip$"), keys)]
 }
 
 .check_paws <- function() {
-  if (!requireNamespace("paws")) 
+  if (!requireNamespace("paws", quietly=TRUE)) 
     stop("install 'paws' to use this function; without it",
          " we can't check existence of data in OSN bucket")
 }

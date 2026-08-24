@@ -1,7 +1,7 @@
 Package: SpatialData.data
 Title: SpatialData datasets
-Depends: R (>= 4.4)
-Version: 0.99.7
+Depends: R (>= 4.5.0)
+Version: 0.99.8
 Description: Makes 'scverse' data examples available through the NSF OSN, 
     and accessible from within R, using 'BiocFileCache'. Furthermore, 
     provides an interface to Python's 'spatialdata-io' for reading and
@@ -20,12 +20,12 @@ Imports:
     basilisk,
     BiocFileCache,
     reticulate,
-    spatialdataR
+    spatialdataR,
+    paws
 Suggests:
     BiocStyle,
     knitr,
-    testthat,
-    paws
+    testthat
 biocViews: 
     DataImport, 
     DataRepresentation, 
@@ -42,4 +42,4 @@ Encoding: UTF-8
 VignetteBuilder: knitr
 URL: https://github.com/HelenaLC/SpatialData.data, https://helenalc.github.io/SpatialData.data/
 BugReports: https://github.com/HelenaLC/SpatialData.data/issues
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

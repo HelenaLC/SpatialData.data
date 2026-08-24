@@ -12,7 +12,7 @@
 #'
 #' @importFrom utils read.csv
 #' 
-#' @returns data.frame
+#' @returns a list or a data.frame
 #' 
 #' @export
 #' 
@@ -31,6 +31,8 @@ SD.data_list <- function(extended = FALSE) {
 #' @description
 #' This function consolidates the retrieval and caching and transformation 
 #' of scverse-curated Zarr archives and 10x-curated Xenium archives.
+#' 
+#' @importFrom stats setNames
 #' 
 #' @param id character string; dataset identifier
 #' @param target character(1), defaults to tempfile(); use a different 
@@ -131,17 +133,17 @@ SD.data_load = function(id,
   msg <- c("Please run SD.data_list() to see available datasets and ", 
            "their S3 buckets.")
   opts <- SD.data_list(extended = TRUE)
-  .DATASETS <- setNames(opts$Pattern, opts$Name)
-  if(id %in% opts$Name) {
-    if(missing(source)){
-      source <- opts$S3_buckets[opts$Name == id][1] 
-    } else if(!source %in% opts$S3_buckets[opts$Name == id]){
-      stop("Unknown source/bucket '", source, "' for dataset '", id, "'! ", msg)
-    }
-    .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
-  } else {
+  if(!id %in% opts$Name)
     stop("Dataset '", id, "' not found! ", msg)
+  if(missing(source)){
+    source <- opts$S3_buckets[opts$Name == id][1] 
+  } else if(!source %in% opts$S3_buckets[opts$Name == id]){
+    stop("Mismatching source/bucket '", source, "' with dataset '", 
+         id, "'! ", msg)
   }
+  opts <- opts[opts$S3_buckets == source,]
+  .DATASETS <- setNames(opts$Pattern, opts$Name)
+  .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
 }
 
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
@@ -167,13 +169,6 @@ SD.data_load = function(id,
 ) {
   
   # get file and urls
-  # allz <- if (source == "biocOSN") {
-  #   .available_biocOSN()
-  # } else if (source == "biocOSN_Xenium") {
-  #   .available_biocOSN_Xenium()
-  # } else if (source == "sandbox") {
-  #   .available_sandbox()
-  # } 
   allz <- SD.data_available(source = source)
   allurls <- file.path(bucket_path(source), allz)
   
