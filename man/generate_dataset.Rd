@@ -52,9 +52,9 @@ generate_dataset(
   )
 )
 
-# write spatialdata in 0.7.2 version
+# write spatialdata in 0.8.0 version
 generate_dataset(
-  sd_version = "0.7.2",
+  sd_version = "0.8.0",
   images = list(
     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
     list(type = "grayscale", coordinate_system="global")

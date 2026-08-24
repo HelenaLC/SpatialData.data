@@ -29,10 +29,10 @@ These *scverse* SpatialData examples are available through
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of python’s spatialdata package (0.3.0, 0.5.0 and 0.7.2) for
+versions of python’s spatialdata package (0.5 and 0.8) for
 reading and writing to .zarr stores.
 
-`basilisk` environments (only 0.5.0 and 0.7.2) are also accompanied by
+`basilisk` environments for versions 0.5 and 0.8 are also accompanied by
 the `dummy-spatialdata` package that generates toy spatialdata examples
 whose elements are customized by the user.
 
@@ -110,16 +110,15 @@ SD.data_available("biocOSN_Xenium")
 ```
 
 You can use `basilisk` to convert these readouts into various SpatialData 
-formats: 
+formats:  
 
-* **0.3.0** (Zarr v2), 
 * **0.5.0** (Zarr v2) and 
-* **0.7.2** (Zarr v3)
+* **0.8.0** (Zarr v3)
 
 We use `options(sd_version)` to set the SpatialData version.
 
 ```{r sd-io}
-options(sd_version = "0.3.0")
+options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 

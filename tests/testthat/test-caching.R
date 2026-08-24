@@ -36,7 +36,7 @@ test_that("SD.io()", {
 
     # directory already exists
     dir.create(out <- tempfile())
-    options(sd_version = "0.3.0")
+    options(sd_version = "0.5.0")
     expect_error(SD.io("xenium", src, out))
     
     # invalid platform specification

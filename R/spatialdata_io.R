@@ -2,8 +2,8 @@
 #' 
 #' Method to call technology-specific readers by spatialdata-io.
 #' 
-#' @param sd_version spatialdata version, should be set to 0.3.0, 0.5.0 or 
-#' 0.7.2. Default: 0.7.
+#' @param sd_version spatialdata version, should be set to 0.5.0 or 0.8.0. 
+#'  Default: 0.8.0.
 #' @param verbose verbose
 #' @import basilisk
 #' 
@@ -34,7 +34,7 @@ SD.io_readers <- function(sd_version = getOption("sd_version"),
 #' 
 #' # read & write to .zarr w/ 'spatialdata-io'
 #' target <- tempfile()
-#' options(sd_version = "0.3.0")
+#' options(sd_version = "0.5.0")
 #' # turn of basilisk on GHA
 #' # SD.io("xenium", srcdir=td, dest=target)
 #' 

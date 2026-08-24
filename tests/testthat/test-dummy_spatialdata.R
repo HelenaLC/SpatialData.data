@@ -3,17 +3,16 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 test_that("generate_dataset()", {
   
-  # skip("turn off basilisk on GHA")
   # versions
   versions <- list(
-    "0.7.2" = "zarr.json",
+    "0.8.0" = "zarr.json",
     "0.5.0" = ".zattrs"
   )
   
   # points work with no coordinate systems
-  generate_dataset(sd_version = "0.7.2", points = list(list(n=12L)))
+  generate_dataset(sd_version = "0.8.0", points = list(list(n=12L)))
   
-  # full spatialdata object works with 0.5.0 and 0.7.2
+  # full spatialdata object works with 0.5.0 and 0.8.0
   lapply(names(versions), function(x){
     
     # generate sd zarr object
