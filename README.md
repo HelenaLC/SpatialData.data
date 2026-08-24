@@ -4,11 +4,12 @@
 
 # Introduction
 
-`Spatialdata.data` package provides utilities for accessing, reading and
+`SpatialData.data` package provides utilities for accessing, reading and
 generating SpatialData datasets. Data from a variety of spatial omics
-technologies has been made available as `SpatialData` .zarr stores
+technologies has been made available as `SpatialData` (zipped) .zarr
+stores.
 
-These *scverse* SpatialData examples are available through
+These *scverse* SpatialData examples are available through sources
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
 2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
@@ -17,12 +18,15 @@ These *scverse* SpatialData examples are available through
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
 `SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of python’s spatialdata package (0.5 and 0.8) for reading and
+versions of scverse’s `spatialdata` module (0.5 and 0.8) for reading and
 writing to .zarr stores.
 
-`basilisk` environments for versions 0.5 and 0.8 are also accompanied by
-the `dummy-spatialdata` package that generates toy spatialdata examples
-whose elements are customized by the user.
+The package also incorporates `dummy-spatialdata` python module that
+generates toy SpatialData examples whose elements are customized by the
+user. These examples can be generated again using `spatialdata` module
+versions 0.5 and 0.8.
+
+Please visit the **vignette** for more information.
 
 # Installation
 
@@ -81,100 +85,16 @@ read into R.
 #> - point8(2): point8_image point8_labels
 ```
 
-## Using spatialdata-io
-
-`SpatialData.data` also provides access to some raw spatial omic
-readouts. These data bundle can then be converted into SpatialData
-objects using `spatialdata-io` python package.
+You can view a list of available datasets using:
 
 ``` r
-SD.data_available("biocOSN_Xenium")
-#> checking Bioconductor OSN bucket (Xenium readouts) ...
-#> [1] "Xenium_Prime_MultiCellSeg_Mouse_Ileum_tiny_outs.zip"
-#> [2] "Xenium_V1_human_Breast_2fov_outs.zip"               
-#> [3] "Xenium_V1_human_Lung_2fov_outs.zip"
-```
-
-We use `options(sd_version)` to set the SpatialData version.
-
-``` r
-options(sd_version = "0.5.0")
-(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
-#> checking Bioconductor OSN bucket (Xenium readouts) ...
-#> Using spatialdata version 0.5.0
-#> [34mINFO    [0m reading                                                                
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/file913f4c9[0m
-#>          [35mcf4c7/[0m[95mcell_feature_matrix.h5[0m                                           
-#> [34mINFO    [0m The SpatialData object is not self-contained [1m([0mi.e. it contains some    
-#>          elements that are Dask-backed from locations outside                   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/[0m[95mfile913f548[0m
-#>          [95ma5c1c[0m[1m)[0m. Please see the documentation of `[1;35mis_self_contained[0m[1m([0m[1m)[0m` to       
-#>          understand the implications of working with SpatialData objects that   
-#>          are not self-contained.                                                
-#> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/[0m[95mfile913f548[0m
-#>          [95ma5c1c[0m
-#> duckdb is storing downloaded extensions and secrets under ~/.duckdb:
-#> ℹ /Users/amanuky/.duckdb
-#> This persists across sessions and is shared with the DuckDB CLI and other clients.
-#> ℹ Run duckdb(shared_home = FALSE) to use a temporary directory instead.
-#> ℹ See ?duckdb_storage for details and alternatives.
-#> class: SpatialData
-#> - images(1):
-#>   - morphology_focus (4,3529,5792)
-#> - labels(2):
-#>   - cell_labels (3529,5792)
-#>   - nucleus_labels (3529,5792)
-#> - points(1):
-#>   - transcripts (1113950)
-#> - shapes(3):
-#>   - cell_boundaries (7275,circle)
-#>   - cell_circles (0,circle)
-#>   - nucleus_boundaries (7020,circle)
-#> - tables(1):
-#>   - table (280,7275) [cell_circles]
-#> coordinate systems(1):
-#> - global(7): morphology_focus cell_labels ... nucleus_boundaries
-#>   transcripts
-```
-
-## Generating dummy SpatialData objects
-
-`SpatialData.data` package incorporates the `dummy-spatialdata` python
-package (<https://pypi.org/project/dummy-spatialdata/>) via `basilisk`
-to generate toy spatialdata objects in multiple spatialdata versions.
-
-``` r
-zarrfile <- tempfile(fileext = ".zarr")
-generate_dataset(
-  file = zarrfile, 
-  sd_version = "0.5.0",
-  images = list(
-    list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
-    list(type = "grayscale", n_layers = c(), coordinate_system="global")
-  ),
-  shapes = list(
-    list(n=12L, type="polygon", coordinate_system="global")
-  ),
-  points = list(
-    list(n=12L)
-  ),
-  coordinate_systems = list(
-    global = list(
-      transformations = list("affine"), 
-      shape = list(x=2000L, y=2000L)
-    )
-  )
-)
-#> Using spatialdata version 0.5.0
-#> [34mINFO    [0m no axes information specified in the object, setting `dims` to: [1m([0m[32m'c'[0m,  
-#>          [32m'y'[0m, [32m'x'[0m[1m)[0m                                                              
-#> [34mINFO    [0m no axes information specified in the object, setting `dims` to: [1m([0m[32m'c'[0m,  
-#>          [32m'y'[0m, [32m'x'[0m[1m)[0m                                                              
-#> [34mINFO    [0m The Zarr backing store has been changed from [3;35mNone[0m the new file path:   
-#>          [35m/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T/RtmpTsMMJS/[0m[95mfile913f370[0m
-#>          [95mff8ca.zarr[0m
-#> SpatialData object written to '/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpTsMMJS/file913f370ff8ca.zarr'
-#> [1] "/var/folders/vf/d8kg507x41xfh6z9vgv9skksdsn29w/T//RtmpTsMMJS/file913f370ff8ca.zarr"
-sd <- spatialdataR::readSpatialData(zarrfile)
+SD.data_list()
+#>  [1] "MouseIntestineVisHD"        "MouseBrainVisHD"           
+#>  [3] "MouseBrainVis"              "LungAdenocarcinomaMCMICRO" 
+#>  [5] "MouseBrainMERFISH"          "MouseLiverMERFISH"         
+#>  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      
+#>  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  
+#> [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        
+#> [13] "Breast2fov_10x"             "Lung2fov_10x"              
+#> [15] "SpaceMHelaniH3T3"
 ```

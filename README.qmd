@@ -18,24 +18,21 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-`Spatialdata.data` package provides utilities for accessing, reading and
-generating SpatialData datasets. Data from a variety of spatial omics 
-technologies has been made available as `SpatialData` .zarr stores
+`SpatialData.data` package provides utilities for accessing, reading and generating SpatialData datasets. Data from a variety 
+of spatial omics technologies has been made available as `SpatialData` (zipped) .zarr stores.
 
-These *scverse* SpatialData examples are available through
+These *scverse* SpatialData examples are available through sources 
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
 2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from some Xenium datasets and
 3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
 
-`SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of python’s spatialdata package (0.5 and 0.8) for
-reading and writing to .zarr stores.
+`SpatialData.data` uses `basilisk` to interface and maintain multiple versions of scverse’s `spatialdata` module (0.5 and 0.8) for reading and writing to .zarr stores. 
 
-`basilisk` environments for versions 0.5 and 0.8 are also accompanied by
-the `dummy-spatialdata` package that generates toy spatialdata examples
-whose elements are customized by the user.
+The package also incorporates `dummy-spatialdata` python module that generates toy SpatialData examples whose elements are customized by the user. These examples can be generated again using `spatialdata` module versions 0.5 and 0.8. 
+
+Please visit the **vignette** for more information.
 
 # Installation
 
@@ -72,53 +69,8 @@ read into R.
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 ```
 
-## Using spatialdata-io
+You can view a list of available datasets using:
 
-`SpatialData.data` also provides access to some raw spatial omic
-readouts. These data bundle can then be converted into SpatialData
-objects using `spatialdata-io` python package.
-
-```{r avail}
-#| label: avail
-SD.data_available("biocOSN_Xenium")
-```
-
-We use `options(sd_version)` to set the SpatialData version.
-
-```{r load_basilisk}
-#| label: load_basilisk
-options(sd_version = "0.5.0")
-(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
-```
-
-## Generating dummy SpatialData objects
-
-`SpatialData.data` package incorporates the `dummy-spatialdata` python package ([https://pypi.org/project/dummy-spatialdata/](https://pypi.org/project/dummy-spatialdata/))
-via `basilisk` to generate toy spatialdata objects in multiple spatialdata 
-versions. 
-
-```{r generate_dataset}
-#| label: generate_dataset
-zarrfile <- tempfile(fileext = ".zarr")
-generate_dataset(
-  file = zarrfile, 
-  sd_version = "0.5.0",
-  images = list(
-    list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
-    list(type = "grayscale", n_layers = c(), coordinate_system="global")
-  ),
-  shapes = list(
-    list(n=12L, type="polygon", coordinate_system="global")
-  ),
-  points = list(
-    list(n=12L)
-  ),
-  coordinate_systems = list(
-    global = list(
-      transformations = list("affine"), 
-      shape = list(x=2000L, y=2000L)
-    )
-  )
-)
-sd <- spatialdataR::readSpatialData(zarrfile)
+```{r load-data-list}
+SD.data_list()
 ```
