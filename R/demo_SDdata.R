@@ -10,7 +10,7 @@
 #' @param metadata if TRUE, all columns will be returned, e.g. File size, 
 #' License etc.
 #'
-#' @importFrom utils read.csv
+#' @importFrom utils read.table
 #' 
 #' @returns a vector of dataset names or a data.frame
 #' 

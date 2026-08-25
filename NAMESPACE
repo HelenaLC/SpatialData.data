@@ -11,6 +11,6 @@ importFrom(basilisk,BasiliskEnvironment)
 importFrom(spatialdataR,readSpatialData)
 importFrom(stats,setNames)
 importFrom(utils,
-  read.csv,
+  read.table,
   unzip
 )
