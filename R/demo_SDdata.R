@@ -20,8 +20,8 @@
 #' SD.data_list()
 #' SD.data_list(extended = TRUE)
 SD.data_list <- function(extended = FALSE) {
-  data_file <- system.file("extdata", "datasets.csv", package = "SpatialData.data")
-  x <- utils::read.csv(data_file, sep = ";")
+  data_file <- system.file("extdata", "datasets.txt", package = "SpatialData.data")
+  x <- read.table(data_file, sep = ";", check.names = FALSE, header = TRUE)
   if(extended) x else unique(x$Name)
 }
 
@@ -136,12 +136,12 @@ SD.data_load = function(id,
   if(!id %in% opts$Name)
     stop("Dataset '", id, "' not found! ", msg)
   if(missing(source)){
-    source <- opts$S3_buckets[opts$Name == id][1] 
-  } else if(!source %in% opts$S3_buckets[opts$Name == id]){
+    source <- opts$`S3 buckets`[opts$Name == id][1] 
+  } else if(!source %in% opts$`S3 buckets`[opts$Name == id]){
     stop("Mismatching source/bucket '", source, "' with dataset '", 
          id, "'! ", msg)
   }
-  opts <- opts[opts$S3_buckets == source,]
+  opts <- opts[opts$`S3 buckets` == source,]
   .DATASETS <- setNames(opts$Pattern, opts$Name)
   .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
 }
