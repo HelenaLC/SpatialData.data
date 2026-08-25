@@ -85,7 +85,7 @@ SD.data_list()
 or as below for a detailed overview and metadata on all datasets: 
 
 ```{r view-data-list, eval=FALSE}
-View(SD.data_list(extended = TRUE))
+View(SD.data_list(metadata = TRUE))
 ```
 
 You can also interrogate the sources (S3 buckets) for available (zipped) .zarr archives:
