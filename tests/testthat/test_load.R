@@ -4,7 +4,7 @@ test_that("invalid id", {
 })
 
 test_that("source list", {
-  expect_true(all(unlist(strsplit(SD.data_list(TRUE)$S3_buckets, ", ")) %in%
+  expect_true(all(unlist(strsplit(SD.data_list(TRUE)$`S3 buckets`, ", ")) %in%
                     c("biocOSN", "biocOSN_Xenium", "sandbox")))
 })
 

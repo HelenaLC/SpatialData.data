@@ -4,10 +4,10 @@
 \alias{SD.data_list}
 \title{SD.data_list}
 \usage{
-SD.data_list(extended = FALSE)
+SD.data_list(metadata = FALSE)
 }
 \arguments{
-\item{extended}{if TRUE, all columns will be returned, e.g. File size, 
+\item{metadata}{if TRUE, all columns will be returned, e.g. File size, 
 License etc.}
 }
 \value{
@@ -19,5 +19,5 @@ sandbox S3 buckets
 }
 \examples{
 SD.data_list()
-SD.data_list(extended = TRUE)
+SD.data_list(metadata = TRUE)
 }

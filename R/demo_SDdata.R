@@ -7,10 +7,10 @@
 #' Returns metadata of available data from Bioc OSN and scverse spatialdata-
 #' sandbox S3 buckets
 #' 
-#' @param extended if TRUE, all columns will be returned, e.g. File size, 
+#' @param metadata if TRUE, all columns will be returned, e.g. File size, 
 #' License etc.
 #'
-#' @importFrom utils read.csv
+#' @importFrom utils read.table
 #' 
 #' @returns a vector of dataset names or a data.frame
 #' 
@@ -18,11 +18,11 @@
 #' 
 #' @examples
 #' SD.data_list()
-#' SD.data_list(extended = TRUE)
-SD.data_list <- function(extended = FALSE) {
-  data_file <- system.file("extdata", "datasets.csv", package = "SpatialData.data")
-  x <- utils::read.csv(data_file, sep = ";")
-  if(extended) x else unique(x$Name)
+#' SD.data_list(metadata = TRUE)
+SD.data_list <- function(metadata = FALSE) {
+  data_file <- system.file("extdata", "datasets.txt", package = "SpatialData.data")
+  x <- read.table(data_file, sep = ";", check.names = FALSE, header = TRUE)
+  if(metadata) x else unique(x$Name)
 }
 
 #' @title retrieve scverse-curated `SpatialData` .zarr archive
@@ -130,18 +130,18 @@ SD.data_list <- function(extended = FALSE) {
 SD.data_load = function(id, 
                         target = tempfile(), 
                         source) { 
-  msg <- c("Please run SD.data_list(extended = TRUE) to see available ", 
+  msg <- c("Please run SD.data_list(metadata = TRUE) to see available ", 
            "datasets and their S3 buckets.")
-  opts <- SD.data_list(extended = TRUE)
+  opts <- SD.data_list(metadata = TRUE)
   if(!id %in% opts$Name)
     stop("Dataset '", id, "' not found! ", msg)
   if(missing(source)){
-    source <- opts$S3_buckets[opts$Name == id][1] 
-  } else if(!source %in% opts$S3_buckets[opts$Name == id]){
+    source <- opts$`S3 buckets`[opts$Name == id][1] 
+  } else if(!source %in% opts$`S3 buckets`[opts$Name == id]){
     stop("Mismatching source/bucket '", source, "' with dataset '", 
          id, "'! ", msg)
   }
-  opts <- opts[opts$S3_buckets == source,]
+  opts <- opts[opts$`S3 buckets` == source,]
   .DATASETS <- setNames(opts$Pattern, opts$Name)
   .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
 }

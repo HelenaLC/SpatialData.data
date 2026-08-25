@@ -1,0 +1,24 @@
+Name;Technology;Sample;Table (Nfeat,Nobs);Image (dim);Nmolecules;File Size;S3 buckets;Zarr Format;License;Pattern
+MouseIntestineVisHD;Visium HD;Mouse intestine;(19059,5479660);(3,21943,23618);;1 GB;biocOSN;v2;CCA;visium_hd_3.0.0
+MouseIntestineVisHD;Visium HD;Mouse intestine;(19059,5479660);(3,21943,23618);;1 GB;sandbox;v3;CCA;visium_hd_3.0.0
+MouseBrainVisHD;Visium HD;Mouse brain;(33696,84031);(3,5492,6000);;174 MB;sandbox;v3;CC BY 4.0 DEED;visium_hd_4.0.1
+MouseBrainVis;Visium;Mouse brain;(31053,6484);(3,2000,1969);;65 MB;sandbox;v3;CC BY 4.0 DEED;visium_spatialdata
+LungAdenocarcinomaMCMICRO;CyCIF (MCMICRO output);Human small lung adenocarcinoma;(12,11607);(12,3139,2511);;250 MB;biocOSN;v2;CC BY-NC 4.0 DEED;mcmicro_io
+MouseBrainMERFISH;MERFISH;Mouse brain;(268,2389);(1,522,575);3714642;50 MB;biocOSN;v2;CC0 1.0 DEED;merfish
+MouseBrainMERFISH;MERFISH;Mouse brain;(268,2389);(1,522,575);3714642;50 MB;sandbox;v3;CC0 1.0 DEED;merfish
+MouseLiverMERFISH;MERFISH;Mouse liver ;(99,3375);(1,6432,6432);1153548;66 MB;sandbox;v3;CC BY 4.0 DEED;mouse_liver
+ColorectalCarcinomaMIBITOF;MIBI-TOF;Human colorectal carcinoma;(36,3309);(3,1024,1024);;25 MB;biocOSN;v2;CC BY 4.0 DEED;mibitof
+ColorectalCarcinomaMIBITOF;MIBI-TOF;Human colorectal carcinoma;(36,3309);(3,1024,1024);;25 MB;sandbox;v3;CC BY 4.0 DEED;mibitof
+MulticancerSteinbock;IMC (Steinbock output);4 different cancers (SCCHN, BCC, NSCLC, CRC);(40,47859);(40,600,600);;820 MB;biocOSN;v2;CC BY 4.0 DEED;steinbock_io
+JanesickBreastVisiumEnh;Visium;Human breast cancer;(18085,4992);(3,21571,19505);;1.5 GB;biocOSN;v2;CCA;visium_associated_xenium_io
+JanesickBreastVisiumEnh;Visium;Human breast cancer;(18085,4992);(3,21571,19505);;1.5 GB;sandbox;v3;CCA;visium_associated_xenium_io
+JanesickBreastXeniumRep1;Xenium;Human breast cancer;(313,167780);(1,25778,35416);42638083;2.8 GB;biocOSN;v2;CCA;xenium_rep1_io
+JanesickBreastXeniumRep1;Xenium;Human breast cancer;(313,167780);(1,25778,35416);42638083;2.8 GB;sandbox;v3;CCA;xenium_rep1_io
+JanesickBreastXeniumRep2;Xenium;Human breast cancer;(313,118752);(1,25779,35411);31997227;3.7 GB;biocOSN;v2;CCA;xenium_rep2_io
+HumanLungMulti_10x;Xenium;Human lung Cancer;(377,162254);(5,17098,51187);12165021;5.4 GB;biocOSN;v2;CC BY 4.0 DEED;HuLungXenmulti
+HumanLungMulti_10x;Xenium;Human lung Cancer;(377,162254);(5,17098,51187);12165021;5.4 GB;sandbox;v3;CC BY 4.0 DEED;xenium_2.0.0
+Breast2fov_10x;Xenium (trimmed);Breast (2 FOVs);(280,7275);(4,3529,5792);1113950;380 MB;biocOSN_Xenium;v2;CCA;Xenium_V1_human_Breast_2fov
+Breast2fov_10x;Xenium (trimmed);Breast (2 FOVs);(280,7275);(4,3529,5792);1113950;380 MB;biocOSN_Xenium;v3;CCA;Xenium_V1_human_Breast_2fov
+Lung2fov_10x;Xenium (trimmed);Lung (2 FOVs);(289,11898);(1,3553,5791);825885;280 MB;biocOSN_Xenium;v2;CCA;Xenium_V1_human_Lung_2fov
+Lung2fov_10x;Xenium (trimmed);Lung (2 FOVs);(289,11898);(1,3553,5791);825885;280 MB;biocOSN_Xenium;v3;CCA;Xenium_V1_human_Lung_2fov
+SpaceMHelaniH3T3;SpaceM;Hepa and NIH3T3 cells;(327,14425);(2,2675,2675);;49 MB;sandbox;v3;CC BY 4.0 DEED;spacem_helanih3t3
