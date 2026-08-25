@@ -133,7 +133,7 @@ or as below for a detailed overview and metadata on all datasets:
 
 ``` r
 
-View(SD.data_list(extended = TRUE))
+View(SD.data_list(metadata = TRUE))
 ```
 
 You can also interrogate the sources (S3 buckets) for available (zipped)
@@ -176,14 +176,14 @@ options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
-    ## INFO     reading /tmp/RtmpLwVhkA/file601f27e34dbc/cell_feature_matrix.h5        
+    ## INFO     reading /tmp/RtmpfM65Py/file601d3b2a631a/cell_feature_matrix.h5        
     ## INFO     The SpatialData object is not self-contained (i.e. it contains some    
     ##          elements that are Dask-backed from locations outside                   
-    ##          /tmp/RtmpLwVhkA/file601f318456fd). Please see the documentation of     
+    ##          /tmp/RtmpfM65Py/file601d5d7c5aac). Please see the documentation of     
     ##          `is_self_contained()` to understand the implications of working with   
     ##          SpatialData objects that are not self-contained.                       
     ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/RtmpLwVhkA/file601f318456fd
+    ##          /tmp/RtmpfM65Py/file601d5d7c5aac
 
     ## class: SpatialData
     ## - images(1):
@@ -237,14 +237,14 @@ sd_zarr <- generate_dataset(
     ## INFO     no axes information specified in the object, setting `dims` to: ('c',  
     ##          'y', 'x')                                                              
     ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/RtmpLwVhkA/file601f1afe3f11.zarr
+    ##          /tmp/RtmpfM65Py/file601d4b9346c9.zarr
 
 ``` r
 
 sd_zarr
 ```
 
-    ## [1] "/tmp/RtmpLwVhkA/file601f1afe3f11.zarr"
+    ## [1] "/tmp/RtmpfM65Py/file601d4b9346c9.zarr"
 
 Now we can read the SpatialData object with SpatialData.
 

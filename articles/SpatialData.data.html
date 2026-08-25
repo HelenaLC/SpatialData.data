@@ -61,7 +61,7 @@ Carey</h4>
                                     <h4 data-toc-skip class="author">Helena
 Lucia Crowell</h4>
                         
-            <h4 data-toc-skip class="date">August 24, 2026</h4>
+            <h4 data-toc-skip class="date">August 25, 2026</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HelenaLC/SpatialData.data/blob/main/vignettes/SpatialData.data.Rmd" class="external-link"><code>vignettes/SpatialData.data.Rmd</code></a></small>
       <div class="d-none name"><code>SpatialData.data.Rmd</code></div>
@@ -175,7 +175,7 @@ are saved as Zarr v3.</p>
 <span><span class="co">## [15] "SpaceMHelaniH3T3"</span></span></code></pre>
 <p>or as below for a detailed overview and metadata on all datasets:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="../reference/SD.data_list.html">SD.data_list</a></span><span class="op">(</span>extended <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="../reference/SD.data_list.html">SD.data_list</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>You can also interrogate the sources (S3 buckets) for available
 (zipped) .zarr archives:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -212,14 +212,14 @@ versions, each associated with a different Zarr format:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>sd_version <span class="op">=</span> <span class="st">"0.5.0"</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"Breast2fov_10x"</span>, source <span class="op">=</span> <span class="st">"biocOSN_Xenium"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> reading <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/file601f27e34dbc/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>        </span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> reading <span style="color: #BB00BB;">/tmp/RtmpfM65Py/file601d3b2a631a/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>        </span></span>
 <span><span class="co">## <span style="color: #0000BB;">INFO    </span> The SpatialData object is not self-contained <span style="font-weight: bold;">(</span>i.e. it contains some    </span></span>
 <span><span class="co">##          elements that are Dask-backed from locations outside                   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/</span><span style="color: #FF55FF;">file601f318456fd</span><span style="font-weight: bold;">)</span>. Please see the documentation of     </span></span>
+<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpfM65Py/</span><span style="color: #FF55FF;">file601d5d7c5aac</span><span style="font-weight: bold;">)</span>. Please see the documentation of     </span></span>
 <span><span class="co">##          `<span style="color: #BB00BB; font-weight: bold;">is_self_contained</span><span style="font-weight: bold;">()</span>` to understand the implications of working with   </span></span>
 <span><span class="co">##          SpatialData objects that are not self-contained.                       </span></span>
 <span><span class="co">## <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/</span><span style="color: #FF55FF;">file601f318456fd</span></span></span></code></pre>
+<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpfM65Py/</span><span style="color: #FF55FF;">file601d5d7c5aac</span></span></span></code></pre>
 <pre><code><span><span class="co">## class: SpatialData</span></span>
 <span><span class="co">## - images(1):</span></span>
 <span><span class="co">##   - morphology_focus (4,3529,5792)</span></span>
@@ -270,10 +270,10 @@ multiple spatialdata versions.</p>
 <span><span class="co">## <span style="color: #0000BB;">INFO    </span> no axes information specified in the object, setting `dims` to: <span style="font-weight: bold;">(</span><span style="color: #00BB00;">'c'</span>,  </span></span>
 <span><span class="co">##          <span style="color: #00BB00;">'y'</span>, <span style="color: #00BB00;">'x'</span><span style="font-weight: bold;">)</span>                                                              </span></span>
 <span><span class="co">## <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpLwVhkA/</span><span style="color: #FF55FF;">file601f1afe3f11.zarr</span></span></span></code></pre>
+<span><span class="co">##          <span style="color: #BB00BB;">/tmp/RtmpfM65Py/</span><span style="color: #FF55FF;">file601d4b9346c9.zarr</span></span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sd_zarr</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/RtmpLwVhkA/file601f1afe3f11.zarr"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "/tmp/RtmpfM65Py/file601d4b9346c9.zarr"</span></span></code></pre>
 <p>Now we can read the SpatialData object with SpatialData.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://helenalc.github.io/spatialdataR/reference/readSpatialData.html" class="external-link">readSpatialData</a></span><span class="op">(</span><span class="va">sd_zarr</span><span class="op">)</span></span>
