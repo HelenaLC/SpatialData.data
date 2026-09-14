@@ -176,14 +176,14 @@ options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
 ```
 
-    ## INFO     reading /tmp/RtmpfM65Py/file601d3b2a631a/cell_feature_matrix.h5        
+    ## INFO     reading /tmp/Rtmp9w89pD/file9ab2212e47f2/cell_feature_matrix.h5        
     ## INFO     The SpatialData object is not self-contained (i.e. it contains some    
     ##          elements that are Dask-backed from locations outside                   
-    ##          /tmp/RtmpfM65Py/file601d5d7c5aac). Please see the documentation of     
+    ##          /tmp/Rtmp9w89pD/file9ab25ee34ea6). Please see the documentation of     
     ##          `is_self_contained()` to understand the implications of working with   
     ##          SpatialData objects that are not self-contained.                       
     ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/RtmpfM65Py/file601d5d7c5aac
+    ##          /tmp/Rtmp9w89pD/file9ab25ee34ea6
 
     ## class: SpatialData
     ## - images(1):
@@ -237,14 +237,14 @@ sd_zarr <- generate_dataset(
     ## INFO     no axes information specified in the object, setting `dims` to: ('c',  
     ##          'y', 'x')                                                              
     ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/RtmpfM65Py/file601d4b9346c9.zarr
+    ##          /tmp/Rtmp9w89pD/file9ab26f067574.zarr
 
 ``` r
 
 sd_zarr
 ```
 
-    ## [1] "/tmp/RtmpfM65Py/file601d4b9346c9.zarr"
+    ## [1] "/tmp/Rtmp9w89pD/file9ab26f067574.zarr"
 
 Now we can read the SpatialData object with SpatialData.
 
@@ -282,7 +282,7 @@ image(sd, 1)
 
     ## R version 4.6.1 (2026-06-24)
     ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.4 LTS
+    ## Running under: Ubuntu 24.04.5 LTS
     ## 
     ## Matrix products: default
     ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -310,14 +310,14 @@ image(sd, 1)
     ##  [5] R.utils_2.13.0              fastmap_1.2.0              
     ##  [7] SingleCellExperiment_1.35.2 BiocFileCache_3.3.0        
     ##  [9] duckdb_1.5.5                digest_0.6.39              
-    ## [11] lifecycle_1.0.5             sf_1.1-2                   
+    ## [11] lifecycle_1.0.5             sf_1.1-3                   
     ## [13] RSQLite_3.53.3              magrittr_2.0.5             
     ## [15] compiler_4.6.1              rlang_1.3.0                
     ## [17] sass_0.4.10                 tools_4.6.1                
-    ## [19] yaml_2.3.12                 knitr_1.51                 
+    ## [19] yaml_2.3.12                 knitr_1.52                 
     ## [21] S4Arrays_1.13.0             htmlwidgets_1.6.4          
     ## [23] bit_4.6.0                   classInt_0.4-11            
-    ## [25] curl_7.1.0                  reticulate_1.46.0          
+    ## [25] curl_8.0.0                  reticulate_1.47.0          
     ## [27] DelayedArray_0.39.6         xml2_1.6.0                 
     ## [29] abind_1.4-8                 KernSmooth_2.23-26         
     ## [31] withr_3.0.3                 purrr_1.2.2                
@@ -325,7 +325,7 @@ image(sd, 1)
     ## [35] R.oo_1.27.1                 grid_4.6.1                 
     ## [37] stats4_4.6.1                e1071_1.7-17               
     ## [39] SummarizedExperiment_1.43.0 cli_3.6.6                  
-    ## [41] rmarkdown_2.31              crayon_1.5.3               
+    ## [41] rmarkdown_2.32              crayon_1.5.3               
     ## [43] ragg_1.5.2                  generics_0.1.4             
     ## [45] otel_0.2.0                  DBI_1.3.0                  
     ## [47] cachem_1.1.0                proxy_0.4-29               
@@ -333,15 +333,15 @@ image(sd, 1)
     ## [51] XVector_0.53.0              matrixStats_1.5.0          
     ## [53] basilisk_1.25.0             vctrs_0.7.3                
     ## [55] Matrix_1.7-5                jsonlite_2.0.0             
-    ## [57] dir.expiry_1.21.0           bookdown_0.47              
-    ## [59] IRanges_2.47.2              S4Vectors_0.51.7           
-    ## [61] bit64_4.8.4                 RBGL_1.89.0                
+    ## [57] dir.expiry_1.21.0           bookdown_0.48              
+    ## [59] IRanges_2.47.5              S4Vectors_0.51.9           
+    ## [61] bit64_4.8.6                 RBGL_1.89.0                
     ## [63] systemfonts_1.3.2           jquerylib_0.1.4            
     ## [65] units_1.0-1                 glue_1.8.1                 
     ## [67] pkgdown_2.2.1               ZarrArray_1.0.1            
-    ## [69] Rarr_2.0.1                  GenomicRanges_1.64.0       
+    ## [69] Rarr_2.0.1                  GenomicRanges_1.65.4       
     ## [71] tibble_3.3.1                pillar_1.11.1              
-    ## [73] htmltools_0.5.9             Seqinfo_1.3.0              
+    ## [73] htmltools_0.5.9             Seqinfo_1.3.2              
     ## [75] graph_1.91.0                dbplyr_2.6.0               
     ## [77] R6_2.6.1                    httr2_1.3.0                
     ## [79] wk_0.9.5                    textshaping_1.0.5          
@@ -351,6 +351,6 @@ image(sd, 1)
     ## [87] memoise_2.0.1               paws.common_0.8.10         
     ## [89] bslib_0.12.0                class_7.3-23               
     ## [91] uuid_1.2-2                  Rcpp_1.1.2                 
-    ## [93] SparseArray_1.13.2          anndataR_1.3.1             
+    ## [93] SparseArray_1.13.2          anndataR_1.2.1             
     ## [95] xfun_0.60                   fs_2.1.0                   
     ## [97] MatrixGenerics_1.25.0       pkgconfig_2.0.3
