@@ -12,6 +12,9 @@ Default: 0.8.0.}
 
 \item{verbose}{verbose}
 }
+\value{
+a \code{SpatialData} object
+}
 \description{
 Method to call technology-specific readers by spatialdata-io.
 }

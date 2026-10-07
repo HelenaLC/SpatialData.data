@@ -20,6 +20,10 @@ SD.data_available(source = "biocOSN")
  }
 }}
 }
+\value{
+a vector of example (zipped) SpatialData stores available at 
+ \code{source}
+}
 \description{
 Function for interrogating files across buckets. Please use 
 paws.storage::s3' to interrogate buckets for zipped zarr archives or 
@@ -30,4 +34,5 @@ Sys.setenv(AWS_REGION = "us-east-1")
 if (requireNamespace("paws.storage")) {
   SD.data_available("biocOSN")
 }
+
 }

@@ -4,3 +4,4 @@
 .Ruserdata
 vignettes/load_datasets.Rmd
 docs
+.DS_Store

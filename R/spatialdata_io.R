@@ -7,6 +7,8 @@
 #' @param verbose verbose
 #' @import basilisk
 #' 
+#' @return a \code{SpatialData} object
+#' 
 #' @examples
 #' SD.io_readers()
 #' 
@@ -28,6 +30,8 @@ SD.io_readers <- function(sd_version = getOption("sd_version"),
 #' @param platform character(1) must be an element of `SD.io_readers()` output
 #' @param srcdir character(1) path to folder holding manufacturer output files
 #' @param dest character(1) a path to a desired destination for zarr representation
+#' 
+#' @return \code{NULL}
 #' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")

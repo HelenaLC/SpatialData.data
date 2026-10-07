@@ -11,7 +11,9 @@
 #' @param tables tables element (anndata)
 #' @param coordinate_systems list of coordinate systems
 #' @param seed seed
-#'
+#' 
+#' @return the path to the SpatialData store (.zarr)
+#' 
 #' @examples
 #' options(sd_version = "0.5.0")
 #' generate_dataset()

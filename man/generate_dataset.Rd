@@ -35,6 +35,9 @@ generate_dataset(
 
 \item{seed}{seed}
 }
+\value{
+the path to the SpatialData store (.zarr)
+}
 \description{
 Generate spatialdata datasets using dummy-spatialdata
 }

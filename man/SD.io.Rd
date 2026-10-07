@@ -14,6 +14,9 @@ SD.io(platform = "xenium", srcdir, dest)
 
 \item{dest}{character(1) a path to a desired destination for zarr representation}
 }
+\value{
+\code{NULL}
+}
 \description{
 Use Python's 'spatialdata-io' to transform manufacturer 
 output to .zarr with specific folder structure.

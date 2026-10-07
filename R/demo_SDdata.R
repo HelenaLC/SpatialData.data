@@ -20,7 +20,9 @@
 #' SD.data_list()
 #' SD.data_list(metadata = TRUE)
 SD.data_list <- function(metadata = FALSE) {
-  data_file <- system.file("extdata", "datasets.txt", package = "SpatialData.data")
+  data_file <- system.file("extdata", 
+                           "datasets.txt", 
+                           package = "SpatialData.data")
   x <- read.table(data_file, sep = ";", check.names = FALSE, header = TRUE)
   if(metadata) x else unique(x$Name)
 }
@@ -127,7 +129,7 @@ SD.data_list <- function(metadata = FALSE) {
 #'     more info:
 #'     \url{https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md}
 #' }
-SD.data_load = function(id, 
+SD.data_load <- function(id, 
                         target = tempfile(), 
                         source) { 
   msg <- c("Please run SD.data_list(metadata = TRUE) to see available ", 
@@ -188,7 +190,7 @@ SD.data_load = function(id,
   if (length(ind) == 0) {
     
     # check main list
-    zipind = grep(patt, allz)
+    zipind <- grep(patt, allz)
     
     # no hits in main list
     if (length(zipind) == 0) 
