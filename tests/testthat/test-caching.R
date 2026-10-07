@@ -21,9 +21,9 @@ path_to_10x_xen_demo <- function(
     message("returning path to cached zip")
     return(info$rpath[nrec])
   }
-  fp <- file.path(bucket_path(source), zipname)
+  fp <- file.path(bucket_path(src), zipname)
   message(sprintf("retrieving from %s, caching, and returning path", 
-                  bucket_path(source)))
+                  bucket_path(src)))
   BiocFileCache::bfcadd(cache, rname=zipname, fpath=fp, rtype="web")
 }
 
@@ -36,7 +36,6 @@ test_that("SD.io()", {
 
     # directory already exists
     dir.create(out <- tempfile())
-    options(sd_version = "0.5.0")
     expect_error(SD.io("xenium", src, out))
     
     # invalid platform specification

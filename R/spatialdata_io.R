@@ -2,8 +2,6 @@
 #' 
 #' Method to call technology-specific readers by spatialdata-io.
 #' 
-#' @param sd_version spatialdata version, should be set to 0.5.0 or 0.8.0. 
-#'  Default: 0.8.0.
 #' @param verbose verbose
 #' @import basilisk
 #' 
@@ -13,10 +11,8 @@
 #' SD.io_readers()
 #' 
 #' @export
-SD.io_readers <- function(sd_version = getOption("sd_version"), 
-                           verbose = TRUE) {
-    proc <- basilisk::basiliskStart(.get_basilisk_env(sd_version, 
-                                                      verbose = verbose)) 
+SD.io_readers <- function(verbose = TRUE) {
+    proc <- basilisk::basiliskStart(.sd_env) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function() {
         sdio <- reticulate::import("spatialdata_io")
@@ -38,7 +34,6 @@ SD.io_readers <- function(sd_version = getOption("sd_version"),
 #' 
 #' # read & write to .zarr w/ 'spatialdata-io'
 #' target <- tempfile()
-#' options(sd_version = "0.5.0")
 #' # turn of basilisk on GHA
 #' # SD.io("xenium", srcdir=td, dest=target)
 #' 
@@ -51,7 +46,7 @@ SD.io <- function(platform="xenium", srcdir, dest) {
     if (dir.exists(dest)) 
         stop("Won't write to existing folder;",
             " please provide a non-existent path.")
-    proc <- basilisk::basiliskStart(.get_basilisk_env()) 
+    proc <- basilisk::basiliskStart(.sd_env) 
     on.exit(basilisk::basiliskStop(proc))
     basilisk::basiliskRun(proc, function(platform, srcdir, dest) {
         sdio <- reticulate::import("spatialdata_io")

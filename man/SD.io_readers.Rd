@@ -4,12 +4,9 @@
 \alias{SD.io_readers}
 \title{SD.io_readers}
 \usage{
-SD.io_readers(sd_version = getOption("sd_version"), verbose = TRUE)
+SD.io_readers(verbose = TRUE)
 }
 \arguments{
-\item{sd_version}{spatialdata version, should be set to 0.5.0 or 0.8.0. 
-Default: 0.8.0.}
-
 \item{verbose}{verbose}
 }
 \value{

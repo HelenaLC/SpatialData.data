@@ -105,13 +105,9 @@ You can use `basilisk` to convert these readouts into SpatialData zarr stores
 using multiple `spatialdata` module versions, each associated with a different 
 Zarr format:
 
-* **0.5.0** (Zarr v2) and 
 * **0.8.0** (Zarr v3)
 
-We use `options(sd_version)` to set the `spatialdata` module version.
-
 ```{r sd-io}
-options(sd_version = "0.5.0")
 (x <- SD.data_load("Breast2fov_10x", src ="biocOSN_Xenium"))
 ```
 
@@ -123,7 +119,6 @@ versions.
 
 ```{r dummy}
 sd_zarr <- generate_dataset(
-  sd_version = "0.5.0",
   images = list(
     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
     list(type = "grayscale", n_layers = c(), coordinate_system="global")
