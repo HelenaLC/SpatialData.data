@@ -39,7 +39,7 @@ SD.data_list <- function(metadata = FALSE) {
 #' @param id character string; dataset identifier
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
-#' @param source The name of the source, i.e. query bucket.
+#' @param src The name of the source, i.e. query bucket.
 #' \describe{
 #'  \item{biocOSN}{
 #'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
@@ -65,7 +65,7 @@ SD.data_list <- function(metadata = FALSE) {
 #' 
 #' # TODO: zarr v3 read is not complete
 #' # # use sandbox as source
-#' # ld <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox")
+#' # ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "sandbox")
 #' 
 #' @export
 #' 
@@ -131,21 +131,21 @@ SD.data_list <- function(metadata = FALSE) {
 #' }
 SD.data_load <- function(id, 
                         target = tempfile(), 
-                        source) { 
+                        src) { 
   msg <- c("Please run SD.data_list(metadata = TRUE) to see available ", 
            "datasets and their S3 buckets.")
   opts <- SD.data_list(metadata = TRUE)
   if(!id %in% opts$Name)
     stop("Dataset '", id, "' not found! ", msg)
-  if(missing(source)){
-    source <- opts$`S3 buckets`[opts$Name == id][1] 
-  } else if(!source %in% opts$`S3 buckets`[opts$Name == id]){
-    stop("Mismatching source/bucket '", source, "' with dataset '", 
+  if(missing(src)){
+    src <- opts$`S3 buckets`[opts$Name == id][1] 
+  } else if(!src %in% opts$`S3 buckets`[opts$Name == id]){
+    stop("Mismatching source/bucket '", src, "' with dataset '", 
          id, "'! ", msg)
   }
-  opts <- opts[opts$`S3 buckets` == source,]
+  opts <- opts[opts$`S3 buckets` == src,]
   .DATASETS <- setNames(opts$Pattern, opts$Name)
-  .read_demo_SDdata(.DATASETS[[id]], target=target, source = source)
+  .read_demo_SDdata(.DATASETS[[id]], target=target, src = src)
 }
 
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
@@ -155,7 +155,7 @@ SD.data_load <- function(id,
 #' @param cache like `BiocFileCache`
 #' @param target character(1), defaults to tempfile(); use a different 
 #'   value if you wish to retain the unzipped .zarr store persistently.
-#' @param source the name of the source bucket.
+#' @param src the name of the source bucket.
 #' 
 #' @importFrom utils unzip
 #' 
@@ -167,12 +167,12 @@ SD.data_load <- function(id,
     patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile(),
-    source = "biocOSN"
+    src = "biocOSN"
 ) {
   
   # get file and urls
-  allz <- SD.data_available(source = source)
-  allurls <- file.path(bucket_path(source), allz)
+  allz <- SD.data_available(src = src)
+  allurls <- file.path(bucket_path(src), allz)
   
   # get availables in cache
   ca <- BiocFileCache::BiocFileCache()
@@ -213,7 +213,7 @@ SD.data_load <- function(id,
   
   # unzip (convert to zarr if needed using spatialdata-io)
   # and return to target
-  if(source == "biocOSN_Xenium"){
+  if(src == "biocOSN_Xenium"){
     dir.create(td <- tempfile()) # can't use target'
     utils::unzip(loc, exdir=td)  # manufacturer output
     if (dir.exists(target)) 
@@ -234,14 +234,14 @@ SD.data_load <- function(id,
     patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile(), 
-    source="biocOSN"
+    src="biocOSN"
 ) {
   spatialdataR::readSpatialData(
     .get_demo_SDdata(
       patt = patt,
       cache = cache,
       target = target,
-      source = source
+      src = src
     )
   )
 }
@@ -258,7 +258,7 @@ SD.data_load <- function(id,
 #' 
 #' Function for interrogating path to buckets.
 #' 
-#' @param source The name of the query bucket.
+#' @param src The name of the query bucket.
 #' \describe{
 #'  \item{biocOSN}{
 #'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
@@ -275,8 +275,8 @@ SD.data_load <- function(id,
 #' bucket_path()
 #' 
 #' @noRd
-bucket_path <- function(source = "biocOSN"){
-  switch(source, 
+bucket_path <- function(src = "biocOSN"){
+  switch(src, 
          biocOSN = .OSN_PATH,
          biocOSN_Xenium = .OSN_Xenium_PATH,
          sandbox = .SANDBOX_PATH, 

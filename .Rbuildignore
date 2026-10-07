@@ -7,3 +7,5 @@
 ^\.github$
 ^\.claude$
 ^\\.DS_Store$
+^codecov\.yml$
+^\.lintr$
