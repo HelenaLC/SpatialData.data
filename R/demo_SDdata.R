@@ -159,8 +159,8 @@ SD.data_load <- function(id,
 #' 
 #' @importFrom utils unzip
 #' 
-#' @note This function checks for stale element in cache and uses bfcupdate to rectify
-#' before retrieving from cache.
+#' @note This function checks for stale element in cache and 
+#'  uses bfcupdate to rectify before retrieving from cache.
 #' 
 #' @noRd
 .get_demo_SDdata <- function(
@@ -200,14 +200,20 @@ SD.data_load <- function(id,
     zipname <- allz[zipind]
     message(sprintf("caching %s", zipname))
     fpath <- allurls[zipind]
-    loc <- BiocFileCache::bfcadd(cache, rname=zipname, fpath=fpath, rtype="web")
+    loc <- BiocFileCache::bfcadd(cache, 
+                                 rname=zipname, 
+                                 fpath=fpath, 
+                                 rtype="web")
   }
   
   # single pattern, length(ind) == 1
   if (length(ind) == 1) {
     stale <- BiocFileCache::bfcneedsupdate(cache, chkdf[ind,]$rid)
     if (stale) 
-      BiocFileCache::bfcupdate(cache, chkdf[ind,]$rid, fpath=chkdf[ind,]$fpath, rtype="web")
+      BiocFileCache::bfcupdate(cache, 
+                               chkdf[ind,]$rid, 
+                               fpath=chkdf[ind,]$fpath, 
+                               rtype="web")
     loc <- chkdf[ind,]$rpath
   }
   
@@ -291,7 +297,9 @@ bucket_path <- function(src = "biocOSN"){
 ####
 
 .pattern_not_unique <- function(patt) {
-  stop("pattern '", patt ,"' does not uniquely identify a resource, please be more specific")
+  stop("pattern '", 
+       patt ,
+       "' does not uniquely identify a resource, please be more specific")
 }
 
 .pattern_not_found <- function(patt) {
