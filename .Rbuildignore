@@ -6,3 +6,5 @@
 ^pkgdown$
 ^\.github$
 ^\.claude$
+^codecov\.yml$
+^\.lintr$
