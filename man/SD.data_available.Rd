@@ -4,10 +4,10 @@
 \alias{SD.data_available}
 \title{SD.data_available}
 \usage{
-SD.data_available(source = "biocOSN")
+SD.data_available(src = "biocOSN")
 }
 \arguments{
-\item{source}{The name of the query bucket.
+\item{src}{The name of the query bucket.
 \describe{
  \item{biocOSN}{
    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)

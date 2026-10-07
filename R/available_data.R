@@ -4,7 +4,7 @@
 #' paws.storage::s3' to interrogate buckets for zipped zarr archives or 
 #' raw readouts for various platforms.
 #' 
-#' @param source The name of the query bucket.
+#' @param src The name of the query bucket.
 #' \describe{
 #'  \item{biocOSN}{
 #'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
@@ -23,8 +23,8 @@
 #'   SD.data_available("biocOSN")
 #' }
 #' @export
-SD.data_available <- function(source = "biocOSN"){
-  switch(source, 
+SD.data_available <- function(src = "biocOSN"){
+  switch(src, 
          biocOSN = .available_biocOSN(),
          biocOSN_Xenium = .available_biocOSN_Xenium(),
          sandbox = .available_sandbox(), 
@@ -46,7 +46,7 @@ SD.data_available <- function(source = "biocOSN"){
         Bucket="bir190004-bucket01", 
         Prefix="BiocSpatialData") 
     keys <- lapply(zz$Contents, "[[", "Key")
-    basename(grepv("/", keys))
+    basename(grepv("/", keys, fixed = TRUE))
 }
 
 #' @noRd
@@ -61,8 +61,8 @@ SD.data_available <- function(source = "biocOSN"){
     Bucket="bir190004-bucket01", 
     Prefix="BiocXenDemo") 
   keys <- lapply(zz$Contents, "[[", "Key")
-  keys <- basename(grepv("/", keys))
-  keys[grepl("\\.zip$", keys)]
+  keys <- basename(grepv("/", keys, fixed = TRUE))
+  keys[!is.na(keys) & endsWith(keys, ".zip")]
 }
 
 # TODO: for now we fix the version to 0.7.1
@@ -78,8 +78,9 @@ SD.data_available <- function(source = "biocOSN"){
     Bucket="spatialdata",
     Prefix="spatialdata-sandbox") 
   keys <- lapply(zz$Contents, "[[", "Key")
-  keys <- basename(grepv("/", keys))
-  keys[grepl(paste0(version, "\\.zip$"), keys)]
+  keys <- basename(grepv("/", keys, fixed = TRUE))
+  keys[!is.na(keys) & endsWith(keys, paste0(version, ".zip"))]
+  # grepv(paste0(version, "\\.zip$"), keys, fixed = TRUE)
 }
 
 .check_paws <- function() {

@@ -4,7 +4,7 @@
 \alias{SD.data_load}
 \title{retrieve scverse-curated `SpatialData` .zarr archive}
 \usage{
-SD.data_load(id, target = tempfile(), source)
+SD.data_load(id, target = tempfile(), src)
 }
 \arguments{
 \item{id}{character string; dataset identifier}
@@ -12,7 +12,7 @@ SD.data_load(id, target = tempfile(), source)
 \item{target}{character(1), defaults to tempfile(); use a different 
 value if you wish to retain the unzipped .zarr store persistently.}
 
-\item{source}{The name of the source, i.e. query bucket.
+\item{src}{The name of the source, i.e. query bucket.
 \describe{
  \item{biocOSN}{
    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
@@ -104,6 +104,6 @@ ld
 
 # TODO: zarr v3 read is not complete
 # # use sandbox as source
-# ld <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox")
+# ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "sandbox")
 
 }
