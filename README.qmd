@@ -18,16 +18,17 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-`SpatialData.data` package provides utilities for accessing, reading and generating SpatialData datasets. Data from a variety 
-of spatial omics technologies has been made available as `SpatialData` (zipped) .zarr stores.
+`SpatialData.data` package provides utilities for accessing example SpatialData 
+datasets. Data from a variety of spatial omics technologies (Visium, Visium HD, 
+Xenium, MERFISH etc.) has been made available as `SpatialData` (zipped) 
+.zarr stores.
 
-These *scverse* SpatialData examples are available through sources 
+These *scverse* SpatialData examples are available through the following
+S3 buckets:
 
-1.  **biocOSN:** Bioc’s NSF OSN bucket,
-3.  **sandbox:** scverse’s spatialdata-sandbox
+1.  **sandbox:** (Default) scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
-
-Please visit the **vignette** for more information.
+2.  **biocOSN:** Bioc’s NSF OSN bucket,
 
 # Installation
 
@@ -44,7 +45,7 @@ library(spatialdataR)
 library(SpatialData.data)
 ```
 
-To *interrogate* our S3 bucket you will need [paws.storage](https://cran.r-project.org/web/packages/paws.storage/index.html) 
+To *interrogate* either of two S3 buckets you will need [paws.storage](https://cran.r-project.org/web/packages/paws.storage/index.html) 
 installed. 
 
 ```{r aws}
