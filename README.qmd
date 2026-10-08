@@ -24,13 +24,8 @@ of spatial omics technologies has been made available as `SpatialData` (zipped) 
 These *scverse* SpatialData examples are available through sources 
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
-2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from some Xenium datasets and
 3.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
-
-`SpatialData.data` uses `basilisk` to interface and maintain multiple versions of scverse’s `spatialdata` module (0.5 and 0.8) for reading and writing to .zarr stores. 
-
-The package also incorporates `dummy-spatialdata` python module that generates toy SpatialData examples whose elements are customized by the user. These examples can be generated again using `spatialdata` module versions 0.5 and 0.8. 
 
 Please visit the **vignette** for more information.
 
