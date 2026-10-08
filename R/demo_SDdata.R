@@ -20,11 +20,12 @@
 #' SD.data_list()
 #' SD.data_list(metadata = TRUE)
 SD.data_list <- function(metadata = FALSE) {
-  data_file <- system.file("extdata", 
-                           "datasets.txt", 
-                           package = "SpatialData.data")
-  x <- read.table(data_file, sep = ";", check.names = FALSE, header = TRUE)
-  if(metadata) x else unique(x$Name)
+    data_file <- system.file(
+        "extdata", 
+        "datasets.txt", 
+        package = "SpatialData.data")
+    x <- read.table(data_file, sep = ";", check.names = FALSE, header = TRUE)
+    if(metadata) x else unique(x$Name)
 }
 
 #' @title retrieve scverse-curated `SpatialData` .zarr archive
@@ -68,73 +69,77 @@ SD.data_list <- function(metadata = FALSE) {
 #' 
 #' @details
 #' \itemize{
-#'   \item MouseIntestineVisHD:
-#'     Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine;
-#'     source (biocOSN):
-#'     \url{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}
-#'   \item MouseBrainVisHD:
-#'     Visium HD 4.0.1 (10x Genomics) dataset of mouse brain;
-#'     source (sandbox):
-#'     \url{https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen}
-#'   \item MouseBrainVis:
-#'     Visium (10x Genomics) dataset of mouse brain;
-#'     source (sandbox):
-#'     \url{https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114}
-#'   \item LungAdenocarcinomaMCMICRO:
-#'     MCMICRO dataset of human small cell lung adenocarcinoma;
-#'     source (biocOSN)
-#'   \item MouseBrainMERFISH:
-#'     MERFISH dataset of mouse brain tissue;
-#'     source (biocOSN)
-#'   \item MouseLiverMERFISH:
-#'     MERFISH dataset of mouse liver tissue (SPArrOW output);
-#'     source (sandbox):
-#'     \url{https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1}
-#'   \item MulticancerSteinbock:
-#'     imaging mass cytometry dataset of four cancers;
-#'     source (biocOSN):
-#'     \url{https://www.nature.com/articles/s41596-023-00881-0}
-#'   \item ColorectalCarcinomaMIBITOF:
-#'     MIBI-TOF dataset of colorectal carcinoma;
-#'     source (biocOSN)
-#'   \item JanesickBreastVisiumEnh:
-#'     Visium (10x Genomics) dataset of breast cancer;
-#'     source (biocOSN):
-#'     \url{https://www.nature.com/articles/s41467-023-43458-x}
-#'   \item JanesickBreastXeniumRep1:
-#'     first of two Xenium (10x Genomics) sections associated with
-#'     the Visium section from Janesick \emph{et al.};
-#'     source (biocOSN)
-#'   \item JanesickBreastXeniumRep2:
-#'     second of two Xenium (10x Genomics) sections associated with
-#'     the Visium section from Janesick \emph{et al.};
-#'     source (biocOSN)
-#'   \item HumanLungMulti_10x:
-#'     Xenium (10x Genomics) data on lung cancer;
-#'     source (biocOSN):
-#'     \url{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}
-#'   \item SpaceMHelaniH3T3:
-#'     SpaceM on Hepa and NIH3T3 cells; source (sandbox);
-#'     more info:
-#'     \url{https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md}
+#'     \item MouseIntestineVisHD:
+#'         Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine;
+#'         source (biocOSN):
+#'         \url{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine}
+#'     \item MouseBrainVisHD:
+#'         Visium HD 4.0.1 (10x Genomics) dataset of mouse brain;
+#'         source (sandbox):
+#'         \url{https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen}
+#'     \item MouseBrainVis:
+#'         Visium (10x Genomics) dataset of mouse brain;
+#'         source (sandbox):
+#'         \url{https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114}
+#'     \item LungAdenocarcinomaMCMICRO:
+#'         MCMICRO dataset of human small cell lung adenocarcinoma;
+#'         source (biocOSN)
+#'     \item MouseBrainMERFISH:
+#'         MERFISH dataset of mouse brain tissue;
+#'         source (biocOSN)
+#'     \item MouseLiverMERFISH:
+#'         MERFISH dataset of mouse liver tissue (SPArrOW output);
+#'         source (sandbox):
+#'         \url{https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1}
+#'     \item MulticancerSteinbock:
+#'         imaging mass cytometry dataset of four cancers;
+#'         source (biocOSN):
+#'         \url{https://www.nature.com/articles/s41596-023-00881-0}
+#'     \item ColorectalCarcinomaMIBITOF:
+#'         MIBI-TOF dataset of colorectal carcinoma;
+#'         source (biocOSN)
+#'     \item JanesickBreastVisiumEnh:
+#'         Visium (10x Genomics) dataset of breast cancer;
+#'         source (biocOSN):
+#'         \url{https://www.nature.com/articles/s41467-023-43458-x}
+#'     \item JanesickBreastXeniumRep1:
+#'         first of two Xenium (10x Genomics) sections associated with
+#'         the Visium section from Janesick \emph{et al.};
+#'         source (biocOSN)
+#'     \item JanesickBreastXeniumRep2:
+#'         second of two Xenium (10x Genomics) sections associated with
+#'         the Visium section from Janesick \emph{et al.};
+#'         source (biocOSN)
+#'     \item HumanLungMulti_10x:
+#'         Xenium (10x Genomics) data on lung cancer;
+#'         source (biocOSN):
+#'         \url{https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard}
+#'     \item SpaceMHelaniH3T3:
+#'         SpaceM on Hepa and NIH3T3 cells; source (sandbox);
+#'         more info:
+#'         \url{https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md}
 #' }
 SD.data_load <- function(id, 
                         target = tempfile(), 
                         src) { 
-  msg <- c("Please run SD.data_list(metadata = TRUE) to see available ", 
-           "datasets and their S3 buckets.")
-  opts <- SD.data_list(metadata = TRUE)
-  if(!id %in% opts$Name)
-    stop("Dataset '", id, "' not found! ", msg)
-  if(missing(src)){
-    src <- opts$`S3 buckets`[opts$Name == id][1] 
-  } else if(!src %in% opts$`S3 buckets`[opts$Name == id]){
-    stop("Mismatching source/bucket '", src, "' with dataset '", 
-         id, "'! ", msg)
-  }
-  opts <- opts[opts$`S3 buckets` == src,]
-  .DATASETS <- setNames(opts$Pattern, opts$Name)
-  .read_demo_SDdata(.DATASETS[[id]], target=target, src = src)
+    msg <- c(
+        "Please run SD.data_list(metadata = TRUE) to see available ", 
+        "datasets and their S3 buckets."
+    )
+    opts <- SD.data_list(metadata = TRUE)
+    if(!id %in% opts$Name)
+        stop("Dataset '", id, "' not found! ", msg)
+    if(missing(src)){
+        src <- opts$`S3 buckets`[opts$Name == id][1] 
+    } else if(!src %in% opts$`S3 buckets`[opts$Name == id]){
+        stop(
+            "Mismatching source/bucket '", src, "' with dataset '", 
+            id, "'! ", msg
+        )
+    }
+    opts <- opts[opts$`S3 buckets` == src,]
+    .DATASETS <- setNames(opts$Pattern, opts$Name)
+    .read_demo_SDdata(.DATASETS[[id]], target=target, src = src)
 }
 
 #' all logic for finding, caching, loading an OSN-based dataset, hidden
@@ -158,59 +163,63 @@ SD.data_load <- function(id,
     target=tempfile(),
     src = "biocOSN"
 ) {
-  
-  # get file and urls
-  allz <- SD.data_available(src = src)
-  allurls <- file.path(bucket_path(src), allz)
-  
-  # get availables in cache
-  ca <- BiocFileCache::BiocFileCache()
-  chk <- lapply(allurls, \(x) BiocFileCache::bfcquery(ca, x))
-  chkdf <- do.call(rbind, chk)
-  
-  # match patterns with cache
-  ind <- grep(patt, chkdf$rname)
-  
-  # multiple pattern hits in cache
-  if (length(ind) > 1)
-    .pattern_not_unique(patt)
-  
-  # not pattern hits in cache
-  if (length(ind) == 0) {
+
+    # get file and urls
+    allz <- SD.data_available(src = src)
+    allurls <- file.path(bucket_path(src), allz)
+
+    # get availables in cache
+    ca <- BiocFileCache::BiocFileCache()
+    chk <- lapply(allurls, \(x) BiocFileCache::bfcquery(ca, x))
+    chkdf <- do.call(rbind, chk)
+
+    # match patterns with cache
+    ind <- grep(patt, chkdf$rname)
+
+    # multiple pattern hits in cache
+    if (length(ind) > 1)
+        .pattern_not_unique(patt)
+
+    # not pattern hits in cache
+    if (length(ind) == 0) {
     
-    # check main list
-    zipind <- grep(patt, allz)
+        # check main list
+        zipind <- grep(patt, allz)
     
-    # no hits in main list
-    if (length(zipind) == 0) 
-      .pattern_not_found(patt)
+        # no hits in main list
+        if (length(zipind) == 0) 
+            .pattern_not_found(patt)
     
-    # get location
-    zipname <- allz[zipind]
-    message(sprintf("caching %s", zipname))
-    fpath <- allurls[zipind]
-    loc <- BiocFileCache::bfcadd(cache, 
-                                 rname=zipname, 
-                                 fpath=fpath, 
-                                 rtype="web")
-  }
-  
-  # single pattern, length(ind) == 1
-  if (length(ind) == 1) {
-    stale <- BiocFileCache::bfcneedsupdate(cache, chkdf[ind,]$rid)
-    if (stale) 
-      BiocFileCache::bfcupdate(cache, 
-                               chkdf[ind,]$rid, 
-                               fpath=chkdf[ind,]$fpath, 
-                               rtype="web")
-    loc <- chkdf[ind,]$rpath
-  }
-  
-  # unzip (convert to zarr if needed using spatialdata-io)
-  # and return to target
-  dir.create(td <- target)
-  utils::unzip(loc, exdir=td)
-  return(dir(td, full.names=TRUE)) 
+        # get location
+        zipname <- allz[zipind]
+        message(sprintf("caching %s", zipname))
+        fpath <- allurls[zipind]
+        loc <- BiocFileCache::bfcadd(
+            cache, 
+            rname=zipname, 
+            fpath=fpath, 
+            rtype="web"
+        )
+    }
+
+    # single pattern, length(ind) == 1
+    if (length(ind) == 1) {
+        stale <- BiocFileCache::bfcneedsupdate(cache, chkdf[ind,]$rid)
+        if (stale) 
+            BiocFileCache::bfcupdate(
+                cache, 
+                chkdf[ind,]$rid, 
+                fpath=chkdf[ind,]$fpath, 
+                rtype="web"
+            )
+        loc <- chkdf[ind,]$rpath
+    }
+
+    # unzip (convert to zarr if needed using spatialdata-io)
+    # and return to target
+    dir.create(td <- target)
+    utils::unzip(loc, exdir=td)
+    return(dir(td, full.names=TRUE)) 
 }
 
 #' read the data with spatialdataR::readSpatialData
@@ -222,14 +231,14 @@ SD.data_load <- function(id,
     target=tempfile(), 
     src="biocOSN"
 ) {
-  spatialdataR::readSpatialData(
-    .get_demo_SDdata(
-      patt = patt,
-      cache = cache,
-      target = target,
-      src = src
+    spatialdataR::readSpatialData(
+        .get_demo_SDdata(
+            patt = patt,
+            cache = cache,
+            target = target,
+            src = src
+        )
     )
-  )
 }
 
 ####
@@ -258,13 +267,16 @@ SD.data_load <- function(id,
 #' 
 #' @noRd
 bucket_path <- function(src = "biocOSN"){
-  switch(src, 
-         biocOSN = .OSN_PATH,
-         sandbox = .SANDBOX_PATH, 
-         {
-           stop("Unknown source/bucket! Available values are ", 
-                "'biocOSN' and 'sandbox'.")
-         })
+    switch(
+        src, 
+        biocOSN = .OSN_PATH,
+        sandbox = .SANDBOX_PATH, 
+        {
+            stop(
+                "Unknown source/bucket! Available values are ", 
+                "'biocOSN' and 'sandbox'."
+            )
+        })
 }
 
 ####
@@ -272,11 +284,13 @@ bucket_path <- function(src = "biocOSN"){
 ####
 
 .pattern_not_unique <- function(patt) {
-  stop("pattern '", 
-       patt ,
-       "' does not uniquely identify a resource, please be more specific")
+    stop(
+        "pattern '", 
+        patt ,
+        "' does not uniquely identify a resource, please be more specific"
+    )
 }
 
 .pattern_not_found <- function(patt) {
-  stop("pattern '", patt ,"' not matched in available resources")
+    stop("pattern '", patt ,"' not matched in available resources")
 }

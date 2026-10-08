@@ -34,16 +34,16 @@ You can install `r BiocStyle::Biocpkg("SpatialData.data")` using:
 
 ```{r eval=FALSE}
 if(!requireNamespace("spatialdataR"))
-  BiocManager::install("spatialdataR")
+    BiocManager::install("spatialdataR")
 if(!requireNamespace("SpatialData.data"))
-  BiocManager::install("SpatialData.data")
+    BiocManager::install("SpatialData.data")
 ```
 
 You can also install the development version like so:
 
 ```{r install-pak, eval=FALSE}
 if(!requireNamespace("pak"))
-  install.packages("pak")
+    install.packages("pak")
 pak::pak("HelenaLC/SpatialData.data")
 ```
 
