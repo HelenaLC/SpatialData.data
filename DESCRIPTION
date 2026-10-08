@@ -1,12 +1,16 @@
 Package: SpatialData.data
 Title: SpatialData datasets
 Depends: R (>= 4.6.0)
-Version: 0.99.9
+Version: 0.99.10
 Description: 
-    Utilities for accessing and importing spatialdata examples 
-    from scverse. The examples are downloaded from NSF OSN  using 
-    'BiocFileCache' and readouts are converted into SpatialData objects (.zarr)
-    using 'spatialdata-io' via basilisk.
+    A companion package to access scverse-curated example SpatialData stores.
+    The datasets span spatial omics technologies such as Visium, Visium HD, 
+    Xenium, MERFISH, MIBI-TOF, and imaging mass cytometry, and are distributed 
+    as zipped Zarr stores through the Bioconductor bucket on the NSF Open 
+    Storage Network (OSN) or the scverse spatialdata sandbox. Available 
+    datasets and their metadata can be listed, and each dataset is downloaded 
+    once, cached locally with 'BiocFileCache', and read into R as a 
+    SpatialData object via 'spatialdataR' package.
 Authors@R: c(
 	person("Helena L.", "Crowell", 
 	    role=c("aut", "cre"),
@@ -26,9 +30,7 @@ Authors@R: c(
         comment=c(ORCID="0000-0003-4046-0063")))
 Imports:
     utils,
-    basilisk,
     BiocFileCache,
-    reticulate,
     spatialdataR,
     paws.storage
 Suggests:

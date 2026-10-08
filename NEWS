@@ -1,13 +1,18 @@
-changes in version 0.99.2
+# SpatialData.data 0.99.10
 
-- add Xenium dataset of human lung cancer to OSN and 
+* Remove support for spatialdata-io and dummy-spatialdata before BioC 
+  submission
+
+# SpatialData.data 0.99.2
+
+* add Xenium dataset of human lung cancer to OSN and 
   corresponding caching function 'HumanLungMulti_10x()'
 
-changes in version 0.99.1
+# SpatialData.data 0.99.1
 
 - move 'SpatialData' from 'Imports:' to 'Depends':
   to fix issues related to order of attachment
 
-changes in version 0.99.0
+# SpatialData.data 0.99.0
 
 - initialization of 'SpatialData.data' package

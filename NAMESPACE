@@ -3,11 +3,6 @@
 export(SD.data_available)
 export(SD.data_list)
 export(SD.data_load)
-export(SD.io)
-export(SD.io_readers)
-export(generate_dataset)
-import(basilisk)
-importFrom(basilisk,BasiliskEnvironment)
 importFrom(spatialdataR,readSpatialData)
 importFrom(stats,setNames)
 importFrom(utils,
