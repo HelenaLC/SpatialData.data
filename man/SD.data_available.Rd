@@ -4,7 +4,7 @@
 \alias{SD.data_available}
 \title{SD.data_available}
 \usage{
-SD.data_available(src = "biocOSN")
+SD.data_available(src = "sandbox")
 }
 \arguments{
 \item{src}{The name of the query bucket.
@@ -28,8 +28,10 @@ raw readouts for various platforms.
 }
 \examples{
 Sys.setenv(AWS_REGION = "us-east-1")
-if (requireNamespace("paws.storage")) {
-    SD.data_available("biocOSN")
-}
+library(paws.storage)
+ 
+SD.data_available()
+SD.data_available("sandbox")
+SD.data_available("biocOSN")
 
 }

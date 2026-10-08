@@ -61,9 +61,8 @@ SD.data_list <- function(metadata = FALSE) {
 #' ld <- SD.data_load("ColorectalCarcinomaMIBITOF")
 #' ld
 #' 
-#' # TODO: zarr v3 read is not complete
-#' # # use sandbox as source
-#' # ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "sandbox")
+#' # load data from biocOSN source (Zarr v2)
+#' ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "biocOSN")
 #' 
 #' @export
 #' 
@@ -130,7 +129,7 @@ SD.data_load <- function(id,
     if(!id %in% opts$Name)
         stop("Dataset '", id, "' not found! ", msg)
     if(missing(src)){
-        src <- opts$`S3 buckets`[opts$Name == id][1] 
+        src <- opts$`S3 buckets`[opts$Name == id][1]
     } else if(!src %in% opts$`S3 buckets`[opts$Name == id]){
         stop(
             "Mismatching source/bucket '", src, "' with dataset '", 
@@ -229,7 +228,7 @@ SD.data_load <- function(id,
     patt, 
     cache=BiocFileCache::BiocFileCache(),
     target=tempfile(), 
-    src="biocOSN"
+    src="sandbox"
 ) {
     spatialdataR::readSpatialData(
         .get_demo_SDdata(
@@ -254,12 +253,12 @@ SD.data_load <- function(id,
 #' 
 #' @param src The name of the query bucket.
 #' \describe{
-#'  \item{biocOSN}{
-#'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
-#'  }
-#'  \item{sandbox}{
-#'    scverse's spatialdata-sandbox bucket at EMBL.
-#'  }
+#'    \item{biocOSN}{
+#'        Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
+#'    }
+#'    \item{sandbox}{
+#'        scverse's spatialdata-sandbox bucket at EMBL.
+#'    }
 #' }
 #' 
 #' @examples

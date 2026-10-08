@@ -19,12 +19,14 @@
 #' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
-#' if (requireNamespace("paws.storage")) {
-#'     SD.data_available("biocOSN")
-#' }
+#' library(paws.storage)
+#'  
+#' SD.data_available()
+#' SD.data_available("sandbox")
+#' SD.data_available("biocOSN")
 #' 
 #' @export
-SD.data_available <- function(src = "biocOSN"){
+SD.data_available <- function(src = "sandbox"){
     switch(
         src, 
         biocOSN = .available_biocOSN(),

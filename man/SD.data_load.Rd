@@ -91,8 +91,7 @@ Sys.setenv(AWS_REGION = "us-east-1")
 ld <- SD.data_load("ColorectalCarcinomaMIBITOF")
 ld
 
-# TODO: zarr v3 read is not complete
-# # use sandbox as source
-# ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "sandbox")
+# load data from biocOSN source (Zarr v2)
+ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "biocOSN")
 
 }
