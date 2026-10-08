@@ -9,7 +9,7 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">SpatialData.data</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.10</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SD.data_load</span><span class="op">(</span><span class="va">id</span>, target <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">source</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">SD.data_load</span><span class="op">(</span><span class="va">id</span>, target <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">src</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -61,12 +61,9 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.</p>
 value if you wish to retain the unzipped .zarr store persistently.</p></dd>
 
 
-<dt id="arg-source">source<a class="anchor" aria-label="anchor" href="#arg-source"></a></dt>
+<dt id="arg-src">src<a class="anchor" aria-label="anchor" href="#arg-src"></a></dt>
 <dd><p>The name of the source, i.e. query bucket.</p><dl><dt>biocOSN</dt>
 <dd><p>Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)</p></dd>
-
- <dt>biocOSN_Xenium</dt>
-<dd><p>Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.</p></dd>
 
  <dt>sandbox</dt>
 <dd><p>scverse's spatialdata-sandbox bucket at EMBL.</p></dd>
@@ -85,62 +82,54 @@ identifier (id)does not uniquely match the name of any resource, see
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
 <ul><li><p>MouseIntestineVisHD:
-    Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine;
-    source (biocOSN):
-    <a href="https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine" class="external-link">https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine</a></p></li>
+        Visium HD 3.0.0 (10x Genomics) dataset of mouse intestine;
+        source (biocOSN):
+        <a href="https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine" class="external-link">https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-intestine</a></p></li>
 <li><p>MouseBrainVisHD:
-    Visium HD 4.0.1 (10x Genomics) dataset of mouse brain;
-    source (sandbox):
-    <a href="https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen" class="external-link">https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen</a></p></li>
+        Visium HD 4.0.1 (10x Genomics) dataset of mouse brain;
+        source (sandbox):
+        <a href="https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen" class="external-link">https://www.10xgenomics.com/datasets/visium-hd-three-prime-mouse-brain-fresh-frozen</a></p></li>
 <li><p>MouseBrainVis:
-    Visium (10x Genomics) dataset of mouse brain;
-    source (sandbox):
-    <a href="https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114" class="external-link">https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114</a></p></li>
+        Visium (10x Genomics) dataset of mouse brain;
+        source (sandbox):
+        <a href="https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114" class="external-link">https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-11114</a></p></li>
 <li><p>LungAdenocarcinomaMCMICRO:
-    MCMICRO dataset of human small cell lung adenocarcinoma;
-    source (biocOSN)</p></li>
+        MCMICRO dataset of human small cell lung adenocarcinoma;
+        source (biocOSN)</p></li>
 <li><p>MouseBrainMERFISH:
-    MERFISH dataset of mouse brain tissue;
-    source (biocOSN)</p></li>
+        MERFISH dataset of mouse brain tissue;
+        source (biocOSN)</p></li>
 <li><p>MouseLiverMERFISH:
-    MERFISH dataset of mouse liver tissue (SPArrOW output);
-    source (sandbox):
-    <a href="https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1" class="external-link">https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1</a></p></li>
+        MERFISH dataset of mouse liver tissue (SPArrOW output);
+        source (sandbox):
+        <a href="https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1" class="external-link">https://www.biorxiv.org/content/10.1101/2024.07.04.601829v1</a></p></li>
 <li><p>MulticancerSteinbock:
-    imaging mass cytometry dataset of four cancers;
-    source (biocOSN):
-    <a href="https://www.nature.com/articles/s41596-023-00881-0" class="external-link">https://www.nature.com/articles/s41596-023-00881-0</a></p></li>
+        imaging mass cytometry dataset of four cancers;
+        source (biocOSN):
+        <a href="https://www.nature.com/articles/s41596-023-00881-0" class="external-link">https://www.nature.com/articles/s41596-023-00881-0</a></p></li>
 <li><p>ColorectalCarcinomaMIBITOF:
-    MIBI-TOF dataset of colorectal carcinoma;
-    source (biocOSN)</p></li>
+        MIBI-TOF dataset of colorectal carcinoma;
+        source (biocOSN)</p></li>
 <li><p>JanesickBreastVisiumEnh:
-    Visium (10x Genomics) dataset of breast cancer;
-    source (biocOSN):
-    <a href="https://www.nature.com/articles/s41467-023-43458-x" class="external-link">https://www.nature.com/articles/s41467-023-43458-x</a></p></li>
+        Visium (10x Genomics) dataset of breast cancer;
+        source (biocOSN):
+        <a href="https://www.nature.com/articles/s41467-023-43458-x" class="external-link">https://www.nature.com/articles/s41467-023-43458-x</a></p></li>
 <li><p>JanesickBreastXeniumRep1:
-    first of two Xenium (10x Genomics) sections associated with
-    the Visium section from Janesick <em>et al.</em>;
-    source (biocOSN)</p></li>
+        first of two Xenium (10x Genomics) sections associated with
+        the Visium section from Janesick <em>et al.</em>;
+        source (biocOSN)</p></li>
 <li><p>JanesickBreastXeniumRep2:
-    second of two Xenium (10x Genomics) sections associated with
-    the Visium section from Janesick <em>et al.</em>;
-    source (biocOSN)</p></li>
-<li><p>Breast2fov_10x:
-    Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs;
-    source (biocOSN_Xenium):
-    <a href="https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data" class="external-link">https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data</a></p></li>
-<li><p>Lung2fov_10x:
-    Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs;
-    source (biocOSN_Xenium):
-    <a href="https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data" class="external-link">https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data</a></p></li>
+        second of two Xenium (10x Genomics) sections associated with
+        the Visium section from Janesick <em>et al.</em>;
+        source (biocOSN)</p></li>
 <li><p>HumanLungMulti_10x:
-    Xenium (10x Genomics) data on lung cancer;
-    source (biocOSN):
-    <a href="https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard" class="external-link">https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard</a></p></li>
+        Xenium (10x Genomics) data on lung cancer;
+        source (biocOSN):
+        <a href="https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard" class="external-link">https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard</a></p></li>
 <li><p>SpaceMHelaniH3T3:
-    SpaceM on Hepa and NIH3T3 cells; source (sandbox);
-    more info:
-    <a href="https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md" class="external-link">https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md</a></p></li>
+        SpaceM on Hepa and NIH3T3 cells; source (sandbox);
+        more info:
+        <a href="https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md" class="external-link">https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md</a></p></li>
 </ul></div>
 
     <div class="section level2">
@@ -149,8 +138,8 @@ identifier (id)does not uniquely match the name of any resource, see
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># load using `SD.data_load`</span></span></span>
 <span class="r-in"><span><span class="va">ld</span> <span class="op">&lt;-</span> <span class="fu">SD.data_load</span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> checking Bioconductor OSN bucket...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> caching mibitof.zip</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> checking scverse spatialdata-sandbox bucket...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> caching mibitof_spatialdata_0.7.1.zip</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">ld</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class: SpatialData</span>
@@ -171,9 +160,11 @@ identifier (id)does not uniquely match the name of any resource, see
 <span class="r-out co"><span class="r-pr">#&gt;</span> - point23(2): point23_image point23_labels</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - point8(2): point8_image point8_labels</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># TODO: zarr v3 read is not complete</span></span></span>
-<span class="r-in"><span><span class="co"># # use sandbox as source</span></span></span>
-<span class="r-in"><span><span class="co"># ld &lt;- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox")</span></span></span>
+<span class="r-in"><span><span class="co"># load data from biocOSN source (Zarr v2)</span></span></span>
+<span class="r-in"><span><span class="va">ld</span> <span class="op">&lt;-</span> <span class="fu">SD.data_load</span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span>, src <span class="op">=</span> <span class="st">"biocOSN"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> checking Bioconductor OSN bucket...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> caching mibitof.zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -182,7 +173,7 @@ identifier (id)does not uniquely match the name of any resource, see
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Vince Carey, Helena L. Crowell.</p>
+  <p>Developed by Helena L. Crowell, Artür Manukyan, Hugo Gruson, Vince Carey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

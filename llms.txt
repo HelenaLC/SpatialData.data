@@ -8,19 +8,8 @@ stores.
 These *scverse* SpatialData examples are available through sources
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
-2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
-    some Xenium datasets and
-3.  **sandbox:** scverse’s spatialdata-sandbox
+2.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
-
-`SpatialData.data` uses `basilisk` to interface and maintain multiple
-versions of scverse’s `spatialdata` module (0.5 and 0.8) for reading and
-writing to .zarr stores.
-
-The package also incorporates `dummy-spatialdata` python module that
-generates toy SpatialData examples whose elements are customized by the
-user. These examples can be generated again using `spatialdata` module
-versions 0.5 and 0.8.
 
 Please visit the **vignette** for more information.
 
@@ -37,6 +26,7 @@ BiocManager::install("SpatialData.data")
 ``` r
 
 library(spatialdataR)
+#> Warning: package 'spatialdataR' was built under R version 4.6.1
 #> 
 #> Attaching package: 'spatialdataR'
 #> The following object is masked from 'package:stats':
@@ -66,6 +56,7 @@ read into R.
 
 (x <- SD.data_load("ColorectalCarcinomaMIBITOF"))
 #> checking Bioconductor OSN bucket...
+#> caching mibitof.zip
 #> class: SpatialData
 #> - images(3):
 #>   - point16_image (3,1024,1024)
@@ -110,13 +101,6 @@ SD.data_list()
   : SD.data_list
 - [`SD.data_load()`](https://helenalc.github.io/SpatialData.data/reference/SD.data_load.md)
   : retrieve scverse-curated \`SpatialData\` .zarr archive
-- [`SD.io()`](https://helenalc.github.io/SpatialData.data/reference/SD.io.md)
-  : Use Python's 'spatialdata-io' to transform manufacturer output to
-  .zarr with specific folder structure.
-- [`SD.io_readers()`](https://helenalc.github.io/SpatialData.data/reference/SD.io_readers.md)
-  : SD.io_readers
-- [`generate_dataset()`](https://helenalc.github.io/SpatialData.data/reference/generate_dataset.md)
-  : generate_dataset
 
 # Articles
 

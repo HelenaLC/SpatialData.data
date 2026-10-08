@@ -9,7 +9,7 @@ sandbox S3 buckets"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">SpatialData.data</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.10</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,8 +71,7 @@ License etc.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "Breast2fov_10x"             "Lung2fov_10x"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] "SpaceMHelaniH3T3"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "SpaceMHelaniH3T3"          </span>
 <span class="r-in"><span><span class="fu">SD.data_list</span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          Name             Technology</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1         MouseIntestineVisHD              Visium HD</span>
@@ -93,11 +92,7 @@ License etc.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16   JanesickBreastXeniumRep2                 Xenium</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17         HumanLungMulti_10x                 Xenium</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18         HumanLungMulti_10x                 Xenium</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19             Breast2fov_10x       Xenium (trimmed)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20             Breast2fov_10x       Xenium (trimmed)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21               Lung2fov_10x       Xenium (trimmed)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22               Lung2fov_10x       Xenium (trimmed)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23           SpaceMHelaniH3T3                 SpaceM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19           SpaceMHelaniH3T3                 SpaceM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                          Sample Table (Nfeat,Nobs)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                               Mouse intestine    (19059,5479660)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                               Mouse intestine    (19059,5479660)</span>
@@ -117,35 +112,27 @@ License etc.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16                          Human breast cancer       (313,118752)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17                            Human lung Cancer       (377,162254)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18                            Human lung Cancer       (377,162254)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19                              Breast (2 FOVs)         (280,7275)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20                              Breast (2 FOVs)         (280,7275)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21                                Lung (2 FOVs)        (289,11898)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22                                Lung (2 FOVs)        (289,11898)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                        Hepa and NIH3T3 cells        (327,14425)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Image (dim) Nmolecules File Size     S3 buckets Zarr Format</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  (3,21943,23618)         NA      1 GB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  (3,21943,23618)         NA      1 GB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    (3,5492,6000)         NA    174 MB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    (3,2000,1969)         NA     65 MB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   (12,3139,2511)         NA    250 MB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      (1,522,575)    3714642     50 MB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7      (1,522,575)    3714642     50 MB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    (1,6432,6432)    1153548     66 MB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9    (3,1024,1024)         NA     25 MB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   (3,1024,1024)         NA     25 MB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11    (40,600,600)         NA    820 MB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 (3,21571,19505)         NA    1.5 GB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 (3,21571,19505)         NA    1.5 GB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 (1,25778,35416)   42638083    2.8 GB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 (1,25778,35416)   42638083    2.8 GB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 (1,25779,35411)   31997227    3.7 GB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17 (5,17098,51187)   12165021    5.4 GB        biocOSN          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 (5,17098,51187)   12165021    5.4 GB        sandbox          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   (4,3529,5792)    1113950    380 MB biocOSN_Xenium          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   (4,3529,5792)    1113950    380 MB biocOSN_Xenium          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   (1,3553,5791)     825885    280 MB biocOSN_Xenium          v2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22   (1,3553,5791)     825885    280 MB biocOSN_Xenium          v3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   (2,2675,2675)         NA     49 MB        sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                        Hepa and NIH3T3 cells        (327,14425)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Image (dim) Nmolecules File Size S3 buckets Zarr Format</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  (3,21943,23618)         NA      1 GB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  (3,21943,23618)         NA      1 GB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    (3,5492,6000)         NA    174 MB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    (3,2000,1969)         NA     65 MB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   (12,3139,2511)         NA    250 MB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      (1,522,575)    3714642     50 MB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      (1,522,575)    3714642     50 MB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    (1,6432,6432)    1153548     66 MB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    (3,1024,1024)         NA     25 MB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   (3,1024,1024)         NA     25 MB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11    (40,600,600)         NA    820 MB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 (3,21571,19505)         NA    1.5 GB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 (3,21571,19505)         NA    1.5 GB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14 (1,25778,35416)   42638083    2.8 GB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 (1,25778,35416)   42638083    2.8 GB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 (1,25779,35411)   31997227    3.7 GB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 (5,17098,51187)   12165021    5.4 GB    sandbox          v3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18 (5,17098,51187)   12165021    5.4 GB    biocOSN          v2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   (2,2675,2675)         NA     49 MB    sandbox          v3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              License                     Pattern</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                CCA             visium_hd_3.0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2                CCA             visium_hd_3.0.0</span>
@@ -163,13 +150,9 @@ License etc.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14               CCA              xenium_rep1_io</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15               CCA              xenium_rep1_io</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 16               CCA              xenium_rep2_io</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17    CC BY 4.0 DEED              HuLungXenmulti</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18    CC BY 4.0 DEED                xenium_2.0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19               CCA Xenium_V1_human_Breast_2fov</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20               CCA Xenium_V1_human_Breast_2fov</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21               CCA   Xenium_V1_human_Lung_2fov</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22               CCA   Xenium_V1_human_Lung_2fov</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23    CC BY 4.0 DEED           spacem_helanih3t3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17    CC BY 4.0 DEED                xenium_2.0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18    CC BY 4.0 DEED              HuLungXenmulti</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19    CC BY 4.0 DEED           spacem_helanih3t3</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -177,7 +160,7 @@ License etc.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Vince Carey, Helena L. Crowell.</p>
+  <p>Developed by Helena L. Crowell, Artür Manukyan, Hugo Gruson, Vince Carey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SpatialData.data</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.10</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,12 +56,16 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>`SpatialData.data`</h1>
-                        <h4 data-toc-skip class="author">Vince
+                        <h4 data-toc-skip class="author">Helena Lucia
+Crowell</h4>
+                                    <h4 data-toc-skip class="author">Artür
+Manukyan</h4>
+                                    <h4 data-toc-skip class="author">Hugo
+Gruson</h4>
+                                    <h4 data-toc-skip class="author">Vince
 Carey</h4>
-                                    <h4 data-toc-skip class="author">Helena
-Lucia Crowell</h4>
                         
-            <h4 data-toc-skip class="date">September 14, 2026</h4>
+            <h4 data-toc-skip class="date">October 08, 2026</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HelenaLC/SpatialData.data/blob/main/vignettes/SpatialData.data.Rmd" class="external-link"><code>vignettes/SpatialData.data.Rmd</code></a></small>
       <div class="d-none name"><code>SpatialData.data.Rmd</code></div>
@@ -80,19 +84,8 @@ sources</p>
 <li>
 <strong>biocOSN:</strong> Bioc’s NSF OSN bucket,</li>
 <li>
-<strong>biocOSN_Xenium:</strong> Bioc’s NSF OSN bucket for raw data
-outputs from some Xenium datasets and</li>
-<li>
 <strong>sandbox:</strong> scverse’s spatialdata-sandbox (<a href="https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html" class="external-link uri">https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html</a>)</li>
 </ol>
-<p><em><a href="https://bioconductor.org/packages/3.23/SpatialData.data" class="external-link">SpatialData.data</a></em>
-uses <code>basilisk</code> to interface and maintain multiple versions
-of scverse’s <code>spatialdata</code> module (0.5 and 0.8) for reading
-and writing to .zarr stores.</p>
-<p>The package also incorporates <code>dummy-spatialdata</code> python
-module that generates toy SpatialData examples whose elements are
-customized by the user. These examples can be generated again using
-<code>spatialdata</code> module versions 0.5 and 0.8</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
@@ -100,13 +93,13 @@ customized by the user. These examples can be generated again using
 using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"spatialdataR"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"spatialdataR"</span><span class="op">)</span></span>
+<span>    <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"spatialdataR"</span><span class="op">)</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"SpatialData.data"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SpatialData.data"</span><span class="op">)</span></span></code></pre></div>
+<span>    <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"SpatialData.data"</span><span class="op">)</span></span></code></pre></div>
 <p>You can also install the development version like so:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"HelenaLC/SpatialData.data"</span><span class="op">)</span></span></code></pre></div>
 <p>To <em>interrogate</em> our S3 bucket you will need <a href="https://cran.r-project.org/web/packages/paws.storage/index.html" class="external-link">paws.storage</a>
 installed.</p>
@@ -144,7 +137,7 @@ and read into R.</p>
 the scverse’s <code>spatialdata</code> sandbox where SpatialData stores
 are saved as Zarr v3.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span>, source <span class="op">=</span> <span class="st">"sandbox"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"ColorectalCarcinomaMIBITOF"</span>, src <span class="op">=</span><span class="st">"sandbox"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: SpatialData</span></span>
 <span><span class="co">## - images(3):</span></span>
 <span><span class="co">##   - point16_image (3,1024,1024)</span></span>
@@ -171,8 +164,7 @@ are saved as Zarr v3.</p>
 <span><span class="co">##  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      </span></span>
 <span><span class="co">##  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  </span></span>
 <span><span class="co">## [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        </span></span>
-<span><span class="co">## [13] "Breast2fov_10x"             "Lung2fov_10x"              </span></span>
-<span><span class="co">## [15] "SpaceMHelaniH3T3"</span></span></code></pre>
+<span><span class="co">## [13] "SpaceMHelaniH3T3"</span></span></code></pre>
 <p>or as below for a detailed overview and metadata on all datasets:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="../reference/SD.data_list.html">SD.data_list</a></span><span class="op">(</span>metadata <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -189,113 +181,6 @@ are saved as Zarr v3.</p>
 <span><span class="co">## [7] "visium_hd_3.0.0_io.zip"                 </span></span>
 <span><span class="co">## [8] "xenium_rep1_io_aligned.zip"             </span></span>
 <span><span class="co">## [9] "xenium_rep2_io_aligned.zip"</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="using-spatialdata-io">Using spatialdata-io<a class="anchor" aria-label="anchor" href="#using-spatialdata-io"></a>
-</h3>
-<p><code>SpatialData.data</code> also provides access to some raw
-spatial omic readouts. After installation from the source
-(i.e. <code>biocOSN_Xenium</code>), these data bundles can then be
-converted into SpatialData objects using <code>spatialdata-io</code>
-python package.</p>
-<p>You can use <code>basilisk</code> to convert these readouts into
-SpatialData zarr stores using multiple <code>spatialdata</code> module
-versions, each associated with a different Zarr format:</p>
-<ul>
-<li>
-<strong>0.5.0</strong> (Zarr v2) and</li>
-<li>
-<strong>0.8.0</strong> (Zarr v3)</li>
-</ul>
-<p>We use <code>options(sd_version)</code> to set the
-<code>spatialdata</code> module version.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>sd_version <span class="op">=</span> <span class="st">"0.5.0"</span><span class="op">)</span></span>
-<span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SD.data_load.html">SD.data_load</a></span><span class="op">(</span><span class="st">"Breast2fov_10x"</span>, source <span class="op">=</span> <span class="st">"biocOSN_Xenium"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> reading <span style="color: #BB00BB;">/tmp/Rtmp9w89pD/file9ab2212e47f2/</span><span style="color: #FF55FF;">cell_feature_matrix.h5</span>        </span></span>
-<span><span class="co">## <span style="color: #0000BB;">INFO    </span> The SpatialData object is not self-contained <span style="font-weight: bold;">(</span>i.e. it contains some    </span></span>
-<span><span class="co">##          elements that are Dask-backed from locations outside                   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/Rtmp9w89pD/</span><span style="color: #FF55FF;">file9ab25ee34ea6</span><span style="font-weight: bold;">)</span>. Please see the documentation of     </span></span>
-<span><span class="co">##          `<span style="color: #BB00BB; font-weight: bold;">is_self_contained</span><span style="font-weight: bold;">()</span>` to understand the implications of working with   </span></span>
-<span><span class="co">##          SpatialData objects that are not self-contained.                       </span></span>
-<span><span class="co">## <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/Rtmp9w89pD/</span><span style="color: #FF55FF;">file9ab25ee34ea6</span></span></span></code></pre>
-<pre><code><span><span class="co">## class: SpatialData</span></span>
-<span><span class="co">## - images(1):</span></span>
-<span><span class="co">##   - morphology_focus (4,3529,5792)</span></span>
-<span><span class="co">## - labels(2):</span></span>
-<span><span class="co">##   - cell_labels (3529,5792)</span></span>
-<span><span class="co">##   - nucleus_labels (3529,5792)</span></span>
-<span><span class="co">## - points(1):</span></span>
-<span><span class="co">##   - transcripts (1113950)</span></span>
-<span><span class="co">## - shapes(3):</span></span>
-<span><span class="co">##   - cell_boundaries (7275,circle)</span></span>
-<span><span class="co">##   - cell_circles (0,circle)</span></span>
-<span><span class="co">##   - nucleus_boundaries (7020,circle)</span></span>
-<span><span class="co">## - tables(1):</span></span>
-<span><span class="co">##   - table (280,7275) [cell_circles]</span></span>
-<span><span class="co">## coordinate systems(1):</span></span>
-<span><span class="co">## - global(7): morphology_focus cell_labels ... nucleus_boundaries</span></span>
-<span><span class="co">##   transcripts</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="generating-dummy-spatialdata-objects">Generating dummy SpatialData objects<a class="anchor" aria-label="anchor" href="#generating-dummy-spatialdata-objects"></a>
-</h3>
-<p><code>SpatialData.data</code> package incorporates the
-<code>dummy-spatialdata</code> python package (<a href="https://pypi.org/project/dummy-spatialdata/" class="external-link">https://pypi.org/project/dummy-spatialdata/</a>)
-via <code>basilisk</code> to generate toy spatialdata objects in
-multiple spatialdata versions.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sd_zarr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate_dataset.html">generate_dataset</a></span><span class="op">(</span></span>
-<span>  sd_version <span class="op">=</span> <span class="st">"0.5.0"</span>,</span>
-<span>  images <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"rgb"</span>, scale_factors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2L</span>,<span class="fl">2L</span>,<span class="fl">2L</span><span class="op">)</span>, coordinate_system<span class="op">=</span><span class="st">"global"</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"grayscale"</span>, n_layers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>, coordinate_system<span class="op">=</span><span class="st">"global"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  shapes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">12L</span>, type<span class="op">=</span><span class="st">"polygon"</span>, coordinate_system<span class="op">=</span><span class="st">"global"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">12L</span><span class="op">)</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  coordinate_systems <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    global <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>      transformations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"affine"</span><span class="op">)</span>, </span>
-<span>      shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2000L</span>, y<span class="op">=</span><span class="fl">2000L</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">INFO    </span> no axes information specified in the object, setting `dims` to: <span style="font-weight: bold;">(</span><span style="color: #00BB00;">'c'</span>,  </span></span>
-<span><span class="co">##          <span style="color: #00BB00;">'y'</span>, <span style="color: #00BB00;">'x'</span><span style="font-weight: bold;">)</span>                                                              </span></span>
-<span><span class="co">## <span style="color: #0000BB;">INFO    </span> no axes information specified in the object, setting `dims` to: <span style="font-weight: bold;">(</span><span style="color: #00BB00;">'c'</span>,  </span></span>
-<span><span class="co">##          <span style="color: #00BB00;">'y'</span>, <span style="color: #00BB00;">'x'</span><span style="font-weight: bold;">)</span>                                                              </span></span>
-<span><span class="co">## <span style="color: #0000BB;">INFO    </span> The Zarr backing store has been changed from <span style="color: #BB00BB; font-style: italic;">None</span> the new file path:   </span></span>
-<span><span class="co">##          <span style="color: #BB00BB;">/tmp/Rtmp9w89pD/</span><span style="color: #FF55FF;">file9ab26f067574.zarr</span></span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sd_zarr</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/Rtmp9w89pD/file9ab26f067574.zarr"</span></span></code></pre>
-<p>Now we can read the SpatialData object with SpatialData.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://helenalc.github.io/spatialdataR/reference/readSpatialData.html" class="external-link">readSpatialData</a></span><span class="op">(</span><span class="va">sd_zarr</span><span class="op">)</span></span>
-<span><span class="va">sd</span></span></code></pre></div>
-<pre><code><span><span class="co">## class: SpatialData</span></span>
-<span><span class="co">## - images(2):</span></span>
-<span><span class="co">##   - image_0 (3,2000,2000)</span></span>
-<span><span class="co">##   - image_1 (1,2000,2000)</span></span>
-<span><span class="co">## - labels(0):</span></span>
-<span><span class="co">## - points(1):</span></span>
-<span><span class="co">##   - point_0 (12)</span></span>
-<span><span class="co">## - shapes(1):</span></span>
-<span><span class="co">##   - shape_0 (12,polygon)</span></span>
-<span><span class="co">## - tables(0):</span></span>
-<span><span class="co">## coordinate systems(2):</span></span>
-<span><span class="co">## - global(3): image_0 image_1 shape_0</span></span>
-<span><span class="co">## - point_0(1): point_0</span></span></code></pre>
-<p>We can also get individual elements</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://helenalc.github.io/spatialdataR/reference/SpatialData.html" class="external-link">image</a></span><span class="op">(</span><span class="va">sd</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## class: SpatialDataImage (MultiScale) </span></span>
-<span><span class="co">## Scales (4): (3,2000,2000 3,1000,1000 3,500,500 3,250,250)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
@@ -321,59 +206,56 @@ multiple spatialdata versions.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] paws.storage_0.10.0     SpatialData.data_0.99.9 spatialdataR_0.99.44   </span></span>
-<span><span class="co">## [4] BiocStyle_2.41.0       </span></span>
+<span><span class="co">## [1] paws.storage_0.11.0      SpatialData.data_0.99.10 spatialdataR_0.99.44    </span></span>
+<span><span class="co">## [4] BiocStyle_2.41.0        </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##  [1] tidyselect_1.2.1            blob_1.3.0                 </span></span>
 <span><span class="co">##  [3] dplyr_1.2.1                 filelock_1.0.3             </span></span>
 <span><span class="co">##  [5] R.utils_2.13.0              fastmap_1.2.0              </span></span>
 <span><span class="co">##  [7] SingleCellExperiment_1.35.2 BiocFileCache_3.3.0        </span></span>
-<span><span class="co">##  [9] duckdb_1.5.5                digest_0.6.39              </span></span>
-<span><span class="co">## [11] lifecycle_1.0.5             sf_1.1-3                   </span></span>
-<span><span class="co">## [13] RSQLite_3.53.3              magrittr_2.0.5             </span></span>
-<span><span class="co">## [15] compiler_4.6.1              rlang_1.3.0                </span></span>
-<span><span class="co">## [17] sass_0.4.10                 tools_4.6.1                </span></span>
-<span><span class="co">## [19] yaml_2.3.12                 knitr_1.52                 </span></span>
-<span><span class="co">## [21] S4Arrays_1.13.0             htmlwidgets_1.6.4          </span></span>
-<span><span class="co">## [23] bit_4.6.0                   classInt_0.4-11            </span></span>
-<span><span class="co">## [25] curl_8.0.0                  reticulate_1.47.0          </span></span>
-<span><span class="co">## [27] DelayedArray_0.39.6         xml2_1.6.0                 </span></span>
-<span><span class="co">## [29] abind_1.4-8                 KernSmooth_2.23-26         </span></span>
-<span><span class="co">## [31] withr_3.0.3                 purrr_1.2.2                </span></span>
-<span><span class="co">## [33] BiocGenerics_0.59.12        desc_1.4.3                 </span></span>
-<span><span class="co">## [35] R.oo_1.27.1                 grid_4.6.1                 </span></span>
-<span><span class="co">## [37] stats4_4.6.1                e1071_1.7-17               </span></span>
-<span><span class="co">## [39] SummarizedExperiment_1.43.0 cli_3.6.6                  </span></span>
-<span><span class="co">## [41] rmarkdown_2.32              crayon_1.5.3               </span></span>
-<span><span class="co">## [43] ragg_1.5.2                  generics_0.1.4             </span></span>
-<span><span class="co">## [45] otel_0.2.0                  DBI_1.3.0                  </span></span>
-<span><span class="co">## [47] cachem_1.1.0                proxy_0.4-29               </span></span>
-<span><span class="co">## [49] parallel_4.6.1              BiocManager_1.30.27        </span></span>
-<span><span class="co">## [51] XVector_0.53.0              matrixStats_1.5.0          </span></span>
-<span><span class="co">## [53] basilisk_1.25.0             vctrs_0.7.3                </span></span>
-<span><span class="co">## [55] Matrix_1.7-5                jsonlite_2.0.0             </span></span>
-<span><span class="co">## [57] dir.expiry_1.21.0           bookdown_0.48              </span></span>
-<span><span class="co">## [59] IRanges_2.47.5              S4Vectors_0.51.9           </span></span>
-<span><span class="co">## [61] bit64_4.8.6                 RBGL_1.89.0                </span></span>
-<span><span class="co">## [63] systemfonts_1.3.2           jquerylib_0.1.4            </span></span>
-<span><span class="co">## [65] units_1.0-1                 glue_1.8.1                 </span></span>
-<span><span class="co">## [67] pkgdown_2.2.1               ZarrArray_1.0.1            </span></span>
-<span><span class="co">## [69] Rarr_2.0.1                  GenomicRanges_1.65.4       </span></span>
-<span><span class="co">## [71] tibble_3.3.1                pillar_1.11.1              </span></span>
-<span><span class="co">## [73] htmltools_0.5.9             Seqinfo_1.3.2              </span></span>
-<span><span class="co">## [75] graph_1.91.0                dbplyr_2.6.0               </span></span>
-<span><span class="co">## [77] R6_2.6.1                    httr2_1.3.0                </span></span>
-<span><span class="co">## [79] wk_0.9.5                    textshaping_1.0.5          </span></span>
-<span><span class="co">## [81] evaluate_1.0.5              lattice_0.22-9             </span></span>
-<span><span class="co">## [83] Biobase_2.73.2              R.methodsS3_1.8.2          </span></span>
-<span><span class="co">## [85] png_0.1-9                   duckspatial_1.2.1          </span></span>
-<span><span class="co">## [87] memoise_2.0.1               paws.common_0.8.10         </span></span>
-<span><span class="co">## [89] bslib_0.12.0                class_7.3-23               </span></span>
-<span><span class="co">## [91] uuid_1.2-2                  Rcpp_1.1.2                 </span></span>
-<span><span class="co">## [93] SparseArray_1.13.2          anndataR_1.2.1             </span></span>
-<span><span class="co">## [95] xfun_0.60                   fs_2.1.0                   </span></span>
-<span><span class="co">## [97] MatrixGenerics_1.25.0       pkgconfig_2.0.3</span></span></code></pre>
+<span><span class="co">##  [9] digest_0.6.39               lifecycle_1.0.5            </span></span>
+<span><span class="co">## [11] sf_1.1-3                    RSQLite_3.53.3             </span></span>
+<span><span class="co">## [13] magrittr_2.0.5              compiler_4.6.1             </span></span>
+<span><span class="co">## [15] rlang_1.3.0                 sass_0.4.10                </span></span>
+<span><span class="co">## [17] tools_4.6.1                 yaml_2.3.12                </span></span>
+<span><span class="co">## [19] knitr_1.52                  S4Arrays_1.13.2            </span></span>
+<span><span class="co">## [21] htmlwidgets_1.6.4           bit_4.6.0                  </span></span>
+<span><span class="co">## [23] classInt_0.4-11             curl_8.0.0                 </span></span>
+<span><span class="co">## [25] reticulate_1.47.0           DelayedArray_0.39.8        </span></span>
+<span><span class="co">## [27] xml2_1.6.0                  abind_1.4-8                </span></span>
+<span><span class="co">## [29] KernSmooth_2.23-26          withr_3.0.3                </span></span>
+<span><span class="co">## [31] purrr_1.2.2                 BiocGenerics_0.59.12       </span></span>
+<span><span class="co">## [33] desc_1.4.3                  R.oo_1.27.1                </span></span>
+<span><span class="co">## [35] grid_4.6.1                  stats4_4.6.1               </span></span>
+<span><span class="co">## [37] e1071_1.7-17                SummarizedExperiment_1.43.0</span></span>
+<span><span class="co">## [39] cli_3.6.6                   rmarkdown_2.32             </span></span>
+<span><span class="co">## [41] crayon_1.5.3                ragg_1.5.2                 </span></span>
+<span><span class="co">## [43] generics_0.1.4              otel_0.2.0                 </span></span>
+<span><span class="co">## [45] DBI_1.3.0                   cachem_1.1.0               </span></span>
+<span><span class="co">## [47] proxy_0.4-29                BiocManager_1.30.27        </span></span>
+<span><span class="co">## [49] XVector_0.53.0              matrixStats_1.5.0          </span></span>
+<span><span class="co">## [51] vctrs_0.7.3                 Matrix_1.7-5               </span></span>
+<span><span class="co">## [53] jsonlite_2.0.0              bookdown_0.48              </span></span>
+<span><span class="co">## [55] IRanges_2.47.5              S4Vectors_0.51.10          </span></span>
+<span><span class="co">## [57] bit64_4.8.6                 RBGL_1.89.0                </span></span>
+<span><span class="co">## [59] systemfonts_1.3.2           jquerylib_0.1.4            </span></span>
+<span><span class="co">## [61] units_1.0-1                 glue_1.8.1                 </span></span>
+<span><span class="co">## [63] pkgdown_2.2.1               ZarrArray_1.0.1            </span></span>
+<span><span class="co">## [65] Rarr_2.0.1                  GenomicRanges_1.65.4       </span></span>
+<span><span class="co">## [67] tibble_3.3.1                pillar_1.11.1              </span></span>
+<span><span class="co">## [69] htmltools_0.5.9             Seqinfo_1.3.2              </span></span>
+<span><span class="co">## [71] graph_1.91.0                dbplyr_2.6.0               </span></span>
+<span><span class="co">## [73] R6_2.6.1                    httr2_1.3.0                </span></span>
+<span><span class="co">## [75] textshaping_1.0.5           evaluate_1.0.5             </span></span>
+<span><span class="co">## [77] lattice_0.22-9              Biobase_2.73.2             </span></span>
+<span><span class="co">## [79] R.methodsS3_1.8.2           png_0.1-9                  </span></span>
+<span><span class="co">## [81] duckspatial_1.2.1           memoise_2.0.1              </span></span>
+<span><span class="co">## [83] paws.common_0.9.0           bslib_0.12.0               </span></span>
+<span><span class="co">## [85] class_7.3-23                Rcpp_1.1.2                 </span></span>
+<span><span class="co">## [87] SparseArray_1.13.4          anndataR_1.2.2             </span></span>
+<span><span class="co">## [89] xfun_0.61                   fs_2.1.0                   </span></span>
+<span><span class="co">## [91] MatrixGenerics_1.25.0       pkgconfig_2.0.3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -382,7 +264,7 @@ multiple spatialdata versions.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Vince Carey, Helena L. Crowell.</p>
+  <p>Developed by Helena L. Crowell, Artür Manukyan, Hugo Gruson, Vince Carey.</p>
 </div>
 
 <div class="pkgdown-footer-right">

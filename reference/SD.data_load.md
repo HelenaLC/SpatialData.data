@@ -6,7 +6,7 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.
 ## Usage
 
 ``` r
-SD.data_load(id, target = tempfile(), source)
+SD.data_load(id, target = tempfile(), src)
 ```
 
 ## Arguments
@@ -20,7 +20,7 @@ SD.data_load(id, target = tempfile(), source)
   character(1), defaults to tempfile(); use a different value if you
   wish to retain the unzipped .zarr store persistently.
 
-- source:
+- src:
 
   The name of the source, i.e. query bucket.
 
@@ -28,11 +28,6 @@ SD.data_load(id, target = tempfile(), source)
 
   :   Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0,
       zarr v2)
-
-  biocOSN_Xenium
-
-  :   Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN
-      bucket.
 
   sandbox
 
@@ -87,14 +82,6 @@ for the list of datasets.
   associated with the Visium section from Janesick *et al.*; source
   (biocOSN)
 
-- Breast2fov_10x: Xenium (10x Genomics) data on breast cancer, trimmed
-  to 2 FOVs; source (biocOSN_Xenium):
-  <https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data>
-
-- Lung2fov_10x: Xenium (10x Genomics) data on lung cancer, trimmed to 2
-  FOVs; source (biocOSN_Xenium):
-  <https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data>
-
 - HumanLungMulti_10x: Xenium (10x Genomics) data on lung cancer; source
   (biocOSN):
   <https://www.10xgenomics.com/datasets/preview-data-ffpe-human-lung-cancer-with-xenium-multimodal-cell-segmentation-1-standard>
@@ -110,8 +97,8 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 # load using `SD.data_load`
 ld <- SD.data_load("ColorectalCarcinomaMIBITOF")
-#> checking Bioconductor OSN bucket...
-#> caching mibitof.zip
+#> checking scverse spatialdata-sandbox bucket...
+#> caching mibitof_spatialdata_0.7.1.zip
 #> 
 ld
 #> class: SpatialData
@@ -132,7 +119,9 @@ ld
 #> - point23(2): point23_image point23_labels
 #> - point8(2): point8_image point8_labels
 
-# TODO: zarr v3 read is not complete
-# # use sandbox as source
-# ld <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox")
+# load data from biocOSN source (Zarr v2)
+ld <- SD.data_load("ColorectalCarcinomaMIBITOF", src = "biocOSN")
+#> checking Bioconductor OSN bucket...
+#> caching mibitof.zip
+#> 
 ```

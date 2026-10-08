@@ -8,20 +8,8 @@ has been made available as `SpatialData` (zipped) .zarr stores.
 These *scverse* SpatialData examples are available through sources
 
 1.  **biocOSN:** Bioc’s NSF OSN bucket,
-2.  **biocOSN_Xenium:** Bioc’s NSF OSN bucket for raw data outputs from
-    some Xenium datasets and
-3.  **sandbox:** scverse’s spatialdata-sandbox
+2.  **sandbox:** scverse’s spatialdata-sandbox
     (<https://spatialdata.scverse.org/en/latest/tutorials/notebooks/datasets/README.html>)
-
-*[SpatialData.data](https://bioconductor.org/packages/3.23/SpatialData.data)*
-uses `basilisk` to interface and maintain multiple versions of scverse’s
-`spatialdata` module (0.5 and 0.8) for reading and writing to .zarr
-stores.
-
-The package also incorporates `dummy-spatialdata` python module that
-generates toy SpatialData examples whose elements are customized by the
-user. These examples can be generated again using `spatialdata` module
-versions 0.5 and 0.8
 
 ### Installation
 
@@ -32,9 +20,9 @@ using:
 ``` r
 
 if(!requireNamespace("spatialdataR"))
-  BiocManager::install("spatialdataR")
+    BiocManager::install("spatialdataR")
 if(!requireNamespace("SpatialData.data"))
-  BiocManager::install("SpatialData.data")
+    BiocManager::install("SpatialData.data")
 ```
 
 You can also install the development version like so:
@@ -42,7 +30,7 @@ You can also install the development version like so:
 ``` r
 
 if(!requireNamespace("pak"))
-  install.packages("pak")
+    install.packages("pak")
 pak::pak("HelenaLC/SpatialData.data")
 ```
 
@@ -92,7 +80,7 @@ Zarr v3.
 
 ``` r
 
-(x <- SD.data_load("ColorectalCarcinomaMIBITOF", source = "sandbox"))
+(x <- SD.data_load("ColorectalCarcinomaMIBITOF", src ="sandbox"))
 ```
 
     ## class: SpatialData
@@ -126,8 +114,7 @@ SD.data_list()
     ##  [7] "ColorectalCarcinomaMIBITOF" "MulticancerSteinbock"      
     ##  [9] "JanesickBreastVisiumEnh"    "JanesickBreastXeniumRep1"  
     ## [11] "JanesickBreastXeniumRep2"   "HumanLungMulti_10x"        
-    ## [13] "Breast2fov_10x"             "Lung2fov_10x"              
-    ## [15] "SpaceMHelaniH3T3"
+    ## [13] "SpaceMHelaniH3T3"
 
 or as below for a detailed overview and metadata on all datasets:
 
@@ -154,130 +141,6 @@ SD.data_available("biocOSN")
     ## [8] "xenium_rep1_io_aligned.zip"             
     ## [9] "xenium_rep2_io_aligned.zip"
 
-### Using spatialdata-io
-
-`SpatialData.data` also provides access to some raw spatial omic
-readouts. After installation from the source (i.e. `biocOSN_Xenium`),
-these data bundles can then be converted into SpatialData objects using
-`spatialdata-io` python package.
-
-You can use `basilisk` to convert these readouts into SpatialData zarr
-stores using multiple `spatialdata` module versions, each associated
-with a different Zarr format:
-
-- **0.5.0** (Zarr v2) and
-- **0.8.0** (Zarr v3)
-
-We use `options(sd_version)` to set the `spatialdata` module version.
-
-``` r
-
-options(sd_version = "0.5.0")
-(x <- SD.data_load("Breast2fov_10x", source = "biocOSN_Xenium"))
-```
-
-    ## INFO     reading /tmp/Rtmp9w89pD/file9ab2212e47f2/cell_feature_matrix.h5        
-    ## INFO     The SpatialData object is not self-contained (i.e. it contains some    
-    ##          elements that are Dask-backed from locations outside                   
-    ##          /tmp/Rtmp9w89pD/file9ab25ee34ea6). Please see the documentation of     
-    ##          `is_self_contained()` to understand the implications of working with   
-    ##          SpatialData objects that are not self-contained.                       
-    ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/Rtmp9w89pD/file9ab25ee34ea6
-
-    ## class: SpatialData
-    ## - images(1):
-    ##   - morphology_focus (4,3529,5792)
-    ## - labels(2):
-    ##   - cell_labels (3529,5792)
-    ##   - nucleus_labels (3529,5792)
-    ## - points(1):
-    ##   - transcripts (1113950)
-    ## - shapes(3):
-    ##   - cell_boundaries (7275,circle)
-    ##   - cell_circles (0,circle)
-    ##   - nucleus_boundaries (7020,circle)
-    ## - tables(1):
-    ##   - table (280,7275) [cell_circles]
-    ## coordinate systems(1):
-    ## - global(7): morphology_focus cell_labels ... nucleus_boundaries
-    ##   transcripts
-
-### Generating dummy SpatialData objects
-
-`SpatialData.data` package incorporates the `dummy-spatialdata` python
-package (<https://pypi.org/project/dummy-spatialdata/>) via `basilisk`
-to generate toy spatialdata objects in multiple spatialdata versions.
-
-``` r
-
-sd_zarr <- generate_dataset(
-  sd_version = "0.5.0",
-  images = list(
-    list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
-    list(type = "grayscale", n_layers = c(), coordinate_system="global")
-  ),
-  shapes = list(
-    list(n=12L, type="polygon", coordinate_system="global")
-  ),
-  points = list(
-    list(n=12L)
-  ),
-  coordinate_systems = list(
-    global = list(
-      transformations = list("affine"), 
-      shape = list(x=2000L, y=2000L)
-    )
-  )
-)
-```
-
-    ## INFO     no axes information specified in the object, setting `dims` to: ('c',  
-    ##          'y', 'x')                                                              
-    ## INFO     no axes information specified in the object, setting `dims` to: ('c',  
-    ##          'y', 'x')                                                              
-    ## INFO     The Zarr backing store has been changed from None the new file path:   
-    ##          /tmp/Rtmp9w89pD/file9ab26f067574.zarr
-
-``` r
-
-sd_zarr
-```
-
-    ## [1] "/tmp/Rtmp9w89pD/file9ab26f067574.zarr"
-
-Now we can read the SpatialData object with SpatialData.
-
-``` r
-
-sd <- readSpatialData(sd_zarr)
-sd
-```
-
-    ## class: SpatialData
-    ## - images(2):
-    ##   - image_0 (3,2000,2000)
-    ##   - image_1 (1,2000,2000)
-    ## - labels(0):
-    ## - points(1):
-    ##   - point_0 (12)
-    ## - shapes(1):
-    ##   - shape_0 (12,polygon)
-    ## - tables(0):
-    ## coordinate systems(2):
-    ## - global(3): image_0 image_1 shape_0
-    ## - point_0(1): point_0
-
-We can also get individual elements
-
-``` r
-
-image(sd, 1)
-```
-
-    ## class: SpatialDataImage (MultiScale) 
-    ## Scales (4): (3,2000,2000 3,1000,1000 3,500,500 3,250,250)
-
 ## Session info
 
     ## R version 4.6.1 (2026-06-24)
@@ -301,56 +164,53 @@ image(sd, 1)
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ## [1] paws.storage_0.10.0     SpatialData.data_0.99.9 spatialdataR_0.99.44   
-    ## [4] BiocStyle_2.41.0       
+    ## [1] paws.storage_0.11.0      SpatialData.data_0.99.10 spatialdataR_0.99.44    
+    ## [4] BiocStyle_2.41.0        
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] tidyselect_1.2.1            blob_1.3.0                 
     ##  [3] dplyr_1.2.1                 filelock_1.0.3             
     ##  [5] R.utils_2.13.0              fastmap_1.2.0              
     ##  [7] SingleCellExperiment_1.35.2 BiocFileCache_3.3.0        
-    ##  [9] duckdb_1.5.5                digest_0.6.39              
-    ## [11] lifecycle_1.0.5             sf_1.1-3                   
-    ## [13] RSQLite_3.53.3              magrittr_2.0.5             
-    ## [15] compiler_4.6.1              rlang_1.3.0                
-    ## [17] sass_0.4.10                 tools_4.6.1                
-    ## [19] yaml_2.3.12                 knitr_1.52                 
-    ## [21] S4Arrays_1.13.0             htmlwidgets_1.6.4          
-    ## [23] bit_4.6.0                   classInt_0.4-11            
-    ## [25] curl_8.0.0                  reticulate_1.47.0          
-    ## [27] DelayedArray_0.39.6         xml2_1.6.0                 
-    ## [29] abind_1.4-8                 KernSmooth_2.23-26         
-    ## [31] withr_3.0.3                 purrr_1.2.2                
-    ## [33] BiocGenerics_0.59.12        desc_1.4.3                 
-    ## [35] R.oo_1.27.1                 grid_4.6.1                 
-    ## [37] stats4_4.6.1                e1071_1.7-17               
-    ## [39] SummarizedExperiment_1.43.0 cli_3.6.6                  
-    ## [41] rmarkdown_2.32              crayon_1.5.3               
-    ## [43] ragg_1.5.2                  generics_0.1.4             
-    ## [45] otel_0.2.0                  DBI_1.3.0                  
-    ## [47] cachem_1.1.0                proxy_0.4-29               
-    ## [49] parallel_4.6.1              BiocManager_1.30.27        
-    ## [51] XVector_0.53.0              matrixStats_1.5.0          
-    ## [53] basilisk_1.25.0             vctrs_0.7.3                
-    ## [55] Matrix_1.7-5                jsonlite_2.0.0             
-    ## [57] dir.expiry_1.21.0           bookdown_0.48              
-    ## [59] IRanges_2.47.5              S4Vectors_0.51.9           
-    ## [61] bit64_4.8.6                 RBGL_1.89.0                
-    ## [63] systemfonts_1.3.2           jquerylib_0.1.4            
-    ## [65] units_1.0-1                 glue_1.8.1                 
-    ## [67] pkgdown_2.2.1               ZarrArray_1.0.1            
-    ## [69] Rarr_2.0.1                  GenomicRanges_1.65.4       
-    ## [71] tibble_3.3.1                pillar_1.11.1              
-    ## [73] htmltools_0.5.9             Seqinfo_1.3.2              
-    ## [75] graph_1.91.0                dbplyr_2.6.0               
-    ## [77] R6_2.6.1                    httr2_1.3.0                
-    ## [79] wk_0.9.5                    textshaping_1.0.5          
-    ## [81] evaluate_1.0.5              lattice_0.22-9             
-    ## [83] Biobase_2.73.2              R.methodsS3_1.8.2          
-    ## [85] png_0.1-9                   duckspatial_1.2.1          
-    ## [87] memoise_2.0.1               paws.common_0.8.10         
-    ## [89] bslib_0.12.0                class_7.3-23               
-    ## [91] uuid_1.2-2                  Rcpp_1.1.2                 
-    ## [93] SparseArray_1.13.2          anndataR_1.2.1             
-    ## [95] xfun_0.60                   fs_2.1.0                   
-    ## [97] MatrixGenerics_1.25.0       pkgconfig_2.0.3
+    ##  [9] digest_0.6.39               lifecycle_1.0.5            
+    ## [11] sf_1.1-3                    RSQLite_3.53.3             
+    ## [13] magrittr_2.0.5              compiler_4.6.1             
+    ## [15] rlang_1.3.0                 sass_0.4.10                
+    ## [17] tools_4.6.1                 yaml_2.3.12                
+    ## [19] knitr_1.52                  S4Arrays_1.13.2            
+    ## [21] htmlwidgets_1.6.4           bit_4.6.0                  
+    ## [23] classInt_0.4-11             curl_8.0.0                 
+    ## [25] reticulate_1.47.0           DelayedArray_0.39.8        
+    ## [27] xml2_1.6.0                  abind_1.4-8                
+    ## [29] KernSmooth_2.23-26          withr_3.0.3                
+    ## [31] purrr_1.2.2                 BiocGenerics_0.59.12       
+    ## [33] desc_1.4.3                  R.oo_1.27.1                
+    ## [35] grid_4.6.1                  stats4_4.6.1               
+    ## [37] e1071_1.7-17                SummarizedExperiment_1.43.0
+    ## [39] cli_3.6.6                   rmarkdown_2.32             
+    ## [41] crayon_1.5.3                ragg_1.5.2                 
+    ## [43] generics_0.1.4              otel_0.2.0                 
+    ## [45] DBI_1.3.0                   cachem_1.1.0               
+    ## [47] proxy_0.4-29                BiocManager_1.30.27        
+    ## [49] XVector_0.53.0              matrixStats_1.5.0          
+    ## [51] vctrs_0.7.3                 Matrix_1.7-5               
+    ## [53] jsonlite_2.0.0              bookdown_0.48              
+    ## [55] IRanges_2.47.5              S4Vectors_0.51.10          
+    ## [57] bit64_4.8.6                 RBGL_1.89.0                
+    ## [59] systemfonts_1.3.2           jquerylib_0.1.4            
+    ## [61] units_1.0-1                 glue_1.8.1                 
+    ## [63] pkgdown_2.2.1               ZarrArray_1.0.1            
+    ## [65] Rarr_2.0.1                  GenomicRanges_1.65.4       
+    ## [67] tibble_3.3.1                pillar_1.11.1              
+    ## [69] htmltools_0.5.9             Seqinfo_1.3.2              
+    ## [71] graph_1.91.0                dbplyr_2.6.0               
+    ## [73] R6_2.6.1                    httr2_1.3.0                
+    ## [75] textshaping_1.0.5           evaluate_1.0.5             
+    ## [77] lattice_0.22-9              Biobase_2.73.2             
+    ## [79] R.methodsS3_1.8.2           png_0.1-9                  
+    ## [81] duckspatial_1.2.1           memoise_2.0.1              
+    ## [83] paws.common_0.9.0           bslib_0.12.0               
+    ## [85] class_7.3-23                Rcpp_1.1.2                 
+    ## [87] SparseArray_1.13.4          anndataR_1.2.2             
+    ## [89] xfun_0.61                   fs_2.1.0                   
+    ## [91] MatrixGenerics_1.25.0       pkgconfig_2.0.3
