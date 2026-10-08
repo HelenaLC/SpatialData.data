@@ -14,6 +14,9 @@ SD.io(platform = "xenium", srcdir, dest)
 
 \item{dest}{character(1) a path to a desired destination for zarr representation}
 }
+\value{
+\code{NULL}
+}
 \description{
 Use Python's 'spatialdata-io' to transform manufacturer 
 output to .zarr with specific folder structure.
@@ -23,7 +26,6 @@ Sys.setenv(AWS_REGION = "us-east-1")
 
 # read & write to .zarr w/ 'spatialdata-io'
 target <- tempfile()
-options(sd_version = "0.5.0")
 # turn of basilisk on GHA
 # SD.io("xenium", srcdir=td, dest=target)
 

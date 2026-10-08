@@ -6,7 +6,6 @@
 \usage{
 generate_dataset(
   file = tempfile(fileext = ".zarr"),
-  sd_version = getOption("sd_version"),
   images = NULL,
   labels = NULL,
   shapes = NULL,
@@ -18,8 +17,6 @@ generate_dataset(
 }
 \arguments{
 \item{file}{location that zarr file will be written}
-
-\item{sd_version}{spatialdata version, see \link{SD.io_readers}}
 
 \item{images}{image element}
 
@@ -35,26 +32,26 @@ generate_dataset(
 
 \item{seed}{seed}
 }
+\value{
+the path to the SpatialData store (.zarr)
+}
 \description{
 Generate spatialdata datasets using dummy-spatialdata
 }
 \examples{
-options(sd_version = "0.5.0")
 generate_dataset()
 
-# write spatialdata in 0.5.0 version
+# write spatialdata to a zarr file
 zarrfile <- tempfile(fileext = ".zarr")
 generate_dataset(
   file = zarrfile, 
-  sd_version = "0.5.0",
   points = list(
     list(n=12L)
   )
 )
 
-# write spatialdata in 0.8.0 version
+# write spatialdata to a zarr file
 generate_dataset(
-  sd_version = "0.8.0",
   images = list(
     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
     list(type = "grayscale", coordinate_system="global")
@@ -72,4 +69,5 @@ generate_dataset(
     )
   )
 )
+
 }

@@ -3,7 +3,6 @@
 #' Generate spatialdata datasets using dummy-spatialdata
 #' 
 #' @param file location that zarr file will be written
-#' @param sd_version spatialdata version, see \link{SD.io_readers}
 #' @param images image element
 #' @param labels labels element
 #' @param shapes shapes element
@@ -11,24 +10,23 @@
 #' @param tables tables element (anndata)
 #' @param coordinate_systems list of coordinate systems
 #' @param seed seed
-#'
+#' 
+#' @return the path to the SpatialData store (.zarr)
+#' 
 #' @examples
-#' options(sd_version = "0.5.0")
 #' generate_dataset()
 #' 
-#' # write spatialdata in 0.5.0 version
+#' # write spatialdata to a zarr file
 #' zarrfile <- tempfile(fileext = ".zarr")
 #' generate_dataset(
 #'   file = zarrfile, 
-#'   sd_version = "0.5.0",
 #'   points = list(
 #'     list(n=12L)
 #'   )
 #' )
 #' 
-#' # write spatialdata in 0.8.0 version
+#' # write spatialdata to a zarr file
 #' generate_dataset(
-#'   sd_version = "0.8.0",
 #'   images = list(
 #'     list(type = "rgb", scale_factors = c(2L,2L,2L), coordinate_system="global"),
 #'     list(type = "grayscale", coordinate_system="global")
@@ -46,9 +44,9 @@
 #'     )
 #'   )
 #' )
+#' 
 #' @export
 generate_dataset <- function(file = tempfile(fileext = ".zarr"),
-                             sd_version = getOption("sd_version"),
                              images = NULL, 
                              labels = NULL, 
                              shapes = NULL, 
@@ -56,9 +54,7 @@ generate_dataset <- function(file = tempfile(fileext = ".zarr"),
                              tables = NULL,
                              coordinate_systems = NULL,
                              seed = 42L) {
-  proc <- basilisk::basiliskStart(
-    .get_basilisk_env(sd_version)
-  ) 
+  proc <- basilisk::basiliskStart(.sd_env) 
   on.exit(basilisk::basiliskStop(proc))
   basilisk::basiliskRun(proc, function(file) {
     if(dir.exists(file))

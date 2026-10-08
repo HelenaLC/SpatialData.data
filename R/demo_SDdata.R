@@ -20,7 +20,9 @@
 #' SD.data_list()
 #' SD.data_list(metadata = TRUE)
 SD.data_list <- function(metadata = FALSE) {
-  data_file <- system.file("extdata", "datasets.txt", package = "SpatialData.data")
+  data_file <- system.file("extdata", 
+                           "datasets.txt", 
+                           package = "SpatialData.data")
   x <- read.table(data_file, sep = ";", check.names = FALSE, header = TRUE)
   if(metadata) x else unique(x$Name)
 }
@@ -127,7 +129,7 @@ SD.data_list <- function(metadata = FALSE) {
 #'     more info:
 #'     \url{https://github.com/giovp/spatialdata-sandbox/blob/main/spacem_helanih3t3/README.md}
 #' }
-SD.data_load = function(id, 
+SD.data_load <- function(id, 
                         target = tempfile(), 
                         src) { 
   msg <- c("Please run SD.data_list(metadata = TRUE) to see available ", 
@@ -157,8 +159,8 @@ SD.data_load = function(id,
 #' 
 #' @importFrom utils unzip
 #' 
-#' @note This function checks for stale element in cache and uses bfcupdate to rectify
-#' before retrieving from cache.
+#' @note This function checks for stale element in cache and 
+#'  uses bfcupdate to rectify before retrieving from cache.
 #' 
 #' @noRd
 .get_demo_SDdata <- function(
@@ -188,7 +190,7 @@ SD.data_load = function(id,
   if (length(ind) == 0) {
     
     # check main list
-    zipind = grep(patt, allz)
+    zipind <- grep(patt, allz)
     
     # no hits in main list
     if (length(zipind) == 0) 
@@ -198,14 +200,20 @@ SD.data_load = function(id,
     zipname <- allz[zipind]
     message(sprintf("caching %s", zipname))
     fpath <- allurls[zipind]
-    loc <- BiocFileCache::bfcadd(cache, rname=zipname, fpath=fpath, rtype="web")
+    loc <- BiocFileCache::bfcadd(cache, 
+                                 rname=zipname, 
+                                 fpath=fpath, 
+                                 rtype="web")
   }
   
   # single pattern, length(ind) == 1
   if (length(ind) == 1) {
     stale <- BiocFileCache::bfcneedsupdate(cache, chkdf[ind,]$rid)
     if (stale) 
-      BiocFileCache::bfcupdate(cache, chkdf[ind,]$rid, fpath=chkdf[ind,]$fpath, rtype="web")
+      BiocFileCache::bfcupdate(cache, 
+                               chkdf[ind,]$rid, 
+                               fpath=chkdf[ind,]$fpath, 
+                               rtype="web")
     loc <- chkdf[ind,]$rpath
   }
   
@@ -289,7 +297,9 @@ bucket_path <- function(src = "biocOSN"){
 ####
 
 .pattern_not_unique <- function(patt) {
-  stop("pattern '", patt ,"' does not uniquely identify a resource, please be more specific")
+  stop("pattern '", 
+       patt ,
+       "' does not uniquely identify a resource, please be more specific")
 }
 
 .pattern_not_found <- function(patt) {

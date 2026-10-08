@@ -17,11 +17,15 @@
 #'  }
 #' }
 #' 
+#' @return a vector of example (zipped) SpatialData stores available at 
+#'  \code{source}
+#' 
 #' @examples
 #' Sys.setenv(AWS_REGION = "us-east-1")
 #' if (requireNamespace("paws.storage")) {
 #'   SD.data_available("biocOSN")
 #' }
+#' 
 #' @export
 SD.data_available <- function(src = "biocOSN"){
   switch(src, 
