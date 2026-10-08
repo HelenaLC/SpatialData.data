@@ -17,9 +17,6 @@ value if you wish to retain the unzipped .zarr store persistently.}
  \item{biocOSN}{
    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
  }
- \item{biocOSN_Xenium}{
-   Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
- }
  \item{sandbox}{
    scverse's spatialdata-sandbox bucket at EMBL.
  }
@@ -77,14 +74,6 @@ of scverse-curated Zarr archives and 10x-curated Xenium archives.
     second of two Xenium (10x Genomics) sections associated with
     the Visium section from Janesick \emph{et al.};
     source (biocOSN)
-  \item Breast2fov_10x:
-    Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs;
-    source (biocOSN_Xenium):
-    \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
-  \item Lung2fov_10x:
-    Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs;
-    source (biocOSN_Xenium):
-    \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
   \item HumanLungMulti_10x:
     Xenium (10x Genomics) data on lung cancer;
     source (biocOSN):

@@ -12,9 +12,6 @@ SD.data_available(src = "biocOSN")
  \item{biocOSN}{
    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
  }
- \item{biocOSN_Xenium}{
-   Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
- }
  \item{sandbox}{
    scverse's spatialdata-sandbox bucket at EMBL.
  }

@@ -17,8 +17,4 @@ JanesickBreastXeniumRep1;Xenium;Human breast cancer;(313,167780);(1,25778,35416)
 JanesickBreastXeniumRep2;Xenium;Human breast cancer;(313,118752);(1,25779,35411);31997227;3.7 GB;biocOSN;v2;CCA;xenium_rep2_io
 HumanLungMulti_10x;Xenium;Human lung Cancer;(377,162254);(5,17098,51187);12165021;5.4 GB;biocOSN;v2;CC BY 4.0 DEED;HuLungXenmulti
 HumanLungMulti_10x;Xenium;Human lung Cancer;(377,162254);(5,17098,51187);12165021;5.4 GB;sandbox;v3;CC BY 4.0 DEED;xenium_2.0.0
-Breast2fov_10x;Xenium (trimmed);Breast (2 FOVs);(280,7275);(4,3529,5792);1113950;380 MB;biocOSN_Xenium;v2;CCA;Xenium_V1_human_Breast_2fov
-Breast2fov_10x;Xenium (trimmed);Breast (2 FOVs);(280,7275);(4,3529,5792);1113950;380 MB;biocOSN_Xenium;v3;CCA;Xenium_V1_human_Breast_2fov
-Lung2fov_10x;Xenium (trimmed);Lung (2 FOVs);(289,11898);(1,3553,5791);825885;280 MB;biocOSN_Xenium;v2;CCA;Xenium_V1_human_Lung_2fov
-Lung2fov_10x;Xenium (trimmed);Lung (2 FOVs);(289,11898);(1,3553,5791);825885;280 MB;biocOSN_Xenium;v3;CCA;Xenium_V1_human_Lung_2fov
 SpaceMHelaniH3T3;SpaceM;Hepa and NIH3T3 cells;(327,14425);(2,2675,2675);;49 MB;sandbox;v3;CC BY 4.0 DEED;spacem_helanih3t3

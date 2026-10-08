@@ -9,9 +9,6 @@
 #'  \item{biocOSN}{
 #'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
 #'  }
-#'  \item{biocOSN_Xenium}{
-#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
-#'  }
 #'  \item{sandbox}{
 #'    scverse's spatialdata-sandbox bucket at EMBL.
 #'  }
@@ -30,11 +27,10 @@
 SD.data_available <- function(src = "biocOSN"){
   switch(src, 
          biocOSN = .available_biocOSN(),
-         biocOSN_Xenium = .available_biocOSN_Xenium(),
          sandbox = .available_sandbox(), 
          {
            stop("Unknown bucket! Available values are ", 
-                "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
+                "'biocOSN' and 'sandbox'.")
          })
 }
 
@@ -51,22 +47,6 @@ SD.data_available <- function(src = "biocOSN"){
         Prefix="BiocSpatialData") 
     keys <- lapply(zz$Contents, "[[", "Key")
     basename(grepv("/", keys, fixed = TRUE))
-}
-
-#' @noRd
-.available_biocOSN_Xenium <- function() {
-  .check_paws()
-  .check_aws_region()
-  message("checking Bioconductor OSN bucket (Xenium readouts) ...")
-  s3 <- paws.storage::s3(
-    credentials=list(anonymous=TRUE),
-    endpoint="https://mghp.osn.xsede.org")
-  zz <- s3$list_objects(
-    Bucket="bir190004-bucket01", 
-    Prefix="BiocXenDemo") 
-  keys <- lapply(zz$Contents, "[[", "Key")
-  keys <- basename(grepv("/", keys, fixed = TRUE))
-  keys[!is.na(keys) & endsWith(keys, ".zip")]
 }
 
 # TODO: for now we fix the version to 0.7.1

@@ -44,9 +44,6 @@ SD.data_list <- function(metadata = FALSE) {
 #'  \item{biocOSN}{
 #'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
 #'  }
-#'  \item{biocOSN_Xenium}{
-#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
-#'  }
 #'  \item{sandbox}{
 #'    scverse's spatialdata-sandbox bucket at EMBL.
 #'  }
@@ -112,14 +109,6 @@ SD.data_list <- function(metadata = FALSE) {
 #'     second of two Xenium (10x Genomics) sections associated with
 #'     the Visium section from Janesick \emph{et al.};
 #'     source (biocOSN)
-#'   \item Breast2fov_10x:
-#'     Xenium (10x Genomics) data on breast cancer, trimmed to 2 FOVs;
-#'     source (biocOSN_Xenium):
-#'     \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
-#'   \item Lung2fov_10x:
-#'     Xenium (10x Genomics) data on lung cancer, trimmed to 2 FOVs;
-#'     source (biocOSN_Xenium):
-#'     \url{https://www.10xgenomics.com/support/software/xenium-onboard-analysis/latest/resources/xenium-example-data}
 #'   \item HumanLungMulti_10x:
 #'     Xenium (10x Genomics) data on lung cancer;
 #'     source (biocOSN):
@@ -219,18 +208,9 @@ SD.data_load <- function(id,
   
   # unzip (convert to zarr if needed using spatialdata-io)
   # and return to target
-  if(src == "biocOSN_Xenium"){
-    dir.create(td <- tempfile()) # can't use target'
-    utils::unzip(loc, exdir=td)  # manufacturer output
-    if (dir.exists(target)) 
-      warning("target exists")
-    SD.io("xenium", srcdir=td, dest=target) # zarr in target
-    return(target)
-  } else {
-    dir.create(td <- target)
-    utils::unzip(loc, exdir=td)
-    return(dir(td, full.names=TRUE)) 
-  }
+  dir.create(td <- target)
+  utils::unzip(loc, exdir=td)
+  return(dir(td, full.names=TRUE)) 
 }
 
 #' read the data with spatialdataR::readSpatialData
@@ -257,7 +237,6 @@ SD.data_load <- function(id,
 ####
 
 .OSN_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocSpatialData"
-.OSN_Xenium_PATH <- "https://mghp.osn.xsede.org/bir190004-bucket01/BiocXenDemo"
 .SANDBOX_PATH <- "https://s3.embl.de/spatialdata/spatialdata-sandbox"
 
 #' bucket_path
@@ -268,9 +247,6 @@ SD.data_load <- function(id,
 #' \describe{
 #'  \item{biocOSN}{
 #'    Bioc's Open Storage Network (NSF) OSN bucket (spatialdata v0.3.0, zarr v2)
-#'  }
-#'  \item{biocOSN_Xenium}{
-#'    Raw Xenium readouts from Bioc's Open Storage Network (NSF) OSN bucket.
 #'  }
 #'  \item{sandbox}{
 #'    scverse's spatialdata-sandbox bucket at EMBL.
@@ -284,11 +260,10 @@ SD.data_load <- function(id,
 bucket_path <- function(src = "biocOSN"){
   switch(src, 
          biocOSN = .OSN_PATH,
-         biocOSN_Xenium = .OSN_Xenium_PATH,
          sandbox = .SANDBOX_PATH, 
          {
            stop("Unknown source/bucket! Available values are ", 
-                "'biocOSN', 'biocOSN_Xenium' and 'sandbox'.")
+                "'biocOSN' and 'sandbox'.")
          })
 }
 
